@@ -1,0 +1,28 @@
+{
+  "pmx": {
+    "morphCount": 108,
+    "sha256": "76b19d70abdaa1e020ed6a53fc1890740e50eb213de9c8955cb24648f3b89487"
+  },
+  "vmd": {
+    "morphRecords": 200337,
+    "boneRecords": 0,
+    "sha256": "db2a8c6f7d6fcf2a072373a2bff24d32be7dd4a5c429f3ac230064b834a9993b"
+  },
+  "clipName": "mot_live_chr_hski_all-001_00_in_f",
+  "frameCount": 4659,
+  "tracksDecoded": 84,
+  "publishedMorphs": 43,
+  "comparedMorphs": 43,
+  "weightRange": [
+    -5.11911821376998e-7,
+    1.0000005960464478
+  ],
+  "maximumWeightError": 5.960226046042294e-8,
+  "worst": {
+    "morph": "mouth_023",
+    "frame": 3903,
+    "expected": 1.0000002980256082,
+    "actual": 1.0000003576278687
+  },
+  "validation": "Independent MMDParser read-back: every VMD morph resolves to a PMX morph and matches the decoded Unity samples at every frame."
+}

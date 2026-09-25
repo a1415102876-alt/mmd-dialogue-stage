@@ -1,0 +1,28 @@
+{
+  "pmx": {
+    "morphCount": 108,
+    "sha256": "76b19d70abdaa1e020ed6a53fc1890740e50eb213de9c8955cb24648f3b89487"
+  },
+  "vmd": {
+    "morphRecords": 472,
+    "boneRecords": 0,
+    "sha256": "80556c80ce7de703cf9b8e7fc5dfc2b1b398cbae786079eb56bc9387dd263241"
+  },
+  "clipName": "mot_all_chr_hski_tereru-001_in_f",
+  "frameCount": 157,
+  "tracksDecoded": 84,
+  "publishedMorphs": 4,
+  "comparedMorphs": 4,
+  "weightRange": [
+    0.1470295786857605,
+    1
+  ],
+  "maximumWeightError": 2.933723397546828e-8,
+  "worst": {
+    "morph": "b_eye.eye_003",
+    "frame": 17,
+    "expected": 0.8308980171562963,
+    "actual": 0.8308980464935303
+  },
+  "validation": "Independent MMDParser read-back: every VMD morph resolves to a PMX morph and matches the decoded Unity samples at every frame."
+}

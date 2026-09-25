@@ -1,0 +1,28 @@
+{
+  "pmx": {
+    "morphCount": 108,
+    "sha256": "9a58487d36658b03b251c058691f4a2fc522c7cab84453bd59f0167efbfea3fe"
+  },
+  "vmd": {
+    "morphRecords": 1,
+    "boneRecords": 0,
+    "sha256": "d97a6ce9b2111df5a16eed5ab52b956c25e087ee5358adf4a96ac9a672d0b5cd"
+  },
+  "clipName": "mot_all_chr_amao_idle-001_pose_f",
+  "frameCount": 2,
+  "tracksDecoded": 84,
+  "publishedMorphs": 1,
+  "comparedMorphs": 1,
+  "weightRange": [
+    0.699999988079071,
+    0.699999988079071
+  ],
+  "maximumWeightError": 1.1920928910669204e-8,
+  "worst": {
+    "morph": "mouth_031",
+    "frame": 0,
+    "expected": 0.7,
+    "actual": 0.699999988079071
+  },
+  "validation": "Independent MMDParser read-back: every VMD morph resolves to a PMX morph and matches the decoded Unity samples at every frame."
+}

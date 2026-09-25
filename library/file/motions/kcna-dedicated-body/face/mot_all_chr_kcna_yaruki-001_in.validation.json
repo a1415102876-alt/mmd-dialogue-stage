@@ -1,0 +1,28 @@
+{
+  "pmx": {
+    "morphCount": 108,
+    "sha256": "7522aa31182e16d1f3c9098639e3c13601dd9017df4138915bdc1ab14edfa7fd"
+  },
+  "vmd": {
+    "morphRecords": 462,
+    "boneRecords": 0,
+    "sha256": "b115997fd0585168ce3d1067478936117d8ad1dc927ad4f818c2621d4af4ba84"
+  },
+  "clipName": "mot_all_chr_kcna_yaruki-001_in_f",
+  "frameCount": 77,
+  "tracksDecoded": 84,
+  "publishedMorphs": 6,
+  "comparedMorphs": 6,
+  "weightRange": [
+    0,
+    1
+  ],
+  "maximumWeightError": 2.8933996421010022e-8,
+  "worst": {
+    "morph": "mouth_031",
+    "frame": 18,
+    "expected": 0.5000000885386412,
+    "actual": 0.5000000596046448
+  },
+  "validation": "Independent MMDParser read-back: every VMD morph resolves to a PMX morph and matches the decoded Unity samples at every frame."
+}

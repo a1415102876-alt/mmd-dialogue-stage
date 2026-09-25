@@ -1,0 +1,28 @@
+{
+  "pmx": {
+    "morphCount": 108,
+    "sha256": "797552872884e6e2aa721c25fe76dc94012162527e1c69e5ed4492b8e6617c46"
+  },
+  "vmd": {
+    "morphRecords": 4,
+    "boneRecords": 0,
+    "sha256": "4683e6b37a56df233ba1673dbad509d7e1604533ccf939df5a2785bd38678866"
+  },
+  "clipName": "mot_all_chr_atbm_idle-001_pose_f",
+  "frameCount": 2,
+  "tracksDecoded": 84,
+  "publishedMorphs": 4,
+  "comparedMorphs": 4,
+  "weightRange": [
+    0.06193108111619949,
+    0.7409381866455078
+  ],
+  "maximumWeightError": 1.1920928910669204e-8,
+  "worst": {
+    "morph": "mouth_014",
+    "frame": 0,
+    "expected": 0.7,
+    "actual": 0.699999988079071
+  },
+  "validation": "Independent MMDParser read-back: every VMD morph resolves to a PMX morph and matches the decoded Unity samples at every frame."
+}

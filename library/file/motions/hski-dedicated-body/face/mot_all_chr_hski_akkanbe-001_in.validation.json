@@ -1,0 +1,28 @@
+{
+  "pmx": {
+    "morphCount": 108,
+    "sha256": "76b19d70abdaa1e020ed6a53fc1890740e50eb213de9c8955cb24648f3b89487"
+  },
+  "vmd": {
+    "morphRecords": 399,
+    "boneRecords": 0,
+    "sha256": "bb8b4ceaa75140dd6d40965aa1d7744c3ba523baf132d6710345e9b45d9f25a0"
+  },
+  "clipName": "mot_all_chr_hski_akkanbe-001_in_f",
+  "frameCount": 57,
+  "tracksDecoded": 84,
+  "publishedMorphs": 7,
+  "comparedMorphs": 7,
+  "weightRange": [
+    0,
+    1
+  ],
+  "maximumWeightError": 2.929769771231605e-8,
+  "worst": {
+    "morph": "b_brow.brow_007",
+    "frame": 2,
+    "expected": 0.6396501367370008,
+    "actual": 0.6396501660346985
+  },
+  "validation": "Independent MMDParser read-back: every VMD morph resolves to a PMX morph and matches the decoded Unity samples at every frame."
+}

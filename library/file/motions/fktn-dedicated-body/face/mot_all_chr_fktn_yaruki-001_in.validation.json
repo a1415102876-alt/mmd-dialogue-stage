@@ -1,0 +1,28 @@
+{
+  "pmx": {
+    "morphCount": 108,
+    "sha256": "1d9a597ee13554e21229b1e627da19d88d69326e9dabfa544bc4ec5801f55a10"
+  },
+  "vmd": {
+    "morphRecords": 261,
+    "boneRecords": 0,
+    "sha256": "9e1bcc313c0d36b2cf4e79eb26c31bbc928abf8ffda9489f171065156cdf0c17"
+  },
+  "clipName": "mot_all_chr_fktn_yaruki-001_in_f",
+  "frameCount": 65,
+  "tracksDecoded": 84,
+  "publishedMorphs": 5,
+  "comparedMorphs": 5,
+  "weightRange": [
+    0,
+    1.0000001192092896
+  ],
+  "maximumWeightError": 4.566602451738788e-8,
+  "worst": {
+    "morph": "b_eye.eye_001",
+    "frame": 8,
+    "expected": 1.000000164875314,
+    "actual": 1.0000001192092896
+  },
+  "validation": "Independent MMDParser read-back: every VMD morph resolves to a PMX morph and matches the decoded Unity samples at every frame."
+}

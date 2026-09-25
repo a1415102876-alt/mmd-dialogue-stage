@@ -1,0 +1,28 @@
+{
+  "pmx": {
+    "morphCount": 108,
+    "sha256": "9a58487d36658b03b251c058691f4a2fc522c7cab84453bd59f0167efbfea3fe"
+  },
+  "vmd": {
+    "morphRecords": 536,
+    "boneRecords": 0,
+    "sha256": "4e593317bc4cabd9014502a3729fddf079834ce9621d105b1012c7e4b071c435"
+  },
+  "clipName": "mot_all_chr_amao_kakutou-001_in_f",
+  "frameCount": 107,
+  "tracksDecoded": 84,
+  "publishedMorphs": 6,
+  "comparedMorphs": 6,
+  "weightRange": [
+    -3.361432021620203e-8,
+    1.0000001192092896
+  ],
+  "maximumWeightError": 4.566602451738788e-8,
+  "worst": {
+    "morph": "b_eye.eye_001",
+    "frame": 8,
+    "expected": 1.000000164875314,
+    "actual": 1.0000001192092896
+  },
+  "validation": "Independent MMDParser read-back: every VMD morph resolves to a PMX morph and matches the decoded Unity samples at every frame."
+}

@@ -1,0 +1,28 @@
+{
+  "pmx": {
+    "morphCount": 108,
+    "sha256": "9a58487d36658b03b251c058691f4a2fc522c7cab84453bd59f0167efbfea3fe"
+  },
+  "vmd": {
+    "morphRecords": 350,
+    "boneRecords": 0,
+    "sha256": "a14ee0d28002b341419338eb0db5255af08640d97127c8d83235c384df013d41"
+  },
+  "clipName": "mot_all_chr_amao_glad-001_in_f",
+  "frameCount": 70,
+  "tracksDecoded": 84,
+  "publishedMorphs": 5,
+  "comparedMorphs": 5,
+  "weightRange": [
+    0,
+    1.0000001192092896
+  ],
+  "maximumWeightError": 2.787217723287938e-8,
+  "worst": {
+    "morph": "mouth_002",
+    "frame": 31,
+    "expected": 0.9259255807171785,
+    "actual": 0.9259255528450012
+  },
+  "validation": "Independent MMDParser read-back: every VMD morph resolves to a PMX morph and matches the decoded Unity samples at every frame."
+}

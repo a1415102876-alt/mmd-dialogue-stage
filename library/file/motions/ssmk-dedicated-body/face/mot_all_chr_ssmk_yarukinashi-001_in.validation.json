@@ -1,0 +1,28 @@
+{
+  "pmx": {
+    "morphCount": 108,
+    "sha256": "f4ee00eae55aa7de5acf3aa2dc914625aa7b0bcbc673c64df2c09fa3ef03aa43"
+  },
+  "vmd": {
+    "morphRecords": 352,
+    "boneRecords": 0,
+    "sha256": "1630204ba4d842a57683ed6170c71e48fb6d933f3621490c929d5f8dd484dc6c"
+  },
+  "clipName": "mot_all_chr_ssmk_yarukinashi-001_in_f",
+  "frameCount": 117,
+  "tracksDecoded": 84,
+  "publishedMorphs": 4,
+  "comparedMorphs": 4,
+  "weightRange": [
+    0,
+    1.000000238418579
+  ],
+  "maximumWeightError": 3.517424640442357e-8,
+  "worst": {
+    "morph": "b_eye.eye_001",
+    "frame": 11,
+    "expected": 1.0000002032443327,
+    "actual": 1.000000238418579
+  },
+  "validation": "Independent MMDParser read-back: every VMD morph resolves to a PMX morph and matches the decoded Unity samples at every frame."
+}

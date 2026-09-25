@@ -1,0 +1,28 @@
+{
+  "pmx": {
+    "morphCount": 108,
+    "sha256": "797552872884e6e2aa721c25fe76dc94012162527e1c69e5ed4492b8e6617c46"
+  },
+  "vmd": {
+    "morphRecords": 6,
+    "boneRecords": 0,
+    "sha256": "3084cd6c39ed6257ba699d7990d0dffa63d2c5a454e1d3fb4cd3c172353d6d06"
+  },
+  "clipName": "mot_all_chr_atbm_facial-all-unique-tereru1_in_f",
+  "frameCount": 2,
+  "tracksDecoded": 84,
+  "publishedMorphs": 6,
+  "comparedMorphs": 6,
+  "weightRange": [
+    0.4000000059604645,
+    1
+  ],
+  "maximumWeightError": 2.384185793236071e-8,
+  "worst": {
+    "morph": "b_brow.brow_014",
+    "frame": 0,
+    "expected": 0.6981616973876953,
+    "actual": 0.6981617212295532
+  },
+  "validation": "Independent MMDParser read-back: every VMD morph resolves to a PMX morph and matches the decoded Unity samples at every frame."
+}

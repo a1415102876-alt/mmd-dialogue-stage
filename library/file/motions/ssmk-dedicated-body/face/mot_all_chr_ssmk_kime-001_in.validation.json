@@ -1,0 +1,28 @@
+{
+  "pmx": {
+    "morphCount": 108,
+    "sha256": "f4ee00eae55aa7de5acf3aa2dc914625aa7b0bcbc673c64df2c09fa3ef03aa43"
+  },
+  "vmd": {
+    "morphRecords": 172,
+    "boneRecords": 0,
+    "sha256": "5adf892a8560c776359743f020a17e60baf4fce45d74f3e2390da1239b836af4"
+  },
+  "clipName": "mot_all_chr_ssmk_kime-001_in_f",
+  "frameCount": 57,
+  "tracksDecoded": 84,
+  "publishedMorphs": 4,
+  "comparedMorphs": 4,
+  "weightRange": [
+    0,
+    1
+  ],
+  "maximumWeightError": 2.9258961031786157e-8,
+  "worst": {
+    "morph": "b_brow.brow_003",
+    "frame": 10,
+    "expected": 0.5650660699079091,
+    "actual": 0.5650660991668701
+  },
+  "validation": "Independent MMDParser read-back: every VMD morph resolves to a PMX morph and matches the decoded Unity samples at every frame."
+}

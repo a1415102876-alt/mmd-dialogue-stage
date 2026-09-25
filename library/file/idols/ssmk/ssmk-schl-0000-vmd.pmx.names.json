@@ -1,0 +1,54 @@
+{
+  "kind": "bones",
+  "sourceSha256": "0e842579940e2b906221fb1cdfbfacee94b643f8df15fd524453108a72248012",
+  "outputSha256": "85741405ceb88c7a4791e7085296545915e80b8664e4dca4bbb77d76b8c02ff8",
+  "sourceBytes": 12278270,
+  "outputBytes": 12278246,
+  "changes": [
+    {
+      "source": "RightHandMiddle1",
+      "target": "RHandMiddle1",
+      "boneIndex": 317,
+      "offset": 4388140
+    },
+    {
+      "source": "RightHandMiddle2",
+      "target": "RHandMiddle2",
+      "boneIndex": 318,
+      "offset": 4388234
+    },
+    {
+      "source": "RightHandMiddle3",
+      "target": "RHandMiddle3",
+      "boneIndex": 319,
+      "offset": 4388328
+    }
+  ],
+  "validation": "Full parsed PMX equals source except configured bone names; all other byte spans copied verbatim.",
+  "textures": [
+    "Texture2D/t_chr_ssmk-schl-0000_bdy_col.png",
+    "Texture2D/t_chr_ssmk-schl-0000_bdy_sdw.png",
+    "Texture2D/t_chr_ssmk-base-0000_rmp.png",
+    "Texture2D/t_chr_ssmk-schl-0000_bdy_def.png",
+    "Texture2D/t_chr_ssmk-schl-0000_bdy_rma.png",
+    "Texture2D/t_chr_ssmk-schl-0000_bdyco_col_alp.png",
+    "Texture2D/t_chr_ssmk-schl-0000_bdyco_sdw.png",
+    "Texture2D/t_chr_ssmk-schl-0000_bdyco_def.png",
+    "Texture2D/t_chr_ssmk-base-0000_fce_col.png",
+    "Texture2D/t_chr_ssmk-base-0000_fce_sdw.png",
+    "Texture2D/t_chr_ssmk-base-0000_fce_def.png",
+    "Texture2D/t_chr_ssmk-base-0000_fce_lyr.png",
+    "Texture2D/t_chr_ssmk-base-0000_eye_col_alp.png",
+    "Texture2D/t_chr_ssmk-base-0000_eye_sdw.png",
+    "Texture2D/t_chr_ssmk-base-0000_eye_def.png",
+    "Texture2D/t_chr_ssmk-base-0000_ehl_col.png",
+    "Texture2D/t_chr_ssmk-base-0000_hir_col_alp.png",
+    "Texture2D/t_chr_ssmk-base-0000_hir_sdw.png",
+    "Texture2D/t_chr_ssmk-base-0000_hir_hhl.png",
+    "Texture2D/t_chr_ssmk-base-0000_hir_def.png",
+    "Texture2D/t_chr_ssmk-base-0000_hirco_col_alp.png",
+    "Texture2D/t_chr_ssmk-base-0000_hirco_sdw.png",
+    "Texture2D/t_chr_ssmk-base-0000_hirco_def.png",
+    "Texture2D/t_chr_ssmk-base-0000_hir_sph.png"
+  ]
+}

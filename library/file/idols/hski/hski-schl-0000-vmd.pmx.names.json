@@ -1,0 +1,51 @@
+{
+  "kind": "bones",
+  "sourceSha256": "51ccbd5735480ba84d2dbffbc7f8b0770584ad6d2a7431d924c34160f552c72a",
+  "outputSha256": "265582d3c770adec0b5ffe42b0696b9d3c88ed7b7171cdae048ebf8216d333ef",
+  "sourceBytes": 12251534,
+  "outputBytes": 12251510,
+  "changes": [
+    {
+      "source": "RightHandMiddle1",
+      "target": "RHandMiddle1",
+      "boneIndex": 300,
+      "offset": 4338724
+    },
+    {
+      "source": "RightHandMiddle2",
+      "target": "RHandMiddle2",
+      "boneIndex": 301,
+      "offset": 4338818
+    },
+    {
+      "source": "RightHandMiddle3",
+      "target": "RHandMiddle3",
+      "boneIndex": 302,
+      "offset": 4338912
+    }
+  ],
+  "validation": "Full parsed PMX equals source except configured bone names; all other byte spans copied verbatim.",
+  "textures": [
+    "Texture2D/t_chr_hski-schl-0000_bdy_col.png",
+    "Texture2D/t_chr_hski-schl-0000_bdy_sdw.png",
+    "Texture2D/t_chr_hski-base-0000_rmp.png",
+    "Texture2D/t_chr_hski-schl-0000_bdy_def.png",
+    "Texture2D/t_chr_hski-schl-0000_bdy_rma.png",
+    "Texture2D/t_chr_hski-base-0000_fce_col.png",
+    "Texture2D/t_chr_hski-base-0000_fce_sdw.png",
+    "Texture2D/t_chr_hski-base-0000_fce_def.png",
+    "Texture2D/t_chr_hski-base-0000_fce_lyr.png",
+    "Texture2D/t_chr_hski-base-0000_eye_col_alp.png",
+    "Texture2D/t_chr_hski-base-0000_eye_sdw.png",
+    "Texture2D/t_chr_hski-base-0000_eye_def.png",
+    "Texture2D/t_chr_hski-base-0000_ehl_col.png",
+    "Texture2D/t_chr_hski-base-0000_hir_col_alp.png",
+    "Texture2D/t_chr_hski-base-0000_hir_sdw.png",
+    "Texture2D/t_chr_hski-base-0000_hir_hhl.png",
+    "Texture2D/t_chr_hski-base-0000_hir_def.png",
+    "Texture2D/t_chr_hski-base-0000_hirco_col_alp.png",
+    "Texture2D/t_chr_hski-base-0000_hirco_sdw.png",
+    "Texture2D/t_chr_hski-base-0000_hirco_def.png",
+    "Texture2D/t_chr_hski-base-0000_hir_sph.png"
+  ]
+}

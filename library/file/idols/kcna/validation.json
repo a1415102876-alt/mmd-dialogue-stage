@@ -1,0 +1,249 @@
+{
+  "model": "E:\\gakumas-pmx-workflow\\output\\kcna-casl\\kcna-casl.pmx",
+  "sha256": "a3e048a8f09e4f7f1bdffb4f8daf61a69333075dc2b73ac134b26358ff7c4605",
+  "format": "pmx",
+  "coordinateSystem": "left",
+  "magic": "PMX ",
+  "version": 2,
+  "headerSize": 8,
+  "encoding": 0,
+  "additionalUvNum": 3,
+  "vertexIndexSize": 2,
+  "textureIndexSize": 1,
+  "materialIndexSize": 1,
+  "boneIndexSize": 2,
+  "morphIndexSize": 2,
+  "rigidBodyIndexSize": 2,
+  "modelName": "mdl_chr_kcna-casl-0000_body(Clone)",
+  "englishModelName": "mdl_chr_kcna-casl-0000_body(Clone)",
+  "comment": "mdl_chr_kcna-casl-0000_body(Clone)",
+  "englishComment": "mdl_chr_kcna-casl-0000_body(Clone)",
+  "vertexCount": 33625,
+  "faceCount": 64792,
+  "textureCount": 24,
+  "materialCount": 16,
+  "boneCount": 340,
+  "morphCount": 108,
+  "frameCount": 1,
+  "rigidBodyCount": 0,
+  "constraintCount": 0,
+  "bounds": {
+    "min": [
+      -7.689528465270996,
+      -4.697814688370272e-7,
+      -3.3148114681243896
+    ],
+    "max": [
+      7.689528942108154,
+      18.569520950317383,
+      3.70615553855896
+    ]
+  },
+  "coloredVertices": 33625,
+  "textures": [
+    {
+      "file": "Texture2D/t_chr_kcna-casl-0000_bdy_col.png",
+      "width": 2048,
+      "height": 2048
+    },
+    {
+      "file": "Texture2D/t_chr_kcna-casl-0000_bdy_sdw.png",
+      "width": 2048,
+      "height": 2048
+    },
+    {
+      "file": "Texture2D/t_chr_kcna-base-0000_rmp.png",
+      "width": 1024,
+      "height": 4
+    },
+    {
+      "file": "Texture2D/t_chr_kcna-casl-0000_bdy_def.png",
+      "width": 2048,
+      "height": 2048
+    },
+    {
+      "file": "Texture2D/t_chr_kcna-casl-0000_bdy_rma.png",
+      "width": 128,
+      "height": 16
+    },
+    {
+      "file": "Texture2D/t_chr_kcna-casl-0000_bdyco_col_alp.png",
+      "width": 1024,
+      "height": 1024
+    },
+    {
+      "file": "Texture2D/t_chr_kcna-casl-0000_bdyco_sdw.png",
+      "width": 1024,
+      "height": 1024
+    },
+    {
+      "file": "Texture2D/t_chr_kcna-casl-0000_bdyco_def.png",
+      "width": 1024,
+      "height": 1024
+    },
+    {
+      "file": "Texture2D/t_chr_kcna-base-0000_fce_col.png",
+      "width": 1024,
+      "height": 1024
+    },
+    {
+      "file": "Texture2D/t_chr_kcna-base-0000_fce_sdw.png",
+      "width": 1024,
+      "height": 1024
+    },
+    {
+      "file": "Texture2D/t_chr_kcna-base-0000_fce_def.png",
+      "width": 1024,
+      "height": 1024
+    },
+    {
+      "file": "Texture2D/t_chr_kcna-base-0000_fce_lyr.png",
+      "width": 2048,
+      "height": 1024
+    },
+    {
+      "file": "Texture2D/t_chr_kcna-base-0000_eye_col_alp.png",
+      "width": 1024,
+      "height": 1024
+    },
+    {
+      "file": "Texture2D/t_chr_kcna-base-0000_eye_sdw.png",
+      "width": 1024,
+      "height": 1024
+    },
+    {
+      "file": "Texture2D/t_chr_kcna-base-0000_eye_def.png",
+      "width": 1024,
+      "height": 1024
+    },
+    {
+      "file": "Texture2D/t_chr_kcna-base-0000_ehl_col.png",
+      "width": 512,
+      "height": 512
+    },
+    {
+      "file": "Texture2D/t_chr_kcna-base-0000_hir_col_alp.png",
+      "width": 2048,
+      "height": 2048
+    },
+    {
+      "file": "Texture2D/t_chr_kcna-base-0000_hir_sdw.png",
+      "width": 2048,
+      "height": 2048
+    },
+    {
+      "file": "Texture2D/t_chr_kcna-base-0000_hir_hhl.png",
+      "width": 2048,
+      "height": 2048
+    },
+    {
+      "file": "Texture2D/t_chr_kcna-base-0000_hir_def.png",
+      "width": 2048,
+      "height": 2048
+    },
+    {
+      "file": "Texture2D/t_chr_kcna-base-0000_hirco_col_alp.png",
+      "width": 512,
+      "height": 512
+    },
+    {
+      "file": "Texture2D/t_chr_kcna-base-0000_hirco_sdw.png",
+      "width": 512,
+      "height": 512
+    },
+    {
+      "file": "Texture2D/t_chr_kcna-base-0000_hirco_def.png",
+      "width": 512,
+      "height": 512
+    },
+    {
+      "file": "Texture2D/t_chr_kcna-base-0000_hir_sph.png",
+      "width": 2048,
+      "height": 2048
+    }
+  ],
+  "materials": [
+    {
+      "name": "m_bdy",
+      "texture": "Texture2D/t_chr_kcna-casl-0000_bdy_col.png",
+      "triangles": 22400
+    },
+    {
+      "name": "m_bdyco",
+      "texture": "Texture2D/t_chr_kcna-casl-0000_bdyco_col_alp.png",
+      "triangles": 1330
+    },
+    {
+      "name": "m_fcp",
+      "texture": "Texture2D/t_chr_kcna-base-0000_fce_col.png",
+      "triangles": 216
+    },
+    {
+      "name": "m_fce",
+      "texture": "Texture2D/t_chr_kcna-base-0000_fce_col.png",
+      "triangles": 88
+    },
+    {
+      "name": "m_fce",
+      "texture": "Texture2D/t_chr_kcna-base-0000_fce_col.png",
+      "triangles": 1494
+    },
+    {
+      "name": "m_fcp",
+      "texture": "Texture2D/t_chr_kcna-base-0000_fce_col.png",
+      "triangles": 2186
+    },
+    {
+      "name": "m_ebs",
+      "texture": "Texture2D/t_chr_kcna-base-0000_fce_col.png",
+      "triangles": 226
+    },
+    {
+      "name": "m_fce",
+      "texture": "Texture2D/t_chr_kcna-base-0000_fce_col.png",
+      "triangles": 1010
+    },
+    {
+      "name": "m_eye",
+      "texture": "Texture2D/t_chr_kcna-base-0000_eye_col_alp.png",
+      "triangles": 400
+    },
+    {
+      "name": "m_ehl",
+      "texture": "Texture2D/t_chr_kcna-base-0000_ehl_col.png",
+      "triangles": 400
+    },
+    {
+      "name": "m_fce",
+      "texture": "Texture2D/t_chr_kcna-base-0000_fce_col.png",
+      "triangles": 2148
+    },
+    {
+      "name": "m_fcp",
+      "texture": "Texture2D/t_chr_kcna-base-0000_fce_col.png",
+      "triangles": 0
+    },
+    {
+      "name": "m_hir",
+      "texture": "Texture2D/t_chr_kcna-base-0000_hir_col_alp.png",
+      "triangles": 15528
+    },
+    {
+      "name": "m_hir",
+      "texture": "Texture2D/t_chr_kcna-base-0000_hir_col_alp.png",
+      "triangles": 572
+    },
+    {
+      "name": "m_hirco",
+      "texture": "Texture2D/t_chr_kcna-base-0000_hirco_col_alp.png",
+      "triangles": 1266
+    },
+    {
+      "name": "m_hir+",
+      "texture": "Texture2D/t_chr_kcna-base-0000_hir_sph.png",
+      "triangles": 15528
+    }
+  ],
+  "validation": "Full PMX parse, indices, skin weights, morph deltas, packed colors and PNG dependencies passed. No animation retargeting or physics validation.",
+  "vmdCompatibleModel": "E:\\gakumas-pmx-workflow\\output\\kcna-casl\\kcna-casl-vmd.pmx"
+}

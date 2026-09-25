@@ -1,0 +1,28 @@
+{
+  "pmx": {
+    "morphCount": 108,
+    "sha256": "513cf4fad6a9d1c493831364341811a8cbf7bd0f444103d11633c0ce91fa441a"
+  },
+  "vmd": {
+    "morphRecords": 4,
+    "boneRecords": 0,
+    "sha256": "ae12ac0b329c0166eef12282f17ff41aa80b66deaf6c6f737d9b4372b7d23fe4"
+  },
+  "clipName": "mot_all_chr_hrnm_facial-all-unique-egao2_in_f",
+  "frameCount": 2,
+  "tracksDecoded": 84,
+  "publishedMorphs": 4,
+  "comparedMorphs": 4,
+  "weightRange": [
+    0.23076920211315155,
+    1
+  ],
+  "maximumWeightError": 1.1920928910669204e-8,
+  "worst": {
+    "morph": "mouth_002",
+    "frame": 0,
+    "expected": 0.8,
+    "actual": 0.800000011920929
+  },
+  "validation": "Independent MMDParser read-back: every VMD morph resolves to a PMX morph and matches the decoded Unity samples at every frame."
+}

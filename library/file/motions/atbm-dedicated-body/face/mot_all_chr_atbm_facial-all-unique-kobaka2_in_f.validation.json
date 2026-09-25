@@ -1,0 +1,28 @@
+{
+  "pmx": {
+    "morphCount": 108,
+    "sha256": "797552872884e6e2aa721c25fe76dc94012162527e1c69e5ed4492b8e6617c46"
+  },
+  "vmd": {
+    "morphRecords": 5,
+    "boneRecords": 0,
+    "sha256": "3a0defaef1094f0d85dd93ca6cd5597c0fbc967c465e5a6330758f9fd30e19d2"
+  },
+  "clipName": "mot_all_chr_atbm_facial-all-unique-kobaka2_in_f",
+  "frameCount": 2,
+  "tracksDecoded": 84,
+  "publishedMorphs": 5,
+  "comparedMorphs": 5,
+  "weightRange": [
+    0.23076920211315155,
+    1
+  ],
+  "maximumWeightError": 6.5565109175214076e-9,
+  "worst": {
+    "morph": "b_eye.eye_002",
+    "frame": 0,
+    "expected": 0.23076919555664063,
+    "actual": 0.23076920211315155
+  },
+  "validation": "Independent MMDParser read-back: every VMD morph resolves to a PMX morph and matches the decoded Unity samples at every frame."
+}

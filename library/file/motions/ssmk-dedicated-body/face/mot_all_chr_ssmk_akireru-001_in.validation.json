@@ -1,0 +1,28 @@
+{
+  "pmx": {
+    "morphCount": 108,
+    "sha256": "f4ee00eae55aa7de5acf3aa2dc914625aa7b0bcbc673c64df2c09fa3ef03aa43"
+  },
+  "vmd": {
+    "morphRecords": 349,
+    "boneRecords": 0,
+    "sha256": "a2008f4ab82aeed7bfe89ce937fed002ce2c0ab2909117153ef0d6ef5d386832"
+  },
+  "clipName": "mot_all_chr_ssmk_akireru-001_in_f",
+  "frameCount": 87,
+  "tracksDecoded": 84,
+  "publishedMorphs": 5,
+  "comparedMorphs": 5,
+  "weightRange": [
+    -2.871173351154388e-14,
+    1
+  ],
+  "maximumWeightError": 2.8610270708107066e-8,
+  "worst": {
+    "morph": "b_brow.brow_004",
+    "frame": 27,
+    "expected": 0.5619485092162674,
+    "actual": 0.5619485378265381
+  },
+  "validation": "Independent MMDParser read-back: every VMD morph resolves to a PMX morph and matches the decoded Unity samples at every frame."
+}

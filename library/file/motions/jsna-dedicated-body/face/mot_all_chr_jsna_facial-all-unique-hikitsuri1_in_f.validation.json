@@ -1,0 +1,28 @@
+{
+  "pmx": {
+    "morphCount": 108,
+    "sha256": "ba6ed350a245420a45f0387a7c72ebf415cd8115e7ffe703845a40f9eaba7c74"
+  },
+  "vmd": {
+    "morphRecords": 4,
+    "boneRecords": 0,
+    "sha256": "a3d9c683600d1b3a7f5aef5b7af4ce55a9eb61c5cbced9eaa8ab22198292ded0"
+  },
+  "clipName": "mot_all_chr_jsna_facial-all-unique-hikitsuri1_in_f",
+  "frameCount": 2,
+  "tracksDecoded": 84,
+  "publishedMorphs": 4,
+  "comparedMorphs": 4,
+  "weightRange": [
+    0.25641030073165894,
+    0.7948718070983887
+  ],
+  "maximumWeightError": 1.907348634588857e-8,
+  "worst": {
+    "morph": "b_brow.brow_009",
+    "frame": 0,
+    "expected": 0.794871826171875,
+    "actual": 0.7948718070983887
+  },
+  "validation": "Independent MMDParser read-back: every VMD morph resolves to a PMX morph and matches the decoded Unity samples at every frame."
+}

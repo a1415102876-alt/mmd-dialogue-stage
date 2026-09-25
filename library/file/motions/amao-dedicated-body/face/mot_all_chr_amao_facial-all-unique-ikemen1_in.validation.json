@@ -1,0 +1,28 @@
+{
+  "pmx": {
+    "morphCount": 108,
+    "sha256": "9a58487d36658b03b251c058691f4a2fc522c7cab84453bd59f0167efbfea3fe"
+  },
+  "vmd": {
+    "morphRecords": 4,
+    "boneRecords": 0,
+    "sha256": "5542adf9a5b6fb2cb5baa6e7b90c6c2439c37d41ee6ef6794f155afa202eb605"
+  },
+  "clipName": "mot_all_chr_amao_facial-all-unique-ikemen1_in_f",
+  "frameCount": 2,
+  "tracksDecoded": 84,
+  "publishedMorphs": 4,
+  "comparedMorphs": 4,
+  "weightRange": [
+    0.6000000238418579,
+    1
+  ],
+  "maximumWeightError": 2.384185793236071e-8,
+  "worst": {
+    "morph": "mouth_031",
+    "frame": 0,
+    "expected": 0.6,
+    "actual": 0.6000000238418579
+  },
+  "validation": "Independent MMDParser read-back: every VMD morph resolves to a PMX morph and matches the decoded Unity samples at every frame."
+}

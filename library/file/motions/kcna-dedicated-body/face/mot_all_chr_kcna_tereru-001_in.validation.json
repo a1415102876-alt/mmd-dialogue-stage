@@ -1,0 +1,28 @@
+{
+  "pmx": {
+    "morphCount": 108,
+    "sha256": "7522aa31182e16d1f3c9098639e3c13601dd9017df4138915bdc1ab14edfa7fd"
+  },
+  "vmd": {
+    "morphRecords": 389,
+    "boneRecords": 0,
+    "sha256": "456c091a1c04a5f1934488ace6b45958e78265e1a06fbd9f1c246e98d9404365"
+  },
+  "clipName": "mot_all_chr_kcna_tereru-001_in_f",
+  "frameCount": 97,
+  "tracksDecoded": 84,
+  "publishedMorphs": 5,
+  "comparedMorphs": 5,
+  "weightRange": [
+    0,
+    1
+  ],
+  "maximumWeightError": 2.97493110146263e-8,
+  "worst": {
+    "morph": "b_brow.brow_014",
+    "frame": 81,
+    "expected": 0.6714245975547661,
+    "actual": 0.6714246273040771
+  },
+  "validation": "Independent MMDParser read-back: every VMD morph resolves to a PMX morph and matches the decoded Unity samples at every frame."
+}

@@ -1,0 +1,28 @@
+{
+  "pmx": {
+    "morphCount": 108,
+    "sha256": "797552872884e6e2aa721c25fe76dc94012162527e1c69e5ed4492b8e6617c46"
+  },
+  "vmd": {
+    "morphRecords": 343,
+    "boneRecords": 0,
+    "sha256": "0ef38b9e21b5d84ec9721b6a24e391d022e49705f20ad308f991ad90fc55fa4f"
+  },
+  "clipName": "mot_all_chr_atbm_angry-002_in_f",
+  "frameCount": 49,
+  "tracksDecoded": 84,
+  "publishedMorphs": 7,
+  "comparedMorphs": 7,
+  "weightRange": [
+    0,
+    1.000000238418579
+  ],
+  "maximumWeightError": 2.972344481655398e-8,
+  "worst": {
+    "morph": "b_brow.brow_101",
+    "frame": 9,
+    "expected": 1.000000268142024,
+    "actual": 1.000000238418579
+  },
+  "validation": "Independent MMDParser read-back: every VMD morph resolves to a PMX morph and matches the decoded Unity samples at every frame."
+}

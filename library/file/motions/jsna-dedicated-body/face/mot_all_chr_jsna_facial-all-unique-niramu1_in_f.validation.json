@@ -1,0 +1,28 @@
+{
+  "pmx": {
+    "morphCount": 108,
+    "sha256": "ba6ed350a245420a45f0387a7c72ebf415cd8115e7ffe703845a40f9eaba7c74"
+  },
+  "vmd": {
+    "morphRecords": 4,
+    "boneRecords": 0,
+    "sha256": "d80603a74e6e00eedd345da1a73ea0dee2d487fa53ead983d5e490c91c6804d6"
+  },
+  "clipName": "mot_all_chr_jsna_facial-all-unique-niramu1_in_f",
+  "frameCount": 2,
+  "tracksDecoded": 84,
+  "publishedMorphs": 4,
+  "comparedMorphs": 4,
+  "weightRange": [
+    0.20000000298023224,
+    1
+  ],
+  "maximumWeightError": 5.960464455334602e-9,
+  "worst": {
+    "morph": "b_brow.brow_003",
+    "frame": 0,
+    "expected": 0.4,
+    "actual": 0.4000000059604645
+  },
+  "validation": "Independent MMDParser read-back: every VMD morph resolves to a PMX morph and matches the decoded Unity samples at every frame."
+}

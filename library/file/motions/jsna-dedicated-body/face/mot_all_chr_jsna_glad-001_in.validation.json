@@ -1,0 +1,28 @@
+{
+  "pmx": {
+    "morphCount": 108,
+    "sha256": "ba6ed350a245420a45f0387a7c72ebf415cd8115e7ffe703845a40f9eaba7c74"
+  },
+  "vmd": {
+    "morphRecords": 535,
+    "boneRecords": 0,
+    "sha256": "f41b3d85cc0dfe66d8b49c58425c1d352817c49b9f38b6f62f854939ab169b70"
+  },
+  "clipName": "mot_all_chr_jsna_glad-001_in_f",
+  "frameCount": 89,
+  "tracksDecoded": 84,
+  "publishedMorphs": 7,
+  "comparedMorphs": 7,
+  "weightRange": [
+    -1.1350383794742763e-13,
+    1
+  ],
+  "maximumWeightError": 2.869877757660788e-8,
+  "worst": {
+    "morph": "b_brow.brow_003",
+    "frame": 29,
+    "expected": 0.7074074458190447,
+    "actual": 0.7074074745178223
+  },
+  "validation": "Independent MMDParser read-back: every VMD morph resolves to a PMX morph and matches the decoded Unity samples at every frame."
+}

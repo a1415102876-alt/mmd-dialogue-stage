@@ -1,0 +1,28 @@
+{
+  "pmx": {
+    "morphCount": 108,
+    "sha256": "1d9a597ee13554e21229b1e627da19d88d69326e9dabfa544bc4ec5801f55a10"
+  },
+  "vmd": {
+    "morphRecords": 336,
+    "boneRecords": 0,
+    "sha256": "df0c07757e5a2d8c31307f2485d7f501f0ab9d9dfe2f9d1e03b2344ace3f854b"
+  },
+  "clipName": "mot_all_chr_fktn_kobiru-002_in_f",
+  "frameCount": 67,
+  "tracksDecoded": 84,
+  "publishedMorphs": 6,
+  "comparedMorphs": 6,
+  "weightRange": [
+    0,
+    1.0000003576278687
+  ],
+  "maximumWeightError": 2.8776426130860955e-8,
+  "worst": {
+    "morph": "b_eye.eye_001",
+    "frame": 6,
+    "expected": 0.6480001519448568,
+    "actual": 0.648000180721283
+  },
+  "validation": "Independent MMDParser read-back: every VMD morph resolves to a PMX morph and matches the decoded Unity samples at every frame."
+}

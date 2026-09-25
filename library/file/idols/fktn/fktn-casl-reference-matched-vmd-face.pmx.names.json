@@ -1,0 +1,295 @@
+{
+  "kind": "morphs",
+  "sourceSha256": "613ae966c6b18c39d1e98714c37726939939eea8d05ebdba339052e20481fbdc",
+  "outputSha256": "1d9a597ee13554e21229b1e627da19d88d69326e9dabfa544bc4ec5801f55a10",
+  "sourceBytes": 12336822,
+  "outputBytes": 12336134,
+  "changes": [
+    {
+      "source": "b_mouth.mouth_001",
+      "target": "mouth_001",
+      "morphIndex": 41,
+      "offset": 7448204
+    },
+    {
+      "source": "b_mouth.mouth_002",
+      "target": "mouth_002",
+      "morphIndex": 42,
+      "offset": 7521170
+    },
+    {
+      "source": "b_mouth.mouth_003",
+      "target": "mouth_003",
+      "morphIndex": 43,
+      "offset": 7594136
+    },
+    {
+      "source": "b_mouth.mouth_004",
+      "target": "mouth_004",
+      "morphIndex": 44,
+      "offset": 7667102
+    },
+    {
+      "source": "b_mouth.mouth_005",
+      "target": "mouth_005",
+      "morphIndex": 45,
+      "offset": 7740068
+    },
+    {
+      "source": "b_mouth.mouth_006",
+      "target": "mouth_006",
+      "morphIndex": 46,
+      "offset": 7813034
+    },
+    {
+      "source": "b_mouth.mouth_007",
+      "target": "mouth_007",
+      "morphIndex": 47,
+      "offset": 7886000
+    },
+    {
+      "source": "b_mouth.mouth_008",
+      "target": "mouth_008",
+      "morphIndex": 48,
+      "offset": 7958966
+    },
+    {
+      "source": "b_mouth.mouth_009",
+      "target": "mouth_009",
+      "morphIndex": 49,
+      "offset": 8031932
+    },
+    {
+      "source": "b_mouth.mouth_010",
+      "target": "mouth_010",
+      "morphIndex": 50,
+      "offset": 8104898
+    },
+    {
+      "source": "b_mouth.mouth_011",
+      "target": "mouth_011",
+      "morphIndex": 51,
+      "offset": 8177864
+    },
+    {
+      "source": "b_mouth.mouth_012",
+      "target": "mouth_012",
+      "morphIndex": 52,
+      "offset": 8250830
+    },
+    {
+      "source": "b_mouth.mouth_013",
+      "target": "mouth_013",
+      "morphIndex": 53,
+      "offset": 8323796
+    },
+    {
+      "source": "b_mouth.mouth_014",
+      "target": "mouth_014",
+      "morphIndex": 54,
+      "offset": 8396762
+    },
+    {
+      "source": "b_mouth.mouth_015",
+      "target": "mouth_015",
+      "morphIndex": 55,
+      "offset": 8469728
+    },
+    {
+      "source": "b_mouth.mouth_016",
+      "target": "mouth_016",
+      "morphIndex": 56,
+      "offset": 8542694
+    },
+    {
+      "source": "b_mouth.mouth_017",
+      "target": "mouth_017",
+      "morphIndex": 57,
+      "offset": 8615660
+    },
+    {
+      "source": "b_mouth.mouth_018",
+      "target": "mouth_018",
+      "morphIndex": 58,
+      "offset": 8688626
+    },
+    {
+      "source": "b_mouth.mouth_019",
+      "target": "mouth_019",
+      "morphIndex": 59,
+      "offset": 8761592
+    },
+    {
+      "source": "b_mouth.mouth_020",
+      "target": "mouth_020",
+      "morphIndex": 60,
+      "offset": 8834558
+    },
+    {
+      "source": "b_mouth.mouth_021",
+      "target": "mouth_021",
+      "morphIndex": 61,
+      "offset": 8907524
+    },
+    {
+      "source": "b_mouth.mouth_022",
+      "target": "mouth_022",
+      "morphIndex": 62,
+      "offset": 8980490
+    },
+    {
+      "source": "b_mouth.mouth_023",
+      "target": "mouth_023",
+      "morphIndex": 63,
+      "offset": 9053456
+    },
+    {
+      "source": "b_mouth.mouth_024",
+      "target": "mouth_024",
+      "morphIndex": 64,
+      "offset": 9126422
+    },
+    {
+      "source": "b_mouth.mouth_025",
+      "target": "mouth_025",
+      "morphIndex": 65,
+      "offset": 9199388
+    },
+    {
+      "source": "b_mouth.mouth_026",
+      "target": "mouth_026",
+      "morphIndex": 66,
+      "offset": 9272354
+    },
+    {
+      "source": "b_mouth.mouth_027",
+      "target": "mouth_027",
+      "morphIndex": 67,
+      "offset": 9345320
+    },
+    {
+      "source": "b_mouth.mouth_028",
+      "target": "mouth_028",
+      "morphIndex": 68,
+      "offset": 9418286
+    },
+    {
+      "source": "b_mouth.mouth_029",
+      "target": "mouth_029",
+      "morphIndex": 69,
+      "offset": 9491252
+    },
+    {
+      "source": "b_mouth.mouth_030",
+      "target": "mouth_030",
+      "morphIndex": 70,
+      "offset": 9564218
+    },
+    {
+      "source": "b_mouth.mouth_031",
+      "target": "mouth_031",
+      "morphIndex": 71,
+      "offset": 9637184
+    },
+    {
+      "source": "b_mouth.mouth_032",
+      "target": "mouth_032",
+      "morphIndex": 72,
+      "offset": 9710150
+    },
+    {
+      "source": "b_mouth.mouth_033",
+      "target": "mouth_033",
+      "morphIndex": 73,
+      "offset": 9783116
+    },
+    {
+      "source": "b_mouth.mouth_101",
+      "target": "mouth_101",
+      "morphIndex": 74,
+      "offset": 9856082
+    },
+    {
+      "source": "b_mouth.mouth_102",
+      "target": "mouth_102",
+      "morphIndex": 75,
+      "offset": 9929048
+    },
+    {
+      "source": "b_mouth.mouth_103",
+      "target": "mouth_103",
+      "morphIndex": 76,
+      "offset": 10002014
+    },
+    {
+      "source": "b_mouth.mouth_104",
+      "target": "mouth_104",
+      "morphIndex": 77,
+      "offset": 10074980
+    },
+    {
+      "source": "b_mouth.mouth_105",
+      "target": "mouth_105",
+      "morphIndex": 78,
+      "offset": 10147946
+    },
+    {
+      "source": "b_mouth.mouth_106",
+      "target": "mouth_106",
+      "morphIndex": 79,
+      "offset": 10220912
+    },
+    {
+      "source": "b_mouth.mouth_201",
+      "target": "mouth_201",
+      "morphIndex": 80,
+      "offset": 10293878
+    },
+    {
+      "source": "b_mouth.mouth_202",
+      "target": "mouth_202",
+      "morphIndex": 81,
+      "offset": 10366844
+    },
+    {
+      "source": "b_mouth.mouth_203",
+      "target": "mouth_203",
+      "morphIndex": 82,
+      "offset": 10439810
+    },
+    {
+      "source": "b_mouth.mouth_204",
+      "target": "mouth_204",
+      "morphIndex": 83,
+      "offset": 10512776
+    }
+  ],
+  "validation": "Full parsed PMX equals source except configured morph names; all other byte spans copied verbatim.",
+  "textures": [
+    "Texture2D/t_chr_fktn-casl-0000_bdy_col.png",
+    "Texture2D/t_chr_fktn-casl-0000_bdy_sdw.png",
+    "Texture2D/t_chr_fktn-base-0000_rmp.png",
+    "Texture2D/t_chr_fktn-casl-0000_bdy_def.png",
+    "Texture2D/t_chr_fktn-casl-0000_bdy_rma.png",
+    "Texture2D/t_chr_fktn-casl-0000_bdyco_col_alp.png",
+    "Texture2D/t_chr_fktn-casl-0000_bdyco_sdw.png",
+    "Texture2D/t_chr_fktn-casl-0000_bdyco_def.png",
+    "Texture2D/t_chr_fktn-base-0000_fce_col.png",
+    "Texture2D/t_chr_fktn-base-0000_fce_sdw.png",
+    "Texture2D/t_chr_fktn-base-0000_fce_def.png",
+    "Texture2D/t_chr_fktn-base-0000_fce_lyr.png",
+    "Texture2D/t_chr_fktn-base-0000_eye_col_alp.png",
+    "Texture2D/t_chr_fktn-base-0000_eye_sdw.png",
+    "Texture2D/t_chr_fktn-base-0000_eye_def.png",
+    "Texture2D/t_chr_fktn-base-0000_ehl_col.png",
+    "Texture2D/t_chr_fktn-base-0000_hir_col_alp.png",
+    "Texture2D/t_chr_fktn-base-0000_hir_sdw.png",
+    "Texture2D/t_chr_fktn-base-0000_hir_hhl.png",
+    "Texture2D/t_chr_fktn-base-0000_hir_def.png",
+    "Texture2D/t_chr_fktn-base-0000_hir_rma.png",
+    "Texture2D/t_chr_fktn-base-0000_hirco_col_alp.png",
+    "Texture2D/t_chr_fktn-base-0000_hirco_sdw.png",
+    "Texture2D/t_chr_fktn-base-0000_hirco_def.png",
+    "Texture2D/t_chr_fktn-base-0000_hir_sph.png"
+  ]
+}

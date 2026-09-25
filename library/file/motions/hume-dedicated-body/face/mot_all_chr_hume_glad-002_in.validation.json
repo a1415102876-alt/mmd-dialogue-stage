@@ -1,0 +1,28 @@
+{
+  "pmx": {
+    "morphCount": 108,
+    "sha256": "aae5f1b281e88e0500e6a780485c2ca27f4868caa38520b9a2324d018f19bcef"
+  },
+  "vmd": {
+    "morphRecords": 348,
+    "boneRecords": 0,
+    "sha256": "760170a8d314e21da1a38cf4aedcaadebb1c8b295274b15e3d527de0ae094007"
+  },
+  "clipName": "mot_all_chr_hume_glad-002_in_f",
+  "frameCount": 58,
+  "tracksDecoded": 84,
+  "publishedMorphs": 6,
+  "comparedMorphs": 6,
+  "weightRange": [
+    0,
+    1.0000003576278687
+  ],
+  "maximumWeightError": 2.8776426130860955e-8,
+  "worst": {
+    "morph": "b_eye.eye_003",
+    "frame": 6,
+    "expected": 0.6480001519448568,
+    "actual": 0.648000180721283
+  },
+  "validation": "Independent MMDParser read-back: every VMD morph resolves to a PMX morph and matches the decoded Unity samples at every frame."
+}

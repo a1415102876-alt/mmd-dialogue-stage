@@ -1,0 +1,4365 @@
+{
+  "source": "E:\\gakumas-pmx-workflow\\output\\shro-casl\\shro-casl-vmd.pmx",
+  "sourceSha256": "90602d426f2a7b8720dfa6ba976fcada1825f5222cf03d138865c608c524b5f9",
+  "space": "Raw PMX file coordinates, no MMDLoader left-to-right conversion",
+  "metadata": {
+    "format": "pmx",
+    "coordinateSystem": "left",
+    "magic": "PMX ",
+    "version": 2,
+    "headerSize": 8,
+    "encoding": 0,
+    "additionalUvNum": 3,
+    "vertexIndexSize": 2,
+    "textureIndexSize": 1,
+    "materialIndexSize": 1,
+    "boneIndexSize": 2,
+    "morphIndexSize": 2,
+    "rigidBodyIndexSize": 2,
+    "modelName": "mdl_chr_shro-casl-0000_body(Clone)",
+    "englishModelName": "mdl_chr_shro-casl-0000_body(Clone)",
+    "comment": "mdl_chr_shro-casl-0000_body(Clone)",
+    "englishComment": "mdl_chr_shro-casl-0000_body(Clone)",
+    "vertexCount": 38741,
+    "faceCount": 76904,
+    "textureCount": 25,
+    "materialCount": 16,
+    "boneCount": 333,
+    "morphCount": 108,
+    "frameCount": 1,
+    "rigidBodyCount": 0,
+    "constraintCount": 0
+  },
+  "bones": [
+    {
+      "name": "mdl_chr_shro-casl-0000_body(Clone)",
+      "englishName": "mdl_chr_shro-casl-0000_body(Clone)",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "parentIndex": -1,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 1
+    },
+    {
+      "name": "Geo_Body",
+      "englishName": "Geo_Body",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "parentIndex": 0,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "IKBody",
+      "englishName": "IKBody",
+      "position": [
+        6.169079824758228e-8,
+        11.684557914733887,
+        0.060620423406362534
+      ],
+      "parentIndex": 0,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "IKGoal_LeftFoot",
+      "englishName": "IKGoal_LeftFoot",
+      "position": [
+        0.8948873281478882,
+        1.1969306468963623,
+        0.36674821376800537
+      ],
+      "parentIndex": 0,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "IKGoal_LeftHand",
+      "englishName": "IKGoal_LeftHand",
+      "position": [
+        6.57280158996582,
+        15.723540306091309,
+        0.2784755527973175
+      ],
+      "parentIndex": 0,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "IKGoal_RightFoot",
+      "englishName": "IKGoal_RightFoot",
+      "position": [
+        -0.8948873281478882,
+        1.1969376802444458,
+        0.36674803495407104
+      ],
+      "parentIndex": 0,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "IKGoal_RightHand",
+      "englishName": "IKGoal_RightHand",
+      "position": [
+        -6.572800159454346,
+        15.723540306091309,
+        0.27847495675086975
+      ],
+      "parentIndex": 0,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "IKHint_LeftElbow",
+      "englishName": "IKHint_LeftElbow",
+      "position": [
+        4.010917663574219,
+        15.723540306091309,
+        2.778475522994995
+      ],
+      "parentIndex": 0,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "IKHint_LeftKnee",
+      "englishName": "IKHint_LeftKnee",
+      "position": [
+        0.8948838710784912,
+        6.339279651641846,
+        -2.9653408527374268
+      ],
+      "parentIndex": 0,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "IKHint_RightElbow",
+      "englishName": "IKHint_RightElbow",
+      "position": [
+        -4.010916709899902,
+        15.723540306091309,
+        2.778475046157837
+      ],
+      "parentIndex": 0,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "IKHint_RightKnee",
+      "englishName": "IKHint_RightKnee",
+      "position": [
+        -0.8948838710784912,
+        6.33927583694458,
+        -2.9653408527374268
+      ],
+      "parentIndex": 0,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "LookAt",
+      "englishName": "LookAt",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "parentIndex": 0,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "Move",
+      "englishName": "Move",
+      "position": [
+        0,
+        0,
+        -0.17965634167194366
+      ],
+      "parentIndex": 0,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "Reference",
+      "englishName": "Reference",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "parentIndex": 0,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 14
+    },
+    {
+      "name": "BodyScaleRatio_DIS",
+      "englishName": "BodyScaleRatio_DIS",
+      "position": [
+        0,
+        1.2937500476837158,
+        0
+      ],
+      "parentIndex": 13,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "Hips",
+      "englishName": "Hips",
+      "position": [
+        0,
+        11.654387474060059,
+        -0.17965634167194366
+      ],
+      "parentIndex": 13,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 16
+    },
+    {
+      "name": "Pelvis",
+      "englishName": "Pelvis",
+      "position": [
+        0,
+        11.654387474060059,
+        -0.17965634167194366
+      ],
+      "parentIndex": 15,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 17
+    },
+    {
+      "name": "Belt1_S",
+      "englishName": "Belt1_S",
+      "position": [
+        1.2409745454788208,
+        11.899420738220215,
+        -1.0835833549499512
+      ],
+      "parentIndex": 16,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 18
+    },
+    {
+      "name": "Belt2_S",
+      "englishName": "Belt2_S",
+      "position": [
+        1.2409744262695312,
+        10.741211891174316,
+        -1.0835833549499512
+      ],
+      "parentIndex": 17,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 19
+    },
+    {
+      "name": "Belt3_S",
+      "englishName": "Belt3_S",
+      "position": [
+        1.2409743070602417,
+        9.583003997802734,
+        -1.0835833549499512
+      ],
+      "parentIndex": 18,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 20
+    },
+    {
+      "name": "Belt4_S_End",
+      "englishName": "Belt4_S_End",
+      "position": [
+        1.2409741878509521,
+        8.424796104431152,
+        -1.0835833549499512
+      ],
+      "parentIndex": 19,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "LeftUpLeg",
+      "englishName": "LeftUpLeg",
+      "position": [
+        0.89488685131073,
+        10.938776969909668,
+        -0.026129862293601036
+      ],
+      "parentIndex": 16,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 22
+    },
+    {
+      "name": "LeftLeg",
+      "englishName": "LeftLeg",
+      "position": [
+        0.89488685131073,
+        6.379137992858887,
+        0.03439432382583618
+      ],
+      "parentIndex": 21,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 23
+    },
+    {
+      "name": "LeftFoot",
+      "englishName": "LeftFoot",
+      "position": [
+        0.8948870897293091,
+        1.1969305276870728,
+        0.3667483925819397
+      ],
+      "parentIndex": 22,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 24
+    },
+    {
+      "name": "LeftToeBase",
+      "englishName": "LeftToeBase",
+      "position": [
+        0.8948857188224792,
+        0.44396743178367615,
+        -0.9528766870498657
+      ],
+      "parentIndex": 23,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "LeftFoot_H",
+      "englishName": "LeftFoot_H",
+      "position": [
+        0.8948870897293091,
+        0.9731479287147522,
+        0.3811003863811493
+      ],
+      "parentIndex": 22,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 26
+    },
+    {
+      "name": "LeftToeBase_H",
+      "englishName": "LeftToeBase_H",
+      "position": [
+        0.8948857188224792,
+        0.32203420996665955,
+        -0.9385247230529785
+      ],
+      "parentIndex": 25,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "LeftLeg_H",
+      "englishName": "LeftLeg_H",
+      "position": [
+        0.89488685131073,
+        6.377891540527344,
+        0.03447432443499565
+      ],
+      "parentIndex": 22,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "LeftLegSkin1_S",
+      "englishName": "LeftLegSkin1_S",
+      "position": [
+        0.8948869109153748,
+        4.7904558181762695,
+        0.13628236949443817
+      ],
+      "parentIndex": 22,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 29
+    },
+    {
+      "name": "LeftLegSkin2_S",
+      "englishName": "LeftLegSkin2_S",
+      "position": [
+        0.8948869109153748,
+        4.7904558181762695,
+        0.13628236949443817
+      ],
+      "parentIndex": 28,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 30
+    },
+    {
+      "name": "LeftLegSkin3_S_End",
+      "englishName": "LeftLegSkin3_S_End",
+      "position": [
+        0.8948869109153748,
+        4.7904558181762695,
+        0.13628236949443817
+      ],
+      "parentIndex": 29,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "LeftThigh_O",
+      "englishName": "LeftThigh_O",
+      "position": [
+        0.89488685131073,
+        9.231178283691406,
+        -0.0034633558243513107
+      ],
+      "parentIndex": 21,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "LeftUpLeg_H",
+      "englishName": "LeftUpLeg_H",
+      "position": [
+        0.89488685131073,
+        10.938776969909668,
+        -0.026129862293601036
+      ],
+      "parentIndex": 21,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "LeftUpLeg_Roll_H",
+      "englishName": "LeftUpLeg_Roll_H",
+      "position": [
+        0.89488685131073,
+        9.297444343566895,
+        0.0028514652512967587
+      ],
+      "parentIndex": 21,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 34
+    },
+    {
+      "name": "LeftUpLegSkin1_S",
+      "englishName": "LeftUpLegSkin1_S",
+      "position": [
+        0.89488685131073,
+        9.297444343566895,
+        0.0028514768928289413
+      ],
+      "parentIndex": 33,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 35
+    },
+    {
+      "name": "LeftUpLegSkin2_S",
+      "englishName": "LeftUpLegSkin2_S",
+      "position": [
+        0.89488685131073,
+        9.297444343566895,
+        0.0028514768928289413
+      ],
+      "parentIndex": 34,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 36
+    },
+    {
+      "name": "LeftUpLegSkin3_S_End",
+      "englishName": "LeftUpLegSkin3_S_End",
+      "position": [
+        0.89488685131073,
+        9.297444343566895,
+        0.0028514768928289413
+      ],
+      "parentIndex": 35,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "LeftWaist_O",
+      "englishName": "LeftWaist_O",
+      "position": [
+        1.034999966621399,
+        12.81876277923584,
+        -0.6324688196182251
+      ],
+      "parentIndex": 16,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 38
+    },
+    {
+      "name": "LeftWaist_H",
+      "englishName": "LeftWaist_H",
+      "position": [
+        0.9649434089660645,
+        11.024970054626465,
+        -0.3179660737514496
+      ],
+      "parentIndex": 37,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "RightUpLeg",
+      "englishName": "RightUpLeg",
+      "position": [
+        -0.89488685131073,
+        10.938773155212402,
+        -0.02612987346947193
+      ],
+      "parentIndex": 16,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 40
+    },
+    {
+      "name": "RightLeg",
+      "englishName": "RightLeg",
+      "position": [
+        -0.89488685131073,
+        6.379144668579102,
+        0.03439418599009514
+      ],
+      "parentIndex": 39,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 41
+    },
+    {
+      "name": "RightFoot",
+      "englishName": "RightFoot",
+      "position": [
+        -0.8948870897293091,
+        1.1969373226165771,
+        0.36674821376800537
+      ],
+      "parentIndex": 40,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 42
+    },
+    {
+      "name": "RightToeBase",
+      "englishName": "RightToeBase",
+      "position": [
+        -0.8948857188224792,
+        0.44397562742233276,
+        -0.9528768658638
+      ],
+      "parentIndex": 41,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "RightFoot_H",
+      "englishName": "RightFoot_H",
+      "position": [
+        -0.8948867321014404,
+        0.9731553792953491,
+        0.3810996413230896
+      ],
+      "parentIndex": 40,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 44
+    },
+    {
+      "name": "RightToeBase_H",
+      "englishName": "RightToeBase_H",
+      "position": [
+        -0.8948853611946106,
+        0.32204166054725647,
+        -0.9385254383087158
+      ],
+      "parentIndex": 43,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "RightLeg_H",
+      "englishName": "RightLeg_H",
+      "position": [
+        -0.89488685131073,
+        6.3778977394104,
+        0.03447418659925461
+      ],
+      "parentIndex": 40,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "RightLegSkin1_S",
+      "englishName": "RightLegSkin1_S",
+      "position": [
+        -0.8948869109153748,
+        4.790463447570801,
+        0.13628217577934265
+      ],
+      "parentIndex": 40,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 47
+    },
+    {
+      "name": "RightLegSkin2_S",
+      "englishName": "RightLegSkin2_S",
+      "position": [
+        -0.8948869109153748,
+        4.790463447570801,
+        0.13628217577934265
+      ],
+      "parentIndex": 46,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 48
+    },
+    {
+      "name": "RightLegSkin3_S_End",
+      "englishName": "RightLegSkin3_S_End",
+      "position": [
+        -0.8948869109153748,
+        4.790463447570801,
+        0.13628217577934265
+      ],
+      "parentIndex": 47,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "RightThigh_O",
+      "englishName": "RightThigh_O",
+      "position": [
+        -0.89488685131073,
+        9.23117446899414,
+        -0.0034633674658834934
+      ],
+      "parentIndex": 39,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "RightUpLeg_H",
+      "englishName": "RightUpLeg_H",
+      "position": [
+        -0.89488685131073,
+        10.938773155212402,
+        -0.02612987346947193
+      ],
+      "parentIndex": 39,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "RightUpLeg_Roll_H",
+      "englishName": "RightUpLeg_Roll_H",
+      "position": [
+        -0.89488685131073,
+        9.297439575195312,
+        0.0028509064577519894
+      ],
+      "parentIndex": 39,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 52
+    },
+    {
+      "name": "RightUpLegSkin1_S",
+      "englishName": "RightUpLegSkin1_S",
+      "position": [
+        -0.89488685131073,
+        9.297440528869629,
+        0.0028508948162198067
+      ],
+      "parentIndex": 51,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 53
+    },
+    {
+      "name": "RightUpLegSkin2_S",
+      "englishName": "RightUpLegSkin2_S",
+      "position": [
+        -0.89488685131073,
+        9.297440528869629,
+        0.0028508948162198067
+      ],
+      "parentIndex": 52,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 54
+    },
+    {
+      "name": "RightUpLegSkin3_S_End",
+      "englishName": "RightUpLegSkin3_S_End",
+      "position": [
+        -0.89488685131073,
+        9.297440528869629,
+        0.0028508948162198067
+      ],
+      "parentIndex": 53,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "RightWaist_O",
+      "englishName": "RightWaist_O",
+      "position": [
+        -1.034999966621399,
+        12.81876277923584,
+        -0.6324688196182251
+      ],
+      "parentIndex": 16,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 56
+    },
+    {
+      "name": "RightWaist_H",
+      "englishName": "RightWaist_H",
+      "position": [
+        -0.9649434089660645,
+        11.024968147277832,
+        -0.31796613335609436
+      ],
+      "parentIndex": 55,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "Spine",
+      "englishName": "Spine",
+      "position": [
+        0,
+        12.541638374328613,
+        -0.17965634167194366
+      ],
+      "parentIndex": 15,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 58
+    },
+    {
+      "name": "Spine1",
+      "englishName": "Spine1",
+      "position": [
+        0,
+        13.594269752502441,
+        -0.17965634167194366
+      ],
+      "parentIndex": 57,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 59
+    },
+    {
+      "name": "LeftBackGown1_S",
+      "englishName": "LeftBackGown1_S",
+      "position": [
+        0.5564069151878357,
+        14.450798988342285,
+        0.8886781930923462
+      ],
+      "parentIndex": 58,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 60
+    },
+    {
+      "name": "LeftBackGown2_S",
+      "englishName": "LeftBackGown2_S",
+      "position": [
+        0.6599237322807312,
+        12.535301208496094,
+        1.1608154773712158
+      ],
+      "parentIndex": 59,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 61
+    },
+    {
+      "name": "LeftBackGown3_S",
+      "englishName": "LeftBackGown3_S",
+      "position": [
+        0.7634415626525879,
+        10.619804382324219,
+        1.4329547882080078
+      ],
+      "parentIndex": 60,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 62
+    },
+    {
+      "name": "LeftBackGown4_S",
+      "englishName": "LeftBackGown4_S",
+      "position": [
+        0.8669566512107849,
+        8.704305648803711,
+        1.7050883769989014
+      ],
+      "parentIndex": 61,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 63
+    },
+    {
+      "name": "LeftBackGown5_S",
+      "englishName": "LeftBackGown5_S",
+      "position": [
+        0.9704755544662476,
+        6.788808345794678,
+        1.977230429649353
+      ],
+      "parentIndex": 62,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 64
+    },
+    {
+      "name": "LeftBackGown6_S",
+      "englishName": "LeftBackGown6_S",
+      "position": [
+        1.0739954710006714,
+        4.873311519622803,
+        2.2493717670440674
+      ],
+      "parentIndex": 63,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 65
+    },
+    {
+      "name": "LeftBackGown7_S_End",
+      "englishName": "LeftBackGown7_S_End",
+      "position": [
+        1.1792662143707275,
+        2.9253745079040527,
+        2.5261197090148926
+      ],
+      "parentIndex": 64,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "LeftBackSideGown1_S",
+      "englishName": "LeftBackSideGown1_S",
+      "position": [
+        1.3726946115493774,
+        14.450798988342285,
+        0.22784748673439026
+      ],
+      "parentIndex": 58,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 67
+    },
+    {
+      "name": "LeftBackSideGown2_S",
+      "englishName": "LeftBackSideGown2_S",
+      "position": [
+        1.622712254524231,
+        12.54423999786377,
+        0.4653979241847992
+      ],
+      "parentIndex": 66,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 68
+    },
+    {
+      "name": "LeftBackSideGown3_S",
+      "englishName": "LeftBackSideGown3_S",
+      "position": [
+        1.872732162475586,
+        10.637682914733887,
+        0.702950119972229
+      ],
+      "parentIndex": 67,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 69
+    },
+    {
+      "name": "LeftBackSideGown4_S",
+      "englishName": "LeftBackSideGown4_S",
+      "position": [
+        2.122750997543335,
+        8.731123924255371,
+        0.9405021667480469
+      ],
+      "parentIndex": 68,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 70
+    },
+    {
+      "name": "LeftBackSideGown5_S",
+      "englishName": "LeftBackSideGown5_S",
+      "position": [
+        2.372770309448242,
+        6.8245649337768555,
+        1.1780555248260498
+      ],
+      "parentIndex": 69,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 71
+    },
+    {
+      "name": "LeftBackSideGown6_S",
+      "englishName": "LeftBackSideGown6_S",
+      "position": [
+        2.622788906097412,
+        4.918006896972656,
+        1.4156113862991333
+      ],
+      "parentIndex": 70,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 72
+    },
+    {
+      "name": "LeftBackSideGown7_S_End",
+      "englishName": "LeftBackSideGown7_S_End",
+      "position": [
+        2.883788585662842,
+        2.9277162551879883,
+        1.6635963916778564
+      ],
+      "parentIndex": 71,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "LeftFrontGown1_S",
+      "englishName": "LeftFrontGown1_S",
+      "position": [
+        0.7298121452331543,
+        14.450798988342285,
+        -1.3357720375061035
+      ],
+      "parentIndex": 58,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 74
+    },
+    {
+      "name": "LeftFrontGown2_S",
+      "englishName": "LeftFrontGown2_S",
+      "position": [
+        0.9573394656181335,
+        12.526712417602539,
+        -1.3309335708618164
+      ],
+      "parentIndex": 73,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 75
+    },
+    {
+      "name": "LeftFrontGown3_S",
+      "englishName": "LeftFrontGown3_S",
+      "position": [
+        1.1848621368408203,
+        10.602622985839844,
+        -1.3261064291000366
+      ],
+      "parentIndex": 74,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 76
+    },
+    {
+      "name": "LeftFrontGown4_S",
+      "englishName": "LeftFrontGown4_S",
+      "position": [
+        1.4123855829238892,
+        8.678534507751465,
+        -1.3212836980819702
+      ],
+      "parentIndex": 75,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 77
+    },
+    {
+      "name": "LeftFrontGown5_S",
+      "englishName": "LeftFrontGown5_S",
+      "position": [
+        1.6399058103561401,
+        6.754444599151611,
+        -1.3164618015289307
+      ],
+      "parentIndex": 76,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 78
+    },
+    {
+      "name": "LeftFrontGown6_S",
+      "englishName": "LeftFrontGown6_S",
+      "position": [
+        1.867429256439209,
+        4.830356121063232,
+        -1.311632513999939
+      ],
+      "parentIndex": 77,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 79
+    },
+    {
+      "name": "LeftFrontGown7_S_End",
+      "englishName": "LeftFrontGown7_S_End",
+      "position": [
+        2.0949513912200928,
+        2.9062674045562744,
+        -1.3068053722381592
+      ],
+      "parentIndex": 78,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "LeftFrontSideGown1_S",
+      "englishName": "LeftFrontSideGown1_S",
+      "position": [
+        1.3210092782974243,
+        14.450798988342285,
+        -0.770010232925415
+      ],
+      "parentIndex": 58,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 81
+    },
+    {
+      "name": "LeftFrontSideGown2_S",
+      "englishName": "LeftFrontSideGown2_S",
+      "position": [
+        1.6154658794403076,
+        12.54221248626709,
+        -0.6134889125823975
+      ],
+      "parentIndex": 80,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 82
+    },
+    {
+      "name": "LeftFrontSideGown3_S",
+      "englishName": "LeftFrontSideGown3_S",
+      "position": [
+        1.9099258184432983,
+        10.633626937866211,
+        -0.45696601271629333
+      ],
+      "parentIndex": 81,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 83
+    },
+    {
+      "name": "LeftFrontSideGown4_S",
+      "englishName": "LeftFrontSideGown4_S",
+      "position": [
+        2.204396963119507,
+        8.725042343139648,
+        -0.30044516921043396
+      ],
+      "parentIndex": 82,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 84
+    },
+    {
+      "name": "LeftFrontSideGown5_S",
+      "englishName": "LeftFrontSideGown5_S",
+      "position": [
+        2.4988410472869873,
+        6.8164544105529785,
+        -0.14392009377479553
+      ],
+      "parentIndex": 83,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 85
+    },
+    {
+      "name": "LeftFrontSideGown6_S",
+      "englishName": "LeftFrontSideGown6_S",
+      "position": [
+        2.793299436569214,
+        4.907867431640625,
+        0.01260323915630579
+      ],
+      "parentIndex": 84,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 86
+    },
+    {
+      "name": "LeftFrontSideGown7_S_End",
+      "englishName": "LeftFrontSideGown7_S_End",
+      "position": [
+        3.0969717502593994,
+        2.939573049545288,
+        0.1740228682756424
+      ],
+      "parentIndex": 85,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "RightBackGown1_S",
+      "englishName": "RightBackGown1_S",
+      "position": [
+        -0.5564066767692566,
+        14.450798988342285,
+        0.8886777758598328
+      ],
+      "parentIndex": 58,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 88
+    },
+    {
+      "name": "RightBackGown2_S",
+      "englishName": "RightBackGown2_S",
+      "position": [
+        -0.6599235534667969,
+        12.535301208496094,
+        1.1608154773712158
+      ],
+      "parentIndex": 87,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 89
+    },
+    {
+      "name": "RightBackGown3_S",
+      "englishName": "RightBackGown3_S",
+      "position": [
+        -0.7634411454200745,
+        10.619803428649902,
+        1.4329546689987183
+      ],
+      "parentIndex": 88,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 90
+    },
+    {
+      "name": "RightBackGown4_S",
+      "englishName": "RightBackGown4_S",
+      "position": [
+        -0.866957426071167,
+        8.704306602478027,
+        1.7050901651382446
+      ],
+      "parentIndex": 89,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 91
+    },
+    {
+      "name": "RightBackGown5_S",
+      "englishName": "RightBackGown5_S",
+      "position": [
+        -0.9704746603965759,
+        6.788808345794678,
+        1.977227807044983
+      ],
+      "parentIndex": 90,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 92
+    },
+    {
+      "name": "RightBackGown6_S",
+      "englishName": "RightBackGown6_S",
+      "position": [
+        -1.073995590209961,
+        4.873312473297119,
+        2.249375104904175
+      ],
+      "parentIndex": 91,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 93
+    },
+    {
+      "name": "RightBackGown7_S_End",
+      "englishName": "RightBackGown7_S_End",
+      "position": [
+        -1.179266333580017,
+        2.92537522315979,
+        2.526123046875
+      ],
+      "parentIndex": 92,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "RightBackSideGown1_S",
+      "englishName": "RightBackSideGown1_S",
+      "position": [
+        -1.3726974725723267,
+        14.450798988342285,
+        0.22784781455993652
+      ],
+      "parentIndex": 58,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 95
+    },
+    {
+      "name": "RightBackSideGown2_S",
+      "englishName": "RightBackSideGown2_S",
+      "position": [
+        -1.6227079629898071,
+        12.544239044189453,
+        0.4653981029987335
+      ],
+      "parentIndex": 94,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 96
+    },
+    {
+      "name": "RightBackSideGown3_S",
+      "englishName": "RightBackSideGown3_S",
+      "position": [
+        -1.872727870941162,
+        10.637681007385254,
+        0.7029502987861633
+      ],
+      "parentIndex": 95,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 97
+    },
+    {
+      "name": "RightBackSideGown4_S",
+      "englishName": "RightBackSideGown4_S",
+      "position": [
+        -2.1227524280548096,
+        8.731123924255371,
+        0.9405030012130737
+      ],
+      "parentIndex": 96,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 98
+    },
+    {
+      "name": "RightBackSideGown5_S",
+      "englishName": "RightBackSideGown5_S",
+      "position": [
+        -2.372765064239502,
+        6.824563503265381,
+        1.1780548095703125
+      ],
+      "parentIndex": 97,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 99
+    },
+    {
+      "name": "RightBackSideGown6_S",
+      "englishName": "RightBackSideGown6_S",
+      "position": [
+        -2.6227896213531494,
+        4.918006896972656,
+        1.4156113862991333
+      ],
+      "parentIndex": 98,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 100
+    },
+    {
+      "name": "RightBackSideGown7_S_End",
+      "englishName": "RightBackSideGown7_S_End",
+      "position": [
+        -2.8837900161743164,
+        2.9277162551879883,
+        1.663596272468567
+      ],
+      "parentIndex": 99,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "RightFrontGown1_S",
+      "englishName": "RightFrontGown1_S",
+      "position": [
+        -0.7298121452331543,
+        14.450798988342285,
+        -1.3357720375061035
+      ],
+      "parentIndex": 58,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 102
+    },
+    {
+      "name": "RightFrontGown2_S",
+      "englishName": "RightFrontGown2_S",
+      "position": [
+        -0.9573396444320679,
+        12.526712417602539,
+        -1.3309335708618164
+      ],
+      "parentIndex": 101,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 103
+    },
+    {
+      "name": "RightFrontGown3_S",
+      "englishName": "RightFrontGown3_S",
+      "position": [
+        -1.184862494468689,
+        10.60262393951416,
+        -1.326106309890747
+      ],
+      "parentIndex": 102,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 104
+    },
+    {
+      "name": "RightFrontGown4_S",
+      "englishName": "RightFrontGown4_S",
+      "position": [
+        -1.4123867750167847,
+        8.678535461425781,
+        -1.3212834596633911
+      ],
+      "parentIndex": 103,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 105
+    },
+    {
+      "name": "RightFrontGown5_S",
+      "englishName": "RightFrontGown5_S",
+      "position": [
+        -1.6399065256118774,
+        6.754446029663086,
+        -1.3164616823196411
+      ],
+      "parentIndex": 104,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 106
+    },
+    {
+      "name": "RightFrontGown6_S",
+      "englishName": "RightFrontGown6_S",
+      "position": [
+        -1.8674299716949463,
+        4.830358505249023,
+        -1.3116321563720703
+      ],
+      "parentIndex": 105,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 107
+    },
+    {
+      "name": "RightFrontGown7_S_End",
+      "englishName": "RightFrontGown7_S_End",
+      "position": [
+        -2.0949528217315674,
+        2.9062705039978027,
+        -1.306804895401001
+      ],
+      "parentIndex": 106,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "RightFrontSideGown1_S",
+      "englishName": "RightFrontSideGown1_S",
+      "position": [
+        -1.3210139274597168,
+        14.450798988342285,
+        -0.7700096964836121
+      ],
+      "parentIndex": 58,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 109
+    },
+    {
+      "name": "RightFrontSideGown2_S",
+      "englishName": "RightFrontSideGown2_S",
+      "position": [
+        -1.6154706478118896,
+        12.54221248626709,
+        -0.6134889125823975
+      ],
+      "parentIndex": 108,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 110
+    },
+    {
+      "name": "RightFrontSideGown3_S",
+      "englishName": "RightFrontSideGown3_S",
+      "position": [
+        -1.9099308252334595,
+        10.633626937866211,
+        -0.45696592330932617
+      ],
+      "parentIndex": 109,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 111
+    },
+    {
+      "name": "RightFrontSideGown4_S",
+      "englishName": "RightFrontSideGown4_S",
+      "position": [
+        -2.204392194747925,
+        8.7250394821167,
+        -0.30044400691986084
+      ],
+      "parentIndex": 110,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 112
+    },
+    {
+      "name": "RightFrontSideGown5_S",
+      "englishName": "RightFrontSideGown5_S",
+      "position": [
+        -2.498842477798462,
+        6.8164544105529785,
+        -0.14391902089118958
+      ],
+      "parentIndex": 111,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 113
+    },
+    {
+      "name": "RightFrontSideGown6_S",
+      "englishName": "RightFrontSideGown6_S",
+      "position": [
+        -2.7933058738708496,
+        4.907866477966309,
+        0.012603332288563251
+      ],
+      "parentIndex": 112,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 114
+    },
+    {
+      "name": "RightFrontSideGown7_S_End",
+      "englishName": "RightFrontSideGown7_S_End",
+      "position": [
+        -3.0969772338867188,
+        2.939572334289551,
+        0.17402295768260956
+      ],
+      "parentIndex": 113,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "Spine2",
+      "englishName": "Spine2",
+      "position": [
+        0,
+        14.575531005859375,
+        -0.17965634167194366
+      ],
+      "parentIndex": 58,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 116
+    },
+    {
+      "name": "CenterLeftRibbon1_S",
+      "englishName": "CenterLeftRibbon1_S",
+      "position": [
+        -0.024919701740145683,
+        14.758658409118652,
+        -1.1387072801589966
+      ],
+      "parentIndex": 115,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 117
+    },
+    {
+      "name": "CenterLeftRibbon2_S",
+      "englishName": "CenterLeftRibbon2_S",
+      "position": [
+        -0.08260181546211243,
+        13.875207901000977,
+        -1.2605425119400024
+      ],
+      "parentIndex": 116,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 118
+    },
+    {
+      "name": "CenterLeftRibbon3_S_End",
+      "englishName": "CenterLeftRibbon3_S_End",
+      "position": [
+        -0.1402839869260788,
+        12.991754531860352,
+        -1.3823776245117188
+      ],
+      "parentIndex": 117,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "CenterRightRibbon1_S",
+      "englishName": "CenterRightRibbon1_S",
+      "position": [
+        0.024919696152210236,
+        14.758712768554688,
+        -1.1387073993682861
+      ],
+      "parentIndex": 115,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 120
+    },
+    {
+      "name": "CenterRightRibbon2_S",
+      "englishName": "CenterRightRibbon2_S",
+      "position": [
+        0.08260183781385422,
+        13.875210762023926,
+        -1.2605435848236084
+      ],
+      "parentIndex": 119,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 121
+    },
+    {
+      "name": "CenterRightRibbon3_S_End",
+      "englishName": "CenterRightRibbon3_S_End",
+      "position": [
+        0.14028383791446686,
+        12.991708755493164,
+        -1.382375955581665
+      ],
+      "parentIndex": 120,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "LeftBust1_S",
+      "englishName": "LeftBust1_S",
+      "position": [
+        0.6668607592582703,
+        14.869665145874023,
+        -0.061237022280693054
+      ],
+      "parentIndex": 115,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 123
+    },
+    {
+      "name": "LeftBust2_S_End",
+      "englishName": "LeftBust2_S_End",
+      "position": [
+        0.6668607592582703,
+        14.756352424621582,
+        -1.3564215898513794
+      ],
+      "parentIndex": 122,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "LeftShoulder",
+      "englishName": "LeftShoulder",
+      "position": [
+        0.1970077008008957,
+        15.723540306091309,
+        0.2784755229949951
+      ],
+      "parentIndex": 115,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 125
+    },
+    {
+      "name": "LeftArm",
+      "englishName": "LeftArm",
+      "position": [
+        1.3953434228897095,
+        15.723540306091309,
+        0.2784755229949951
+      ],
+      "parentIndex": 124,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 126
+    },
+    {
+      "name": "LeftArm_H",
+      "englishName": "LeftArm_H",
+      "position": [
+        1.396593451499939,
+        15.723540306091309,
+        0.2784755229949951
+      ],
+      "parentIndex": 125,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "LeftArm_Roll_H",
+      "englishName": "LeftArm_Roll_H",
+      "position": [
+        2.977599620819092,
+        15.723540306091309,
+        0.2784755229949951
+      ],
+      "parentIndex": 125,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 128
+    },
+    {
+      "name": "LeftArmSleeve1_S",
+      "englishName": "LeftArmSleeve1_S",
+      "position": [
+        2.9775993824005127,
+        15.723540306091309,
+        0.2784755229949951
+      ],
+      "parentIndex": 127,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 129
+    },
+    {
+      "name": "LeftArmSleeve2_S",
+      "englishName": "LeftArmSleeve2_S",
+      "position": [
+        2.9775993824005127,
+        15.723540306091309,
+        0.2784755229949951
+      ],
+      "parentIndex": 128,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 130
+    },
+    {
+      "name": "LeftArmSleeve3_S_End",
+      "englishName": "LeftArmSleeve3_S_End",
+      "position": [
+        2.9775993824005127,
+        15.723540306091309,
+        0.2784755229949951
+      ],
+      "parentIndex": 129,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "LeftForeArm",
+      "englishName": "LeftForeArm",
+      "position": [
+        4.010918140411377,
+        15.723540306091309,
+        0.2784755229949951
+      ],
+      "parentIndex": 125,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 132
+    },
+    {
+      "name": "LeftForeArm_H",
+      "englishName": "LeftForeArm_H",
+      "position": [
+        4.012167453765869,
+        15.723540306091309,
+        0.2784755229949951
+      ],
+      "parentIndex": 131,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "LeftForeArm_Roll_H",
+      "englishName": "LeftForeArm_Roll_H",
+      "position": [
+        5.498730659484863,
+        15.723540306091309,
+        0.2784755229949951
+      ],
+      "parentIndex": 131,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 134
+    },
+    {
+      "name": "LeftForeArmSleeve1_S",
+      "englishName": "LeftForeArmSleeve1_S",
+      "position": [
+        5.498730659484863,
+        15.723540306091309,
+        0.2784755229949951
+      ],
+      "parentIndex": 133,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 135
+    },
+    {
+      "name": "LeftForeArmSleeve2_S",
+      "englishName": "LeftForeArmSleeve2_S",
+      "position": [
+        5.498730659484863,
+        15.723540306091309,
+        0.2784755229949951
+      ],
+      "parentIndex": 134,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 136
+    },
+    {
+      "name": "LeftForeArmSleeve3_S_End",
+      "englishName": "LeftForeArmSleeve3_S_End",
+      "position": [
+        5.498730659484863,
+        15.723540306091309,
+        0.2784755229949951
+      ],
+      "parentIndex": 135,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "LeftHand",
+      "englishName": "LeftHand",
+      "position": [
+        6.57280158996582,
+        15.723540306091309,
+        0.2784755229949951
+      ],
+      "parentIndex": 131,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 138
+    },
+    {
+      "name": "LeftHand1_E",
+      "englishName": "LeftHand1_E",
+      "position": [
+        7.344781875610352,
+        15.564602851867676,
+        0.2784755229949951
+      ],
+      "parentIndex": 137,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "LeftHand1_I",
+      "englishName": "LeftHand1_I",
+      "position": [
+        7.344781875610352,
+        15.564602851867676,
+        0.27847516536712646
+      ],
+      "parentIndex": 137,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "LeftHand2_I",
+      "englishName": "LeftHand2_I",
+      "position": [
+        7.344781875610352,
+        15.564602851867676,
+        0.27847516536712646
+      ],
+      "parentIndex": 137,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "LeftHandIndex1",
+      "englishName": "LeftHandIndex1",
+      "position": [
+        7.487957954406738,
+        15.830211639404297,
+        0.04601229727268219
+      ],
+      "parentIndex": 137,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 142
+    },
+    {
+      "name": "LeftHandIndex2",
+      "englishName": "LeftHandIndex2",
+      "position": [
+        7.833619594573975,
+        15.830211639404297,
+        0.04601229727268219
+      ],
+      "parentIndex": 141,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 143
+    },
+    {
+      "name": "LeftHandIndex3",
+      "englishName": "LeftHandIndex3",
+      "position": [
+        8.015172004699707,
+        15.830211639404297,
+        0.04601229727268219
+      ],
+      "parentIndex": 142,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "LeftHandMiddle1",
+      "englishName": "LeftHandMiddle1",
+      "position": [
+        7.485010623931885,
+        15.864255905151367,
+        0.23707689344882965
+      ],
+      "parentIndex": 137,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 145
+    },
+    {
+      "name": "LeftHandMiddle2",
+      "englishName": "LeftHandMiddle2",
+      "position": [
+        7.875585556030273,
+        15.864255905151367,
+        0.23707689344882965
+      ],
+      "parentIndex": 144,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 146
+    },
+    {
+      "name": "LeftHandMiddle3",
+      "englishName": "LeftHandMiddle3",
+      "position": [
+        8.088153839111328,
+        15.864255905151367,
+        0.23707689344882965
+      ],
+      "parentIndex": 145,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "LeftHandPinky1",
+      "englishName": "LeftHandPinky1",
+      "position": [
+        7.389804363250732,
+        15.772934913635254,
+        0.5827487707138062
+      ],
+      "parentIndex": 137,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 148
+    },
+    {
+      "name": "LeftHandPinky2",
+      "englishName": "LeftHandPinky2",
+      "position": [
+        7.691500663757324,
+        15.772934913635254,
+        0.5827487707138062
+      ],
+      "parentIndex": 147,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 149
+    },
+    {
+      "name": "LeftHandPinky3",
+      "englishName": "LeftHandPinky3",
+      "position": [
+        7.835529804229736,
+        15.772934913635254,
+        0.5827487707138062
+      ],
+      "parentIndex": 148,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "LeftHandRing1",
+      "englishName": "LeftHandRing1",
+      "position": [
+        7.4509124755859375,
+        15.832158088684082,
+        0.41501346230506897
+      ],
+      "parentIndex": 137,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 151
+    },
+    {
+      "name": "LeftHandRing2",
+      "englishName": "LeftHandRing2",
+      "position": [
+        7.803426742553711,
+        15.832158088684082,
+        0.41501346230506897
+      ],
+      "parentIndex": 150,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 152
+    },
+    {
+      "name": "LeftHandRing3",
+      "englishName": "LeftHandRing3",
+      "position": [
+        8.01528263092041,
+        15.832158088684082,
+        0.41501346230506897
+      ],
+      "parentIndex": 151,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "LeftHandThumb1",
+      "englishName": "LeftHandThumb1",
+      "position": [
+        6.840542793273926,
+        15.56868839263916,
+        0.03892982006072998
+      ],
+      "parentIndex": 137,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 154
+    },
+    {
+      "name": "LeftHandThumb2",
+      "englishName": "LeftHandThumb2",
+      "position": [
+        7.126785755157471,
+        15.56868839263916,
+        -0.24731376767158508
+      ],
+      "parentIndex": 153,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 155
+    },
+    {
+      "name": "LeftHandThumb3",
+      "englishName": "LeftHandThumb3",
+      "position": [
+        7.357714653015137,
+        15.56868839263916,
+        -0.47824159264564514
+      ],
+      "parentIndex": 154,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "LeftHand_H",
+      "englishName": "LeftHand_H",
+      "position": [
+        6.343420028686523,
+        15.723540306091309,
+        0.2784755229949951
+      ],
+      "parentIndex": 131,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "Neck",
+      "englishName": "Neck",
+      "position": [
+        0,
+        16.39072608947754,
+        0.19938497245311737
+      ],
+      "parentIndex": 115,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 158
+    },
+    {
+      "name": "Head",
+      "englishName": "Head",
+      "position": [
+        0,
+        17.046659469604492,
+        0.19938497245311737
+      ],
+      "parentIndex": 157,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 159
+    },
+    {
+      "name": "mdl_chr_shro-base-0000_face(Clone)",
+      "englishName": "mdl_chr_shro-base-0000_face(Clone)",
+      "position": [
+        0,
+        17.046659469604492,
+        0.19938497245311737
+      ],
+      "parentIndex": 158,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 160
+    },
+    {
+      "name": "Head_Face",
+      "englishName": "Head_Face",
+      "position": [
+        0,
+        17.046659469604492,
+        0.19938497245311737
+      ],
+      "parentIndex": 159,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 161
+    },
+    {
+      "name": "FaceScaleRatio_DIS",
+      "englishName": "FaceScaleRatio_DIS",
+      "position": [
+        0,
+        18.274158477783203,
+        0.19938497245311737
+      ],
+      "parentIndex": 160,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "LeftEye",
+      "englishName": "LeftEye",
+      "position": [
+        0.16097670793533325,
+        17.895597457885742,
+        0.18886598944664001
+      ],
+      "parentIndex": 160,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "Loc_ForeHead",
+      "englishName": "Loc_ForeHead",
+      "position": [
+        0,
+        18.294158935546875,
+        -1.0681151151657104
+      ],
+      "parentIndex": 160,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "Loc_Jaw",
+      "englishName": "Loc_Jaw",
+      "position": [
+        0,
+        16.661659240722656,
+        -0.654365062713623
+      ],
+      "parentIndex": 160,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "Loc_LeftCheek",
+      "englishName": "Loc_LeftCheek",
+      "position": [
+        0.43250003457069397,
+        17.390409469604492,
+        -0.8081150650978088
+      ],
+      "parentIndex": 160,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "Loc_LeftEyeCenter",
+      "englishName": "Loc_LeftEyeCenter",
+      "position": [
+        0.45729929208755493,
+        17.654373168945312,
+        -0.7134331464767456
+      ],
+      "parentIndex": 160,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "Loc_LeftEyeOuter",
+      "englishName": "Loc_LeftEyeOuter",
+      "position": [
+        0.6132569313049316,
+        17.6405029296875,
+        -0.6602335572242737
+      ],
+      "parentIndex": 160,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "Loc_LeftEyeUnder_NoBind",
+      "englishName": "Loc_LeftEyeUnder_NoBind",
+      "position": [
+        0.6912500262260437,
+        17.496658325195312,
+        -0.6668650507926941
+      ],
+      "parentIndex": 160,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "Loc_RightCheek",
+      "englishName": "Loc_RightCheek",
+      "position": [
+        -0.43250003457069397,
+        17.390409469604492,
+        -0.8068650364875793
+      ],
+      "parentIndex": 160,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "Loc_RightEyeCenter",
+      "englishName": "Loc_RightEyeCenter",
+      "position": [
+        -0.45729929208755493,
+        17.654373168945312,
+        -0.7134331464767456
+      ],
+      "parentIndex": 160,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "Loc_RightEyeUnder_NoBind",
+      "englishName": "Loc_RightEyeUnder_NoBind",
+      "position": [
+        -0.6912500262260437,
+        17.496658325195312,
+        -0.6668650507926941
+      ],
+      "parentIndex": 160,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "Loc_RightEyeOuter",
+      "englishName": "Loc_RightEyeOuter",
+      "position": [
+        -0.6132569313049316,
+        17.6405029296875,
+        -0.6602335572242737
+      ],
+      "parentIndex": 160,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "RightEye",
+      "englishName": "RightEye",
+      "position": [
+        -0.16101329028606415,
+        17.895597457885742,
+        0.18886598944664001
+      ],
+      "parentIndex": 160,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "Tongue1",
+      "englishName": "Tongue1",
+      "position": [
+        0,
+        17.21222496032715,
+        -0.595278799533844
+      ],
+      "parentIndex": 160,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 175
+    },
+    {
+      "name": "Tongue2",
+      "englishName": "Tongue2",
+      "position": [
+        -1.2487034981858638e-17,
+        17.062271118164062,
+        -0.6709168553352356
+      ],
+      "parentIndex": 174,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 176
+    },
+    {
+      "name": "Tongue3",
+      "englishName": "Tongue3",
+      "position": [
+        -1.2487051525470889e-17,
+        16.975740432739258,
+        -0.7145770192146301
+      ],
+      "parentIndex": 175,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 177
+    },
+    {
+      "name": "Tongue4",
+      "englishName": "Tongue4",
+      "position": [
+        -2.489772119317863e-17,
+        16.90253448486328,
+        -0.7514896988868713
+      ],
+      "parentIndex": 176,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "FacialDecal",
+      "englishName": "FacialDecal",
+      "position": [
+        0,
+        17.046659469604492,
+        0.19938497245311737
+      ],
+      "parentIndex": 160,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 179
+    },
+    {
+      "name": "LeftCheek",
+      "englishName": "LeftCheek",
+      "position": [
+        0.5412499904632568,
+        17.505409240722656,
+        -0.7281149625778198
+      ],
+      "parentIndex": 178,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "RightCheek",
+      "englishName": "RightCheek",
+      "position": [
+        -0.5412499904632568,
+        17.505409240722656,
+        -0.7281149625778198
+      ],
+      "parentIndex": 178,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "CheekWhole",
+      "englishName": "CheekWhole",
+      "position": [
+        0,
+        17.449159622192383,
+        -0.8868650794029236
+      ],
+      "parentIndex": 178,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "CheekLineWhole",
+      "englishName": "CheekLineWhole",
+      "position": [
+        0,
+        17.50790786743164,
+        -0.8868650794029236
+      ],
+      "parentIndex": 178,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "LeftCheekLine",
+      "englishName": "LeftCheekLine",
+      "position": [
+        0.5699999928474426,
+        17.504159927368164,
+        -0.7168650031089783
+      ],
+      "parentIndex": 178,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "RightCheekLine",
+      "englishName": "RightCheekLine",
+      "position": [
+        -0.5699999928474426,
+        17.504159927368164,
+        -0.7168650031089783
+      ],
+      "parentIndex": 178,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "Pale",
+      "englishName": "Pale",
+      "position": [
+        0,
+        18.286659240722656,
+        -0.7681150436401367
+      ],
+      "parentIndex": 178,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "Shadow",
+      "englishName": "Shadow",
+      "position": [
+        0,
+        18.286659240722656,
+        -0.7681150436401367
+      ],
+      "parentIndex": 178,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "VLSkinningRenderer",
+      "englishName": "VLSkinningRenderer",
+      "position": [
+        0,
+        17.046659469604492,
+        0.19938497245311737
+      ],
+      "parentIndex": 159,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "mdl_chr_shro-base-0000_hair(Clone)",
+      "englishName": "mdl_chr_shro-base-0000_hair(Clone)",
+      "position": [
+        0,
+        17.046659469604492,
+        0.19938497245311737
+      ],
+      "parentIndex": 158,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 189
+    },
+    {
+      "name": "Geo_Hair",
+      "englishName": "Geo_Hair",
+      "position": [
+        0,
+        17.046659469604492,
+        0.19938497245311737
+      ],
+      "parentIndex": 188,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "Geo_HairProp",
+      "englishName": "Geo_HairProp",
+      "position": [
+        0,
+        17.046659469604492,
+        0.19938497245311737
+      ],
+      "parentIndex": 188,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "Head_Hair",
+      "englishName": "Head_Hair",
+      "position": [
+        0,
+        17.046659469604492,
+        0.19938497245311737
+      ],
+      "parentIndex": 188,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 192
+    },
+    {
+      "name": "CenterLeftHair_O",
+      "englishName": "CenterLeftHair_O",
+      "position": [
+        0.22499999403953552,
+        17.811283111572266,
+        1.4551302194595337
+      ],
+      "parentIndex": 191,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 193
+    },
+    {
+      "name": "CenterLeftHair_A",
+      "englishName": "CenterLeftHair_A",
+      "position": [
+        0.22499999403953552,
+        17.811283111572266,
+        1.4551302194595337
+      ],
+      "parentIndex": 192,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 194
+    },
+    {
+      "name": "CenterLeftHair1_S",
+      "englishName": "CenterLeftHair1_S",
+      "position": [
+        0.22499999403953552,
+        17.811283111572266,
+        1.4551302194595337
+      ],
+      "parentIndex": 193,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 195
+    },
+    {
+      "name": "CenterLeftHair2_S",
+      "englishName": "CenterLeftHair2_S",
+      "position": [
+        0.22499950230121613,
+        16.977718353271484,
+        1.4871376752853394
+      ],
+      "parentIndex": 194,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 196
+    },
+    {
+      "name": "CenterLeftHair3_S",
+      "englishName": "CenterLeftHair3_S",
+      "position": [
+        0.2612026631832123,
+        16.173233032226562,
+        1.670244574546814
+      ],
+      "parentIndex": 195,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 197
+    },
+    {
+      "name": "CenterLeftHair4_S",
+      "englishName": "CenterLeftHair4_S",
+      "position": [
+        0.34396880865097046,
+        15.455791473388672,
+        2.0369553565979004
+      ],
+      "parentIndex": 196,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 198
+    },
+    {
+      "name": "CenterLeftHair5_S",
+      "englishName": "CenterLeftHair5_S",
+      "position": [
+        0.4846409857273102,
+        14.93941879272461,
+        2.6908671855926514
+      ],
+      "parentIndex": 197,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 199
+    },
+    {
+      "name": "CenterLeftHair6_S_End",
+      "englishName": "CenterLeftHair6_S_End",
+      "position": [
+        0.6308619976043701,
+        15.182502746582031,
+        3.4864892959594727
+      ],
+      "parentIndex": 198,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "CenterRightHair_O",
+      "englishName": "CenterRightHair_O",
+      "position": [
+        -0.22499999403953552,
+        17.811283111572266,
+        1.4551302194595337
+      ],
+      "parentIndex": 191,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 201
+    },
+    {
+      "name": "CenterRightHair_A",
+      "englishName": "CenterRightHair_A",
+      "position": [
+        -0.22499999403953552,
+        17.811283111572266,
+        1.4551302194595337
+      ],
+      "parentIndex": 200,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 202
+    },
+    {
+      "name": "CenterRightHair1_S",
+      "englishName": "CenterRightHair1_S",
+      "position": [
+        -0.22499999403953552,
+        17.811283111572266,
+        1.4551302194595337
+      ],
+      "parentIndex": 201,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 203
+    },
+    {
+      "name": "CenterRightHair2_S",
+      "englishName": "CenterRightHair2_S",
+      "position": [
+        -0.22499997913837433,
+        16.980228424072266,
+        1.5272551774978638
+      ],
+      "parentIndex": 202,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 204
+    },
+    {
+      "name": "CenterRightHair3_S",
+      "englishName": "CenterRightHair3_S",
+      "position": [
+        -0.24905633926391602,
+        16.174123764038086,
+        1.705156922340393
+      ],
+      "parentIndex": 203,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 205
+    },
+    {
+      "name": "CenterRightHair4_S",
+      "englishName": "CenterRightHair4_S",
+      "position": [
+        -0.32676953077316284,
+        15.421280860900879,
+        1.9936697483062744
+      ],
+      "parentIndex": 204,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 206
+    },
+    {
+      "name": "CenterRightHair5_S",
+      "englishName": "CenterRightHair5_S",
+      "position": [
+        -0.44309717416763306,
+        14.98633098602295,
+        2.708352565765381
+      ],
+      "parentIndex": 205,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 207
+    },
+    {
+      "name": "CenterRightHair6_S_End",
+      "englishName": "CenterRightHair6_S_End",
+      "position": [
+        -0.6097554564476013,
+        15.220641136169434,
+        3.5025880336761475
+      ],
+      "parentIndex": 206,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "FrontHair1_S",
+      "englishName": "FrontHair1_S",
+      "position": [
+        -0.14103153347969055,
+        19.182247161865234,
+        -0.635733962059021
+      ],
+      "parentIndex": 191,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 209
+    },
+    {
+      "name": "FrontHair2_S_End",
+      "englishName": "FrontHair2_S_End",
+      "position": [
+        -0.4772111773490906,
+        18.96724510192871,
+        -0.9660347700119019
+      ],
+      "parentIndex": 208,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "HairScaleRatio_DIS",
+      "englishName": "HairScaleRatio_DIS",
+      "position": [
+        0,
+        18.271657943725586,
+        0.19938497245311737
+      ],
+      "parentIndex": 191,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "Head1_E",
+      "englishName": "Head1_E",
+      "position": [
+        1.7538958549796714e-15,
+        19.92439079284668,
+        0.23204463720321655
+      ],
+      "parentIndex": 191,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "Head1_I",
+      "englishName": "Head1_I",
+      "position": [
+        1.7538958549796714e-15,
+        19.92439079284668,
+        0.23204463720321655
+      ],
+      "parentIndex": 191,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "Head2_E",
+      "englishName": "Head2_E",
+      "position": [
+        1.7538958549796714e-15,
+        19.92439079284668,
+        0.23204463720321655
+      ],
+      "parentIndex": 191,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "Head2_I",
+      "englishName": "Head2_I",
+      "position": [
+        1.7538958549796714e-15,
+        19.92439079284668,
+        0.23204463720321655
+      ],
+      "parentIndex": 191,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "LeftBackHair_O",
+      "englishName": "LeftBackHair_O",
+      "position": [
+        0.6810059547424316,
+        17.80666732788086,
+        1.2202445268630981
+      ],
+      "parentIndex": 191,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 216
+    },
+    {
+      "name": "LeftBackHair_A",
+      "englishName": "LeftBackHair_A",
+      "position": [
+        0.6810059547424316,
+        17.80666732788086,
+        1.2202445268630981
+      ],
+      "parentIndex": 215,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 217
+    },
+    {
+      "name": "LeftBackHair1_S",
+      "englishName": "LeftBackHair1_S",
+      "position": [
+        0.6810059547424316,
+        17.80666732788086,
+        1.2202445268630981
+      ],
+      "parentIndex": 216,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 218
+    },
+    {
+      "name": "LeftBackHair2_S",
+      "englishName": "LeftBackHair2_S",
+      "position": [
+        0.7102346420288086,
+        16.971054077148438,
+        1.2674001455307007
+      ],
+      "parentIndex": 217,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 219
+    },
+    {
+      "name": "LeftBackHair3_S",
+      "englishName": "LeftBackHair3_S",
+      "position": [
+        0.7738998532295227,
+        16.168302536010742,
+        1.4306228160858154
+      ],
+      "parentIndex": 218,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 220
+    },
+    {
+      "name": "LeftBackHair4_S",
+      "englishName": "LeftBackHair4_S",
+      "position": [
+        1.0007911920547485,
+        15.430316925048828,
+        1.7732291221618652
+      ],
+      "parentIndex": 219,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 221
+    },
+    {
+      "name": "LeftBackHair5_S",
+      "englishName": "LeftBackHair5_S",
+      "position": [
+        1.4078335762023926,
+        15.023787498474121,
+        2.391723871231079
+      ],
+      "parentIndex": 220,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 222
+    },
+    {
+      "name": "LeftBackHair6_S_End",
+      "englishName": "LeftBackHair6_S_End",
+      "position": [
+        1.8792122602462769,
+        15.229228019714355,
+        3.061858892440796
+      ],
+      "parentIndex": 221,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "LeftBackSideHair_O",
+      "englishName": "LeftBackSideHair_O",
+      "position": [
+        1.0611960887908936,
+        17.80603790283203,
+        0.9282757639884949
+      ],
+      "parentIndex": 191,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 224
+    },
+    {
+      "name": "LeftBackSideHair_A",
+      "englishName": "LeftBackSideHair_A",
+      "position": [
+        1.0611960887908936,
+        17.80603790283203,
+        0.9282757639884949
+      ],
+      "parentIndex": 223,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 225
+    },
+    {
+      "name": "LeftBackSideHair1_S",
+      "englishName": "LeftBackSideHair1_S",
+      "position": [
+        1.0611960887908936,
+        17.80603790283203,
+        0.9282757639884949
+      ],
+      "parentIndex": 224,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 226
+    },
+    {
+      "name": "LeftBackSideHair2_S",
+      "englishName": "LeftBackSideHair2_S",
+      "position": [
+        1.1128053665161133,
+        16.991973876953125,
+        1.0325185060501099
+      ],
+      "parentIndex": 225,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 227
+    },
+    {
+      "name": "LeftBackSideHair3_S",
+      "englishName": "LeftBackSideHair3_S",
+      "position": [
+        1.2605981826782227,
+        16.234100341796875,
+        1.2134287357330322
+      ],
+      "parentIndex": 226,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 228
+    },
+    {
+      "name": "LeftBackSideHair4_S",
+      "englishName": "LeftBackSideHair4_S",
+      "position": [
+        1.5763640403747559,
+        15.58625602722168,
+        1.5829598903656006
+      ],
+      "parentIndex": 227,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 229
+    },
+    {
+      "name": "LeftBackSideHair5_S",
+      "englishName": "LeftBackSideHair5_S",
+      "position": [
+        2.1151998043060303,
+        15.291512489318848,
+        2.1616055965423584
+      ],
+      "parentIndex": 228,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 230
+    },
+    {
+      "name": "LeftBackSideHair6_S_End",
+      "englishName": "LeftBackSideHair6_S_End",
+      "position": [
+        2.6393914222717285,
+        15.492663383483887,
+        2.6171693801879883
+      ],
+      "parentIndex": 229,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "LeftHair_O",
+      "englishName": "LeftHair_O",
+      "position": [
+        1.3864121437072754,
+        18.656919479370117,
+        0.5744624733924866
+      ],
+      "parentIndex": 191,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 232
+    },
+    {
+      "name": "LeftHair_A",
+      "englishName": "LeftHair_A",
+      "position": [
+        1.3864121437072754,
+        18.656919479370117,
+        0.5744624733924866
+      ],
+      "parentIndex": 231,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 233
+    },
+    {
+      "name": "LeftHair1_S",
+      "englishName": "LeftHair1_S",
+      "position": [
+        1.3864121437072754,
+        18.656919479370117,
+        0.5744624733924866
+      ],
+      "parentIndex": 232,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 234
+    },
+    {
+      "name": "LeftHair2_S",
+      "englishName": "LeftHair2_S",
+      "position": [
+        1.583011507987976,
+        17.7726993560791,
+        0.684722900390625
+      ],
+      "parentIndex": 233,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 235
+    },
+    {
+      "name": "LeftHair3_S",
+      "englishName": "LeftHair3_S",
+      "position": [
+        1.7814639806747437,
+        16.894107818603516,
+        0.830845832824707
+      ],
+      "parentIndex": 234,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 236
+    },
+    {
+      "name": "LeftHair4_S",
+      "englishName": "LeftHair4_S",
+      "position": [
+        2.0400164127349854,
+        16.049936294555664,
+        1.061460256576538
+      ],
+      "parentIndex": 235,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 237
+    },
+    {
+      "name": "LeftHair5_S",
+      "englishName": "LeftHair5_S",
+      "position": [
+        2.4864864349365234,
+        15.384109497070312,
+        1.4973435401916504
+      ],
+      "parentIndex": 236,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 238
+    },
+    {
+      "name": "LeftHair6_S_End",
+      "englishName": "LeftHair6_S_End",
+      "position": [
+        3.0175466537475586,
+        15.552700996398926,
+        2.2199831008911133
+      ],
+      "parentIndex": 237,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "LeftSideFrontHair1_S",
+      "englishName": "LeftSideFrontHair1_S",
+      "position": [
+        0.6929447650909424,
+        18.70295524597168,
+        -0.8069117665290833
+      ],
+      "parentIndex": 191,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 240
+    },
+    {
+      "name": "LeftSideFrontHair2_S",
+      "englishName": "LeftSideFrontHair2_S",
+      "position": [
+        0.8154606819152832,
+        18.0439510345459,
+        -0.817498505115509
+      ],
+      "parentIndex": 239,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 241
+    },
+    {
+      "name": "LeftSideFrontHair3_S",
+      "englishName": "LeftSideFrontHair3_S",
+      "position": [
+        0.8813993334770203,
+        17.377965927124023,
+        -0.7784028053283691
+      ],
+      "parentIndex": 240,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 242
+    },
+    {
+      "name": "LeftSideFrontHair4_S",
+      "englishName": "LeftSideFrontHair4_S",
+      "position": [
+        0.7802383303642273,
+        16.71614646911621,
+        -0.8126506805419922
+      ],
+      "parentIndex": 241,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 243
+    },
+    {
+      "name": "LeftSideFrontHair5_S_End",
+      "englishName": "LeftSideFrontHair5_S_End",
+      "position": [
+        0.20124498009681702,
+        16.035459518432617,
+        -0.9236657023429871
+      ],
+      "parentIndex": 242,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "LeftSideFrontHairSub1_S",
+      "englishName": "LeftSideFrontHairSub1_S",
+      "position": [
+        0.7394140958786011,
+        18.8486385345459,
+        -0.7527225017547607
+      ],
+      "parentIndex": 191,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 245
+    },
+    {
+      "name": "LeftSideFrontHairSub2_S",
+      "englishName": "LeftSideFrontHairSub2_S",
+      "position": [
+        0.9965558052062988,
+        17.989551544189453,
+        -0.8038352131843567
+      ],
+      "parentIndex": 244,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 246
+    },
+    {
+      "name": "LeftSideFrontHairSub3_S",
+      "englishName": "LeftSideFrontHairSub3_S",
+      "position": [
+        1.025156855583191,
+        17.081645965576172,
+        -0.7275359034538269
+      ],
+      "parentIndex": 245,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 247
+    },
+    {
+      "name": "LeftSideFrontHairSub4_S",
+      "englishName": "LeftSideFrontHairSub4_S",
+      "position": [
+        0.6543276309967041,
+        16.429946899414062,
+        -0.7440595030784607
+      ],
+      "parentIndex": 246,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 248
+    },
+    {
+      "name": "LeftSideFrontHairSub5_S_End",
+      "englishName": "LeftSideFrontHairSub5_S_End",
+      "position": [
+        0.06159180775284767,
+        16.79897117614746,
+        -0.4481287896633148
+      ],
+      "parentIndex": 247,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "LeftSideHair1_S",
+      "englishName": "LeftSideHair1_S",
+      "position": [
+        1.0088770389556885,
+        18.64996337890625,
+        -0.45174455642700195
+      ],
+      "parentIndex": 191,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 250
+    },
+    {
+      "name": "LeftSideHair2_S",
+      "englishName": "LeftSideHair2_S",
+      "position": [
+        1.0464106798171997,
+        17.78206443786621,
+        -0.43835288286209106
+      ],
+      "parentIndex": 249,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 251
+    },
+    {
+      "name": "LeftSideHair3_S",
+      "englishName": "LeftSideHair3_S",
+      "position": [
+        0.9359508156776428,
+        16.946247100830078,
+        -0.38645443320274353
+      ],
+      "parentIndex": 250,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 252
+    },
+    {
+      "name": "LeftSideHair4_S",
+      "englishName": "LeftSideHair4_S",
+      "position": [
+        0.6341739892959595,
+        16.174888610839844,
+        -0.5520477890968323
+      ],
+      "parentIndex": 251,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 253
+    },
+    {
+      "name": "LeftSideHair5_S_End",
+      "englishName": "LeftSideHair5_S_End",
+      "position": [
+        0.047310441732406616,
+        15.764461517333984,
+        -0.6155040264129639
+      ],
+      "parentIndex": 252,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "LeftSideHairSub1_S",
+      "englishName": "LeftSideHairSub1_S",
+      "position": [
+        1.254909873008728,
+        18.44232940673828,
+        -0.003626313991844654
+      ],
+      "parentIndex": 191,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 255
+    },
+    {
+      "name": "LeftSideHairSub2_S",
+      "englishName": "LeftSideHairSub2_S",
+      "position": [
+        1.5437324047088623,
+        17.625553131103516,
+        0.07308167219161987
+      ],
+      "parentIndex": 254,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 256
+    },
+    {
+      "name": "LeftSideHairSub3_S",
+      "englishName": "LeftSideHairSub3_S",
+      "position": [
+        1.3597739934921265,
+        16.641315460205078,
+        -0.037610460072755814
+      ],
+      "parentIndex": 255,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 257
+    },
+    {
+      "name": "LeftSideHairSub4_S_End",
+      "englishName": "LeftSideHairSub4_S_End",
+      "position": [
+        0.5390663743019104,
+        16.44407844543457,
+        -0.445584774017334
+      ],
+      "parentIndex": 256,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "RightBackHair_O",
+      "englishName": "RightBackHair_O",
+      "position": [
+        -0.6810059547424316,
+        17.80666732788086,
+        1.2202445268630981
+      ],
+      "parentIndex": 191,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 259
+    },
+    {
+      "name": "RightBackHair_A",
+      "englishName": "RightBackHair_A",
+      "position": [
+        -0.6810059547424316,
+        17.80666732788086,
+        1.2202445268630981
+      ],
+      "parentIndex": 258,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 260
+    },
+    {
+      "name": "RightBackHair1_S",
+      "englishName": "RightBackHair1_S",
+      "position": [
+        -0.6810059547424316,
+        17.80666732788086,
+        1.2202445268630981
+      ],
+      "parentIndex": 259,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 261
+    },
+    {
+      "name": "RightBackHair2_S",
+      "englishName": "RightBackHair2_S",
+      "position": [
+        -0.69657963514328,
+        16.97072982788086,
+        1.267985224723816
+      ],
+      "parentIndex": 260,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 262
+    },
+    {
+      "name": "RightBackHair3_S",
+      "englishName": "RightBackHair3_S",
+      "position": [
+        -0.783810019493103,
+        16.16244888305664,
+        1.389568567276001
+      ],
+      "parentIndex": 261,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 263
+    },
+    {
+      "name": "RightBackHair4_S",
+      "englishName": "RightBackHair4_S",
+      "position": [
+        -1.0251386165618896,
+        15.456034660339355,
+        1.7848215103149414
+      ],
+      "parentIndex": 262,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 264
+    },
+    {
+      "name": "RightBackHair5_S",
+      "englishName": "RightBackHair5_S",
+      "position": [
+        -1.4890024662017822,
+        15.065693855285645,
+        2.3729960918426514
+      ],
+      "parentIndex": 263,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 265
+    },
+    {
+      "name": "RightBackHair6_S_End",
+      "englishName": "RightBackHair6_S_End",
+      "position": [
+        -1.9852290153503418,
+        15.30540657043457,
+        3.0131382942199707
+      ],
+      "parentIndex": 264,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "RightBackSideHair_O",
+      "englishName": "RightBackSideHair_O",
+      "position": [
+        -1.0611960887908936,
+        17.806081771850586,
+        0.9282759428024292
+      ],
+      "parentIndex": 191,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 267
+    },
+    {
+      "name": "RightBackSideHair_A",
+      "englishName": "RightBackSideHair_A",
+      "position": [
+        -1.0611960887908936,
+        17.806081771850586,
+        0.9282759428024292
+      ],
+      "parentIndex": 266,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 268
+    },
+    {
+      "name": "RightBackSideHair1_S",
+      "englishName": "RightBackSideHair1_S",
+      "position": [
+        -1.0611960887908936,
+        17.806081771850586,
+        0.9282759428024292
+      ],
+      "parentIndex": 267,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 269
+    },
+    {
+      "name": "RightBackSideHair2_S",
+      "englishName": "RightBackSideHair2_S",
+      "position": [
+        -1.112430453300476,
+        16.98615074157715,
+        0.9645785689353943
+      ],
+      "parentIndex": 268,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 270
+    },
+    {
+      "name": "RightBackSideHair3_S",
+      "englishName": "RightBackSideHair3_S",
+      "position": [
+        -1.2721930742263794,
+        16.226057052612305,
+        1.1250426769256592
+      ],
+      "parentIndex": 269,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 271
+    },
+    {
+      "name": "RightBackSideHair4_S",
+      "englishName": "RightBackSideHair4_S",
+      "position": [
+        -1.5863388776779175,
+        15.572110176086426,
+        1.485234022140503
+      ],
+      "parentIndex": 270,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 272
+    },
+    {
+      "name": "RightBackSideHair5_S",
+      "englishName": "RightBackSideHair5_S",
+      "position": [
+        -2.118849754333496,
+        15.215652465820312,
+        2.034301280975342
+      ],
+      "parentIndex": 271,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 273
+    },
+    {
+      "name": "RightBackSideHair6_S_End",
+      "englishName": "RightBackSideHair6_S_End",
+      "position": [
+        -2.6155052185058594,
+        15.357592582702637,
+        2.5277273654937744
+      ],
+      "parentIndex": 272,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "RightHair_O",
+      "englishName": "RightHair_O",
+      "position": [
+        -1.3477373123168945,
+        18.414342880249023,
+        0.6221333742141724
+      ],
+      "parentIndex": 191,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 275
+    },
+    {
+      "name": "RightHair_A",
+      "englishName": "RightHair_A",
+      "position": [
+        -1.3477373123168945,
+        18.414342880249023,
+        0.6221333742141724
+      ],
+      "parentIndex": 274,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 276
+    },
+    {
+      "name": "RightHair1_S",
+      "englishName": "RightHair1_S",
+      "position": [
+        -1.3477373123168945,
+        18.414342880249023,
+        0.6221333742141724
+      ],
+      "parentIndex": 275,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 277
+    },
+    {
+      "name": "RightHair2_S",
+      "englishName": "RightHair2_S",
+      "position": [
+        -1.5823036432266235,
+        17.572391510009766,
+        0.6636361479759216
+      ],
+      "parentIndex": 276,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 278
+    },
+    {
+      "name": "RightHair3_S",
+      "englishName": "RightHair3_S",
+      "position": [
+        -2.019129991531372,
+        16.821136474609375,
+        0.7657219171524048
+      ],
+      "parentIndex": 277,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 279
+    },
+    {
+      "name": "RightHair4_S",
+      "englishName": "RightHair4_S",
+      "position": [
+        -2.474517822265625,
+        16.11975860595703,
+        1.0232406854629517
+      ],
+      "parentIndex": 278,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 280
+    },
+    {
+      "name": "RightHair5_S_End",
+      "englishName": "RightHair5_S_End",
+      "position": [
+        -2.4468162059783936,
+        15.658381462097168,
+        1.7662005424499512
+      ],
+      "parentIndex": 279,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "RightSideFrontHair1_S",
+      "englishName": "RightSideFrontHair1_S",
+      "position": [
+        -0.6335110664367676,
+        19.074234008789062,
+        -0.6275808811187744
+      ],
+      "parentIndex": 191,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 282
+    },
+    {
+      "name": "RightSideFrontHair2_S",
+      "englishName": "RightSideFrontHair2_S",
+      "position": [
+        -0.7750080227851868,
+        18.164216995239258,
+        -0.7691402435302734
+      ],
+      "parentIndex": 281,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 283
+    },
+    {
+      "name": "RightSideFrontHair3_S",
+      "englishName": "RightSideFrontHair3_S",
+      "position": [
+        -0.7272864580154419,
+        17.24066734313965,
+        -0.6791542172431946
+      ],
+      "parentIndex": 282,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 284
+    },
+    {
+      "name": "RightSideFrontHair4_S",
+      "englishName": "RightSideFrontHair4_S",
+      "position": [
+        -0.5468577146530151,
+        16.33586311340332,
+        -0.569196879863739
+      ],
+      "parentIndex": 283,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 285
+    },
+    {
+      "name": "RightSideFrontHair5_S_End",
+      "englishName": "RightSideFrontHair5_S_End",
+      "position": [
+        0.18523326516151428,
+        15.664002418518066,
+        -0.6480205655097961
+      ],
+      "parentIndex": 284,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "RightSideFrontHairSub1_S",
+      "englishName": "RightSideFrontHairSub1_S",
+      "position": [
+        -0.7176511287689209,
+        19.073020935058594,
+        -0.633338451385498
+      ],
+      "parentIndex": 191,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 287
+    },
+    {
+      "name": "RightSideFrontHairSub2_S",
+      "englishName": "RightSideFrontHairSub2_S",
+      "position": [
+        -0.8632616400718689,
+        18.249197006225586,
+        -0.7934720516204834
+      ],
+      "parentIndex": 286,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 288
+    },
+    {
+      "name": "RightSideFrontHairSub3_S",
+      "englishName": "RightSideFrontHairSub3_S",
+      "position": [
+        -0.8467255234718323,
+        17.301725387573242,
+        -0.7903861999511719
+      ],
+      "parentIndex": 287,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 289
+    },
+    {
+      "name": "RightSideFrontHairSub4_S",
+      "englishName": "RightSideFrontHairSub4_S",
+      "position": [
+        -0.7611687183380127,
+        16.431039810180664,
+        -0.7758418917655945
+      ],
+      "parentIndex": 288,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 290
+    },
+    {
+      "name": "RightSideFrontHairSub5_S_End",
+      "englishName": "RightSideFrontHairSub5_S_End",
+      "position": [
+        0.0461239367723465,
+        16.09539794921875,
+        -0.7405157089233398
+      ],
+      "parentIndex": 289,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "RightSideHair1_S",
+      "englishName": "RightSideHair1_S",
+      "position": [
+        -1.0360032320022583,
+        18.580791473388672,
+        -0.24944579601287842
+      ],
+      "parentIndex": 191,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 292
+    },
+    {
+      "name": "RightSideHair2_S_End",
+      "englishName": "RightSideHair2_S_End",
+      "position": [
+        -0.9768803119659424,
+        18.410337448120117,
+        -0.7526149153709412
+      ],
+      "parentIndex": 291,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "RightBust1_S",
+      "englishName": "RightBust1_S",
+      "position": [
+        -0.666861355304718,
+        14.869665145874023,
+        -0.06123725324869156
+      ],
+      "parentIndex": 115,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 294
+    },
+    {
+      "name": "RightBust2_S_End",
+      "englishName": "RightBust2_S_End",
+      "position": [
+        -0.666861355304718,
+        14.756352424621582,
+        -1.356421947479248
+      ],
+      "parentIndex": 293,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "RightShoulder",
+      "englishName": "RightShoulder",
+      "position": [
+        -0.1970077008008957,
+        15.723540306091309,
+        0.27847492694854736
+      ],
+      "parentIndex": 115,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 296
+    },
+    {
+      "name": "RightArm",
+      "englishName": "RightArm",
+      "position": [
+        -1.395342469215393,
+        15.723540306091309,
+        0.27847492694854736
+      ],
+      "parentIndex": 295,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 297
+    },
+    {
+      "name": "RightArm_H",
+      "englishName": "RightArm_H",
+      "position": [
+        -1.3965924978256226,
+        15.723540306091309,
+        0.27847492694854736
+      ],
+      "parentIndex": 296,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "RightArm_Roll_H",
+      "englishName": "RightArm_Roll_H",
+      "position": [
+        -2.9775986671447754,
+        15.723540306091309,
+        0.27847492694854736
+      ],
+      "parentIndex": 296,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 299
+    },
+    {
+      "name": "RightArmSleeve1_S",
+      "englishName": "RightArmSleeve1_S",
+      "position": [
+        -2.9776391983032227,
+        15.723540306091309,
+        0.27847492694854736
+      ],
+      "parentIndex": 298,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 300
+    },
+    {
+      "name": "RightArmSleeve2_S",
+      "englishName": "RightArmSleeve2_S",
+      "position": [
+        -2.9776391983032227,
+        15.723540306091309,
+        0.27847492694854736
+      ],
+      "parentIndex": 299,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 301
+    },
+    {
+      "name": "RightArmSleeve3_S_End",
+      "englishName": "RightArmSleeve3_S_End",
+      "position": [
+        -2.9776391983032227,
+        15.723540306091309,
+        0.27847492694854736
+      ],
+      "parentIndex": 300,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "RightForeArm",
+      "englishName": "RightForeArm",
+      "position": [
+        -4.010916709899902,
+        15.723540306091309,
+        0.27847492694854736
+      ],
+      "parentIndex": 296,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 303
+    },
+    {
+      "name": "RightForeArm_H",
+      "englishName": "RightForeArm_H",
+      "position": [
+        -4.012166976928711,
+        15.723540306091309,
+        0.27847492694854736
+      ],
+      "parentIndex": 302,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "RightForeArm_Roll_H",
+      "englishName": "RightForeArm_Roll_H",
+      "position": [
+        -5.498729228973389,
+        15.723540306091309,
+        0.27847492694854736
+      ],
+      "parentIndex": 302,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 305
+    },
+    {
+      "name": "RightForeArmSleeve1_S",
+      "englishName": "RightForeArmSleeve1_S",
+      "position": [
+        -5.498729228973389,
+        15.723540306091309,
+        0.27847492694854736
+      ],
+      "parentIndex": 304,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 306
+    },
+    {
+      "name": "RightForeArmSleeve2_S",
+      "englishName": "RightForeArmSleeve2_S",
+      "position": [
+        -5.498729228973389,
+        15.723540306091309,
+        0.27847492694854736
+      ],
+      "parentIndex": 305,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 307
+    },
+    {
+      "name": "RightForeArmSleeve3_S_End",
+      "englishName": "RightForeArmSleeve3_S_End",
+      "position": [
+        -5.498729228973389,
+        15.723540306091309,
+        0.27847492694854736
+      ],
+      "parentIndex": 306,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "RightHand",
+      "englishName": "RightHand",
+      "position": [
+        -6.572800159454346,
+        15.723540306091309,
+        0.27847492694854736
+      ],
+      "parentIndex": 302,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 309
+    },
+    {
+      "name": "RightHand1_E",
+      "englishName": "RightHand1_E",
+      "position": [
+        -7.344780921936035,
+        15.564602851867676,
+        0.27847492694854736
+      ],
+      "parentIndex": 308,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "RightHand1_I",
+      "englishName": "RightHand1_I",
+      "position": [
+        -7.344780921936035,
+        15.564602851867676,
+        0.27847492694854736
+      ],
+      "parentIndex": 308,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "RightHand2_I",
+      "englishName": "RightHand2_I",
+      "position": [
+        -7.344780921936035,
+        15.564602851867676,
+        0.27847492694854736
+      ],
+      "parentIndex": 308,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "RightHandIndex1",
+      "englishName": "RightHandIndex1",
+      "position": [
+        -7.487952709197998,
+        15.830185890197754,
+        0.04601236432790756
+      ],
+      "parentIndex": 308,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 313
+    },
+    {
+      "name": "RightHandIndex2",
+      "englishName": "RightHandIndex2",
+      "position": [
+        -7.833618640899658,
+        15.830185890197754,
+        0.04601236432790756
+      ],
+      "parentIndex": 312,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 314
+    },
+    {
+      "name": "RightHandIndex3",
+      "englishName": "RightHandIndex3",
+      "position": [
+        -8.015168190002441,
+        15.830185890197754,
+        0.04601236432790756
+      ],
+      "parentIndex": 313,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "RHandMiddle1",
+      "englishName": "RightHandMiddle1",
+      "position": [
+        -7.4850053787231445,
+        15.864154815673828,
+        0.2370770424604416
+      ],
+      "parentIndex": 308,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 316
+    },
+    {
+      "name": "RHandMiddle2",
+      "englishName": "RightHandMiddle2",
+      "position": [
+        -7.875590801239014,
+        15.864154815673828,
+        0.2370770424604416
+      ],
+      "parentIndex": 315,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 317
+    },
+    {
+      "name": "RHandMiddle3",
+      "englishName": "RightHandMiddle3",
+      "position": [
+        -8.088147163391113,
+        15.864154815673828,
+        0.2370770424604416
+      ],
+      "parentIndex": 316,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "RightHandPinky1",
+      "englishName": "RightHandPinky1",
+      "position": [
+        -7.389810085296631,
+        15.772867202758789,
+        0.5827484130859375
+      ],
+      "parentIndex": 308,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 319
+    },
+    {
+      "name": "RightHandPinky2",
+      "englishName": "RightHandPinky2",
+      "position": [
+        -7.6915059089660645,
+        15.772867202758789,
+        0.5827484130859375
+      ],
+      "parentIndex": 318,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 320
+    },
+    {
+      "name": "RightHandPinky3",
+      "englishName": "RightHandPinky3",
+      "position": [
+        -7.835529327392578,
+        15.772867202758789,
+        0.5827484130859375
+      ],
+      "parentIndex": 319,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "RightHandRing1",
+      "englishName": "RightHandRing1",
+      "position": [
+        -7.45091438293457,
+        15.832059860229492,
+        0.41501373052597046
+      ],
+      "parentIndex": 308,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 322
+    },
+    {
+      "name": "RightHandRing2",
+      "englishName": "RightHandRing2",
+      "position": [
+        -7.803422927856445,
+        15.832059860229492,
+        0.41501373052597046
+      ],
+      "parentIndex": 321,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 323
+    },
+    {
+      "name": "RightHandRing3",
+      "englishName": "RightHandRing3",
+      "position": [
+        -8.015280723571777,
+        15.832059860229492,
+        0.41501373052597046
+      ],
+      "parentIndex": 322,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "RightHandThumb1",
+      "englishName": "RightHandThumb1",
+      "position": [
+        -6.840542316436768,
+        15.56868839263916,
+        0.038929283618927
+      ],
+      "parentIndex": 308,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 325
+    },
+    {
+      "name": "RightHandThumb2",
+      "englishName": "RightHandThumb2",
+      "position": [
+        -7.126785755157471,
+        15.56868839263916,
+        -0.24731431901454926
+      ],
+      "parentIndex": 324,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 326
+    },
+    {
+      "name": "RightHandThumb3",
+      "englishName": "RightHandThumb3",
+      "position": [
+        -7.35771369934082,
+        15.56868839263916,
+        -0.478242427110672
+      ],
+      "parentIndex": 325,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "RightHand_H",
+      "englishName": "RightHand_H",
+      "position": [
+        -6.343418598175049,
+        15.723540306091309,
+        0.27847492694854736
+      ],
+      "parentIndex": 302,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 328
+    },
+    {
+      "name": "RightHandSleeve1_S",
+      "englishName": "RightHandSleeve1_S",
+      "position": [
+        -6.3400421142578125,
+        15.723540306091309,
+        0.27847492694854736
+      ],
+      "parentIndex": 327,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 329
+    },
+    {
+      "name": "RightHandSleeve2_S",
+      "englishName": "RightHandSleeve2_S",
+      "position": [
+        -6.3400421142578125,
+        15.723540306091309,
+        0.27847492694854736
+      ],
+      "parentIndex": 328,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": 330
+    },
+    {
+      "name": "RightHandSleeve3_S_End",
+      "englishName": "RightHandSleeve3_S_End",
+      "position": [
+        -6.3400421142578125,
+        15.723540306091309,
+        0.27847492694854736
+      ],
+      "parentIndex": 329,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "Reference1_I",
+      "englishName": "Reference1_I",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "parentIndex": 0,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    },
+    {
+      "name": "Reference2_I",
+      "englishName": "Reference2_I",
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "parentIndex": 0,
+      "transformationClass": 0,
+      "flag": 31,
+      "connectIndex": -1
+    }
+  ],
+  "rigidBodyCount": 0
+}

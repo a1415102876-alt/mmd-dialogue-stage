@@ -1,0 +1,28 @@
+{
+  "pmx": {
+    "morphCount": 108,
+    "sha256": "797552872884e6e2aa721c25fe76dc94012162527e1c69e5ed4492b8e6617c46"
+  },
+  "vmd": {
+    "morphRecords": 781,
+    "boneRecords": 0,
+    "sha256": "717746991d67938bdd800c3ed9859faf920cf7d167fc61d0a7303ac3653c3ae2"
+  },
+  "clipName": "mot_all_chr_atbm_no-003_in_f",
+  "frameCount": 71,
+  "tracksDecoded": 84,
+  "publishedMorphs": 11,
+  "comparedMorphs": 11,
+  "weightRange": [
+    -1.7602317825549108e-7,
+    1
+  ],
+  "maximumWeightError": 2.8920003503074554e-8,
+  "worst": {
+    "morph": "b_brow.brow_101",
+    "frame": 27,
+    "expected": 0.8959995797394005,
+    "actual": 0.895999550819397
+  },
+  "validation": "Independent MMDParser read-back: every VMD morph resolves to a PMX morph and matches the decoded Unity samples at every frame."
+}

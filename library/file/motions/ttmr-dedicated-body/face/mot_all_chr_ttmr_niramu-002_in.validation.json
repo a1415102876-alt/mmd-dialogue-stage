@@ -1,0 +1,28 @@
+{
+  "pmx": {
+    "morphCount": 108,
+    "sha256": "3333c87dc28060a2c28ee738dff3f889a3845c85b265994eb28023bf69fc679b"
+  },
+  "vmd": {
+    "morphRecords": 966,
+    "boneRecords": 0,
+    "sha256": "d5d121bffdf9eb0fb29cdee83c6e4838b4f41e921df205052ac4e1a230da45a4"
+  },
+  "clipName": "mot_all_chr_ttmr_niramu-002_in_f",
+  "frameCount": 138,
+  "tracksDecoded": 84,
+  "publishedMorphs": 7,
+  "comparedMorphs": 7,
+  "weightRange": [
+    -1.5444865653080342e-7,
+    1.0000003576278687
+  ],
+  "maximumWeightError": 5.716558559853979e-8,
+  "worst": {
+    "morph": "b_eye.eye_007",
+    "frame": 96,
+    "expected": 1.000000062043704,
+    "actual": 1.0000001192092896
+  },
+  "validation": "Independent MMDParser read-back: every VMD morph resolves to a PMX morph and matches the decoded Unity samples at every frame."
+}

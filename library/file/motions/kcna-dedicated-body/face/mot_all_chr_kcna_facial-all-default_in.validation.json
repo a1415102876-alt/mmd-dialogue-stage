@@ -1,0 +1,23 @@
+{
+  "pmx": {
+    "morphCount": 108,
+    "sha256": "7522aa31182e16d1f3c9098639e3c13601dd9017df4138915bdc1ab14edfa7fd"
+  },
+  "vmd": {
+    "morphRecords": 1,
+    "boneRecords": 0,
+    "sha256": "2a5851190fc83d38743e30a01c02e1dee333d87e31d93957b7f06333593836c8"
+  },
+  "clipName": "mot_all_chr_kcna_facial-all-default_in_f",
+  "frameCount": 2,
+  "tracksDecoded": 84,
+  "publishedMorphs": 1,
+  "comparedMorphs": 1,
+  "weightRange": [
+    1,
+    1
+  ],
+  "maximumWeightError": 0,
+  "worst": null,
+  "validation": "Independent MMDParser read-back: every VMD morph resolves to a PMX morph and matches the decoded Unity samples at every frame."
+}

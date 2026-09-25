@@ -1,0 +1,28 @@
+{
+  "pmx": {
+    "morphCount": 108,
+    "sha256": "7522aa31182e16d1f3c9098639e3c13601dd9017df4138915bdc1ab14edfa7fd"
+  },
+  "vmd": {
+    "morphRecords": 707,
+    "boneRecords": 0,
+    "sha256": "2ba0a6b4937df8190f7941d31188c0ae2fc1a269b6c47d8c845075cfc467f659"
+  },
+  "clipName": "mot_all_chr_kcna_sad-003_in_f",
+  "frameCount": 101,
+  "tracksDecoded": 84,
+  "publishedMorphs": 7,
+  "comparedMorphs": 7,
+  "weightRange": [
+    -1.990639049154197e-7,
+    1.000000238418579
+  ],
+  "maximumWeightError": 5.14714246779846e-8,
+  "worst": {
+    "morph": "mouth_033",
+    "frame": 14,
+    "expected": 1.0000002898900038,
+    "actual": 1.000000238418579
+  },
+  "validation": "Independent MMDParser read-back: every VMD morph resolves to a PMX morph and matches the decoded Unity samples at every frame."
+}

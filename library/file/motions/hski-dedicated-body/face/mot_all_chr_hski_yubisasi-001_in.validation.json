@@ -1,0 +1,28 @@
+{
+  "pmx": {
+    "morphCount": 108,
+    "sha256": "76b19d70abdaa1e020ed6a53fc1890740e50eb213de9c8955cb24648f3b89487"
+  },
+  "vmd": {
+    "morphRecords": 540,
+    "boneRecords": 0,
+    "sha256": "8773f6c250abfa84ded045d0c55e13159a71a4d6cb5807771916116244e8022a"
+  },
+  "clipName": "mot_all_chr_hski_yubisasi-001_in_f",
+  "frameCount": 77,
+  "tracksDecoded": 84,
+  "publishedMorphs": 8,
+  "comparedMorphs": 8,
+  "weightRange": [
+    -1.9030221463326585e-15,
+    1
+  ],
+  "maximumWeightError": 5.33911310718338e-8,
+  "worst": {
+    "morph": "b_brow.brow_003",
+    "frame": 47,
+    "expected": 1.000000053391131,
+    "actual": 1
+  },
+  "validation": "Independent MMDParser read-back: every VMD morph resolves to a PMX morph and matches the decoded Unity samples at every frame."
+}

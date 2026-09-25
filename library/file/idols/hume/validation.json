@@ -1,0 +1,224 @@
+{
+  "model": "E:\\gakumas-pmx-workflow\\output\\hume-schl-0000\\hume-schl-0000.pmx",
+  "sha256": "d4ba0d2071ab8c160eaf9618519012daaafca57fc701ce49580db0111f2e7d61",
+  "format": "pmx",
+  "coordinateSystem": "left",
+  "magic": "PMX ",
+  "version": 2,
+  "headerSize": 8,
+  "encoding": 0,
+  "additionalUvNum": 3,
+  "vertexIndexSize": 2,
+  "textureIndexSize": 1,
+  "materialIndexSize": 1,
+  "boneIndexSize": 2,
+  "morphIndexSize": 2,
+  "rigidBodyIndexSize": 2,
+  "modelName": "mdl_chr_hume-schl-0000_body(Clone)",
+  "englishModelName": "mdl_chr_hume-schl-0000_body(Clone)",
+  "comment": "mdl_chr_hume-schl-0000_body(Clone)",
+  "englishComment": "mdl_chr_hume-schl-0000_body(Clone)",
+  "vertexCount": 39301,
+  "faceCount": 79398,
+  "textureCount": 21,
+  "materialCount": 14,
+  "boneCount": 344,
+  "morphCount": 108,
+  "frameCount": 1,
+  "rigidBodyCount": 0,
+  "constraintCount": 0,
+  "bounds": {
+    "min": [
+      -8.235913276672363,
+      -0.008385730907320976,
+      -1.9160157442092896
+    ],
+    "max": [
+      8.235912322998047,
+      20.25485610961914,
+      2.2466795444488525
+    ]
+  },
+  "coloredVertices": 39301,
+  "textures": [
+    {
+      "file": "Texture2D/t_chr_hume-schl-0000_bdy_col.png",
+      "width": 2048,
+      "height": 2048
+    },
+    {
+      "file": "Texture2D/t_chr_hume-schl-0000_bdy_sdw.png",
+      "width": 2048,
+      "height": 2048
+    },
+    {
+      "file": "Texture2D/t_chr_hume-base-0000_rmp.png",
+      "width": 1024,
+      "height": 4
+    },
+    {
+      "file": "Texture2D/t_chr_hume-schl-0000_bdy_def.png",
+      "width": 2048,
+      "height": 2048
+    },
+    {
+      "file": "Texture2D/t_chr_hume-schl-0000_bdy_rma.png",
+      "width": 128,
+      "height": 16
+    },
+    {
+      "file": "Texture2D/t_chr_hume-base-0000_fce_col.png",
+      "width": 1024,
+      "height": 1024
+    },
+    {
+      "file": "Texture2D/t_chr_hume-base-0000_fce_sdw.png",
+      "width": 1024,
+      "height": 1024
+    },
+    {
+      "file": "Texture2D/t_chr_hume-base-0000_fce_def.png",
+      "width": 1024,
+      "height": 1024
+    },
+    {
+      "file": "Texture2D/t_chr_hume-base-0000_fce_lyr.png",
+      "width": 2048,
+      "height": 1024
+    },
+    {
+      "file": "Texture2D/t_chr_hume-base-0000_eye_col_alp.png",
+      "width": 1024,
+      "height": 1024
+    },
+    {
+      "file": "Texture2D/t_chr_hume-base-0000_eye_sdw.png",
+      "width": 1024,
+      "height": 1024
+    },
+    {
+      "file": "Texture2D/t_chr_hume-base-0000_eye_def.png",
+      "width": 1024,
+      "height": 1024
+    },
+    {
+      "file": "Texture2D/t_chr_hume-base-0000_ehl_col.png",
+      "width": 512,
+      "height": 512
+    },
+    {
+      "file": "Texture2D/t_chr_hume-base-0000_hir_col_alp.png",
+      "width": 2048,
+      "height": 2048
+    },
+    {
+      "file": "Texture2D/t_chr_hume-base-0000_hir_sdw.png",
+      "width": 2048,
+      "height": 2048
+    },
+    {
+      "file": "Texture2D/t_chr_hume-base-0000_hir_hhl.png",
+      "width": 2048,
+      "height": 2048
+    },
+    {
+      "file": "Texture2D/t_chr_hume-base-0000_hir_def.png",
+      "width": 2048,
+      "height": 2048
+    },
+    {
+      "file": "Texture2D/t_chr_hume-base-0000_hirco_col_alp.png",
+      "width": 512,
+      "height": 512
+    },
+    {
+      "file": "Texture2D/t_chr_hume-base-0000_hirco_sdw.png",
+      "width": 512,
+      "height": 512
+    },
+    {
+      "file": "Texture2D/t_chr_hume-base-0000_hirco_def.png",
+      "width": 512,
+      "height": 512
+    },
+    {
+      "file": "Texture2D/t_chr_hume-base-0000_hir_sph.png",
+      "width": 2048,
+      "height": 2048
+    }
+  ],
+  "materials": [
+    {
+      "name": "m_bdy",
+      "texture": "Texture2D/t_chr_hume-schl-0000_bdy_col.png",
+      "triangles": 25000
+    },
+    {
+      "name": "m_fcp",
+      "texture": "Texture2D/t_chr_hume-base-0000_fce_col.png",
+      "triangles": 216
+    },
+    {
+      "name": "m_fce",
+      "texture": "Texture2D/t_chr_hume-base-0000_fce_col.png",
+      "triangles": 88
+    },
+    {
+      "name": "m_fce",
+      "texture": "Texture2D/t_chr_hume-base-0000_fce_col.png",
+      "triangles": 1494
+    },
+    {
+      "name": "m_fcp",
+      "texture": "Texture2D/t_chr_hume-base-0000_fce_col.png",
+      "triangles": 2186
+    },
+    {
+      "name": "m_ebs",
+      "texture": "Texture2D/t_chr_hume-base-0000_fce_col.png",
+      "triangles": 226
+    },
+    {
+      "name": "m_fce",
+      "texture": "Texture2D/t_chr_hume-base-0000_fce_col.png",
+      "triangles": 1010
+    },
+    {
+      "name": "m_eye",
+      "texture": "Texture2D/t_chr_hume-base-0000_eye_col_alp.png",
+      "triangles": 400
+    },
+    {
+      "name": "m_ehl",
+      "texture": "Texture2D/t_chr_hume-base-0000_ehl_col.png",
+      "triangles": 400
+    },
+    {
+      "name": "m_fce",
+      "texture": "Texture2D/t_chr_hume-base-0000_fce_col.png",
+      "triangles": 2148
+    },
+    {
+      "name": "m_fcp",
+      "texture": "Texture2D/t_chr_hume-base-0000_fce_col.png",
+      "triangles": 0
+    },
+    {
+      "name": "m_hir",
+      "texture": "Texture2D/t_chr_hume-base-0000_hir_col_alp.png",
+      "triangles": 22560
+    },
+    {
+      "name": "m_hirco",
+      "texture": "Texture2D/t_chr_hume-base-0000_hirco_col_alp.png",
+      "triangles": 1110
+    },
+    {
+      "name": "m_hir+",
+      "texture": "Texture2D/t_chr_hume-base-0000_hir_sph.png",
+      "triangles": 22560
+    }
+  ],
+  "validation": "Full PMX parse, indices, skin weights, morph deltas, packed colors and PNG dependencies passed. No animation retargeting or physics validation.",
+  "vmdCompatibleModel": "E:\\gakumas-pmx-workflow\\output\\hume-schl-0000\\hume-schl-0000-vmd.pmx"
+}

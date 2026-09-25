@@ -1,0 +1,28 @@
+{
+  "pmx": {
+    "morphCount": 108,
+    "sha256": "797552872884e6e2aa721c25fe76dc94012162527e1c69e5ed4492b8e6617c46"
+  },
+  "vmd": {
+    "morphRecords": 37,
+    "boneRecords": 0,
+    "sha256": "2056da79bde0b07d95d4e5250b811f5815ac987f8dc09e31b2721499a2f7d8c5"
+  },
+  "clipName": "mot_all_chr_atbm_facial-all-unique-ikari2-start_in_f",
+  "frameCount": 16,
+  "tracksDecoded": 84,
+  "publishedMorphs": 7,
+  "comparedMorphs": 7,
+  "weightRange": [
+    0,
+    1
+  ],
+  "maximumWeightError": 2.1457672083613488e-8,
+  "worst": {
+    "morph": "mouth_202",
+    "frame": 11,
+    "expected": 0.5000000381469727,
+    "actual": 0.5000000596046448
+  },
+  "validation": "Independent MMDParser read-back: every VMD morph resolves to a PMX morph and matches the decoded Unity samples at every frame."
+}

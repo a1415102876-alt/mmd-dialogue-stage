@@ -1,0 +1,28 @@
+{
+  "pmx": {
+    "morphCount": 108,
+    "sha256": "1d9a597ee13554e21229b1e627da19d88d69326e9dabfa544bc4ec5801f55a10"
+  },
+  "vmd": {
+    "morphRecords": 776,
+    "boneRecords": 0,
+    "sha256": "ca9011c093c9950a3f1165c32f64d2a03575e83078933a68c2ef6f4ea0d6f56e"
+  },
+  "clipName": "mot_all_chr_fktn_koufun-001_in_f",
+  "frameCount": 155,
+  "tracksDecoded": 84,
+  "publishedMorphs": 6,
+  "comparedMorphs": 6,
+  "weightRange": [
+    -4.851328299082525e-7,
+    1
+  ],
+  "maximumWeightError": 2.9270253887325737e-8,
+  "worst": {
+    "morph": "b_brow.brow_004",
+    "frame": 104,
+    "expected": 0.8461538856581824,
+    "actual": 0.8461539149284363
+  },
+  "validation": "Independent MMDParser read-back: every VMD morph resolves to a PMX morph and matches the decoded Unity samples at every frame."
+}

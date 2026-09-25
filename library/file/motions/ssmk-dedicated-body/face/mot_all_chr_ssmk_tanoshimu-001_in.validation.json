@@ -1,0 +1,28 @@
+{
+  "pmx": {
+    "morphCount": 108,
+    "sha256": "f4ee00eae55aa7de5acf3aa2dc914625aa7b0bcbc673c64df2c09fa3ef03aa43"
+  },
+  "vmd": {
+    "morphRecords": 221,
+    "boneRecords": 0,
+    "sha256": "efb5b1db73f061f0a02034165f515c8e26f8f04730c1ac55e0665a9288d06f5f"
+  },
+  "clipName": "mot_all_chr_ssmk_tanoshimu-001_in_f",
+  "frameCount": 55,
+  "tracksDecoded": 84,
+  "publishedMorphs": 5,
+  "comparedMorphs": 5,
+  "weightRange": [
+    -1.3907747131725046e-7,
+    1.0000001192092896
+  ],
+  "maximumWeightError": 4.217106774895285e-8,
+  "worst": {
+    "morph": "b_brow.brow_014",
+    "frame": 11,
+    "expected": 1.0000001613803573,
+    "actual": 1.0000001192092896
+  },
+  "validation": "Independent MMDParser read-back: every VMD morph resolves to a PMX morph and matches the decoded Unity samples at every frame."
+}

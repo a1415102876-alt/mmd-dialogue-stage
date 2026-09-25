@@ -1,7 +1,15 @@
-﻿# 模型资源说明
+﻿# 模型与动作资源
 
-本仓库默认**不提交** `library/file/idols` 与 `library/file/motions` 下的 PMX / 贴图 / VMD。
+本仓库已捆绑 `library.json` 引用的资源（Private）：
 
-- 技术上可以把模型放进上述目录后改 `.gitignore` 再提交。
-- GitHub 单文件上限 100MB；更大请用 Git LFS 或 Release / 网盘 / R2（见 `library.json` 的 r2 字段）。
-- 学园偶像大师等导出模型通常受版权保护，**请使用 Private 仓库**，不要公开分发。
+| 来源 | 仓库路径 |
+|---|---|
+| `E:\gakumas-pmx-workflow\output\*`（偶像 PMX/贴图） | `library/file/idols/<id>/` |
+| `E:\gakumas-motion-batches\cmmn-001\vmd-hips` / `vmd-face` | `library/file/motions/cmmn-body/` 、`cmmn-face/` |
+| `...\gakumas-motion-workbench\generated\dedicated-vmd\*` | `library/file/motions/<id>-dedicated-body/` |
+
+未包含：`author-source`、Unity 工程、未引用的 cstm 变体、以及 `cmmn-001` 里除 vmd-hips/vmd-face 外的中间产物（约 4GB）。
+
+`library.json` 的 `packs.*.root` 现为相对本仓库根目录的路径。接到 SillyTavern 时，请把本仓库放到 `public/mmd-dialogue-stage`，或把 `root` 改成绝对路径；服务端 `mmd-library.js` 用 `path.resolve(pack.root)` 读文件。
+
+版权：学马仕导出资源请保持 Private，勿公开分发。

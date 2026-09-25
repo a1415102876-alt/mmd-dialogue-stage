@@ -1,0 +1,28 @@
+{
+  "pmx": {
+    "morphCount": 108,
+    "sha256": "ba6ed350a245420a45f0387a7c72ebf415cd8115e7ffe703845a40f9eaba7c74"
+  },
+  "vmd": {
+    "morphRecords": 4,
+    "boneRecords": 0,
+    "sha256": "7ab5377b9a0fb3fad51722d2044d8c3e119af5feb5e184f5388b338b57b8b6ae"
+  },
+  "clipName": "mot_all_chr_jsna_facial-all-unique-doya1_in_f",
+  "frameCount": 2,
+  "tracksDecoded": 84,
+  "publishedMorphs": 4,
+  "comparedMorphs": 4,
+  "weightRange": [
+    0.1794872134923935,
+    1
+  ],
+  "maximumWeightError": 1.1920928966180355e-8,
+  "worst": {
+    "morph": "b_brow.brow_003",
+    "frame": 0,
+    "expected": 0.46153850555419923,
+    "actual": 0.46153849363327026
+  },
+  "validation": "Independent MMDParser read-back: every VMD morph resolves to a PMX morph and matches the decoded Unity samples at every frame."
+}

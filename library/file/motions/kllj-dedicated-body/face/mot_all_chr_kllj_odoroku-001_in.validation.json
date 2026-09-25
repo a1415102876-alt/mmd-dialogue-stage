@@ -1,0 +1,28 @@
+{
+  "pmx": {
+    "morphCount": 108,
+    "sha256": "4594a94e41db94c1c072d0b5b5e0f3a2c3cc8e1f02e38c93bac302586e39672d"
+  },
+  "vmd": {
+    "morphRecords": 287,
+    "boneRecords": 0,
+    "sha256": "080256079bd238955fe809f54adbd1fecdb7d2e452f8ea2832fa9c3730161f44"
+  },
+  "clipName": "mot_all_chr_kllj_odoroku-001_in_f",
+  "frameCount": 57,
+  "tracksDecoded": 84,
+  "publishedMorphs": 7,
+  "comparedMorphs": 7,
+  "weightRange": [
+    -2.7161508597828288e-8,
+    1
+  ],
+  "maximumWeightError": 2.6206329661881966e-8,
+  "worst": {
+    "morph": "b_brow.brow_014",
+    "frame": 15,
+    "expected": 0.58694716928418,
+    "actual": 0.5869471430778503
+  },
+  "validation": "Independent MMDParser read-back: every VMD morph resolves to a PMX morph and matches the decoded Unity samples at every frame."
+}

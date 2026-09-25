@@ -1,0 +1,28 @@
+{
+  "pmx": {
+    "morphCount": 108,
+    "sha256": "aae5f1b281e88e0500e6a780485c2ca27f4868caa38520b9a2324d018f19bcef"
+  },
+  "vmd": {
+    "morphRecords": 639,
+    "boneRecords": 0,
+    "sha256": "fb871da59527296e1ad77162e4e550f2f63f21c97a4ce8b545bd18bc356af551"
+  },
+  "clipName": "mot_all_chr_hume_doya-001_in_f",
+  "frameCount": 71,
+  "tracksDecoded": 84,
+  "publishedMorphs": 9,
+  "comparedMorphs": 9,
+  "weightRange": [
+    -3.0119377214532506e-8,
+    1
+  ],
+  "maximumWeightError": 2.9707150961399975e-8,
+  "worst": {
+    "morph": "b_brow.brow_014",
+    "frame": 12,
+    "expected": 0.6282106935026222,
+    "actual": 0.6282106637954712
+  },
+  "validation": "Independent MMDParser read-back: every VMD morph resolves to a PMX morph and matches the decoded Unity samples at every frame."
+}
