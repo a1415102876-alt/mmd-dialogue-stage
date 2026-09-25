@@ -12,7 +12,7 @@ import { HairCoverStage } from './gakumas-hair-cover.js?v=20260911-look5';
 import { GAKUMAS_LOOK, GakumasLookPass, applyGakumasLookUniforms, createGakumasLookUniformValues } from './gakumas-look.js?v=20260911-defaults7';
 import { HAIR_SHADOW_BIAS, HAIR_SHADOW_FOCUS, HairShadowStage } from './gakumas-hair-shadow.js?v=20260910-hairshadow3';
 import { hasGakumasVertexColorAttribute } from './gakumas-outline.js?v=20260909-outline1';
-import { SecondaryMotion } from './gakumas-secondary-motion.js?v=20260925-ttmr-native-hair-frame-v1';
+import { SecondaryMotion } from './gakumas-secondary-motion.js?v=20260925-ttmr-backhair-gravity0-v1';
 import { identifyLibraryIdol, supportsSecondaryMotion, motionMatchesIdol } from './idol-library.js?v=20260912-all-idols';
 import { bindVisemeMorphs, estimateVisemeTrack, faceCueLabel, gestureCueLabel, isFacialNoiseMorph, parseAiCue, restoreVisemeInfluences, shouldClearFacialNoise, snapshotVisemeInfluences, visemeWeightAt, allVisemeBindingTargets, visemeBindingTargets } from './dialogue-intent.js?v=20260913-numbered';
 
@@ -78,8 +78,8 @@ let secondaryMotionBindGeneration = 0;
 const secondaryMotionReady = idolId => {
     const key = idolId || 'fallback';
     if (secondaryMotionTables.has(key)) return secondaryMotionTables.get(key);
-    const request = fetch(`./secondary-motion-profiles/${encodeURIComponent(idolId || 'fktn')}.json?v=20260925-ttmr-native-hair-frame-v1`)
-        .then(response => response.ok ? response.json() : fetch(`./gakumas-secondary-motion.json?v=20260925-ttmr-native-hair-frame-v1`).then(fallback => {
+    const request = fetch(`./secondary-motion-profiles/${encodeURIComponent(idolId || 'fktn')}.json?v=20260925-ttmr-backhair-gravity0-v1`)
+        .then(response => response.ok ? response.json() : fetch(`./gakumas-secondary-motion.json?v=20260925-ttmr-backhair-gravity0-v1`).then(fallback => {
             if (!fallback.ok) throw new Error(fallback.statusText);
             return fallback.json();
         }))

@@ -616,12 +616,12 @@ test('temari front-top-side hair follows its current rest direction instead of b
     assert.equal(shouldPreserveHairRestTail('CenterFrontHair2_S', ttmr), false);
 });
 
-test('temari back hair follows its parent chain while braids keep world-down carry', () => {
-    const ttmr = { hairRestTailMode: 'braid-only' };
+test('temari back hair keeps its world rest direction together with the braids', () => {
+    const ttmr = { hairRestTailMode: 'braid-and-back' };
     assert.equal(shouldPreserveHairRestTail('LeftSideHair2_S', ttmr), true);
     assert.equal(shouldPreserveHairRestTail('RightSideBackCHair2_S', ttmr), true);
-    assert.equal(shouldPreserveHairRestTail('CenterBackHair4_S', ttmr), false);
-    assert.equal(shouldPreserveHairRestTail('LeftBackSideHair5_S', ttmr), false);
+    assert.equal(shouldPreserveHairRestTail('CenterBackHair4_S', ttmr), true);
+    assert.equal(shouldPreserveHairRestTail('LeftBackSideHair5_S', ttmr), true);
 });
 
 test('temari back hair uses the native local frame from segment two onward', () => {

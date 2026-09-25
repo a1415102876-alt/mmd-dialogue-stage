@@ -38,7 +38,7 @@ import { SceneDirector } from './scene-director.js';
 export function createSceneDirector(container) {
     return new SceneDirector(container, canvas => new LivePortraitRuntime(canvas));
 }
-import { SecondaryMotion } from './gakumas-secondary-motion.js?v=20260925-ttmr-native-hair-frame-v1';
+import { SecondaryMotion } from './gakumas-secondary-motion.js?v=20260925-ttmr-backhair-gravity0-v1';
 
 export {
     LIVE_PORTRAIT_IDOL_ID,
@@ -51,8 +51,8 @@ export {
 
 const LIBRARY_JSON = '/mmd-dialogue-stage/library.json?v=20260911-vn1';
 const MOTION_MAP_JSON = '/mmd-dialogue-stage/gakumas-motion-map.json?v=20260910-library1';
-const SECONDARY_MOTION_JSON = '/mmd-dialogue-stage/gakumas-secondary-motion.json?v=20260925-ttmr-native-hair-frame-v1';
-const SECONDARY_PROFILE_VERSION = '20260925-ttmr-native-hair-frame-v1';
+const SECONDARY_MOTION_JSON = '/mmd-dialogue-stage/gakumas-secondary-motion.json?v=20260925-ttmr-backhair-gravity0-v1';
+const SECONDARY_PROFILE_VERSION = '20260925-ttmr-backhair-gravity0-v1';
 const LIBRARY_STATUS = '/mmd-dialogue-stage/library/status?v=20260912-fallback';
 
 let singleton = null;

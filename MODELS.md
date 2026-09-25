@@ -1,15 +1,13 @@
-﻿# 模型与动作资源
+# 模型与动作资源（R2）
 
-本仓库已捆绑 `library.json` 引用的资源（Private）：
+已上传到 Cloudflare R2：
 
-| 来源 | 仓库路径 |
-|---|---|
-| `E:\gakumas-pmx-workflow\output\*`（偶像 PMX/贴图） | `library/file/idols/<id>/` |
-| `E:\gakumas-motion-batches\cmmn-001\vmd-hips` / `vmd-face` | `library/file/motions/cmmn-body/` 、`cmmn-face/` |
-| `...\gakumas-motion-workbench\generated\dedicated-vmd\*` | `library/file/motions/<id>-dedicated-body/` |
+- Account: `3b8121f92099336587cf87837240c3be`
+- Bucket: `gakuen`
+- Keys: `idols/<id>/...`、`motions/...`（与 `library.json` 的 `r2Prefix` 一致）
+- 对象数约 1960
 
-未包含：`author-source`、Unity 工程、未引用的 cstm 变体、以及 `cmmn-001` 里除 vmd-hips/vmd-face 外的中间产物（约 4GB）。
+注意：初星育成的 `https://pub-cfdeb8f85de84d8193695eca002e7880.r2.dev` **不是** `gakuen` 桶。
+请在 R2 → `gakuen` → Settings 开启 **Public access / R2.dev subdomain**，把生成的 `https://pub-xxxx.r2.dev` 填进 `library.json` 的 `r2.baseUrl`，再把 `source` 改为 `r2`。
 
-`library.json` 的 `packs.*.root` 现为相对本仓库根目录的路径。接到 SillyTavern 时，请把本仓库放到 `public/mmd-dialogue-stage`，或把 `root` 改成绝对路径；服务端 `mmd-library.js` 用 `path.resolve(pack.root)` 读文件。
-
-版权：学马仕导出资源请保持 Private，勿公开分发。
+仓库内历史提交可能仍含 `library/file` 大文件；新改动请继续忽略该目录，以 R2 为准。

@@ -4,7 +4,9 @@
   "localBase": "/mmd-dialogue-stage/library/file",
   "r2": {
     "baseUrl": "",
-    "comment": "以后把 source 改成 r2，并填写公开的 Cloudflare R2 或 CDN 根地址。对象键与下方 packs.r2Prefix 相同，例如 idols/fktn/fktn-casl-reference-matched-vmd-face.pmx"
+    "comment": "gakuen bucket objects are under idols/ and motions/. Enable R2.dev public access on bucket gakuen, then set baseUrl to that pub-*.r2.dev URL (the hatsuboshi pub-cfdeb8f... host is a different bucket).",
+    "bucket": "gakuen",
+    "accountId": "3b8121f92099336587cf87837240c3be"
   },
   "idols": [
     {

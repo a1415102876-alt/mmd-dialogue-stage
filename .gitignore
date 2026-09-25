@@ -5,4 +5,9 @@ Thumbs.db
 *.log
 *.bak
 
-# Keep model/motion packs under library/file (private repo).
+# Model/motion packs live on Cloudflare R2 (bucket gakuen), not in git.
+# The historical commit may still contain library/file; ignore further local changes.
+library/file/idols/**
+library/file/motions/**
+!library/file/idols/.gitkeep
+!library/file/motions/.gitkeep

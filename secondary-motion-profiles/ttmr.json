@@ -23779,10 +23779,10 @@
       "Spine1"
     ]
   },
-  "hairRestTailMode": "braid-only",
+  "hairRestTailMode": "braid-and-back",
   "stableHairContacts": true,
   "gravityScaleByBoneGroup": {
-    "backHair": 0.55
+    "backHair": 0
   },
   "hairRootColliderSkip": {
     "particles": [
