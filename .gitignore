@@ -1,0 +1,13 @@
+﻿# Dependencies / junk
+node_modules/
+.DS_Store
+Thumbs.db
+*.log
+
+# Local model packs are large and often copyrighted game assets.
+# Default: keep them out of git. To include, remove these lines and
+# put packs under library/file/idols/... then commit (private repo recommended).
+library/file/idols/**
+library/file/motions/**
+!library/file/idols/.gitkeep
+!library/file/motions/.gitkeep

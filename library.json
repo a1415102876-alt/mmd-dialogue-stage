@@ -1,0 +1,255 @@
+{
+  "version": 1,
+  "source": "local",
+  "localBase": "/mmd-dialogue-stage/library/file",
+  "r2": {
+    "baseUrl": "",
+    "comment": "以后把 source 改成 r2，并填写公开的 Cloudflare R2 或 CDN 根地址。对象键与下方 packs.r2Prefix 相同，例如 idols/fktn/fktn-casl-reference-matched-vmd-face.pmx"
+  },
+  "idols": [
+    {
+      "id": "fktn",
+      "name": "藤田琴音",
+      "outfit": "CASL",
+      "pack": "idols/fktn",
+      "model": "fktn-casl-reference-matched-vmd-face.pmx",
+      "textureDir": "Texture2D",
+      "note": "试探口型：あ mouth_032，い 025+026，う 021，え 025，お 023；情绪规则以后再加",
+      "visemes": {
+        "A": "mouth_032",
+        "I": "mouth_025+mouth_026",
+        "U": "mouth_021",
+        "E": "mouth_025",
+        "O": "mouth_023",
+        "M": ""
+      },
+      "secondaryMotionProfile": "fktn-casl"
+    },
+    {
+      "id": "amao",
+      "name": "有村麻央",
+      "outfit": "CASL",
+      "pack": "idols/amao",
+      "model": "amao-casl-vmd.pmx",
+      "textureDir": "Texture2D",
+      "note": "已导出CASL；口型与二次运动尚未专门适配"
+    },
+    {
+      "id": "ttmr",
+      "name": "月村手毬",
+      "outfit": "CASL",
+      "pack": "idols/ttmr",
+      "model": "ttmr-casl-vmd.pmx",
+      "textureDir": "Texture2D",
+      "note": "已导出CASL；口型与二次运动尚未专门适配"
+    },
+    {
+      "id": "kcna",
+      "name": "仓本千奈",
+      "outfit": "CASL",
+      "pack": "idols/kcna",
+      "model": "kcna-casl-vmd.pmx",
+      "textureDir": "Texture2D",
+      "note": "已导出CASL；口型与二次运动尚未专门适配"
+    },
+    {
+      "id": "shro",
+      "name": "筱泽广",
+      "outfit": "CASL",
+      "pack": "idols/shro",
+      "model": "shro-casl-vmd.pmx",
+      "textureDir": "Texture2D",
+      "note": "已导出CASL；口型与二次运动尚未专门适配"
+    },
+    {
+      "id": "hski",
+      "name": "花海咲季",
+      "outfit": "SCHL-0000",
+      "pack": "idols/hski",
+      "model": "hski-schl-0000-vmd.pmx",
+      "textureDir": "Texture2D",
+      "note": "已导出SCHL学校制服；口型与二次运动尚未专门适配"
+    },
+    {
+      "id": "hume",
+      "name": "花海佑芽",
+      "outfit": "SCHL-0000",
+      "pack": "idols/hume",
+      "model": "hume-schl-0000-vmd.pmx",
+      "textureDir": "Texture2D",
+      "note": "已导出SCHL学校制服；口型与二次运动尚未专门适配"
+    },
+    {
+      "id": "hrnm",
+      "name": "姬崎莉波",
+      "outfit": "SCHL-0000",
+      "pack": "idols/hrnm",
+      "model": "hrnm-schl-0000-vmd.pmx",
+      "textureDir": "Texture2D",
+      "note": "已导出SCHL学校制服；口型与二次运动尚未专门适配"
+    },
+    {
+      "id": "ssmk",
+      "name": "紫云清夏",
+      "outfit": "SCHL-0000",
+      "pack": "idols/ssmk",
+      "model": "ssmk-schl-0000-vmd.pmx",
+      "textureDir": "Texture2D",
+      "note": "已导出SCHL学校制服；口型与二次运动尚未专门适配"
+    },
+    {
+      "id": "kllj",
+      "name": "葛城莉莉娅",
+      "outfit": "SCHL-0000",
+      "pack": "idols/kllj",
+      "model": "kllj-schl-0000-vmd.pmx",
+      "textureDir": "Texture2D",
+      "note": "已导出SCHL学校制服；口型与二次运动尚未专门适配"
+    },
+    {
+      "id": "jsna",
+      "name": "十王星南",
+      "outfit": "SCHL-0000",
+      "pack": "idols/jsna",
+      "model": "jsna-schl-0000-vmd.pmx",
+      "textureDir": "Texture2D",
+      "note": "已导出SCHL学校制服；口型与二次运动尚未专门适配"
+    },
+    {
+      "id": "hmsz",
+      "name": "秦谷美铃",
+      "outfit": "SCHL-0000",
+      "pack": "idols/hmsz",
+      "model": "hmsz-schl-0000-vmd.pmx",
+      "textureDir": "Texture2D",
+      "note": "已导出SCHL学校制服；口型与二次运动尚未专门适配"
+    },
+    {
+      "id": "atbm",
+      "name": "雨夜燕",
+      "outfit": "SCHL-0000",
+      "pack": "idols/atbm",
+      "model": "atbm-schl-0000-vmd.pmx",
+      "textureDir": "Texture2D",
+      "note": "已导出SCHL学校制服；口型与二次运动尚未专门适配"
+    }
+  ],
+  "packs": {
+    "idols/fktn": {
+      "root": "E:/gakumas-pmx-workflow/output/fktn-casl-reference-matched",
+      "r2Prefix": "idols/fktn"
+    },
+    "motions/cmmn-body": {
+      "root": "E:/gakumas-motion-batches/cmmn-001/vmd-hips",
+      "r2Prefix": "motions/cmmn-body"
+    },
+    "motions/cmmn-face": {
+      "root": "E:/gakumas-motion-batches/cmmn-001/vmd-face",
+      "r2Prefix": "motions/cmmn-face"
+    },
+    "motions/fktn-body": {
+      "root": "G:/SillyTavern/SillyTavern/tools/gakumas-motion-workbench/generated/batches/fktn-001/vmd-hips",
+      "r2Prefix": "motions/fktn-body"
+    },
+    "idols/amao": {
+      "root": "E:/gakumas-pmx-workflow/output/amao-casl",
+      "r2Prefix": "idols/amao"
+    },
+    "idols/ttmr": {
+      "root": "E:/gakumas-pmx-workflow/output/ttmr-casl",
+      "r2Prefix": "idols/ttmr"
+    },
+    "idols/kcna": {
+      "root": "E:/gakumas-pmx-workflow/output/kcna-casl",
+      "r2Prefix": "idols/kcna"
+    },
+    "idols/shro": {
+      "root": "E:/gakumas-pmx-workflow/output/shro-casl",
+      "r2Prefix": "idols/shro"
+    },
+    "idols/hski": {
+      "root": "E:/gakumas-pmx-workflow/output/hski-schl-0000",
+      "r2Prefix": "idols/hski"
+    },
+    "idols/hume": {
+      "root": "E:/gakumas-pmx-workflow/output/hume-schl-0000",
+      "r2Prefix": "idols/hume"
+    },
+    "idols/hrnm": {
+      "root": "E:/gakumas-pmx-workflow/output/hrnm-schl-0000",
+      "r2Prefix": "idols/hrnm"
+    },
+    "idols/ssmk": {
+      "root": "E:/gakumas-pmx-workflow/output/ssmk-schl-0000",
+      "r2Prefix": "idols/ssmk"
+    },
+    "idols/kllj": {
+      "root": "E:/gakumas-pmx-workflow/output/kllj-schl-0000",
+      "r2Prefix": "idols/kllj"
+    },
+    "idols/jsna": {
+      "root": "E:/gakumas-pmx-workflow/output/jsna-schl-0000",
+      "r2Prefix": "idols/jsna"
+    },
+    "idols/hmsz": {
+      "root": "E:/gakumas-pmx-workflow/output/hmsz-schl-0000",
+      "r2Prefix": "idols/hmsz"
+    },
+    "idols/atbm": {
+      "root": "E:/gakumas-pmx-workflow/output/atbm-schl-0000",
+      "r2Prefix": "idols/atbm"
+    },
+    "motions/amao-dedicated-body": {
+      "root": "G:\\SillyTavern\\SillyTavern\\tools\\gakumas-motion-workbench\\generated\\dedicated-vmd\\amao",
+      "r2Prefix": "motions/amao-dedicated-body"
+    },
+    "motions/atbm-dedicated-body": {
+      "root": "G:\\SillyTavern\\SillyTavern\\tools\\gakumas-motion-workbench\\generated\\dedicated-vmd\\atbm",
+      "r2Prefix": "motions/atbm-dedicated-body"
+    },
+    "motions/hmsz-dedicated-body": {
+      "root": "G:\\SillyTavern\\SillyTavern\\tools\\gakumas-motion-workbench\\generated\\dedicated-vmd\\hmsz",
+      "r2Prefix": "motions/hmsz-dedicated-body"
+    },
+    "motions/hrnm-dedicated-body": {
+      "root": "G:\\SillyTavern\\SillyTavern\\tools\\gakumas-motion-workbench\\generated\\dedicated-vmd\\hrnm",
+      "r2Prefix": "motions/hrnm-dedicated-body"
+    },
+    "motions/hski-dedicated-body": {
+      "root": "G:\\SillyTavern\\SillyTavern\\tools\\gakumas-motion-workbench\\generated\\dedicated-vmd\\hski",
+      "r2Prefix": "motions/hski-dedicated-body"
+    },
+    "motions/hume-dedicated-body": {
+      "root": "G:\\SillyTavern\\SillyTavern\\tools\\gakumas-motion-workbench\\generated\\dedicated-vmd\\hume",
+      "r2Prefix": "motions/hume-dedicated-body"
+    },
+    "motions/jsna-dedicated-body": {
+      "root": "G:\\SillyTavern\\SillyTavern\\tools\\gakumas-motion-workbench\\generated\\dedicated-vmd\\jsna",
+      "r2Prefix": "motions/jsna-dedicated-body"
+    },
+    "motions/kcna-dedicated-body": {
+      "root": "G:\\SillyTavern\\SillyTavern\\tools\\gakumas-motion-workbench\\generated\\dedicated-vmd\\kcna",
+      "r2Prefix": "motions/kcna-dedicated-body"
+    },
+    "motions/kllj-dedicated-body": {
+      "root": "G:\\SillyTavern\\SillyTavern\\tools\\gakumas-motion-workbench\\generated\\dedicated-vmd\\kllj",
+      "r2Prefix": "motions/kllj-dedicated-body"
+    },
+    "motions/shro-dedicated-body": {
+      "root": "G:\\SillyTavern\\SillyTavern\\tools\\gakumas-motion-workbench\\generated\\dedicated-vmd\\shro",
+      "r2Prefix": "motions/shro-dedicated-body"
+    },
+    "motions/ssmk-dedicated-body": {
+      "root": "G:\\SillyTavern\\SillyTavern\\tools\\gakumas-motion-workbench\\generated\\dedicated-vmd\\ssmk",
+      "r2Prefix": "motions/ssmk-dedicated-body"
+    },
+    "motions/ttmr-dedicated-body": {
+      "root": "G:\\SillyTavern\\SillyTavern\\tools\\gakumas-motion-workbench\\generated\\dedicated-vmd\\ttmr",
+      "r2Prefix": "motions/ttmr-dedicated-body"
+    },
+    "motions/fktn-dedicated-body": {
+      "root": "G:\\SillyTavern\\SillyTavern\\tools\\gakumas-motion-workbench\\generated\\dedicated-vmd\\fktn",
+      "r2Prefix": "motions/fktn-dedicated-body"
+    }
+  }
+}
