@@ -89,7 +89,9 @@ export function gravityScaleForSpring(record, table = null, tuning = DEFAULT_SEC
     // its authored sag, but avoid applying the full generic hair gravity a
     // second time to the long rear chains. This is a profile-level correction
     // because the native spring parameters remain shared and untouched.
-    const group = /(?:SideBackCHair|BackHair|BackSideHair|BackUHair)/i.test(name)
+    const isBackHairGroup = /(?:SideBackCHair|BackSideHair|BackSideCHair|BackUHair)/i.test(name)
+        || /(?:^|(?:Center|Left|Right))BackHair/i.test(name);
+    const group = isBackHairGroup
         && !/Front/i.test(name)
         ? 'backHair'
         : null;
@@ -113,6 +115,20 @@ export function staticParticleRadius(particleBone, particleRadius, scale = 1) {
     // static colliders. Keeping it here balloons the hem (including Kotone).
     if (/Skirt/i.test(particleBone || '')) return 0;
     return Math.max(0, Number(particleRadius) || 0) * Math.max(0, Number(scale) || 0);
+}
+
+/**
+ * Static-collider thickness of the particle at a spring's tail.
+ * Skirts can opt into the native tail particle radius because their frill
+ * reaches past the spring segment while sitting.
+ */
+export function springStaticParticleRadius(record, tailRecord, table = null, scale = 1) {
+    if (/Skirt/i.test(record?.bone || '') && table?.skirtStaticParticleRadius === 'tail-particle') {
+        const tail = Number(tailRecord?.particleRadius);
+        const radius = Number.isFinite(tail) && tail >= 0 ? tail : Number(record?.particleRadius) || 0;
+        return Math.max(0, radius) * Math.max(0, Number(scale) || 0);
+    }
+    return staticParticleRadius(record?.bone, record?.particleRadius, scale);
 }
 
 export function skipsContralateralLegCollider(particleBone, colliderBone) {
@@ -143,22 +159,32 @@ export function skipsHairSpineCollider(particleBone, colliderBone, table = null)
 }
 
 export function skipsHairRootFaceCollider(particleBone, colliderBone) {
-    // The captured side-braid root has a strong rootWeight (0.75) and no
-    // native collision hit, while its following SideHair2 node does collide.
-    // Keep only that attached root from being projected sideways when its
-    // rest center is already inside the head capsule.
-    return /^(Left|Right)SideHair1_S$/.test(particleBone || '')
-        && colliderBone === 'Head_Face';
+    // SideHair roots must be constrained by the authored head capsule too.
+    // The old root exemption made the first segment bypass Head_Face while
+    // SideHair2+ still collided with it, producing a discontinuous chain.
+    return false;
 }
 
 export function skipsConfiguredHairRootCollider(particleBone, colliderBone, table = null) {
-    const rule = table?.hairRootColliderSkip;
-    if (!rule || !Array.isArray(rule.particles) || !rule.particles.includes(particleBone || '')) return false;
-    return Array.isArray(rule.colliders) && rule.colliders.includes(colliderBone || '');
+    const configured = table?.hairRootColliderSkip;
+    const rules = Array.isArray(configured) ? configured : [configured];
+    return rules.some(rule => !!rule
+        && Array.isArray(rule.particles) && rule.particles.includes(particleBone || '')
+        && Array.isArray(rule.colliders) && rule.colliders.includes(colliderBone || ''));
 }
 
 export function skipsLargeSpineSkirtCollider(particleBone, colliderBone, colliderMask) {
     return /Skirt/.test(particleBone || '') && colliderBone === 'Spine2' && (colliderMask | 0) === 16;
+}
+
+export function isHairVolumeCollider(record) {
+    if (record?.collisionMode === 'hairVolume') return true;
+    // Older recovered profiles do not carry the explicit mode yet. The
+    // native Spine2 mask-16 capsule is the same authored long hair volume.
+    return record?.bone === 'Spine2'
+        && (Number(record?.collisionMask) | 0) === 16
+        && Number(record?.radiusA) >= 0.25
+        && Number(record?.unityLength) >= 0.5;
 }
 
 function dynamicRecordMask(record) {
@@ -604,9 +630,23 @@ export function recoveredHairDriverQuaternion(headQuat, neckQuat, setting) {
     return unityCalcQuaternionToPmx(composed);
 }
 
-export function recoveredSkirtDriverQuaternion(sourceQuat, setting) {
+export function skirtDriverSwingSigns(table, boneName) {
+    const rule = table?.skirtDriverSwingSigns;
+    if (!rule || typeof rule !== 'object') return null;
+    const side = driverSide(boneName) === 'left' ? 'Left' : driverSide(boneName) === 'right' ? 'Right' : 'Center';
+    const pick = value => {
+        const raw = value && typeof value === 'object' ? value[side] : value;
+        return Number(raw) < 0 ? -1 : 1;
+    };
+    return [1, pick(rule.abduction), pick(rule.flexion)];
+}
+
+export function recoveredSkirtDriverQuaternion(sourceQuat, setting, swingSigns = null) {
     const relative = quatNormalize(sourceQuat || [0, 0, 0, 1]);
-    const swing = skirtSwingDegrees(quaternionToRuntimeEulerDegrees(relative));
+    const measured = skirtSwingDegrees(quaternionToRuntimeEulerDegrees(relative));
+    const swing = Array.isArray(swingSigns)
+        ? measured.map((value, index) => value * (swingSigns[index] < 0 ? -1 : 1))
+        : measured;
     const inner = Array.isArray(setting?.innerCoefficient) ? setting.innerCoefficient : [0, 0, 0];
     const outer = Array.isArray(setting?.outerCoefficient) ? setting.outerCoefficient : [0, 0, 0];
     const min = Array.isArray(setting?.limitMin) ? setting.limitMin : [-180, -180, -180];
@@ -783,6 +823,18 @@ export function resolveSphere(point, pointRadius, center, radius) {
 export function resolveCapsule(point, pointRadius, start, end, radiusA, radiusB) {
     const { point: closest, t } = closestOnSegment(point, start, end);
     return resolveSphere(point, pointRadius, closest, radiusA + (radiusB - radiusA) * t);
+}
+
+export function resolveCapsuleInside(point, pointRadius, start, end, radiusA, radiusB) {
+    if (!Array.isArray(point) || !Array.isArray(start) || !Array.isArray(end)) return point;
+    const { point: closest, t } = closestOnSegment(point, start, end);
+    const radius = (radiusA || 0) + ((radiusB || 0) - (radiusA || 0)) * t;
+    const allowed = Math.max(0, radius - Math.max(0, pointRadius || 0));
+    const offset = sub(point, closest);
+    const distance = vecLength(offset);
+    if (distance <= allowed) return point;
+    if (distance < 1e-8) return point;
+    return add(closest, scale(offset, allowed / distance));
 }
 
 export function resolveCapsuleKeepSide(point, pointRadius, start, end, radiusA, radiusB, restPoint) {
@@ -1070,9 +1122,9 @@ export function clampExtraByLimits(extraQuat, limitInfo) {
     ]);
 }
 
-function isBackHairSegmentFromSecond(record) {
+function isNativeHairFrameSegment(record) {
     const name = record?.bone || '';
-    return /^(?:Center|Left|Right)(?:BackHair|BackSideHair|BackUHair)(?:[2-9]|[1-9]\d+)_S(?:_End)?$/i.test(name);
+      return /^(?:Center|Left|Right)(?:HairSide|SideHair|SideBackHair|BackHair|BackSideHair|BackUHair)(?:[1-9]\d*)_S(?:_End)?$/i.test(name);
 }
 
 /**
@@ -1083,7 +1135,7 @@ function isBackHairSegmentFromSecond(record) {
  * native simulation axis into the PMX bone-local tail axis.
  */
 export function nativeHairLimitFrame(record, tailLocal) {
-    if (!isBackHairSegmentFromSecond(record)) return null;
+    if (!isNativeHairFrameSegment(record)) return null;
     const axis = normalize(record?.nativeBoneAxis || [0, 0, 0]);
     const rotation = record?.modelingLocalTx?.rotation;
     const tail = normalize(tailLocal || [0, 0, 0]);
@@ -1290,6 +1342,27 @@ function firstChildBone(bone, byName) {
     return (bone?.children || []).find(child => child?.isBone || child?.isBone === undefined && child?.quaternion) || null;
 }
 
+function usesModelingHairRest(record, table) {
+    if (table?.useModelingHairRestPose !== true) return false;
+      return /^(?:Left|Right)(?:HairSide|SideHair|SideBackHair)/i.test(record?.bone || '');
+}
+
+function terminalTailLocal(bone, record, scaleFactor, length) {
+    const safeLength = Math.abs(Number(length) || 0) * (scaleFactor || 1);
+    if (safeLength < 1e-4) return null;
+    const parent = bone?.parent;
+    if (parent) {
+        updateWorld(bone);
+        updateWorld(parent);
+        const incoming = sub(worldPositionOf(bone), worldPositionOf(parent));
+        const localIncoming = worldToLocalDir(bone, incoming);
+        if (vecLength(localIncoming) > 1e-4) return scale(normalize(localIncoming), safeLength);
+    }
+    const axis = normalize(record?.nativeBoneAxis || [0, 0, 0]);
+    if (vecLength(axis) > 1e-4) return scale(axis, safeLength);
+    return null;
+}
+
 export function continueAlongRest(local, unityLength, scaleFactor) {
     const length = Math.abs(unityLength || 0) * (scaleFactor || 1);
     if (length < 1e-4) return [0, 0, 0];
@@ -1365,13 +1438,16 @@ export class SecondaryMotion {
             const childRest = child ? byName.get(child.name) : null;
             const childRecord = child ? springRecords.get(child.name) : null;
             const useModelingRest = this.table.useModelingRestPose !== false && /Jacket/i.test(record.bone || '');
-            let tailLocal = useModelingRest
+            const useModelingHair = usesModelingHairRest(record, this.table);
+            let tailLocal = useModelingRest || useModelingHair
                 ? modelingRestTailLocal(record, childRecord, this.scale)
                 : null;
             if (!tailLocal) tailLocal = childRest ? localPositionOf(child, childRest) : [0, 0, 0];
             if (vecLength(tailLocal) < 1e-4) {
                 if (childRest) continue;
-                tailLocal = continueAlongRest(localPositionOf(entry.bone, entry), vecLength(record.unityLocalPosition || [0, 0, 0]), this.scale);
+                tailLocal = useModelingHair
+                    ? terminalTailLocal(entry.bone, record, this.scale, vecLength(record.unityLocalPosition || [0, 0, 0]))
+                    : continueAlongRest(localPositionOf(entry.bone, entry), vecLength(record.unityLocalPosition || [0, 0, 0]), this.scale);
             }
             if (vecLength(tailLocal) < 1e-4) continue;
             this.springs.push({
@@ -1388,6 +1464,7 @@ export class SecondaryMotion {
                 collisionHold: 0,
                 tailBone: child?.name || null,
                 tailParent: child?.parent?.name || null,
+                tailRecord: childRecord || null,
             });
         }
         const depth = bone => {
@@ -1401,11 +1478,22 @@ export class SecondaryMotion {
         };
         this.springs.sort((a, b) => depth(a.entry.bone) - depth(b.entry.bone));
         for (const record of this.table.colliders || []) {
-            const entry = byName.get(record.bone);
+            const sourceEntry = byName.get(record.bone);
+            // Some recovered colliders are stage aliases rather than PMX
+            // bones. Keep the bake reference and runtime carrier separate:
+            // the native Head_Face endpoints are authored in Head rest space,
+            // while the native driven handle points at the face helper. A
+            // profile can therefore set carrierBone when the helper has its
+            // own runtime transform; otherwise restBone remains the carrier.
+            const carrierName = record.carrierBone || record.restBone || record.bone;
+            const entry = byName.get(carrierName) || sourceEntry;
             if (!entry) {
                 this.missing.push(record.bone);
                 continue;
             }
+            // Head_Face is a stage-only native collider. Its local endpoints
+            // stay in the captured bake frame; carrierBone only selects the
+            // transform that moves that frame at runtime.
             this.colliders.push({
                 record,
                 entry,
@@ -1512,7 +1600,10 @@ export class SecondaryMotion {
         this.lastColliderGeometry = null;
         for (const binding of this.bindings) binding.extra = null;
         for (const item of this.springs) {
-            writeQuat(item.entry.bone, this.enabled ? this.#followedRest(item) : item.entry.quaternion.toArray());
+            // The captured localTx is an initial dynamic state. Seed it once
+            // during reset; applying it again on every frame would compound
+            // the snapshot rotation and make the chain drift.
+            writeQuat(item.entry.bone, this.enabled ? this.#followedRest(item, true) : item.entry.quaternion.toArray());
             updateWorld(item.entry.bone);
             const origin = worldPositionOf(item.entry.bone);
             const tail = worldPointFromLocal(item.entry.bone, item.tailLocal);
@@ -1587,7 +1678,7 @@ export class SecondaryMotion {
             const outer = skirtIsOuter(relative, driver.setting, side, binding.skirtOuter);
             binding.skirtOuter = outer;
             let extra = recovered
-                ? recoveredSkirtDriverQuaternion(relative, driver.setting)
+                ? recoveredSkirtDriverQuaternion(relative, driver.setting, skirtDriverSwingSigns(this.table, driver.bone))
                 : skirtDriverQuaternion(relative, driver.setting, side, outer);
             if (/Jacket3_S$/.test(driver.bone || '')) {
                 const skirtExtra = this.bindings.find(item => item.driver.bone === jacketSkirtAnchor(driver.bone))?.extra;
@@ -1633,7 +1724,7 @@ export class SecondaryMotion {
             end: [...collider.end],
         }));
         for (const item of this.springs) {
-            writeQuat(item.entry.bone, this.#followedRest(item));
+            writeQuat(item.entry.bone, this.#followedRest(item, false));
             updateWorld(item.entry.bone);
             const origin = worldPositionOf(item.entry.bone);
             const restTail = worldPointFromLocal(item.entry.bone, item.tailLocal);
@@ -1694,9 +1785,12 @@ export class SecondaryMotion {
             if (traceBone) traceBone.appliedExtra = [...appliedExtra];
             updateWorld(item.entry.bone);
             item.current = worldPointFromLocal(item.entry.bone, item.tailLocal);
-            if (stableContact) {
-                // A constraint correction is not velocity. Include the rendered
-                // displacement (after fixed length/writeback) in both samples.
+            if (collided || stableContact) {
+                // A contact/constraint correction is not velocity. Include the
+                // rendered displacement (after fixed length/writeback) in both
+                // samples. Without this, the next integration frame treats the
+                // outward projection as a real impulse and alternates between
+                // re-entering and leaving the collider.
                 item.previous = add(item.previous, sub(item.current, unconstrainedTail));
             }
         }
@@ -1723,7 +1817,15 @@ export class SecondaryMotion {
             // separate thigh-follow correction and keeps zero extra radius;
             // applying its 0.05 Unity radius here would expand the whole hem
             // by a visible extra ring.
-            const clothRadius = staticParticleRadius(item.record.bone, item.record.particleRadius, this.scale);
+            const clothRadius = springStaticParticleRadius(item.record, item.tailRecord, this.table, this.scale);
+            // The native Spine2 mask-16 collider is an authored outer hair
+            // volume. It contains the hair envelope, so an escaped particle
+            // must be brought back toward the capsule axis. Applying the
+            // generic outside projection here makes side hair flare outward.
+            if (isHairVolumeCollider(collider.record)) {
+                next = resolveCapsuleInside(next, clothRadius, collider.start, collider.end, collider.radiusA, collider.radiusB);
+                continue;
+            }
             next = resolveCapsuleKeepSide(next, clothRadius, collider.start, collider.end, collider.radiusA, collider.radiusB, restTail);
         }
         next = constrainLength(worldPositionOf(item.entry.bone), next, item.restLength);
@@ -1817,11 +1919,11 @@ export class SecondaryMotion {
     #traceFrameStart(dt, worldColliders) { if(!this.clothingTrace||this.clothingTrace.ticks>=300)return; const n=this.clothingTrace.ticks; const sample=this.clothingTrace.metadata?.allFrames||n===0||[1,2,3,6,12,30,60,120,180,240,299].includes(n); if(sample)this.clothingTrace.frames.push({tick:n,delta:dt,enabled:this.enabled,tuning:{...this.tuning},colliders:worldColliders.map(c=>({bone:c.record.bone,mask:c.mask,start:[...c.start],end:[...c.end],radiusA:c.radiusA,radiusB:c.radiusB})),dynamicPairs:[],bones:[]}); }
     #traceFrameEnd() { if(!this.clothingTrace)return; const f=this.clothingTrace.frames.at(-1); if(f) for(const i of this.springs) if(i.record.part==='body'||i.record.part==='clothing'||/Skirt|Jacket/i.test(i.record.bone)) { let b=f.bones.find(x=>x.bone===i.record.bone); if(!b){b={bone:i.record.bone,part:i.record.part,collisions:[]}; f.bones.push(b);} b.final={quaternion:i.entry.bone.quaternion.toArray(),current:[...i.current],collided:i.collided,collisionHold:i.collisionHold}; } this.clothingTrace.ticks++; if(this.clothingTrace.ticks>=300)this.clothingTrace.complete=true; }
 
-    #followedRest(item) {
+    #followedRest(item, includeInitialOffset = false) {
         const rest = item.entry.quaternion.toArray();
-        const offset = Array.isArray(item.record.initialRotationEuler)
+        const offset = includeInitialOffset && Array.isArray(item.record.initialRotationEuler)
             ? eulerDegreesToQuaternionXYZ(item.record.initialRotationEuler)
-            : Array.isArray(item.record.initialRotationOffset)
+            : includeInitialOffset && Array.isArray(item.record.initialRotationOffset)
                 ? quatSlerp([0, 0, 0, 1], item.record.initialRotationOffset, clampAxis(item.record.initialRotationWeight ?? 1, 0, 1))
                 : null;
         const base = offset ? composeRestAndQuat(rest, offset) : rest;
@@ -1841,7 +1943,7 @@ export class SecondaryMotion {
         if (vecLength(restDir) < 1e-8 || vecLength(nextDir) < 1e-8) return [0, 0, 0, 1];
         const extra = quatFromTo(restDir, nextDir);
         if (!useLimits || !APPLY_SPRING_ANGLE_LIMITS) return extra;
-        if (isBackHairSegmentFromSecond(item.record)) {
+        if (isNativeHairFrameSegment(item.record)) {
             return clampExtraByNativeHairFrame(extra, item.record, item.tailLocal);
         }
         const limitInfo = /Skirt|Jacket|Hair/i.test(item.record.bone || '')
@@ -1852,7 +1954,7 @@ export class SecondaryMotion {
 
     #writeBoneToward(item, origin, next, useLimits = true) {
         const extra = this.#extraToward(item, origin, next, useLimits);
-        writeQuat(item.entry.bone, quatMultiply(this.#followedRest(item), extra));
+        writeQuat(item.entry.bone, quatMultiply(this.#followedRest(item, false), extra));
         return extra;
     }
 

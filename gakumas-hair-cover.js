@@ -1,6 +1,6 @@
 import * as THREE from './vendor/three/build/three.module.js';
-import { isHairCoverSourceMaterial } from './gakumas-passes.js?v=20260910-hairshadow3';
-import { injectActorShader } from './gakumas-shader.js?v=20260911-look5';
+import { isHairCoverSourceMaterial } from './gakumas-passes.js?v=20260925-rendering-v3';
+import { injectActorShader } from './gakumas-shader.js?v=20260925-rendering-v3';
 
 export const HAIR_FADE_PARAMETERS = Object.freeze([0.75, 2, 0.4, 4]);
 
@@ -72,7 +72,7 @@ export class HairCoverStage {
         material.blendDstAlpha = THREE.OneMinusSrcAlphaFactor;
         material.premultipliedAlpha = false;
         material.onBeforeCompile = shader => injectActorShader(shader, { ...actorUniforms, ...this.uniforms });
-        material.customProgramCacheKey = () => 'gakumas-actor-hair-cover-pass-look5';
+        material.customProgramCacheKey = () => 'gakumas-actor-hair-cover-pass-rendering-v2';
         this.entries.push({ mesh, source, material, groups });
     }
 
@@ -144,3 +144,5 @@ export class HairCoverStage {
         this.lastDraws = [];
     }
 }
+
+

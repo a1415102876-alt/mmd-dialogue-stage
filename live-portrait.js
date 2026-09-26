@@ -16,11 +16,11 @@ import {
 } from './core.js?v=20260914-idol-types';
 import { idolAssetUrls, motionAssetUrls, motionAvailability } from './library-client.js?v=20260913-nested-motion';
 import { GAKUMAS_TEXTURE_KINDS, GAKUMAS_ACTIVE_TEXTURE_KINDS, selectMaterialTextures, textureDescriptor, textureUsesColorSpace } from './gakumas-materials.js?v=20260910-shadow1';
-import { injectActorShader } from './gakumas-shader.js?v=20260911-look5';
-import { actorStencilState, classifyActorPass, shouldCastCharacterShadow, shouldReceiveCharacterShadow, shouldReceiveHairShadow, shouldWriteHairShadow } from './gakumas-passes.js?v=20260910-hairshadow3';
-import { HairCoverStage } from './gakumas-hair-cover.js?v=20260911-look5';
-import { HAIR_SHADOW_BIAS, HAIR_SHADOW_FOCUS, HairShadowStage } from './gakumas-hair-shadow.js?v=20260910-hairshadow3';
-import { GAKUMAS_LOOK, GakumasLookPass, applyGakumasLookUniforms, createGakumasLookUniformValues } from './gakumas-look.js?v=20260911-look5';
+import { injectActorShader } from './gakumas-shader.js?v=20260925-rendering-v3';
+import { actorStencilState, classifyActorPass, shouldCastCharacterShadow, shouldReceiveCharacterShadow, shouldReceiveHairShadow, shouldWriteHairShadow } from './gakumas-passes.js?v=20260925-rendering-v3';
+import { HairCoverStage } from './gakumas-hair-cover.js?v=20260925-rendering-v3';
+import { HAIR_SHADOW_BIAS, HAIR_SHADOW_FOCUS, HairShadowStage } from './gakumas-hair-shadow.js?v=20260925-rendering-v3';
+import { GAKUMAS_LOOK, GakumasLookPass, applyGakumasLookUniforms, createGakumasLookUniformValues } from './gakumas-look.js?v=20260925-rendering-v3';
 import { hasGakumasVertexColorAttribute } from './gakumas-outline.js?v=20260909-outline1';
 import {
     LIVE_PORTRAIT_IDOL_ID,
@@ -38,7 +38,7 @@ import { SceneDirector } from './scene-director.js';
 export function createSceneDirector(container) {
     return new SceneDirector(container, canvas => new LivePortraitRuntime(canvas));
 }
-import { SecondaryMotion } from './gakumas-secondary-motion.js?v=20260925-ttmr-backhair-gravity0-v1';
+import { SecondaryMotion } from './gakumas-secondary-motion.js?v=20260926-hski-skirt-hem-v17';
 
 export {
     LIVE_PORTRAIT_IDOL_ID,
@@ -51,8 +51,8 @@ export {
 
 const LIBRARY_JSON = '/mmd-dialogue-stage/library.json?v=20260911-vn1';
 const MOTION_MAP_JSON = '/mmd-dialogue-stage/gakumas-motion-map.json?v=20260910-library1';
-const SECONDARY_MOTION_JSON = '/mmd-dialogue-stage/gakumas-secondary-motion.json?v=20260925-ttmr-backhair-gravity0-v1';
-const SECONDARY_PROFILE_VERSION = '20260925-ttmr-backhair-gravity0-v1';
+const SECONDARY_MOTION_JSON = '/mmd-dialogue-stage/gakumas-secondary-motion.json?v=20260926-hski-skirt-hem-v17';
+const SECONDARY_PROFILE_VERSION = '20260926-hski-skirt-hem-v17';
 const LIBRARY_STATUS = '/mmd-dialogue-stage/library/status?v=20260912-fallback';
 
 let singleton = null;
@@ -934,7 +934,7 @@ export class LivePortraitRuntime {
                 if ('toneMapped' in material) material.toneMapped = false;
                 this.applyStencil(material, actorStencilState(material.name, actorPass));
                 material.onBeforeCompile = shader => injectActorShader(shader, uniforms);
-                material.customProgramCacheKey = () => `gakumas-v2:gakumas:${role}:look5`;
+                material.customProgramCacheKey = () => `gakumas-v2:gakumas:${role}:rendering-v2`;
                 material.needsUpdate = true;
                 material.visible = true;
                 this.hairCoverStage.add(child, material, materialIndex, uniforms, hairTextureName);
@@ -1050,6 +1050,11 @@ export class LivePortraitRuntime {
         if (singleton === this) singleton = null;
     }
 }
+
+
+
+
+
 
 
 

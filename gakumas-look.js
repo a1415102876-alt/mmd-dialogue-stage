@@ -11,10 +11,15 @@ export const GAKUMAS_LOOK = Object.freeze({
     shadowElevation: 16,
     keyColor: '#ffffff',
     rimColor: '#ffb197',
-    skinSaturation: 1.32,
+    skinSaturation: 1.12,
+    skinLift: 0.055,
     lightTermOffset: 0.16,
     shadowFloor: 0.22,
     specStrength: 0.38,
+    hairShadowStrength: 1.3,
+    hairShadowFloor: 0.12,
+    hairShadowSoftness: 0.045,
+    hairShadowRampPower: 1.25,
     shadeMultiply: [1, 1, 1],
     specSky: [0.72, 0.74, 0.78],
     specFloor: [0.16, 0.14, 0.13],
@@ -40,11 +45,16 @@ export function applyGakumasLookUniforms(uniforms, look = GAKUMAS_LOOK) {
     if (uniforms.gkLightTermOffset) uniforms.gkLightTermOffset.value = look.lightTermOffset;
     if (uniforms.gkShadowFloor) uniforms.gkShadowFloor.value = look.shadowFloor;
     if (uniforms.gkSkinSaturation) uniforms.gkSkinSaturation.value = look.skinSaturation;
+    if (uniforms.gkSkinLift) uniforms.gkSkinLift.value = look.skinLift;
     if (uniforms.gkShadeMultiply) uniforms.gkShadeMultiply.value.setRGB(...look.shadeMultiply);
     if (uniforms.gkSpecSky) uniforms.gkSpecSky.value.setRGB(...look.specSky);
     if (uniforms.gkSpecFloor) uniforms.gkSpecFloor.value.setRGB(...look.specFloor);
     if (uniforms.gkSpecHorizon) uniforms.gkSpecHorizon.value.setRGB(...look.specHorizon);
     if (uniforms.gkSpecStrength) uniforms.gkSpecStrength.value = look.specStrength;
+    if (uniforms.gkHairShadowStrength) uniforms.gkHairShadowStrength.value = look.hairShadowStrength;
+    if (uniforms.gkHairShadowFloor) uniforms.gkHairShadowFloor.value = look.hairShadowFloor;
+    if (uniforms.gkHairShadowSoftness) uniforms.gkHairShadowSoftness.value = look.hairShadowSoftness;
+    if (uniforms.gkHairShadowRampPower) uniforms.gkHairShadowRampPower.value = look.hairShadowRampPower;
     return uniforms;
 }
 
@@ -53,11 +63,16 @@ export function createGakumasLookUniformValues(look = GAKUMAS_LOOK) {
         gkLightTermOffset: { value: look.lightTermOffset },
         gkShadowFloor: { value: look.shadowFloor },
         gkSkinSaturation: { value: look.skinSaturation },
+        gkSkinLift: { value: look.skinLift },
         gkShadeMultiply: { value: new THREE.Color().setRGB(look.shadeMultiply[0], look.shadeMultiply[1], look.shadeMultiply[2]) },
         gkSpecSky: { value: new THREE.Color().setRGB(look.specSky[0], look.specSky[1], look.specSky[2]) },
         gkSpecFloor: { value: new THREE.Color().setRGB(look.specFloor[0], look.specFloor[1], look.specFloor[2]) },
         gkSpecHorizon: { value: new THREE.Color().setRGB(look.specHorizon[0], look.specHorizon[1], look.specHorizon[2]) },
         gkSpecStrength: { value: look.specStrength },
+        gkHairShadowStrength: { value: look.hairShadowStrength },
+        gkHairShadowFloor: { value: look.hairShadowFloor },
+        gkHairShadowSoftness: { value: look.hairShadowSoftness },
+        gkHairShadowRampPower: { value: look.hairShadowRampPower },
     };
 }
 

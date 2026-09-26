@@ -4,7 +4,7 @@
   "localBase": "/mmd-dialogue-stage/library/file",
   "r2": {
     "baseUrl": "",
-    "comment": "gakuen bucket objects are under idols/ and motions/. Enable R2.dev public access on bucket gakuen, then set baseUrl to that pub-*.r2.dev URL (the hatsuboshi pub-cfdeb8f... host is a different bucket).",
+    "comment": "Objects live on R2 bucket gakuen under idols/ and motions/. Set baseUrl to gakuen public pub-*.r2.dev then source=r2.",
     "bucket": "gakuen",
     "accountId": "3b8121f92099336587cf87837240c3be"
   },
@@ -139,148 +139,119 @@
   "packs": {
     "idols/fktn": {
       "root": "library/file/idols/fktn",
-      "r2Prefix": "idols/fktn",
-      "note": "Bundled in-repo. Resolve relative to this stage folder (or set absolute path for SillyTavern)."
+      "r2Prefix": "idols/fktn"
     },
     "motions/cmmn-body": {
       "root": "library/file/motions/cmmn-body",
-      "r2Prefix": "motions/cmmn-body",
-      "note": "Bundled in-repo. Resolve relative to this stage folder (or set absolute path for SillyTavern)."
+      "r2Prefix": "motions/cmmn-body"
     },
     "motions/cmmn-face": {
       "root": "library/file/motions/cmmn-face",
-      "r2Prefix": "motions/cmmn-face",
-      "note": "Bundled in-repo. Resolve relative to this stage folder (or set absolute path for SillyTavern)."
+      "r2Prefix": "motions/cmmn-face"
     },
     "motions/fktn-body": {
       "root": "library/file/motions/fktn-body",
-      "r2Prefix": "motions/fktn-body",
-      "note": "Bundled in-repo. Resolve relative to this stage folder (or set absolute path for SillyTavern)."
+      "r2Prefix": "motions/fktn-body"
     },
     "idols/amao": {
       "root": "library/file/idols/amao",
-      "r2Prefix": "idols/amao",
-      "note": "Bundled in-repo. Resolve relative to this stage folder (or set absolute path for SillyTavern)."
+      "r2Prefix": "idols/amao"
     },
     "idols/ttmr": {
       "root": "library/file/idols/ttmr",
-      "r2Prefix": "idols/ttmr",
-      "note": "Bundled in-repo. Resolve relative to this stage folder (or set absolute path for SillyTavern)."
+      "r2Prefix": "idols/ttmr"
     },
     "idols/kcna": {
       "root": "library/file/idols/kcna",
-      "r2Prefix": "idols/kcna",
-      "note": "Bundled in-repo. Resolve relative to this stage folder (or set absolute path for SillyTavern)."
+      "r2Prefix": "idols/kcna"
     },
     "idols/shro": {
       "root": "library/file/idols/shro",
-      "r2Prefix": "idols/shro",
-      "note": "Bundled in-repo. Resolve relative to this stage folder (or set absolute path for SillyTavern)."
+      "r2Prefix": "idols/shro"
     },
     "idols/hski": {
       "root": "library/file/idols/hski",
-      "r2Prefix": "idols/hski",
-      "note": "Bundled in-repo. Resolve relative to this stage folder (or set absolute path for SillyTavern)."
+      "r2Prefix": "idols/hski"
     },
     "idols/hume": {
       "root": "library/file/idols/hume",
-      "r2Prefix": "idols/hume",
-      "note": "Bundled in-repo. Resolve relative to this stage folder (or set absolute path for SillyTavern)."
+      "r2Prefix": "idols/hume"
     },
     "idols/hrnm": {
       "root": "library/file/idols/hrnm",
-      "r2Prefix": "idols/hrnm",
-      "note": "Bundled in-repo. Resolve relative to this stage folder (or set absolute path for SillyTavern)."
+      "r2Prefix": "idols/hrnm"
     },
     "idols/ssmk": {
       "root": "library/file/idols/ssmk",
-      "r2Prefix": "idols/ssmk",
-      "note": "Bundled in-repo. Resolve relative to this stage folder (or set absolute path for SillyTavern)."
+      "r2Prefix": "idols/ssmk"
     },
     "idols/kllj": {
       "root": "library/file/idols/kllj",
-      "r2Prefix": "idols/kllj",
-      "note": "Bundled in-repo. Resolve relative to this stage folder (or set absolute path for SillyTavern)."
+      "r2Prefix": "idols/kllj"
     },
     "idols/jsna": {
       "root": "library/file/idols/jsna",
-      "r2Prefix": "idols/jsna",
-      "note": "Bundled in-repo. Resolve relative to this stage folder (or set absolute path for SillyTavern)."
+      "r2Prefix": "idols/jsna"
     },
     "idols/hmsz": {
       "root": "library/file/idols/hmsz",
-      "r2Prefix": "idols/hmsz",
-      "note": "Bundled in-repo. Resolve relative to this stage folder (or set absolute path for SillyTavern)."
+      "r2Prefix": "idols/hmsz"
     },
     "idols/atbm": {
       "root": "library/file/idols/atbm",
-      "r2Prefix": "idols/atbm",
-      "note": "Bundled in-repo. Resolve relative to this stage folder (or set absolute path for SillyTavern)."
+      "r2Prefix": "idols/atbm"
     },
     "motions/amao-dedicated-body": {
       "root": "library/file/motions/amao-dedicated-body",
-      "r2Prefix": "motions/amao-dedicated-body",
-      "note": "Bundled in-repo. Resolve relative to this stage folder (or set absolute path for SillyTavern)."
+      "r2Prefix": "motions/amao-dedicated-body"
     },
     "motions/atbm-dedicated-body": {
       "root": "library/file/motions/atbm-dedicated-body",
-      "r2Prefix": "motions/atbm-dedicated-body",
-      "note": "Bundled in-repo. Resolve relative to this stage folder (or set absolute path for SillyTavern)."
+      "r2Prefix": "motions/atbm-dedicated-body"
     },
     "motions/hmsz-dedicated-body": {
       "root": "library/file/motions/hmsz-dedicated-body",
-      "r2Prefix": "motions/hmsz-dedicated-body",
-      "note": "Bundled in-repo. Resolve relative to this stage folder (or set absolute path for SillyTavern)."
+      "r2Prefix": "motions/hmsz-dedicated-body"
     },
     "motions/hrnm-dedicated-body": {
       "root": "library/file/motions/hrnm-dedicated-body",
-      "r2Prefix": "motions/hrnm-dedicated-body",
-      "note": "Bundled in-repo. Resolve relative to this stage folder (or set absolute path for SillyTavern)."
+      "r2Prefix": "motions/hrnm-dedicated-body"
     },
     "motions/hski-dedicated-body": {
       "root": "library/file/motions/hski-dedicated-body",
-      "r2Prefix": "motions/hski-dedicated-body",
-      "note": "Bundled in-repo. Resolve relative to this stage folder (or set absolute path for SillyTavern)."
+      "r2Prefix": "motions/hski-dedicated-body"
     },
     "motions/hume-dedicated-body": {
       "root": "library/file/motions/hume-dedicated-body",
-      "r2Prefix": "motions/hume-dedicated-body",
-      "note": "Bundled in-repo. Resolve relative to this stage folder (or set absolute path for SillyTavern)."
+      "r2Prefix": "motions/hume-dedicated-body"
     },
     "motions/jsna-dedicated-body": {
       "root": "library/file/motions/jsna-dedicated-body",
-      "r2Prefix": "motions/jsna-dedicated-body",
-      "note": "Bundled in-repo. Resolve relative to this stage folder (or set absolute path for SillyTavern)."
+      "r2Prefix": "motions/jsna-dedicated-body"
     },
     "motions/kcna-dedicated-body": {
       "root": "library/file/motions/kcna-dedicated-body",
-      "r2Prefix": "motions/kcna-dedicated-body",
-      "note": "Bundled in-repo. Resolve relative to this stage folder (or set absolute path for SillyTavern)."
+      "r2Prefix": "motions/kcna-dedicated-body"
     },
     "motions/kllj-dedicated-body": {
       "root": "library/file/motions/kllj-dedicated-body",
-      "r2Prefix": "motions/kllj-dedicated-body",
-      "note": "Bundled in-repo. Resolve relative to this stage folder (or set absolute path for SillyTavern)."
+      "r2Prefix": "motions/kllj-dedicated-body"
     },
     "motions/shro-dedicated-body": {
       "root": "library/file/motions/shro-dedicated-body",
-      "r2Prefix": "motions/shro-dedicated-body",
-      "note": "Bundled in-repo. Resolve relative to this stage folder (or set absolute path for SillyTavern)."
+      "r2Prefix": "motions/shro-dedicated-body"
     },
     "motions/ssmk-dedicated-body": {
       "root": "library/file/motions/ssmk-dedicated-body",
-      "r2Prefix": "motions/ssmk-dedicated-body",
-      "note": "Bundled in-repo. Resolve relative to this stage folder (or set absolute path for SillyTavern)."
+      "r2Prefix": "motions/ssmk-dedicated-body"
     },
     "motions/ttmr-dedicated-body": {
       "root": "library/file/motions/ttmr-dedicated-body",
-      "r2Prefix": "motions/ttmr-dedicated-body",
-      "note": "Bundled in-repo. Resolve relative to this stage folder (or set absolute path for SillyTavern)."
+      "r2Prefix": "motions/ttmr-dedicated-body"
     },
     "motions/fktn-dedicated-body": {
       "root": "library/file/motions/fktn-dedicated-body",
-      "r2Prefix": "motions/fktn-dedicated-body",
-      "note": "Bundled in-repo. Resolve relative to this stage folder (or set absolute path for SillyTavern)."
+      "r2Prefix": "motions/fktn-dedicated-body"
     }
   }
 }

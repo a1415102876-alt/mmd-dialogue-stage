@@ -32,8 +32,10 @@ export function shouldWriteHairShadow(role) {
 }
 
 export function shouldReceiveHairShadow(role) {
-    // Yu-ki's later UE pass: ToonFace / ToonEye only. Body stays on Ramp.
-    return ['face', 'faceDetail', 'eye'].includes(role);
+    // Face and eyes receive the projected hair shadow. Hair cards also receive
+    // the depth pass so overlapping braid cards can form the layered dark bands
+    // visible in the game capture. Body and clothing remain on their own ramp.
+    return ['face', 'faceDetail', 'eye', 'hair'].includes(role);
 }
 
 export function isHairCoverSourceMaterial(materialName, textureName) {

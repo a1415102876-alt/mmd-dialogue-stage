@@ -5,14 +5,14 @@ import { MMDAnimationHelper } from 'three/addons/animation/MMDAnimationHelper.js
 import { OutlineEffect } from 'three/addons/effects/OutlineEffect.js?v=20260909-outline1';
 import { EXPRESSION_PRESETS, MOTION_BUCKETS, MOTION_FADE, buildPlaylist, classifyClipTracks, findPresetMorph, indexMotionFiles, normalizeActionId, parsePerformanceCommand, playlistClipIds, sortPlaylistByCatalog, canKeepBodyForFace, fadeDurationForClip, fadeDurationForTransition, findIdlePlaylistIndex, findFacePlaylistIndex, findGesturePlaylistIndex, shouldLoopMotion } from './core.js?v=20260914-idol-types';
 import { LIBRARY_R2_KEY, LIBRARY_SOURCE_KEY, idolAssetUrls, motionAssetUrls, motionAvailability, resolveLibrarySource, sourceLabel } from './library-client.js?v=20260913-nested-motion';
-import { GAKUMAS_TEXTURE_KINDS, GAKUMAS_ACTIVE_TEXTURE_KINDS, selectMaterialTextures, textureDescriptor, textureUsesColorSpace, setTextureColorSpace } from './gakumas-materials.js?v=20260911-look6';
-import { injectActorShader } from './gakumas-shader.js?v=20260911-look5';
-import { actorStencilState, classifyActorPass, shouldCastCharacterShadow, shouldReceiveCharacterShadow, shouldReceiveHairShadow, shouldWriteHairShadow } from './gakumas-passes.js?v=20260910-hairshadow3';
-import { HairCoverStage } from './gakumas-hair-cover.js?v=20260911-look5';
-import { GAKUMAS_LOOK, GakumasLookPass, applyGakumasLookUniforms, createGakumasLookUniformValues } from './gakumas-look.js?v=20260911-defaults7';
-import { HAIR_SHADOW_BIAS, HAIR_SHADOW_FOCUS, HairShadowStage } from './gakumas-hair-shadow.js?v=20260910-hairshadow3';
+import { GAKUMAS_TEXTURE_KINDS, GAKUMAS_ACTIVE_TEXTURE_KINDS, selectMaterialTextures, textureDescriptor, textureUsesColorSpace, setTextureColorSpace } from './gakumas-materials.js?v=20260925-rendering-v3';
+import { injectActorShader } from './gakumas-shader.js?v=20260925-rendering-v3';
+import { actorStencilState, classifyActorPass, shouldCastCharacterShadow, shouldReceiveCharacterShadow, shouldReceiveHairShadow, shouldWriteHairShadow } from './gakumas-passes.js?v=20260925-rendering-v3';
+import { HairCoverStage } from './gakumas-hair-cover.js?v=20260925-rendering-v3';
+import { GAKUMAS_LOOK, GakumasLookPass, applyGakumasLookUniforms, createGakumasLookUniformValues } from './gakumas-look.js?v=20260925-rendering-v3';
+import { HAIR_SHADOW_BIAS, HAIR_SHADOW_FOCUS, HairShadowStage } from './gakumas-hair-shadow.js?v=20260925-rendering-v3';
 import { hasGakumasVertexColorAttribute } from './gakumas-outline.js?v=20260909-outline1';
-import { SecondaryMotion } from './gakumas-secondary-motion.js?v=20260925-ttmr-backhair-gravity0-v1';
+import { SecondaryMotion } from './gakumas-secondary-motion.js?v=20260926-hski-skirt-hem-v17';
 import { identifyLibraryIdol, supportsSecondaryMotion, motionMatchesIdol } from './idol-library.js?v=20260912-all-idols';
 import { bindVisemeMorphs, estimateVisemeTrack, faceCueLabel, gestureCueLabel, isFacialNoiseMorph, parseAiCue, restoreVisemeInfluences, shouldClearFacialNoise, snapshotVisemeInfluences, visemeWeightAt, allVisemeBindingTargets, visemeBindingTargets } from './dialogue-intent.js?v=20260913-numbered';
 
@@ -65,6 +65,7 @@ const hairShadowLightVS = new THREE.Vector3();
 const secondaryMotion = new SecondaryMotion();
 const colliderDebug = {
     enabled: false,
+    selected: 'all',
     group: new THREE.Group(),
     staticMeshes: [],
     particleMeshes: [],
@@ -78,8 +79,8 @@ let secondaryMotionBindGeneration = 0;
 const secondaryMotionReady = idolId => {
     const key = idolId || 'fallback';
     if (secondaryMotionTables.has(key)) return secondaryMotionTables.get(key);
-    const request = fetch(`./secondary-motion-profiles/${encodeURIComponent(idolId || 'fktn')}.json?v=20260925-ttmr-backhair-gravity0-v1`)
-        .then(response => response.ok ? response.json() : fetch(`./gakumas-secondary-motion.json?v=20260925-ttmr-backhair-gravity0-v1`).then(fallback => {
+    const request = fetch(`./secondary-motion-profiles/${encodeURIComponent(idolId || 'fktn')}.json?v=20260926-hski-skirt-hem-v17`)
+        .then(response => response.ok ? response.json() : fetch(`./gakumas-secondary-motion.json?v=20260926-hski-skirt-hem-v17`).then(fallback => {
             if (!fallback.ok) throw new Error(fallback.statusText);
             return fallback.json();
         }))
@@ -305,6 +306,10 @@ function bindUi() {
         colliderDebug.enabled = event.target.checked;
         colliderDebug.group.visible = colliderDebug.enabled && !!state.model;
         renderSecondaryMotionStatus();
+    });
+    $('#colliderDebugSelect')?.addEventListener('change', event => {
+        colliderDebug.selected = event.target.value || 'all';
+        updateColliderDebug();
     });
     bindLightControl('gakumasHairCoverMinimum', null, null, value => {
         state.gakumasPasses.hairCoverMinimum = value;
@@ -765,7 +770,7 @@ function applyMaterialStyle() {
             material.colorWrite = true;
             applyStencilState(material, actorStencilState(material.name, actorPass));
             material.onBeforeCompile = state.materialMode === 'gakumas' ? shader => injectActorShader(shader, uniforms) : () => {};
-            material.customProgramCacheKey = () => `gakumas-v2:${state.materialMode}:${role}:look6`;
+            material.customProgramCacheKey = () => `gakumas-v2:${state.materialMode}:${role}:rendering-v2`;
             material.needsUpdate = true;
             material.visible = true;
             if (state.materialMode === 'gakumas') {
@@ -1375,13 +1380,48 @@ function updateColliderDebug() {
     if (!colliderDebug.enabled || !state.model) return;
     const debug = secondaryMotion.debugState();
     resizeDebugPool(colliderDebug.staticMeshes, debug.colliders.length, 0x2bb5a8, 0.8);
+    const selectedIndex = colliderDebug.selected === 'all' ? null : Number(colliderDebug.selected);
     debug.colliders.forEach((shape, index) => {
         const mesh = colliderDebug.staticMeshes[index];
+        const isSelected = selectedIndex === null || selectedIndex === index;
+        mesh.visible = isSelected;
+        mesh.material.color.setHex(selectedIndex === null ? 0x2bb5a8 : 0xffc857);
+        mesh.material.opacity = selectedIndex === null ? 0.8 : 1;
+        if (!isSelected) return;
         if (shape.kind === 'capsule') fitDebugCapsule(mesh, shape.start, shape.end, Math.max(shape.radiusA, shape.radiusB));
         else fitDebugSphere(mesh, shape.start, shape.radiusA);
     });
     resizeDebugPool(colliderDebug.particleMeshes, debug.particles.length, 0xef765f, 0.45);
-    debug.particles.forEach((particle, index) => fitDebugSphere(colliderDebug.particleMeshes[index], particle.position, particle.radius));
+    const showParticles = selectedIndex === null;
+    debug.particles.forEach((particle, index) => {
+        const mesh = colliderDebug.particleMeshes[index];
+        mesh.visible = showParticles;
+        if (showParticles) fitDebugSphere(mesh, particle.position, particle.radius);
+    });
+}
+
+function renderColliderDebugSelect() {
+    const select = $('#colliderDebugSelect');
+    if (!select) return;
+    const previous = colliderDebug.selected;
+    select.replaceChildren();
+    const all = document.createElement('option');
+    all.value = 'all';
+    all.textContent = '全部碰撞体';
+    select.appendChild(all);
+    secondaryMotion.colliders.forEach(({ record }, index) => {
+        const option = document.createElement('option');
+        const kind = record.kind === 'capsule' || record.type === 1 ? '胶囊' : '球体';
+        const radius = (Number(record.radiusA || 0) * 100).toFixed(1);
+        const native = Number.isInteger(Number(record.nativeIndex)) ? ` · native#${record.nativeIndex}` : '';
+        option.value = String(index);
+        option.textContent = `#${String(index + 1).padStart(2, '0')} ${record.bone} · mask ${record.collisionMask} · ${kind} · ${radius}cm${native}`;
+        select.appendChild(option);
+    });
+    const previousIndex = Number(previous);
+    const valid = previous === 'all' || Number.isInteger(previousIndex) && previousIndex >= 0 && previousIndex < secondaryMotion.colliders.length;
+    colliderDebug.selected = valid ? previous : 'all';
+    select.value = colliderDebug.selected;
 }
 
 function renderColliderAuthoring() {
@@ -1410,6 +1450,8 @@ async function bindSecondaryMotion() {
     const idolId = state.library.activeIdol;
     const idol = state.library.config?.idols?.find(item => item.id === idolId);
     secondaryMotion.bind([]);
+    colliderDebug.selected = 'all';
+    renderColliderDebugSelect();
     updateColliderDebug();
     if (!supportsSecondaryMotion(idol)) {
         renderSecondaryMotionStatus();
@@ -1426,6 +1468,7 @@ async function bindSecondaryMotion() {
     secondaryMotion.table = table;
     secondaryMotion.startClothingTrace({ idolId, model: state.model?.name || null, source: "secondary-motion-profile" });
     secondaryMotion.bind(state.restPose);
+    renderColliderDebugSelect();
     renderSecondaryMotionStatus();
     updateColliderDebug();
     if (secondaryMotion.missing.length) {
@@ -1999,6 +2042,11 @@ function disposeObject(object) {
         });
     });
 }
+
+
+
+
+
 
 
 

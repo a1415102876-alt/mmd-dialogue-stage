@@ -45,6 +45,7 @@ uniform float gkLightTermOffset;
 uniform float gkShadowFloor;
 uniform float gkShadowStrength;
 uniform float gkSkinSaturation;
+uniform float gkSkinLift;
 uniform vec3 gkShadeMultiply;
 uniform vec3 gkSpecSky;
 uniform vec3 gkSpecFloor;
@@ -65,6 +66,10 @@ uniform sampler2D gkHairShadowMap;
 uniform sampler2D gkHairShadowDepth;
 uniform float gkHairShadowEnabled;
 uniform float gkHairShadowReceive;
+uniform float gkHairShadowStrength;
+uniform float gkHairShadowFloor;
+uniform float gkHairShadowSoftness;
+uniform float gkHairShadowRampPower;
 uniform float gkHairShadowOffset;
 uniform float gkHairShadowFocus;
 uniform float gkHairShadowBias;
@@ -167,18 +172,39 @@ if (gkHairShadowEnabled > 0.5 && gkHairShadowReceive > 0.5) {
     vec2 gkHairScreen = gl_FragCoord.xy / max(gkHairShadowResolution, vec2(1.0));
     float gkHairViewZ = max(-perspectiveDepthToViewZ(gl_FragCoord.z, gkHairShadowNear, gkHairShadowFar), 0.001);
     vec2 gkHairShift = gkHairShadowLightVS.xy * ((gkHairShadowOffset * gkHairShadowFocus) / gkHairViewZ) / max(gkHairShadowResolution, vec2(1.0));
-    vec2 gkHairUV = clamp(gkHairScreen + gkHairShift, vec2(0.0), vec2(1.0));
-    vec4 gkHairSample = texture2D(gkHairShadowMap, gkHairUV);
-    float gkHairDepth = texture2D(gkHairShadowDepth, gkHairUV).x;
-    // Window depth is non-linear, so a constant bias there vanishes with camera
-    // distance. Compare linear view distances and keep the bias in world units.
-    float gkHairOccluderZ = -perspectiveDepthToViewZ(gkHairDepth, gkHairShadowNear, gkHairShadowFar);
-    if (gkHairSample.a > 0.5 && gkHairOccluderZ + gkHairShadowBias < gkHairViewZ) gkHairShadow = 0.0;
+    vec2 gkHairTexel = 1.0 / max(gkHairShadowResolution, vec2(1.0));
+    float gkHairShadowAccum = 0.0;
+    float gkHairShadowWeight = 0.0;
+    for (int gkHairY = -1; gkHairY <= 1; gkHairY ++) {
+        for (int gkHairX = -1; gkHairX <= 1; gkHairX ++) {
+            vec2 gkHairUV = clamp(gkHairScreen + gkHairShift + vec2(float(gkHairX), float(gkHairY)) * gkHairTexel, vec2(0.0), vec2(1.0));
+            vec4 gkHairSample = texture2D(gkHairShadowMap, gkHairUV);
+            if (gkHairSample.a > 0.5) {
+                float gkHairDepth = texture2D(gkHairShadowDepth, gkHairUV).x;
+                // Window depth is non-linear, so compare linear view distances.
+                float gkHairOccluderZ = -perspectiveDepthToViewZ(gkHairDepth, gkHairShadowNear, gkHairShadowFar);
+                float gkHairGap = max(gkHairViewZ - gkHairOccluderZ - gkHairShadowBias, 0.0);
+                float gkHairOcclusion = smoothstep(0.0, max(gkHairShadowSoftness, 0.0001), gkHairGap);
+                gkHairOcclusion = pow(gkHairOcclusion, max(gkHairShadowRampPower, 0.1));
+                gkHairShadowAccum += 1.0 - gkHairOcclusion;
+                gkHairShadowWeight += 1.0;
+            }
+        }
+    }
+    if (gkHairShadowWeight > 0.0) gkHairShadow = gkHairShadowAccum / gkHairShadowWeight;
 }
 gkShadow = min(gkShadow, gkHairShadow);
-float gkShadowForLighting = mix(1.0, gkShadow, clamp(gkShadowStrength, 0.0, 1.0));
+float gkShadowResponse = gkShadowStrength;
+#ifdef GK_HAIR
+gkShadowResponse *= gkHairShadowStrength;
+#endif
+float gkShadowForLighting = mix(1.0, gkShadow, clamp(gkShadowResponse, 0.0, 1.0));
 gkLighting = min(gkLighting, gkShadowForLighting);
-gkLighting = max(gkLighting, gkShadowFloor);
+float gkLightingFloor = gkShadowFloor;
+#ifdef GK_HAIR
+gkLightingFloor = gkHairShadowFloor;
+#endif
+gkLighting = max(gkLighting, gkLightingFloor);
 float gkSpecMask = min(gkDef.a, gkShadowForLighting);
 #ifdef GK_HAIR
 float gkHairProp = step(0.75001, gkUv.x) * step(0.75001, gkUv.y);
@@ -201,6 +227,7 @@ vec3 gkShadeTint = gkShade.rgb * gkShadeMultiply;
 vec3 gkSkinRamp = mix(gkRamp.rgb, gkRamp.rgb * gkShadeMultiply, gkRamp.a);
 vec3 gkNonSkin = mix(gkBase, gkShadeTint, gkRamp.a);
 vec3 gkSkin = gkBase * gkSkinRamp;
+gkSkin = min(gkSkin + vec3(gkSkinLift * gkLighting), vec3(1.0));
 vec3 gkActorColor = mix(gkNonSkin, gkSkin, gkSkinMask);
 float gkSat = mix(1.0, gkSkinSaturation, gkSkinMask);
 float gkLum = dot(gkActorColor, vec3(0.2126, 0.7152, 0.0722));
