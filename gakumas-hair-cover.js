@@ -1,6 +1,6 @@
 import * as THREE from './vendor/three/build/three.module.js';
-import { isHairCoverSourceMaterial } from './gakumas-passes.js?v=20261003-hair-cover-fix-v9';
-import { injectActorShader } from './gakumas-shader.js?v=20261003-hair-cover-fix-v9';
+import { isHairCoverSourceMaterial } from './gakumas-passes.js?v=20261003-hair-cover-fix-v10';
+import { injectActorShader } from './gakumas-shader.js?v=20261003-hair-cover-fix-v10';
 
 export const HAIR_FADE_PARAMETERS = Object.freeze([0.75, 2, 0.4, 4]);
 
@@ -114,32 +114,16 @@ export class HairCoverStage {
             // This callback runs after the regular render list, so the
             // m_hir+ overlay is at the same depth as the already drawn hair.
             // Reuse the source shader, but make this one redraw an overlay:
-            // depth must not reject it, while the existing hair stencil (64)
-            // keeps it out of the higher-stencil eye layer. Restore every
-            // state field before returning because the source is still used
-            // by the normal scene render on the next frame.
+            // depth must not reject it. Keep the source stencil state intact:
+            // the eye layer deliberately uses a higher stencil value, so a
+            // synthetic Equal(64) test would make the highlight disappear
+            // exactly when it passes over a semi-transparent eye.
             const state = {
                 depthTest: source.depthTest,
                 depthWrite: source.depthWrite,
-                stencilWrite: source.stencilWrite,
-                stencilFunc: source.stencilFunc,
-                stencilRef: source.stencilRef,
-                stencilFuncMask: source.stencilFuncMask,
-                stencilWriteMask: source.stencilWriteMask,
-                stencilFail: source.stencilFail,
-                stencilZFail: source.stencilZFail,
-                stencilZPass: source.stencilZPass,
             };
             source.depthTest = false;
             source.depthWrite = false;
-            source.stencilWrite = true;
-            source.stencilFunc = THREE.EqualStencilFunc;
-            source.stencilRef = 64;
-            source.stencilFuncMask = 0xff;
-            source.stencilWriteMask = 0;
-            source.stencilFail = THREE.KeepStencilOp;
-            source.stencilZFail = THREE.KeepStencilOp;
-            source.stencilZPass = THREE.KeepStencilOp;
             try {
                 for (const group of groups) {
                     renderer.renderBufferDirect(camera, scene, mesh.geometry, source, mesh, group);

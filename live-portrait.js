@@ -16,9 +16,9 @@ import {
 } from './core.js?v=20260914-idol-types';
 import { idolAssetUrls, motionAssetUrls, motionAvailability } from './library-client.js?v=20260913-nested-motion';
 import { GAKUMAS_TEXTURE_KINDS, GAKUMAS_ACTIVE_TEXTURE_KINDS, selectMaterialTextures, textureDescriptor, textureUsesColorSpace } from './gakumas-materials.js?v=20260910-shadow1';
-import { injectActorShader } from './gakumas-shader.js?v=20261003-hair-cover-fix-v9';
-import { actorStencilState, classifyActorPass, placeCharacterShadowLight, shouldCastCharacterShadow, shouldReceiveCharacterShadow } from './gakumas-passes.js?v=20261003-hair-cover-fix-v9';
-import { HairCoverStage } from './gakumas-hair-cover.js?v=20261003-hair-cover-fix-v9';
+import { injectActorShader } from './gakumas-shader.js?v=20261003-hair-cover-fix-v10';
+import { actorStencilState, classifyActorPass, placeCharacterShadowLight, shouldCastCharacterShadow, shouldReceiveCharacterShadow } from './gakumas-passes.js?v=20261003-hair-cover-fix-v10';
+import { HairCoverStage } from './gakumas-hair-cover.js?v=20261003-hair-cover-fix-v10';
 import { GAKUMAS_LOOK, GakumasLookPass, applyGakumasLookUniforms, createGakumasLookUniformValues } from './gakumas-look.js?v=20261002-rim-v1';
 import { hasGakumasVertexColorAttribute } from './gakumas-outline.js?v=20260909-outline1';
 import {
@@ -887,7 +887,7 @@ export class LivePortraitRuntime {
                 };
                 const baseDefines = { ...(material.defines || {}) };
                 delete baseDefines.GK_HAIR_COVER;
-                material.defines = { ...baseDefines, GK_HAIR: role === 'hair' || actorPass === 'hairHighlight', GK_FACE: role === 'face', GK_EYE: role === 'eye' || role === 'eyeHighlight' };
+                material.defines = { ...baseDefines, GK_HAIR: role === 'hair' || actorPass === 'hairHighlight', GK_HAIR_HIGHLIGHT_PASS: actorPass === 'hairHighlight', GK_FACE: role === 'face', GK_EYE: role === 'eye' || actorPass === 'eyeHighlight' };
                 material.userData.gakumasBaseTransparent ??= material.transparent;
                 material.transparent = material.userData.gakumasBaseTransparent;
                 material.blending = baseBlending;

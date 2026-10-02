@@ -52,6 +52,14 @@ export function selectMaterialTextures(material, entries) {
             const shared = matches.filter(entry => entry.stem === `t_chr_${descriptor.character}-base-0000`);
             if (shared.length) matches = shared;
         }
+        // hir_hhl is the hair highlight mask. hir_sph is the source map of
+        // the separate m_hir+ sphere layer; both share the hir stem but are
+        // not interchangeable supplemental bindings. Prefer the explicit
+        // hhl mask when both suffixes are present.
+        if (kind === 'highlight' && matches.length > 1) {
+            const hhlMatches = matches.filter(entry => /(?:^|[_-])hhl(?:\.|_|$)/.test(entry.name));
+            if (hhlMatches.length === 1) matches = hhlMatches;
+        }
         if (matches.length === 1) bindings[kind] = matches[0];
         else if (matches.length > 1) ambiguous.push(kind);
     }

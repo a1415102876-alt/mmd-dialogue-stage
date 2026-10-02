@@ -47,7 +47,8 @@ test('cover shader only fades m_hir and leaves the m_hir+ highlight branch to it
     injectActorShader(shader, {});
     assert.doesNotMatch(shader.vertexShader, /gl_Position\.z -= 0\.0015 \* gl_Position\.w;/);
     assert.match(shader.fragmentShader, /#ifdef GK_HAIR_COVER_PASS[\s\S]*gkSpecMask = 0\.0;[\s\S]*#else[\s\S]*gkHairHighlight/);
-    assert.match(shader.fragmentShader, /gkSpecMask \*= gkHairProp;\s*#endif\s*#endif\s*vec4 gkRamp/);
+    assert.match(shader.fragmentShader, /gkSpecMask \*= gkHairProp;\s*#endif\s*#endif\s*#endif\s*vec4 gkRamp/);
+    assert.match(shader.fragmentShader, /#ifdef GK_HAIR\s*#ifndef GK_HAIR_HIGHLIGHT_PASS[\s\S]*#endif\s*#endif/);
 });
 
 test('only hair has a second pass; base arrays, geometry, maps and scene stay intact', () => {
@@ -94,10 +95,8 @@ test('redraws m_hir+ after HairCover so the highlight is not buried by the fade 
             if (material === materials[2]) {
                 assert.equal(material.depthTest, false);
                 assert.equal(material.depthWrite, false);
-                assert.equal(material.stencilWrite, true);
-                assert.equal(material.stencilFunc, THREE.EqualStencilFunc);
-                assert.equal(material.stencilRef, 64);
-                assert.equal(material.stencilWriteMask, 0);
+                assert.equal(material.stencilWrite, false);
+                assert.equal(material.stencilFunc, THREE.AlwaysStencilFunc);
             }
             events.push(material === materials[2] ? 'highlight' : 'cover');
         },

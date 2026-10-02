@@ -8,9 +8,9 @@ import { OutlineEffect } from 'three/addons/effects/OutlineEffect.js?v=20260909-
 import { EXPRESSION_PRESETS, MOTION_BUCKETS, MOTION_FADE, buildPlaylist, classifyClipTracks, findPresetMorph, indexMotionFiles, normalizeActionId, parsePerformanceCommand, playlistClipIds, sortPlaylistByCatalog, canKeepBodyForFace, fadeDurationForClip, fadeDurationForTransition, findIdlePlaylistIndex, findFacePlaylistIndex, findGesturePlaylistIndex, shouldLoopMotion } from './core.js?v=20260929-glb-direct-track-classifier-v2';
 import { LIBRARY_R2_KEY, LIBRARY_SOURCE_KEY, idolAssetUrls, libraryFileUrl, motionAssetUrls, motionAvailability, resolveLibrarySource, selectIdolModel, sourceLabel } from './library-client.js?v=20261002-idol-glb';
 import { GAKUMAS_TEXTURE_KINDS, GAKUMAS_ACTIVE_TEXTURE_KINDS, selectMaterialTextures, textureDescriptor, textureUsesColorSpace, setTextureColorSpace } from './gakumas-materials.js?v=20260929-glb-highlight-semantic-v2';
-import { injectActorShader } from './gakumas-shader.js?v=20261003-hair-cover-fix-v9';
-import { actorStencilState, classifyActorPass, placeCharacterShadowLight, shouldCastCharacterShadow, shouldReceiveCharacterShadow } from './gakumas-passes.js?v=20261003-hair-cover-fix-v9';
-import { HairCoverStage } from './gakumas-hair-cover.js?v=20261003-hair-cover-fix-v9';
+import { injectActorShader } from './gakumas-shader.js?v=20261003-hair-cover-fix-v10';
+import { actorStencilState, classifyActorPass, placeCharacterShadowLight, shouldCastCharacterShadow, shouldReceiveCharacterShadow } from './gakumas-passes.js?v=20261003-hair-cover-fix-v10';
+import { HairCoverStage } from './gakumas-hair-cover.js?v=20261003-hair-cover-fix-v10';
 import { GakumasSceneStage } from './gakumas-scene.js?v=20261002-scene-lit-v7';
 import { GakumasPostPass } from './gakumas-post.js?v=20261002-scene-lit-v9';
 import { GAKUMAS_LOOK, GakumasLookPass, applyGakumasLookUniforms, createGakumasLookUniformValues } from './gakumas-look.js?v=20261002-rim-v1';
@@ -1064,6 +1064,7 @@ function applyMaterialStyle() {
             material.defines = {
                 ...baseDefines,
                 GK_HAIR: role === 'hair' || actorPass === 'hairHighlight',
+                GK_HAIR_HIGHLIGHT_PASS: actorPass === 'hairHighlight',
                 GK_FACE: role === 'face',
                 GK_EYE: role === 'eye' || role === 'eyeHighlight',
                 GK_EYE_HIGHLIGHT: material.name.toLowerCase() === 'm_ehl' || actorPass === 'eyeHighlight',
@@ -1084,7 +1085,7 @@ function applyMaterialStyle() {
             // MeshStandardMaterial defaults to an opaque base-color pass,
             // which hides the regular m_hir layer. Recreate the PMX overlay
             // semantics here.
-            if (actorPass === 'hairHighlight') {
+            if (state.modelFormat === 'glb' && actorPass === 'hairHighlight') {
                 material.transparent = true;
                 material.blending = THREE.AdditiveBlending;
                 material.depthWrite = false;

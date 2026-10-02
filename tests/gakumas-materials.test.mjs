@@ -49,6 +49,16 @@ test('does not borrow eye highlights, hair maps or maps from other characters', 
     assert.equal(describeMaterial(materialFor('t_chr_fktn-base-0000_ehl_col.png')).role, 'eyeHighlight');
 });
 
+test('prefers the hhl hair highlight mask when hir_hhl and hir_sph share a stem', () => {
+    const sphere = textureDescriptor('t_chr_fktn-base-0000_hir_sph.png');
+    const selection = selectMaterialTextures(
+        materialFor('t_chr_fktn-base-0000_hir_col_alp.png'),
+        [...entries, sphere],
+    );
+    assert.equal(selection.bindings.highlight.name, 't_chr_fktn-base-0000_hir_hhl.png');
+    assert.deepEqual(selection.ambiguous, []);
+});
+
 test('ambiguous files are reported instead of depending on file order', () => {
     const source = materialFor('t_chr_fktn-base-0000_fce_col.png');
     const duplicate = entries.find(entry => entry.name.endsWith('fce_def.png'));
