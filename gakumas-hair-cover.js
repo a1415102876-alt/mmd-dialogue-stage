@@ -1,6 +1,6 @@
 import * as THREE from './vendor/three/build/three.module.js';
-import { isHairCoverSourceMaterial } from './gakumas-passes.js?v=20261003-hair-cover-fix-v10';
-import { injectActorShader } from './gakumas-shader.js?v=20261003-hair-cover-fix-v10';
+import { isHairCoverSourceMaterial } from './gakumas-passes.js?v=20261003-hair-cover-fix-v11';
+import { injectActorShader } from './gakumas-shader.js?v=20261003-hair-cover-fix-v11';
 
 export const HAIR_FADE_PARAMETERS = Object.freeze([0.75, 2, 0.4, 4]);
 
@@ -81,7 +81,15 @@ export class HairCoverStage {
             ? geometry.groups.filter(group => group.materialIndex === materialIndex)
             : [{ start: 0, count: geometry.index?.count ?? geometry.attributes.position.count, materialIndex: 0 }];
         if (!groups.length) return;
-        this.highlightEntries.push({ mesh, source, groups });
+        this.highlightEntries.push({
+            mesh,
+            source,
+            groups,
+            // GLB m_hir+ is an additive overlay. Its source material is kept
+            // out of the ordinary render list and is drawn exactly once in
+            // this post pass, otherwise the 0.55 layer is accumulated twice.
+            postOnly: source.userData?.gakumasPostHighlightOnly === true,
+        });
     }
 
     update(head, minimumCoverage) {
@@ -106,9 +114,10 @@ export class HairCoverStage {
         }
     }
 
-    drawHighlights(renderer, scene, camera) {
-        for (const { mesh, source, groups } of this.highlightEntries) {
-            if (!source.visible || !isVisible(mesh, camera)) continue;
+    drawHighlights(renderer, scene, camera, postOnlyOnly = false) {
+        for (const { mesh, source, groups, postOnly } of this.highlightEntries) {
+            if (postOnlyOnly && !postOnly) continue;
+            if ((!source.visible && !postOnly) || !isVisible(mesh, camera)) continue;
             mesh.modelViewMatrix.multiplyMatrices(camera.matrixWorldInverse, mesh.matrixWorld);
             mesh.normalMatrix.getNormalMatrix(mesh.modelViewMatrix);
             // This callback runs after the regular render list, so the
@@ -137,18 +146,20 @@ export class HairCoverStage {
     renderFrame(renderer, outline, scene, camera, enabled) {
         this.lastDraws = [];
         const originalSceneAfter = scene.onAfterRender;
-        if (enabled && this.entries.length) {
+        const postOnlyHighlights = this.highlightEntries.some(entry => entry.postOnly);
+        if ((enabled && this.entries.length) || postOnlyHighlights) {
             if (camera.isArrayCamera) {
                 throw new Error('HairCover currently requires a single camera');
             }
-            this.active = true;
+            this.active = enabled && this.entries.length > 0;
             // Draw after the eyes. Mesh onAfterRender runs in the opaque pass,
             // before the transparent eye cards, so the eyes would cover the fade.
             scene.onAfterRender = (activeRenderer, activeScene, activeCamera) => {
-                if (this.active) {
-                    this.draw(activeRenderer, activeScene, activeCamera);
-                    this.drawHighlights(activeRenderer, activeScene, activeCamera);
-                }
+                if (this.active) this.draw(activeRenderer, activeScene, activeCamera);
+                // Highlight overlays also need a post pass when HairCover is
+                // disabled. GLB m_hir+ uses this path exclusively; PMX keeps
+                // its historical redraw only while HairCover is active.
+                this.drawHighlights(activeRenderer, activeScene, activeCamera, !this.active);
                 if (originalSceneAfter) originalSceneAfter.call(scene, activeRenderer, activeScene, activeCamera);
             };
         }
@@ -168,4 +179,3 @@ export class HairCoverStage {
         this.lastDraws = [];
     }
 }
-

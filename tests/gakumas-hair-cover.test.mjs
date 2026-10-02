@@ -108,6 +108,31 @@ test('redraws m_hir+ after HairCover so the highlight is not buried by the fade 
     assert.equal(materials[2].stencilWrite, false);
 });
 
+test('GLB post-only m_hir+ stays visible when HairCover is disabled without a duplicate base draw', () => {
+    const { stage, scene, camera, mesh, materials } = fixture();
+    materials[2].userData.gakumasPostHighlightOnly = true;
+    materials[2].visible = false;
+    stage.addHighlight(mesh, materials[2], 2);
+    const events = [];
+    const renderer = {
+        render: () => {
+            events.push('base');
+            scene.onAfterRender(renderer, scene, camera);
+        },
+        renderBufferDirect: (_camera, _scene, _geometry, material) => {
+            assert.equal(material, materials[2]);
+            assert.equal(material.depthTest, false);
+            assert.equal(material.depthWrite, false);
+            events.push('highlight');
+        },
+    };
+    stage.renderFrame(renderer, { enabled: false, renderOutline() {} }, scene, camera, false);
+    assert.deepEqual(events, ['base', 'highlight']);
+    assert.equal(materials[2].visible, false);
+    assert.equal(materials[2].depthTest, true);
+    assert.equal(materials[2].depthWrite, true);
+});
+
 test('extra drawing respects visibility, camera layers and material visibility', () => {
     const { stage, mesh, scene, camera, materials } = fixture();
     let draws = 0;

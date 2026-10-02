@@ -8,9 +8,9 @@ import { OutlineEffect } from 'three/addons/effects/OutlineEffect.js?v=20260909-
 import { EXPRESSION_PRESETS, MOTION_BUCKETS, MOTION_FADE, buildPlaylist, classifyClipTracks, findPresetMorph, indexMotionFiles, normalizeActionId, parsePerformanceCommand, playlistClipIds, sortPlaylistByCatalog, canKeepBodyForFace, fadeDurationForClip, fadeDurationForTransition, findIdlePlaylistIndex, findFacePlaylistIndex, findGesturePlaylistIndex, shouldLoopMotion } from './core.js?v=20260929-glb-direct-track-classifier-v2';
 import { LIBRARY_R2_KEY, LIBRARY_SOURCE_KEY, idolAssetUrls, libraryFileUrl, motionAssetUrls, motionAvailability, resolveLibrarySource, selectIdolModel, sourceLabel } from './library-client.js?v=20261002-idol-glb';
 import { GAKUMAS_TEXTURE_KINDS, GAKUMAS_ACTIVE_TEXTURE_KINDS, selectMaterialTextures, textureDescriptor, textureUsesColorSpace, setTextureColorSpace } from './gakumas-materials.js?v=20260929-glb-highlight-semantic-v2';
-import { injectActorShader } from './gakumas-shader.js?v=20261003-hair-cover-fix-v10';
-import { actorStencilState, classifyActorPass, placeCharacterShadowLight, shouldCastCharacterShadow, shouldReceiveCharacterShadow } from './gakumas-passes.js?v=20261003-hair-cover-fix-v10';
-import { HairCoverStage } from './gakumas-hair-cover.js?v=20261003-hair-cover-fix-v10';
+import { injectActorShader } from './gakumas-shader.js?v=20261003-hair-cover-fix-v11';
+import { actorStencilState, classifyActorPass, placeCharacterShadowLight, shouldCastCharacterShadow, shouldReceiveCharacterShadow } from './gakumas-passes.js?v=20261003-hair-cover-fix-v11';
+import { HairCoverStage } from './gakumas-hair-cover.js?v=20261003-hair-cover-fix-v11';
 import { GakumasSceneStage } from './gakumas-scene.js?v=20261002-scene-lit-v7';
 import { GakumasPostPass } from './gakumas-post.js?v=20261002-scene-lit-v9';
 import { GAKUMAS_LOOK, GakumasLookPass, applyGakumasLookUniforms, createGakumasLookUniformValues } from './gakumas-look.js?v=20261002-rim-v1';
@@ -1091,6 +1091,10 @@ function applyMaterialStyle() {
                 material.depthWrite = false;
                 material.renderOrder = 18;
                 material.opacity = 0.55;
+                // The GLB overlay is rendered once after HairCover. Keeping
+                // it in the ordinary render list would add the same layer a
+                // second time because HairCoverStage also redraws m_hir+.
+                material.userData.gakumasPostHighlightOnly = true;
             }
             material.depthTest = true;
             material.alphaTest = actorPass === 'eye' || actorPass === 'eyeHighlight' ? 0 : 0.33;
@@ -1119,7 +1123,7 @@ function applyMaterialStyle() {
             material.onBeforeCompile = state.materialMode === 'gakumas' ? shader => injectActorShader(shader, uniforms) : () => {};
             material.customProgramCacheKey = () => `gakumas-v2:${state.materialMode}:${role}:rim-v1`;
             material.needsUpdate = true;
-            material.visible = true;
+            material.visible = material.userData.gakumasPostHighlightOnly !== true;
             if (state.materialMode === 'gakumas') {
                 hairCoverStage.add(child, material, materialIndex, uniforms, hairTextureName);
                 if (actorPass === 'hairHighlight') hairCoverStage.addHighlight(child, material, materialIndex);
@@ -2822,21 +2826,3 @@ function disposeObject(object) {
         });
     });
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
