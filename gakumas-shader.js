@@ -143,7 +143,6 @@ gkLighting = min(gkLighting, gkShadowForLighting);
 gkLighting = max(gkLighting, gkShadowFloor);
 float gkSpecMask = min(gkDef.a, gkShadowForLighting);
 #ifdef GK_HAIR
-#ifndef GK_HAIR_HIGHLIGHT_PASS
 #ifdef GK_HAIR_COVER_PASS
 // HairCover exists to apply the view-dependent alpha. Do not run the regular
 // hair highlight/specular branch in this redraw; m_hir+ owns that layer.
@@ -154,7 +153,6 @@ float gkHairHighlight = smoothstep(0.35, 0.65, pow(clamp(gkMatNormal.z, 0.0, 1.0
 gkHairHighlight *= gkSpecMask * gkHasHighlight * (1.0 - gkHairProp);
 gkBase = mix(gkBase, texture2D(gkHighlightMap, gkUv).rgb, gkHairHighlight);
 gkSpecMask *= gkHairProp;
-#endif
 #endif
 #endif
 vec4 gkRamp = texture2D(gkRampMap, vec2(gkLighting, 0.5));

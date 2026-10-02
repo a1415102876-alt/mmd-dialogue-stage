@@ -1,6 +1,6 @@
 import * as THREE from './vendor/three/build/three.module.js';
-import { isHairCoverSourceMaterial } from './gakumas-passes.js?v=20261003-hair-cover-fix-v11';
-import { injectActorShader } from './gakumas-shader.js?v=20261003-hair-cover-fix-v11';
+import { isHairCoverSourceMaterial } from './gakumas-passes.js?v=20261003-hair-cover-fix-v12';
+import { injectActorShader } from './gakumas-shader.js?v=20261003-hair-cover-fix-v12';
 
 export const HAIR_FADE_PARAMETERS = Object.freeze([0.75, 2, 0.4, 4]);
 
@@ -122,17 +122,30 @@ export class HairCoverStage {
             mesh.normalMatrix.getNormalMatrix(mesh.modelViewMatrix);
             // This callback runs after the regular render list, so the
             // m_hir+ overlay is at the same depth as the already drawn hair.
-            // Reuse the source shader, but make this one redraw an overlay:
-            // depth must not reject it. Keep the source stencil state intact:
-            // the eye layer deliberately uses a higher stencil value, so a
-            // synthetic Equal(64) test would make the highlight disappear
-            // exactly when it passes over a semi-transparent eye.
+            // Redraw it as a true overlay: depth and stencil must not reject
+            // it when the eye card has already written its higher layer.
             const state = {
                 depthTest: source.depthTest,
                 depthWrite: source.depthWrite,
+                stencilWrite: source.stencilWrite,
+                stencilFunc: source.stencilFunc,
+                stencilRef: source.stencilRef,
+                stencilFuncMask: source.stencilFuncMask,
+                stencilWriteMask: source.stencilWriteMask,
+                stencilFail: source.stencilFail,
+                stencilZFail: source.stencilZFail,
+                stencilZPass: source.stencilZPass,
             };
             source.depthTest = false;
             source.depthWrite = false;
+            source.stencilWrite = false;
+            source.stencilFunc = THREE.AlwaysStencilFunc;
+            source.stencilRef = 0;
+            source.stencilFuncMask = 0xff;
+            source.stencilWriteMask = 0;
+            source.stencilFail = THREE.KeepStencilOp;
+            source.stencilZFail = THREE.KeepStencilOp;
+            source.stencilZPass = THREE.KeepStencilOp;
             try {
                 for (const group of groups) {
                     renderer.renderBufferDirect(camera, scene, mesh.geometry, source, mesh, group);
@@ -174,6 +187,9 @@ export class HairCoverStage {
 
     dispose() {
         this.entries.forEach(entry => entry.material.dispose());
+        this.highlightEntries.forEach(entry => {
+            if (entry.source.userData?.gakumasOwnedHighlightOverlay) entry.source.dispose();
+        });
         this.entries = [];
         this.highlightEntries = [];
         this.lastDraws = [];

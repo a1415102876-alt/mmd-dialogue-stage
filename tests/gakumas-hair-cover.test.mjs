@@ -47,8 +47,11 @@ test('cover shader only fades m_hir and leaves the m_hir+ highlight branch to it
     injectActorShader(shader, {});
     assert.doesNotMatch(shader.vertexShader, /gl_Position\.z -= 0\.0015 \* gl_Position\.w;/);
     assert.match(shader.fragmentShader, /#ifdef GK_HAIR_COVER_PASS[\s\S]*gkSpecMask = 0\.0;[\s\S]*#else[\s\S]*gkHairHighlight/);
-    assert.match(shader.fragmentShader, /gkSpecMask \*= gkHairProp;\s*#endif\s*#endif\s*#endif\s*vec4 gkRamp/);
-    assert.match(shader.fragmentShader, /#ifdef GK_HAIR\s*#ifndef GK_HAIR_HIGHLIGHT_PASS[\s\S]*#endif\s*#endif/);
+    assert.match(shader.fragmentShader, /gkSpecMask \*= gkHairProp;\s*#endif\s*#endif\s*vec4 gkRamp/);
+    // m_hir+ keeps the regular authored highlight branch. GLB gets an
+    // unlit post overlay in app.js; skipping this branch here makes its
+    // sphere layer disappear with the camera angle.
+    assert.doesNotMatch(shader.fragmentShader, /#ifndef GK_HAIR_HIGHLIGHT_PASS/);
 });
 
 test('only hair has a second pass; base arrays, geometry, maps and scene stay intact', () => {
@@ -106,6 +109,29 @@ test('redraws m_hir+ after HairCover so the highlight is not buried by the fade 
     assert.equal(materials[2].depthTest, true);
     assert.equal(materials[2].depthWrite, true);
     assert.equal(materials[2].stencilWrite, false);
+});
+
+test('highlight redraw ignores the eye stencil and restores the source state', () => {
+    const { stage, scene, camera, mesh, materials } = fixture();
+    const source = materials[2];
+    source.stencilWrite = true;
+    source.stencilFunc = THREE.EqualStencilFunc;
+    source.stencilRef = 68;
+    source.stencilFuncMask = 0xff;
+    source.stencilWriteMask = 0xff;
+    stage.addHighlight(mesh, source, 2);
+    const renderer = {
+        render: () => scene.onAfterRender(renderer, scene, camera),
+        renderBufferDirect: () => {
+            assert.equal(source.stencilWrite, false);
+            assert.equal(source.stencilFunc, THREE.AlwaysStencilFunc);
+            assert.equal(source.stencilRef, 0);
+        },
+    };
+    stage.renderFrame(renderer, { enabled: false, renderOutline() {} }, scene, camera, false);
+    assert.equal(source.stencilWrite, true);
+    assert.equal(source.stencilFunc, THREE.EqualStencilFunc);
+    assert.equal(source.stencilRef, 68);
 });
 
 test('GLB post-only m_hir+ stays visible when HairCover is disabled without a duplicate base draw', () => {

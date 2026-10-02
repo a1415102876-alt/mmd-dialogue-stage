@@ -8,9 +8,9 @@ import { OutlineEffect } from 'three/addons/effects/OutlineEffect.js?v=20260909-
 import { EXPRESSION_PRESETS, MOTION_BUCKETS, MOTION_FADE, buildPlaylist, classifyClipTracks, findPresetMorph, indexMotionFiles, normalizeActionId, parsePerformanceCommand, playlistClipIds, sortPlaylistByCatalog, canKeepBodyForFace, fadeDurationForClip, fadeDurationForTransition, findIdlePlaylistIndex, findFacePlaylistIndex, findGesturePlaylistIndex, shouldLoopMotion } from './core.js?v=20260929-glb-direct-track-classifier-v2';
 import { LIBRARY_R2_KEY, LIBRARY_SOURCE_KEY, idolAssetUrls, libraryFileUrl, motionAssetUrls, motionAvailability, resolveLibrarySource, selectIdolModel, sourceLabel } from './library-client.js?v=20261002-idol-glb';
 import { GAKUMAS_TEXTURE_KINDS, GAKUMAS_ACTIVE_TEXTURE_KINDS, selectMaterialTextures, textureDescriptor, textureUsesColorSpace, setTextureColorSpace } from './gakumas-materials.js?v=20260929-glb-highlight-semantic-v2';
-import { injectActorShader } from './gakumas-shader.js?v=20261003-hair-cover-fix-v11';
-import { actorStencilState, classifyActorPass, placeCharacterShadowLight, shouldCastCharacterShadow, shouldReceiveCharacterShadow } from './gakumas-passes.js?v=20261003-hair-cover-fix-v11';
-import { HairCoverStage } from './gakumas-hair-cover.js?v=20261003-hair-cover-fix-v11';
+import { injectActorShader } from './gakumas-shader.js?v=20261003-hair-cover-fix-v12';
+import { actorStencilState, classifyActorPass, placeCharacterShadowLight, shouldCastCharacterShadow, shouldReceiveCharacterShadow } from './gakumas-passes.js?v=20261003-hair-cover-fix-v12';
+import { HairCoverStage } from './gakumas-hair-cover.js?v=20261003-hair-cover-fix-v12';
 import { GakumasSceneStage } from './gakumas-scene.js?v=20261002-scene-lit-v7';
 import { GakumasPostPass } from './gakumas-post.js?v=20261002-scene-lit-v9';
 import { GAKUMAS_LOOK, GakumasLookPass, applyGakumasLookUniforms, createGakumasLookUniformValues } from './gakumas-look.js?v=20261002-rim-v1';
@@ -1126,7 +1126,19 @@ function applyMaterialStyle() {
             material.visible = material.userData.gakumasPostHighlightOnly !== true;
             if (state.materialMode === 'gakumas') {
                 hairCoverStage.add(child, material, materialIndex, uniforms, hairTextureName);
-                if (actorPass === 'hairHighlight') hairCoverStage.addHighlight(child, material, materialIndex);
+                if (actorPass === 'hairHighlight') {
+                    // UnityGLTF imports the GLB sphere layer as a
+                    // MeshStandardMaterial. Its map is an authored alpha
+                    // overlay, so running it through the actor light/shadow
+                    // shader makes the layer vanish at the same view angles
+                    // as HairCover. Draw a small unlit clone after the scene;
+                    // it keeps the GLB alpha and blend semantics while
+                    // remaining independent of eye depth and camera light.
+                    const highlightSource = state.modelFormat === 'glb'
+                        ? createGlbHairHighlightOverlay(material)
+                        : material;
+                    hairCoverStage.addHighlight(child, highlightSource, materialIndex);
+                }
             }
         });
         if (state.materialMode === 'gakumas') {
@@ -1136,6 +1148,34 @@ function applyMaterialStyle() {
     });
     updateGakumasUniforms();
     renderGakumasInspector();
+}
+
+function createGlbHairHighlightOverlay(source) {
+    const overlay = new THREE.MeshBasicMaterial({
+        name: `${source.name || 'm_hir+'}:GLBOverlay`,
+        map: source.map || null,
+        color: source.color?.clone?.() || new THREE.Color(0xffffff),
+        transparent: true,
+        opacity: source.opacity ?? 0.55,
+        blending: THREE.AdditiveBlending,
+        depthTest: false,
+        depthWrite: false,
+        alphaTest: 0.01,
+        side: THREE.FrontSide,
+        toneMapped: false,
+    });
+    overlay.userData = {
+        ...source.userData,
+        gakumasPostHighlightOnly: true,
+        gakumasOwnedHighlightOverlay: true,
+        gakumasActorPass: 'hairHighlight',
+    };
+    overlay.stencilWrite = false;
+    overlay.stencilFunc = THREE.AlwaysStencilFunc;
+    overlay.stencilRef = 0;
+    overlay.stencilFuncMask = 0xff;
+    overlay.stencilWriteMask = 0;
+    return overlay;
 }
 
 function applyStencilState(material, state) {
