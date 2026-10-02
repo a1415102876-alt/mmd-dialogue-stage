@@ -15388,7 +15388,11 @@
     "unsupportedCaptureOnlyJobs": [
       "_quartzDriverFrillJobBones",
       "_quartzDriverWaistJobBones"
-    ]
+    ],
+    "unsupportedCaptureOnlyReasons": {
+      "_quartzDriverFrillJobBones": "capture-array-empty",
+      "_quartzDriverWaistJobBones": "capture-array-empty"
+    }
   },
   "skirtStaticParticleRadius": "tail-particle",
   "skirtStaticParticleRadiusScale": 0.4,

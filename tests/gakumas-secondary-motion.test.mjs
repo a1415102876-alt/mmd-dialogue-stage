@@ -235,7 +235,7 @@ test('latest candidate profiles keep all three humanoid Quartz classes and nativ
         }
         assert.equal(profile.quartzStageAdaptation.status, 'stage-adaptation-native-io-unverified');
         const expectedCaptureOnlyGaps = profile.quartzStageAdaptation.captureJobs
-            .filter(job => /Frill|Waist/.test(job.name || '') && job.itemsCount === 0)
+            .filter(job => /Frill|Waist/.test(job.name || ''))
             .map(job => job.name);
         assert.deepEqual(profile.quartzStageAdaptation.unsupportedCaptureOnlyJobs, expectedCaptureOnlyGaps);
     }

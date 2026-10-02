@@ -21166,7 +21166,12 @@
       }
     ],
     "unsupportedCaptureOnlyJobs": [
+      "_quartzDriverFrillJobBones",
       "_quartzDriverWaistJobBones"
-    ]
+    ],
+    "unsupportedCaptureOnlyReasons": {
+      "_quartzDriverFrillJobBones": "capture-fields-present-no-authored-settings",
+      "_quartzDriverWaistJobBones": "capture-array-empty"
+    }
   }
 }
