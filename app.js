@@ -1,18 +1,22 @@
 import * as THREE from 'three';
+import { bindGlbMorphTracks } from './glb-morph-tracks.js?v=20260929-face-primitives-v1';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { MMDLoader } from 'three/addons/loaders/MMDLoader.js?v=20260909-outline1';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { MMDAnimationHelper } from 'three/addons/animation/MMDAnimationHelper.js';
 import { OutlineEffect } from 'three/addons/effects/OutlineEffect.js?v=20260909-outline1';
-import { EXPRESSION_PRESETS, MOTION_BUCKETS, MOTION_FADE, buildPlaylist, classifyClipTracks, findPresetMorph, indexMotionFiles, normalizeActionId, parsePerformanceCommand, playlistClipIds, sortPlaylistByCatalog, canKeepBodyForFace, fadeDurationForClip, fadeDurationForTransition, findIdlePlaylistIndex, findFacePlaylistIndex, findGesturePlaylistIndex, shouldLoopMotion } from './core.js?v=20260914-idol-types';
-import { LIBRARY_R2_KEY, LIBRARY_SOURCE_KEY, idolAssetUrls, motionAssetUrls, motionAvailability, resolveLibrarySource, sourceLabel } from './library-client.js?v=20260913-nested-motion';
-import { GAKUMAS_TEXTURE_KINDS, GAKUMAS_ACTIVE_TEXTURE_KINDS, selectMaterialTextures, textureDescriptor, textureUsesColorSpace, setTextureColorSpace } from './gakumas-materials.js?v=20260925-rendering-v3';
-import { injectActorShader } from './gakumas-shader.js?v=20260925-rendering-v3';
-import { actorStencilState, classifyActorPass, shouldCastCharacterShadow, shouldReceiveCharacterShadow, shouldReceiveHairShadow, shouldWriteHairShadow } from './gakumas-passes.js?v=20260925-rendering-v3';
-import { HairCoverStage } from './gakumas-hair-cover.js?v=20260925-rendering-v3';
-import { GAKUMAS_LOOK, GakumasLookPass, applyGakumasLookUniforms, createGakumasLookUniformValues } from './gakumas-look.js?v=20260925-rendering-v3';
-import { HAIR_SHADOW_BIAS, HAIR_SHADOW_FOCUS, HairShadowStage } from './gakumas-hair-shadow.js?v=20260925-rendering-v3';
-import { hasGakumasVertexColorAttribute } from './gakumas-outline.js?v=20260909-outline1';
-import { SecondaryMotion } from './gakumas-secondary-motion.js?v=20260926-hski-skirt-hem-v17';
+import { EXPRESSION_PRESETS, MOTION_BUCKETS, MOTION_FADE, buildPlaylist, classifyClipTracks, findPresetMorph, indexMotionFiles, normalizeActionId, parsePerformanceCommand, playlistClipIds, sortPlaylistByCatalog, canKeepBodyForFace, fadeDurationForClip, fadeDurationForTransition, findIdlePlaylistIndex, findFacePlaylistIndex, findGesturePlaylistIndex, shouldLoopMotion } from './core.js?v=20260929-glb-direct-track-classifier-v2';
+import { LIBRARY_R2_KEY, LIBRARY_SOURCE_KEY, idolAssetUrls, libraryFileUrl, motionAssetUrls, motionAvailability, resolveLibrarySource, selectIdolModel, sourceLabel } from './library-client.js?v=20261002-idol-glb';
+import { GAKUMAS_TEXTURE_KINDS, GAKUMAS_ACTIVE_TEXTURE_KINDS, selectMaterialTextures, textureDescriptor, textureUsesColorSpace, setTextureColorSpace } from './gakumas-materials.js?v=20260929-glb-highlight-semantic-v2';
+import { injectActorShader } from './gakumas-shader.js?v=20261002-rim-v1';
+import { actorStencilState, classifyActorPass, placeCharacterShadowLight, shouldCastCharacterShadow, shouldReceiveCharacterShadow } from './gakumas-passes.js?v=20261002-hair-cover-base';
+import { HairCoverStage } from './gakumas-hair-cover.js?v=20261002-hair-cover-base';
+import { GakumasSceneStage } from './gakumas-scene.js?v=20261002-scene-lit-v7';
+import { GakumasPostPass } from './gakumas-post.js?v=20261002-scene-lit-v9';
+import { GAKUMAS_LOOK, GakumasLookPass, applyGakumasLookUniforms, createGakumasLookUniformValues } from './gakumas-look.js?v=20261002-rim-v1';
+import { hasGakumasVertexColorAttribute } from './gakumas-outline.js?v=20260929-packed-color';
+import { SecondaryMotion, applyHairRestRotationRebase, rebaseHairAnimationTracks, refreshRestInverseBinds } from './gakumas-secondary-motion.js?v=20261002-secondary-motion-v42-lilia-skirt-child-chain';
+import { buildStageBoneTraceFrame, createStageBoneTrace } from './stage-bone-trace.js?v=20260927-stage-bone-trace-v1';
 import { identifyLibraryIdol, supportsSecondaryMotion, motionMatchesIdol } from './idol-library.js?v=20260912-all-idols';
 import { bindVisemeMorphs, estimateVisemeTrack, faceCueLabel, gestureCueLabel, isFacialNoiseMorph, parseAiCue, restoreVisemeInfluences, shouldClearFacialNoise, snapshotVisemeInfluences, visemeWeightAt, allVisemeBindingTargets, visemeBindingTargets } from './dialogue-intent.js?v=20260913-numbered';
 
@@ -34,6 +38,11 @@ const state = {
     restPose: null,
     objectUrls: [],
     modelFile: null,
+    modelFormat: '',
+    gltf: null,
+    animationTarget: null,
+    animationMixer: null,
+    skeletonBones: [],
     textureFiles: [],
     activeAction: '',
     activeExpression: 'neutral',
@@ -55,13 +64,16 @@ const state = {
     gakumasHeadRight: new THREE.Vector3(1, 0, 0),
     gakumasLightDirection: new THREE.Vector3(),
     gakumasDebugView: 0,
-    gakumasPasses: { characterShadow: true, hairCover: true, hairCoverMinimum: 0.35, hairShadow: true, hairShadowOffset: 32 },
+    gakumasPasses: { characterShadow: true, hairCover: true, hairCoverMinimum: 0.35 },
     outline: { color: '#000000', alpha: 0.82, thickness: 0.004 },
 };
+
+// UnityGLTF exports this actor in Unity world units while the recovered
+// secondary-motion table and the PMX stage use the authored stage unit. The
+// HSKI Unity export is approximately 125 times smaller than that stage.
+const GLB_STAGE_SCALE = 12.5;
 const clock = new THREE.Clock();
 const hairCoverStage = new HairCoverStage();
-const hairShadowStage = new HairShadowStage();
-const hairShadowLightVS = new THREE.Vector3();
 const secondaryMotion = new SecondaryMotion();
 const colliderDebug = {
     enabled: false,
@@ -75,15 +87,215 @@ const colliderDebugUp = new THREE.Vector3(0, 1, 0);
 const colliderDebugDir = new THREE.Vector3();
 const secondaryMotionTables = new Map();
 const clothingTraceStatus = () => { const node=$('clothingTraceStatus'); if (node) { const s=secondaryMotion.getClothingTraceStatus(); node.textContent=s.active ? `衣物诊断：${s.ticks}/300 帧${s.complete ? '（已完成）' : ''}` : '未记录'; } };
+let stageBoneTrace = null;
+const stageBoneTraceStatus = () => { const node=$('stageBoneTraceStatus'); if (node) node.textContent = stageBoneTrace ? `骨骼对齐：${stageBoneTrace.frame_count}/300 帧（每帧含 input/output）${stageBoneTrace.frame_count >= 300 ? '（已完成）' : ''}` : '未记录'; };
+const motionDebug = { recording: false, frames: [], maxFrames: 180, startedAt: 0, report: null };
+const motionDebugOutput = value => { const node = $('#motionDebugOutput'); if (node) node.textContent = typeof value === 'string' ? value : JSON.stringify(value, null, 2); };
+function motionDebugTrackInfo(clip) {
+    const tracks = clip?.tracks || [];
+    const names = tracks.map(track => String(track.name || ''));
+    const bones = names.map(name => name.match(/^\.bones\[([^\]]+)\]/)?.[1] || name.match(/^([^\.\[]+)\.(?:position|quaternion)$/)?.[1]).filter(Boolean);
+    const morphs = names.filter(name => /(?:^|\.)morphTargetInfluences\[/.test(name));
+    const targetBones = new Set((state.animationTarget?.skeleton?.bones || state.model?.skeleton?.bones || []).map(bone => bone.name));
+    const matched = [...new Set(bones.filter(name => targetBones.has(name)))];
+    return {
+        name: clip?.name || '',
+        duration: Number(clip?.duration || 0),
+        tracks: tracks.length,
+        boneTracks: bones.length,
+        morphTracks: morphs.length,
+        matchedBones: matched.length,
+        unmatchedBones: [...new Set(bones.filter(name => !targetBones.has(name)))].slice(0, 80),
+        sampleTracks: names.slice(0, 24),
+    };
+}
+function buildMotionDebugReport() {
+    const target = state.animationTarget || state.model;
+    const actions = [...state.actions.values()].map(entry => ({ id: entry.id, label: entry.label, kind: entry.kind, clip: motionDebugTrackInfo(entry.clip) }));
+    const mixer = currentMixer();
+    return {
+        schemaVersion: 1,
+        capturedAt: new Date().toISOString(),
+        model: { name: state.model?.name || null, format: state.modelFormat, scale: state.model?.scale?.toArray?.() || null },
+        target: { name: target?.name || null, isSkinnedMesh: !!target?.isSkinnedMesh, geometry: !!target?.geometry, bones: target?.skeleton?.bones?.length || 0, morphs: Object.keys(target?.morphTargetDictionary || {}).length },
+        active: { id: state.activeAction, playlist: state.activeClipIds, playing: state.playing, mixerTime: mixer?.time ?? null, liveActions: state.liveActions.map(action => ({ clip: action.getClip()?.name || '', time: action.time, weight: action.getEffectiveWeight(), enabled: action.enabled })) },
+        actions,
+        secondary: { enabled: secondaryMotion.enabled, bindings: secondaryMotion.bindings.length, springs: secondaryMotion.springs.length, colliders: secondaryMotion.colliders.length, missing: secondaryMotion.missing.slice(0, 100), runtime: { ...secondaryMotion.runtime } },
+        frames: motionDebug.frames,
+    };
+}
+function captureMotionDebugFrame(phase) {
+    if (!motionDebug.recording || !state.model) return;
+    const names = ['Hips', 'Pelvis', 'Head', 'LeftArm', 'RightArm', 'LeftFrontSkirt_A', 'RightFrontSkirt_A'];
+    const bones = state.model?.skeleton?.bones || state.animationTarget?.skeleton?.bones || [];
+    const byName = new Map(bones.map(bone => [bone.name, bone]));
+    const values = {};
+    names.forEach(name => { const bone = byName.get(name); if (bone) values[name] = { position: bone.position.toArray(), quaternion: bone.quaternion.toArray() }; });
+    motionDebug.frames.push({ frame: motionDebug.frames.length, phase, mixerTime: currentMixer()?.time ?? null, action: state.activeAction, values });
+    if (motionDebug.frames.length >= motionDebug.maxFrames) {
+        motionDebug.recording = false;
+        motionDebug.report = buildMotionDebugReport();
+        motionDebugOutput(motionDebug.report);
+        showToast('动作诊断记录完成，可导出 JSON');
+    }
+}
+function startMotionDebug() {
+    if (!state.model) return showToast('请先载入 GLB 或 PMX 模型', true);
+    motionDebug.recording = true;
+    motionDebug.frames = [];
+    motionDebug.startedAt = performance.now();
+    motionDebug.report = buildMotionDebugReport();
+    motionDebugOutput({ ...motionDebug.report, status: 'recording', frames: [] });
+    showToast('已开始记录动作诊断，请立即播放动作并等待 180 帧');
+}
+function exportMotionDebug() {
+    const report = motionDebug.report || buildMotionDebugReport();
+    const blob = new Blob([JSON.stringify(report, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a'); link.href = url; link.download = `motion-debug-${state.modelFormat || 'unknown'}-${Date.now()}.json`; link.click();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+function exportGlbMotionPack() {
+    if (state.modelFormat !== 'glb' || !state.model) {
+        showToast('请先载入 GLB 模型', true);
+        return;
+    }
+    const actions = [...state.actions.values()].map(entry => ({
+        id: entry.id,
+        label: entry.label,
+        kind: entry.kind,
+        clip: entry.clip.toJSON(),
+    }));
+    if (!actions.length) {
+        showToast('当前还没有已转换的 GLB 动作', true);
+        return;
+    }
+    const payload = {
+        format: 'mmd-stage-glb-motion-pack',
+        version: 1,
+        model: state.modelFile?.name || state.model.name || 'GLB',
+        bones: (state.model.skeleton?.bones || []).map(bone => bone.name),
+        actions,
+    };
+    const blob = new Blob([JSON.stringify(payload)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `${String(payload.model).replace(/\.[^.]+$/, '')}-glb-motions.json`;
+    link.click();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+    showToast(`已导出 ${actions.length} 个 GLB 动作`);
+}
+
+async function importGlbMotionPack(file) {
+    if (state.modelFormat !== 'glb' || !state.model) {
+        showToast('请先载入对应的 GLB 模型', true);
+        return;
+    }
+    try {
+        const payload = JSON.parse(await file.text());
+        if (payload?.format !== 'mmd-stage-glb-motion-pack' || !Array.isArray(payload.actions)) {
+            throw new Error('不是有效的 GLB 动作包');
+        }
+        const boneNames = new Set((state.model.skeleton?.bones || []).map(bone => bone.name));
+        const imported = [];
+        for (const [index, entry] of payload.actions.entries()) {
+            if (!entry?.clip) continue;
+            const clip = THREE.AnimationClip.parse(entry.clip);
+            const missing = clip.tracks
+                .map(track => String(track.name).match(/^([^\.]+)\.(?:position|quaternion)$/)?.[1])
+                .filter(name => name && !boneNames.has(name));
+            if (missing.length) continue;
+            const id = String(entry.id || entry.label || `glb-${index}`);
+            state.actions.set(id, { id, label: entry.label || id, clip, kind: entry.kind || 'body' });
+            imported.push(id);
+        }
+        rebuildPlaylist();
+        renderMotionLibrary();
+        if (!imported.length) throw new Error('动作包中的骨骼与当前 GLB 不匹配');
+        showToast(`已导入 ${imported.length} 个 GLB 动作`);
+    } catch (error) {
+        console.error('[MMD Stage] GLB motion pack import failed', error);
+        showToast(`GLB 动作包导入失败：${error.message || '文件格式错误'}`, true);
+    }
+}
+function startStageBoneTrace() {
+    const isHski = state.library.activeIdol === 'hski';
+    stageBoneTrace = createStageBoneTrace({
+        idol: state.library.activeIdol || null,
+        event: isHski ? '肯定' : null,
+        motion: isHski ? '型A-001进入' : null,
+        capture_reference: isHski ? 'capture-2026-9-27-7-45-7-35392-10545781' : null,
+        capture_frame_count: isHski ? 108 : null,
+        model: state.model?.name || null,
+        source: 'stage-bone-alignment',
+        phase_semantics: {
+            input: 'after_animation_before_secondary_motion',
+            output: 'after_secondary_motion_and_matrix_refresh',
+        },
+    });
+    stageBoneTraceStatus();
+}
+function captureStageBoneTraceFrame(phase = 'output') {
+    if (!stageBoneTrace || stageBoneTrace.frame_count >= 300 || !state.model) return;
+    const mixer = currentMixer();
+    const action = state.liveActions.find(item => item?.isRunning?.()) || state.liveActions[0];
+    const frameId = stageBoneTrace.frame_count + 1;
+    const frame = buildStageBoneTraceFrame(state.skeletonBones || state.model.skeleton?.bones || [], {
+        frameId,
+        phase,
+        timestampMs: typeof performance !== 'undefined' && Number.isFinite(performance.now()) ? performance.now() : Date.now(),
+        action: state.activeAction || null,
+        actionTime: action && Number.isFinite(Number(action.time)) ? Number(action.time) : mixer?.time,
+    });
+    stageBoneTrace.frames.push(frame);
+    if (phase === 'output') stageBoneTrace.frame_count = frameId;
+    stageBoneTraceStatus();
+}
+function exportStageBoneTrace() {
+    if (!stageBoneTrace || !stageBoneTrace.frames.length) { showToast('还没有骨骼对齐记录', true); return; }
+    const blob = new Blob([JSON.stringify(stageBoneTrace, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `stage-bone-trace-${state.library.activeIdol || 'unknown'}-${new Date().toISOString().replace(/[:.]/g, '-')}.json`;
+    link.click();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
 let secondaryMotionBindGeneration = 0;
-const secondaryMotionReady = idolId => {
-    const key = idolId || 'fallback';
+let modelLoadGeneration = 0;
+let gakumasTextureLoadGeneration = 0;
+function modelVariantKey(name) {
+    return String(name || '')
+        .split(/[\\/]/).pop()
+        .replace(/\.[^.]+$/, '')
+        .replace(/-glb-hair-layer$/i, '')
+        .toLowerCase();
+}
+
+function modelVariantId(modelKey) {
+    return String(modelKey || '').split('-')[0] || '';
+}
+
+const secondaryMotionReady = (profileKey, fallbackId = '') => {
+    const key = profileKey || fallbackId || 'fallback';
     if (secondaryMotionTables.has(key)) return secondaryMotionTables.get(key);
-    const request = fetch(`./secondary-motion-profiles/${encodeURIComponent(idolId || 'fktn')}.json?v=20260926-hski-skirt-hem-v17`)
-        .then(response => response.ok ? response.json() : fetch(`./gakumas-secondary-motion.json?v=20260926-hski-skirt-hem-v17`).then(fallback => {
-            if (!fallback.ok) throw new Error(fallback.statusText);
-            return fallback.json();
-        }))
+        const request = fetch(`./secondary-motion-manifest.json?v=20261001-glb-variant-profiles-v6-ttmr-native-chain-remap`)
+        .then(response => response.ok ? response.json() : null)
+        .catch(() => null)
+        .then(manifest => {
+            const entry = manifest?.models?.find(item =>
+                item?.modelKey === profileKey || item?.aliases?.includes(profileKey));
+            const profileUrl = entry?.profile
+                ? `./${String(entry.profile).replace(/^\.\//, '')}`
+                : `./secondary-motion-profiles/${encodeURIComponent(fallbackId || profileKey || 'fktn')}.json`;
+            return fetch(`${profileUrl}?v=20261002-secondary-motion-v25-kcna-native-skirt`)
+                .then(response => response.ok ? response.json() : fetch(`./gakumas-secondary-motion.json?v=20261002-secondary-motion-v25-kcna-native-skirt`).then(fallback => {
+                    if (!fallback.ok) throw new Error(fallback.statusText);
+                    return fallback.json();
+                }));
+        })
         .then(table => table)
         .catch(error => { console.error('[MMD Stage] secondary motion table failed', error); return null; });
     secondaryMotionTables.set(key, request);
@@ -108,6 +320,15 @@ const outlineEffect = new OutlineEffect(renderer, {
     defaultKeepAlive: true,
 });
 const lookPass = new GakumasLookPass(renderer);
+const postPass = new GakumasPostPass(renderer);
+const POST_MODULES = [
+    ['postBloom', 'bloom'],
+    ['postDiffusion', 'diffusion'],
+    ['postParaffin', 'paraffin'],
+    ['postChroma', 'chromatic'],
+    ['postVignette', 'vignette'],
+    ['postTaa', 'taa'],
+];
 
 const scene = new THREE.Scene();
 scene.add(colliderDebug.group);
@@ -149,19 +370,19 @@ const characterShadowLight = new THREE.DirectionalLight(0xffffff, 0.0);
 characterShadowLight.position.set(5, 18, 8);
 characterShadowLight.target.position.set(0, 8, 0);
 characterShadowLight.castShadow = true;
-characterShadowLight.shadow.mapSize.set(2048, 2048);
+characterShadowLight.shadow.mapSize.set(4096, 4096);
 characterShadowLight.shadow.camera.left = -10;
 characterShadowLight.shadow.camera.right = 10;
-characterShadowLight.shadow.camera.top = 18;
-characterShadowLight.shadow.camera.bottom = -2;
-characterShadowLight.shadow.camera.near = 0.5;
-characterShadowLight.shadow.camera.far = 50;
-characterShadowLight.shadow.bias = -0.0002;
-characterShadowLight.shadow.normalBias = 0.045;
+characterShadowLight.shadow.camera.top = 10;
+characterShadowLight.shadow.camera.bottom = -10;
+characterShadowLight.shadow.camera.near = 0.05;
+characterShadowLight.shadow.camera.far = 30;
+characterShadowLight.shadow.bias = 0;
+characterShadowLight.shadow.normalBias = 0;
+characterShadowLight.shadow.radius = 0;
 characterShadowLight.userData.gakumasCharacterShadow = true;
 scene.add(characterShadowLight.target, characterShadowLight);
 const characterShadowFit = { center: new THREE.Vector3(0, 8, 0), radius: 10 };
-const characterShadowTravel = new THREE.Vector3();
 
 const floor = new THREE.Mesh(
     new THREE.CircleGeometry(18, 96),
@@ -175,6 +396,9 @@ grid.position.y = 0.012;
 grid.material.transparent = true;
 grid.material.opacity = 0.34;
 scene.add(grid);
+const sceneStage = new GakumasSceneStage({ scene, scale: GLB_STAGE_SCALE });
+const DEFAULT_CAMERA_FOV = camera.fov;
+let gridWanted = true;
 
 resetCamera();
 buildExpressionButtons();
@@ -195,6 +419,14 @@ function bindUi() {
     $('#modelFileInput').addEventListener('change', event => loadModelFiles([...event.target.files]));
     $('#textureFolderInput').addEventListener('change', event => addTextureFiles([...event.target.files]));
     $('#motionInput').addEventListener('change', event => importMotions([...event.target.files]));
+    $('#exportGlbMotionPackBtn')?.addEventListener('click', exportGlbMotionPack);
+    $('#importGlbMotionPackBtn')?.addEventListener('click', () => $('#glbMotionPackInput')?.click());
+    $('#glbMotionPackInput')?.addEventListener('change', event => {
+        [...event.target.files].forEach(importGlbMotionPack);
+        event.target.value = '';
+    });
+    $('#motionDebugStartBtn')?.addEventListener('click', startMotionDebug);
+    $('#motionDebugExportBtn')?.addEventListener('click', exportMotionDebug);
     $('#motionFilter')?.addEventListener('change', event => {
         state.motionFilter = event.target.value || 'all';
         renderMotionLibrary();
@@ -291,17 +523,14 @@ function bindUi() {
     $('#gakumasHairCover').addEventListener('change', event => {
         state.gakumasPasses.hairCover = event.target.checked;
     });
-    $('#gakumasHairShadow').addEventListener('change', event => {
-        state.gakumasPasses.hairShadow = event.target.checked;
-        updateGakumasUniforms();
-    });
     $('#secondaryMotionToggle')?.addEventListener('change', event => {
         secondaryMotion.enabled = event.target.checked;
         secondaryMotion.update();
         renderSecondaryMotionStatus();
     });
-    $('#clothingTraceStartBtn')?.addEventListener('click', () => { secondaryMotion.startClothingTrace({ idolId: state.library.activeIdol, model: state.model?.name || null }); clothingTraceStatus(); showToast('已开始记录衣物二次运动'); });
+    $('#clothingTraceStartBtn')?.addEventListener('click', () => { secondaryMotion.startClothingTrace({ idolId: state.library.activeIdol, model: state.model?.name || null }); startStageBoneTrace(); clothingTraceStatus(); showToast('已开始记录衣物与骨骼对齐数据'); });
     $('#clothingTraceExportBtn')?.addEventListener('click', () => { const trace=secondaryMotion.getClothingTrace(); if (!trace) { showToast('还没有衣物诊断记录', true); return; } const blob=new Blob([JSON.stringify(trace,null,2)], {type:'application/json'}); const url=URL.createObjectURL(blob); const link=document.createElement('a'); link.href=url; link.download=`secondary-motion-${state.library.activeIdol || 'unknown'}-${new Date().toISOString().replace(/[:.]/g,'-')}.json`; link.click(); setTimeout(()=>URL.revokeObjectURL(url),1000); });
+    $('#stageBoneTraceExportBtn')?.addEventListener('click', exportStageBoneTrace);
     $('#colliderDebugToggle')?.addEventListener('change', event => {
         colliderDebug.enabled = event.target.checked;
         colliderDebug.group.visible = colliderDebug.enabled && !!state.model;
@@ -315,19 +544,27 @@ function bindUi() {
         state.gakumasPasses.hairCoverMinimum = value;
         updateGakumasUniforms();
     });
-    bindLightControl('gakumasHairShadowOffset', null, null, value => {
-        state.gakumasPasses.hairShadowOffset = value;
-        updateGakumasUniforms();
-    });
     bindLightControl('gakumasBloom', null, null, value => lookPass.setBloom({ intensity: value }));
     bindLightControl('gakumasBloomKnee', null, null, value => lookPass.setBloom({ knee: value }));
     bindLightControl('gakumasBloomRadius', null, null, value => lookPass.setBloom({ radius: value }));
     $('#resetCameraBtn').addEventListener('click', resetCamera);
     $('#toggleGridBtn').addEventListener('click', event => {
-        grid.visible = !grid.visible;
-        event.currentTarget.classList.toggle('is-active', grid.visible);
-        event.currentTarget.setAttribute('aria-pressed', String(grid.visible));
+        gridWanted = !gridWanted;
+        grid.visible = gridWanted && !sceneStage.loaded;
+        event.currentTarget.classList.toggle('is-active', gridWanted);
+        event.currentTarget.setAttribute('aria-pressed', String(gridWanted));
     });
+    $('#sceneSelect')?.addEventListener('change', event => selectStageScene(event.currentTarget.value));
+    $('#sceneLayout')?.addEventListener('change', event => {
+        if (!sceneStage.applyLayout(event.currentTarget.value)) return;
+        applySceneCamera();
+        syncScenePost();
+        renderSceneStatus();
+    });
+    for (const [id, name] of POST_MODULES) {
+        $(`#${id}`)?.addEventListener('change', event => postPass.setModule(name, event.target.checked));
+    }
+    $('#sceneCameraBtn')?.addEventListener('click', applySceneCamera);
     $('#playPauseBtn').addEventListener('click', togglePlayback);
     $('#loopToggle').addEventListener('change', applyLoopMode);
     $('#runCommandBtn').addEventListener('click', runCommandFromEditor);
@@ -403,20 +640,6 @@ function applyMainLightDirection(azimuth, elevation, source = 'key') {
     keyPointLight.position.copy(keyLight.position);
     keyLight.target.updateMatrixWorld();
     keyLight.updateMatrixWorld();
-    const shadowDistance = characterShadowFit.radius + 6;
-    characterShadowLight.target.position.copy(center);
-    characterShadowLight.position.copy(center).addScaledVector(direction, shadowDistance);
-    characterShadowLight.target.updateMatrixWorld();
-    characterShadowLight.updateMatrixWorld();
-    const shadowCamera = characterShadowLight.shadow.camera;
-    shadowCamera.left = -characterShadowFit.radius;
-    shadowCamera.right = characterShadowFit.radius;
-    shadowCamera.top = characterShadowFit.radius;
-    shadowCamera.bottom = -characterShadowFit.radius;
-    shadowCamera.near = 0.25;
-    shadowCamera.far = shadowDistance + characterShadowFit.radius + 4;
-    shadowCamera.updateProjectionMatrix();
-    characterShadowLight.shadow.updateMatrices(characterShadowLight);
     if (source !== 'key') {
         setAngleSlider('keyAzimuth', 'keyAzimuthValue', az);
         setAngleSlider('keyElevation', 'keyElevationValue', el);
@@ -450,39 +673,20 @@ function updateGakumasUniforms() {
     const axisSource = state.gakumasHeadBone || state.model;
     hairCoverStage.update(axisSource, state.gakumasPasses.hairCoverMinimum);
     if (axisSource) state.gakumasHeadRight.setFromMatrixColumn(axisSource.matrixWorld, 0).normalize();
-    characterShadowTravel.copy(characterShadowLight.target.position).sub(characterShadowLight.position).normalize();
-    const shadowMapSize = characterShadowLight.shadow.mapSize;
+    const characterShadow = placeCharacterShadowLight(characterShadowLight, camera, characterShadowFit);
     state.gakumasUniforms.forEach(uniforms => {
         uniforms.gkLightDirection.value.copy(direction);
         uniforms.gkLightColor.value.copy(keyLight.color);
         uniforms.gkLightStrength.value = keyLight.intensity;
         uniforms.gkRimColor.value.copy(rimLight.color);
-        uniforms.gkRimStrength.value = rimLight.intensity * 0.42;
+        uniforms.gkRimStrength.value = rimLight.intensity;
         uniforms.gkShadowStrength.value = state.shadowStrength;
         uniforms.gkHeadRight.value.copy(state.gakumasHeadRight);
         uniforms.gkDebugView.value = state.gakumasDebugView;
         uniforms.gkCharacterShadowEnabled.value = state.gakumasPasses.characterShadow && characterShadowLight.shadow.map ? 1 : 0;
         uniforms.gkCharacterShadowMap.value = characterShadowLight.shadow.map?.texture || null;
-        characterShadowLight.shadow.updateMatrices(characterShadowLight);
         uniforms.gkCharacterShadowMatrix.value.copy(characterShadowLight.shadow.matrix);
-        uniforms.gkCharacterShadowLightDir.value.copy(characterShadowTravel);
-        uniforms.gkCharacterShadowMapSize.value.set(shadowMapSize.x, shadowMapSize.y);
-        uniforms.gkCharacterShadowNormalBias.value = Math.max(0.04, characterShadowFit.radius * 0.006);
-        uniforms.gkCharacterShadowConstantBias.value = 0;
-        uniforms.gkCharacterShadowRadius.value = 1.25;
-        const depthRange = Math.max(characterShadowLight.shadow.camera.far - characterShadowLight.shadow.camera.near, 0.001);
-        uniforms.gkCharacterShadowContact.value = Math.max(0.16, characterShadowFit.radius * 0.014) / depthRange;
-        hairShadowLightVS.copy(direction).transformDirection(camera.matrixWorldInverse);
-        uniforms.gkHairShadowEnabled.value = state.gakumasPasses.hairShadow && hairShadowStage.entries.length ? 1 : 0;
-        uniforms.gkHairShadowMap.value = hairShadowStage.map();
-        uniforms.gkHairShadowDepth.value = hairShadowStage.depthMap();
-        uniforms.gkHairShadowOffset.value = state.gakumasPasses.hairShadowOffset;
-        uniforms.gkHairShadowFocus.value = HAIR_SHADOW_FOCUS;
-        uniforms.gkHairShadowBias.value = Math.max(HAIR_SHADOW_BIAS, characterShadowFit.radius * 0.0015);
-        uniforms.gkHairShadowNear.value = camera.near;
-        uniforms.gkHairShadowFar.value = camera.far;
-        uniforms.gkHairShadowResolution.value.copy(hairShadowStage.resolution);
-        uniforms.gkHairShadowLightVS.value.copy(hairShadowLightVS);
+        uniforms.gkCharacterShadowContact.value = characterShadow?.contact || 0.001;
         applyGakumasLookUniforms(uniforms, { ...GAKUMAS_LOOK, shadowFloor: state.shadowFloor });
     });
 }
@@ -501,9 +705,24 @@ function buildExpressionButtons() {
 }
 
 async function loadModelFiles(files) {
+    const glbFiles = files.filter(file => file.name.toLowerCase().endsWith('.glb'));
+    if (glbFiles.length) {
+        if (glbFiles.length > 1) showToast(`找到 ${glbFiles.length} 个 GLB，已载入 ${glbFiles[0].name}`);
+        const glbFile = glbFiles[0];
+        await loadModelFromSource({
+            name: glbFile.name,
+            url: createObjectUrl(glbFile),
+            textures: [...files, ...state.textureFiles],
+            fileMapFiles: [...files, ...state.textureFiles],
+            modelKey: modelVariantKey(glbFile.name),
+            idolId: modelVariantId(modelVariantKey(glbFile.name)),
+            format: 'glb',
+        });
+        return;
+    }
     const pmxFiles = files.filter(file => file.name.toLowerCase().endsWith('.pmx'));
     if (!pmxFiles.length) {
-        showToast('所选文件夹中没有找到 PMX 模型', true);
+        showToast('所选文件夹中没有找到 GLB 或 PMX 模型', true);
         return;
     }
     if (pmxFiles.length > 1) showToast(`找到 ${pmxFiles.length} 个 PMX，已载入 ${pmxFiles[0].name}`);
@@ -514,30 +733,108 @@ async function loadModelFiles(files) {
         textures: [...files, ...state.textureFiles],
         fileMapFiles: [...files, ...state.textureFiles],
         idolId: '',
+        format: 'pmx',
     });
 }
 
-async function loadModelFromSource({ name, url, textures, fileMapFiles, idolId }) {
+async function loadModelFromSource({ name, url, textures, fileMapFiles, idolId, modelKey = '', format = 'pmx' }) {
+    const generation = ++modelLoadGeneration;
     setStatus(`正在载入 ${name}`);
     $('#runtimeBadge').textContent = '载入中';
-    state.modelFile = { name };
+    // Keep the actual source URL. A later texture-folder selection reloads the
+    // current model; storing only its display name would make the code pass a
+    // plain string to URL.createObjectURL().
+    state.modelFile = { name, url, format, idolId, modelKey };
+    state.modelFormat = format;
+    state.gltf = null;
     const fileMap = fileMapFiles?.length ? buildFileMap(fileMapFiles) : null;
     const manager = new THREE.LoadingManager();
-    manager.setURLModifier(resource => (fileMap && resolveLocalResource(resource, fileMap)) || resource);
-    const loader = new MMDLoader(manager);
-
+    // GLB baseColor images are embedded in the file. Keep the supplemental
+    // PMX texture folder out of GLTFLoader's URL rewriting, otherwise a
+    // matching body texture can replace the GLB hair/eye base map.
+    // Supplemental shade/ramp/highlight maps are loaded separately below.
+    if (format !== 'glb') {
+        manager.setURLModifier(resource => (fileMap && resolveLocalResource(resource, fileMap)) || resource);
+    }
     clearColliderDebug();
     try {
-        loader._extractExtension = () => name.toLowerCase().endsWith('.pmd') ? 'pmd' : 'pmx';
-        const model = await new Promise((resolve, reject) => loader.load(url, resolve, undefined, reject));
+        let model;
+        let animationTarget;
+        if (format === 'glb') {
+            const loader = new GLTFLoader(manager);
+            const gltf = await new Promise((resolve, reject) => loader.load(url, resolve, undefined, reject));
+            if (generation !== modelLoadGeneration) return false;
+            model = gltf.scene;
+            model.traverse(child => {
+                if (!child.isMesh) return;
+                const geometry = child.geometry;
+                const packed = geometry.getAttribute('_gakumas_vertex_color') || geometry.getAttribute('color');
+                if (packed?.itemSize === 4) {
+                    geometry.setAttribute('gakumasVertexColor', packed);
+                    geometry.userData.gakumasPackedVertexColor = true;
+                }
+                // Legacy exports used COLOR_0 for packed game shader data.
+                // Never multiply that data into the actor's base texture.
+                const materials = Array.isArray(child.material) ? child.material : [child.material];
+                materials.forEach(material => {
+                    if (material?.map && !material.userData.gakumasEmbeddedBaseMap) {
+                        material.userData.gakumasEmbeddedBaseMap = material.map;
+                    }
+                    material.vertexColors = false;
+                    material.name = material.name.replace(/\s*\[(?:HairPortFallback|GLB)\]/g, '').trim();
+                    material.needsUpdate = true;
+                });
+            });
+            state.gltf = gltf;
+            const skinned = [];
+            model.traverse(child => { if (child.isSkinnedMesh && child.skeleton) skinned.push(child); });
+            if (!skinned.length) throw new Error('GLB 中没有找到 SkinnedMesh 骨架');
+            // MMDLoader builds VMD tracks against model.skeleton. Expose the
+            // same small compatibility surface on the GLB root so the
+            // existing motion library can drive either model source.
+            // The face mesh owns the Morph dictionary, while the body mesh
+            // owns the complete shared skeleton. They must not be conflated:
+            // the face skin in this GLB has only seven face bones, which made
+            // every body VMD track disappear and also starved secondary motion.
+            const skin = skinned.reduce((best, item) =>
+                (item.skeleton?.bones?.length || 0) > (best?.skeleton?.bones?.length || 0) ? item : best,
+            skinned[0]);
+            const morphSkin = skinned.find(item => item.morphTargetDictionary && Object.keys(item.morphTargetDictionary).length) || skin;
+            animationTarget = skin;
+            model.skeleton = skin.skeleton;
+            model.morphTargetDictionary = morphSkin.morphTargetDictionary || {};
+            model.morphTargetInfluences = morphSkin.morphTargetInfluences || [];
+            animationTarget.userData.glbMorphTarget = morphSkin;
+            // MMDLoader assumes the target always owns a morph dictionary.
+            // GLB body meshes often have none even though the face mesh does.
+            // An empty dictionary keeps skeletal VMD tracks loadable; morph
+            // tracks are handled by the face mesh path when it exists.
+            animationTarget.morphTargetDictionary = morphSkin.morphTargetDictionary || {};
+            animationTarget.morphTargetInfluences = morphSkin.morphTargetInfluences || [];
+            model.scale.setScalar(GLB_STAGE_SCALE);
+        } else {
+            const loader = new MMDLoader(manager);
+            loader._extractExtension = () => name.toLowerCase().endsWith('.pmd') ? 'pmd' : 'pmx';
+            model = await new Promise((resolve, reject) => loader.load(url, resolve, undefined, reject));
+            if (generation !== modelLoadGeneration) return false;
+            animationTarget = model;
+        }
         if (state.model) {
             hairCoverStage.dispose();
-            state.helper.remove(state.model);
+            const oldTarget = state.animationTarget || state.model;
+            if (state.helper.objects.has(oldTarget)) state.helper.remove(oldTarget);
+            state.animationMixer = null;
             scene.remove(state.model);
             disposeObject(state.model);
         }
         state.model = model;
-        state.library.activeIdol = idolId || identifyLibraryIdol(state.library.config, name)?.id || '';
+        state.animationTarget = animationTarget;
+        // UnityGLTF materials are PBR carriers for the embedded base maps.
+        // GLB actors must enter the same Gakumas shader/look pipeline as the
+        // library path; otherwise a manually selected GLB stays in the MMD
+        // preset and bypasses the actor shader entirely.
+        if (format === 'glb') applyRenderPreset('gakumas');
+        state.library.activeIdol = idolId || identifyLibraryIdol(state.library.config, name)?.id || (/hski/i.test(name) ? 'hski' : '');
         state.gakumasHeadBone = null;
         model.traverse(child => {
             if (!state.gakumasHeadBone && child.isBone && /^(?:head|頭|頭部)$/i.test(child.name)) state.gakumasHeadBone = child;
@@ -555,6 +852,12 @@ async function loadModelFromSource({ name, url, textures, fileMapFiles, idolId }
         state.stickyFace = { id: '', intensity: 1 };
         state.lipSync = { bound: {}, track: [], startedAt: 0, active: false, savedMouth: null };
         captureRestPose(model);
+        // Physics records are authored in Unity-local units, while GLB is
+        // enlarged for the Stage view. Feed that parent scale to the solver
+        // so tail lengths, gravity and collider radii share world units.
+        secondaryMotion.worldScale = format === 'glb'
+            ? Math.max(Math.abs(Number(model.scale.x)) || 1, Math.abs(Number(model.scale.y)) || 1, Math.abs(Number(model.scale.z)) || 1)
+            : 1;
         await bindSecondaryMotion();
         model.traverse(child => {
             if (child.isMesh) {
@@ -575,9 +878,10 @@ async function loadModelFromSource({ name, url, textures, fileMapFiles, idolId }
         });
         scene.add(model);
         await loadGakumasTextures(textures || []);
+        if (generation !== modelLoadGeneration) return false;
         applyMaterialStyle();
         fitCharacterShadowToModel(model);
-        state.helper.add(model, { physics: false });
+        if (state.modelFormat !== 'glb') state.helper.add(state.animationTarget, { physics: false });
         frameModel(model);
         renderMorphControls();
         bindLipSyncMorphs();
@@ -585,11 +889,11 @@ async function loadModelFromSource({ name, url, textures, fileMapFiles, idolId }
         renderIdolList();
         $('#emptyState').classList.add('is-hidden');
         $('#modelFileName').textContent = name;
-        $('#modelSummary').textContent = `${name} · ${getMorphNames().length} 个 Morph`;
+        $('#modelSummary').textContent = `${name} · ${getMorphNames().length} 个 Morph · ${format.toUpperCase()}`;
         $('#runtimeBadge').textContent = '模型就绪';
         $('#runtimeBadge').classList.add('is-ready');
         setStatus('模型已载入，可从动作库选择动作', 'ready');
-        showToast('PMX 模型载入完成');
+        showToast(`${format === 'glb' ? 'GLB' : 'PMX'} 模型载入完成`);
         return true;
     } catch (error) {
         console.error('[MMD Stage] model load failed', error);
@@ -609,10 +913,10 @@ function applyRenderPreset(preset) {
         // actor look gray and milky compared with the MMD preset.
         gakumas: {
             toneMapping: THREE.NoToneMapping, exposure: 1.0,
-            key: GAKUMAS_LOOK.key, hemi: GAKUMAS_LOOK.hemi, rim: GAKUMAS_LOOK.rim, shadow: GAKUMAS_LOOK.shadow,
+            key: GAKUMAS_LOOK.key, hemi: GAKUMAS_LOOK.hemi, rim: 1, shadow: GAKUMAS_LOOK.shadow,
             keyAzimuth: GAKUMAS_LOOK.keyAzimuth, keyElevation: GAKUMAS_LOOK.keyElevation,
             shadowAzimuth: GAKUMAS_LOOK.shadowAzimuth, shadowElevation: GAKUMAS_LOOK.shadowElevation,
-            keyColor: GAKUMAS_LOOK.keyColor, rimColor: GAKUMAS_LOOK.rimColor,
+            keyColor: GAKUMAS_LOOK.keyColor, rimColor: '#ffffff',
             outlineThickness: 0.004, outlineAlpha: 0.82, outlineColor: '#000000',
             characterShadow: true,
         },
@@ -694,7 +998,6 @@ function applyMaterialStyle() {
     $('#gakumasInspector').hidden = state.materialMode !== 'gakumas';
     if (!state.model) return;
     hairCoverStage.dispose();
-    hairShadowStage.dispose();
     state.gakumasUniforms.clear();
     state.model.traverse(child => {
         if (!child.isMesh) return;
@@ -703,7 +1006,14 @@ function applyMaterialStyle() {
         applyOutlineToMaterial(child.material, child);
         const materials = Array.isArray(child.material) ? child.material : [child.material];
         materials.forEach((material, materialIndex) => {
-            if (!material?.isMMDToonMaterial) return;
+            // PMX materials arrive as MMDToonMaterial. UnityGLTF uses
+            // MeshStandardMaterial, but the actor shader is built on the
+            // standard Three.js lighting chunks and can serve both sources.
+            if (!material || (!material.isMMDToonMaterial && state.modelFormat !== 'glb')) return;
+            if (state.modelFormat === 'glb' && !material.map && material.userData.gakumasEmbeddedBaseMap) {
+                material.map = material.userData.gakumasEmbeddedBaseMap;
+                material.needsUpdate = true;
+            }
             if (material.map && 'colorSpace' in material.map && THREE.SRGBColorSpace) {
                 setTextureColorSpace(material.map, THREE.SRGBColorSpace);
             }
@@ -726,7 +1036,6 @@ function applyMaterialStyle() {
                 child.userData.gakumasShadowMaterialMask[materialIndex] = shouldCastCharacterShadow(actorPass);
             }
             uniforms.gkCharacterShadowReceive.value = shouldReceiveCharacterShadow(actorPass) ? 1 : 0;
-            uniforms.gkHairShadowReceive.value = shouldReceiveHairShadow(actorPass) ? 1 : 0;
             const rampAddAllowed = ['body', 'bodyAccessory', 'clothing', 'face'].includes(role);
             uniforms.gkHasRampAdd.value = selection.bindings.rampAdd?.texture && rampAddAllowed ? 1 : 0;
             const baseBlending = material.userData.gakumasBaseBlending ?? material.blending;
@@ -752,7 +1061,13 @@ function applyMaterialStyle() {
             };
             const baseDefines = { ...(material.defines || {}) };
             delete baseDefines.GK_HAIR_COVER;
-            material.defines = { ...baseDefines, GK_HAIR: role === 'hair' || actorPass === 'hairHighlight', GK_FACE: role === 'face', GK_EYE: role === 'eye' || role === 'eyeHighlight' };
+            material.defines = {
+                ...baseDefines,
+                GK_HAIR: role === 'hair' || actorPass === 'hairHighlight',
+                GK_FACE: role === 'face',
+                GK_EYE: role === 'eye' || role === 'eyeHighlight',
+                GK_EYE_HIGHLIGHT: material.name.toLowerCase() === 'm_ehl' || actorPass === 'eyeHighlight',
+            };
             material.userData.gakumasBaseTransparent ??= material.transparent;
             material.transparent = material.userData.gakumasBaseTransparent;
             material.blending = baseBlending;
@@ -764,18 +1079,48 @@ function applyMaterialStyle() {
                 material.depthTest = false;
                 material.renderOrder = 30;
             }
+            // PMX m_hir+ is a duplicated overlay used for the sphere/highlight
+            // layer. The GLB carries the same geometry and hir_sph map, but
+            // MeshStandardMaterial defaults to an opaque base-color pass,
+            // which hides the regular m_hir layer. Recreate the PMX overlay
+            // semantics here.
+            if (actorPass === 'hairHighlight') {
+                material.transparent = true;
+                material.blending = THREE.AdditiveBlending;
+                material.depthWrite = false;
+                material.renderOrder = 18;
+                material.opacity = 0.55;
+            }
             material.depthTest = true;
             material.alphaTest = actorPass === 'eye' || actorPass === 'eyeHighlight' ? 0 : 0.33;
             material.side = THREE.FrontSide;
             material.colorWrite = true;
+            if (isEyeLayer) {
+                material.transparent = true;
+                material.depthTest = false;
+                material.depthWrite = false;
+                material.renderOrder = material.name.toLowerCase() === 'm_ehl' ? 32 : 30;
+                material.alphaTest = 0.01;
+            }
+            if (material.name.toLowerCase() === 'm_ehl' || actorPass === 'eyeHighlight') {
+                // m_ehl is a separate eye highlight card. It must be blended
+                // over m_eye at the same depth instead of failing the depth
+                // test against the iris surface.
+                material.transparent = true;
+                material.blending = THREE.NormalBlending;
+                material.depthTest = false;
+                material.depthWrite = false;
+                material.renderOrder = 32;
+                material.opacity = 1;
+                material.alphaTest = 0.01;
+            }
             applyStencilState(material, actorStencilState(material.name, actorPass));
             material.onBeforeCompile = state.materialMode === 'gakumas' ? shader => injectActorShader(shader, uniforms) : () => {};
-            material.customProgramCacheKey = () => `gakumas-v2:${state.materialMode}:${role}:rendering-v2`;
+            material.customProgramCacheKey = () => `gakumas-v2:${state.materialMode}:${role}:rim-v1`;
             material.needsUpdate = true;
             material.visible = true;
             if (state.materialMode === 'gakumas') {
                 hairCoverStage.add(child, material, materialIndex, uniforms, hairTextureName);
-                if (shouldWriteHairShadow(actorPass)) hairShadowStage.add(child, material, materialIndex);
             }
         });
         if (state.materialMode === 'gakumas') {
@@ -820,6 +1165,7 @@ function applyStencilState(material, state) {
 }
 
 async function loadGakumasTextures(files) {
+    const generation = ++gakumasTextureLoadGeneration;
     const uniqueFiles = new Map();
     for (const file of files) {
         const name = file.name || file.file?.name || '';
@@ -852,8 +1198,13 @@ async function loadGakumasTextures(files) {
         }
         entries.push(entry);
     }
+    if (generation !== gakumasTextureLoadGeneration) {
+        entries.forEach(entry => entry.texture?.dispose());
+        return false;
+    }
     state.gakumasTextures.forEach(entry => entry.texture?.dispose());
     state.gakumasTextures = entries;
+    return true;
 }
 
 function gakumasFallback(kind) {
@@ -883,31 +1234,17 @@ function createGakumasUniforms() {
         gkLightStrength: { value: GAKUMAS_LOOK.key },
         gkShadowStrength: { value: GAKUMAS_LOOK.shadow },
         gkHeadRight: { value: new THREE.Vector3(1, 0, 0) },
-        gkRimDirection: { value: new THREE.Vector3(-0.7, 0.6, 0.3).normalize() },
-        gkRimColor: { value: new THREE.Color(GAKUMAS_LOOK.rimColor) },
-        gkRimStrength: { value: GAKUMAS_LOOK.rim * 0.42 },
+        gkRimDirection: { value: new THREE.Vector3(...GAKUMAS_LOOK.rimView) },
+        gkRimColor: { value: new THREE.Color(0xffffff) },
+        gkRimStrength: { value: 1 },
+        gkRimPower: { value: GAKUMAS_LOOK.rimPower },
+        gkRimAlbedo: { value: GAKUMAS_LOOK.rimAlbedo },
         gkDebugView: { value: 0 },
         gkCharacterShadowMap: { value: null },
         gkCharacterShadowMatrix: { value: new THREE.Matrix4() },
         gkCharacterShadowEnabled: { value: 0 },
         gkCharacterShadowReceive: { value: 1 },
-        gkCharacterShadowLightDir: { value: new THREE.Vector3(0, -1, 0) },
-        gkCharacterShadowMapSize: { value: new THREE.Vector2(2048, 2048) },
-        gkCharacterShadowNormalBias: { value: 0.08 },
-        gkCharacterShadowConstantBias: { value: 0 },
-        gkCharacterShadowRadius: { value: 1.25 },
-        gkCharacterShadowContact: { value: 0.008 },
-        gkHairShadowMap: { value: null },
-        gkHairShadowDepth: { value: null },
-        gkHairShadowEnabled: { value: 0 },
-        gkHairShadowReceive: { value: 0 },
-        gkHairShadowOffset: { value: 32 },
-        gkHairShadowFocus: { value: HAIR_SHADOW_FOCUS },
-        gkHairShadowBias: { value: HAIR_SHADOW_BIAS },
-        gkHairShadowNear: { value: 0.1 },
-        gkHairShadowFar: { value: 1000 },
-        gkHairShadowResolution: { value: new THREE.Vector2(1, 1) },
-        gkHairShadowLightVS: { value: new THREE.Vector3(0, 1, 0) },
+        gkCharacterShadowContact: { value: 0.001 },
         gkHairFadeParam: { value: new THREE.Vector4(0.15, 4.0, 0.3, 2.0) },
         ...createGakumasLookUniformValues(),
     };
@@ -934,9 +1271,9 @@ function renderGakumasInspector() {
     $('#gakumasHeadStatus').textContent = state.gakumasHeadBone ? `脸部朝向跟随：${state.gakumasHeadBone.name}` : '未找到 Head／頭 骨骼；脸部朝向暂跟随模型。';
     if ($('#gakumasCharacterShadow')) $('#gakumasCharacterShadow').checked = state.gakumasPasses.characterShadow;
     if ($('#gakumasHairCover')) $('#gakumasHairCover').checked = state.gakumasPasses.hairCover;
-    if ($('#gakumasHairShadow')) $('#gakumasHairShadow').checked = state.gakumasPasses.hairShadow;
     $('#gakumasHairCoverStatus').textContent = `HairCover：${hairCoverStage.entries.reduce((count, entry) => count + entry.groups.length, 0)} 个 m_hir 面组就绪；m_hir+ 高光和其他材质不补绘。`;
-    $('#gakumasHairShadowStatus').textContent = `刘海影：${hairShadowStage.entries.reduce((count, entry) => count + entry.groups.length, 0)} 个头发面组写入屏幕深度；只给脸和眼采样，后发深度更大会被丢掉。`;
+    const shadowStatus = $('#gakumasCharacterShadowStatus');
+    if (shadowStatus) shadowStatus.textContent = '角色阴影：4K 深度图，光源跟摄像机。脸、眼睛和高光层不写入；头发、身体和衣服写入，并在脸、眼睛、头发、身体和衣服上采样。';
 }
 
 function classifyShadowRole(mesh) {
@@ -996,12 +1333,29 @@ function outlineColorArray(hex) {
     return [color.r, color.g, color.b];
 }
 
-function addTextureFiles(files) {
+async function addTextureFiles(files) {
     state.textureFiles = files;
+    // GLB already contains its baseColor maps and materials. Re-loading the
+    // file just to add supplemental Gakumas maps can recreate MeshStandard
+    // materials at the wrong point in the pipeline and lose the embedded eye
+    // map. Update only the auxiliary texture uniforms for an existing GLB.
+    if (state.model && state.modelFormat === 'glb') {
+        await loadGakumasTextures(files);
+        if (state.materialMode !== 'gakumas') applyRenderPreset('gakumas');
+        else applyMaterialStyle();
+        updateGakumasUniforms();
+        renderGakumasInspector();
+        showToast('已载入 ' + files.length + ' 个补充贴图');
+        return;
+    }
     if (state.modelFile) {
-        loadModelFiles([state.modelFile, ...files]);
+        loadModelFromSource({
+            ...state.modelFile,
+            textures: files,
+            fileMapFiles: files,
+        });
     } else {
-        showToast(`已暂存 ${files.length} 个贴图文件，请再选择 PMX 模型。`);
+        showToast(`已暂存 ${files.length} 个贴图文件，请再选择模型。`);
     }
 }
 
@@ -1042,13 +1396,187 @@ async function importMotions(files) {
     })));
 }
 
+// VMD stores MMD bone names, while the GLB exporter keeps the Unity bone
+// names.  HSKI's exported skeleton already uses the same English names for
+// most tracks, but a VMD from an MMD tool can still contain the usual
+// Japanese aliases.  Remap those aliases before MMDLoader builds tracks;
+// otherwise the loader silently drops the bone motion.
+const VMD_GLB_BONE_ALIASES = new Map([
+    ['センター', 'Center'], ['全ての親', 'Root'], ['上半身', 'UpperBody'], ['上半身2', 'UpperBody2'],
+    ['下半身', 'LowerBody'], ['首', 'Neck'], ['頭', 'Head'], ['左目', 'LeftEye'], ['右目', 'RightEye'],
+    ['左肩', 'LeftShoulder'], ['右肩', 'RightShoulder'], ['左腕', 'LeftArm'], ['右腕', 'RightArm'],
+    ['左ひじ', 'LeftForeArm'], ['右ひじ', 'RightForeArm'], ['左手首', 'LeftHand'], ['右手首', 'RightHand'],
+    ['左足', 'LeftUpLeg'], ['右足', 'RightUpLeg'], ['左ひざ', 'LeftLeg'], ['右ひざ', 'RightLeg'],
+    ['左足首', 'LeftFoot'], ['右足首', 'RightFoot'], ['左つま先', 'LeftToeBase'], ['右つま先', 'RightToeBase'],
+    // The PMX writer shortens these three names to fit VMD's 15-byte bone
+    // field. The GLB keeps Unity's full names.
+    ['RHandMiddle1', 'RightHandMiddle1'], ['RHandMiddle2', 'RightHandMiddle2'], ['RHandMiddle3', 'RightHandMiddle3'],
+]);
+
+function normalizedBoneKey(name) {
+    return String(name || '').trim().replace(/[\s_\-.]/g, '').toLowerCase();
+}
+
+function resolveVmdBoneName(rawName, target) {
+    const bones = target?.skeleton?.bones || [];
+    const exact = new Map(bones.map(bone => [bone.name, bone.name]));
+    if (exact.has(rawName)) return rawName;
+    const alias = VMD_GLB_BONE_ALIASES.get(String(rawName || '').trim());
+    if (alias && exact.has(alias)) return alias;
+    const byKey = new Map(bones.map(bone => [normalizedBoneKey(bone.name), bone.name]));
+    const rawKey = normalizedBoneKey(rawName);
+    const variants = [
+        rawKey,
+        rawKey.replace(/^(?:j)?(?:bip)?(?:c|l|r)?/, ''),
+        rawKey.replace(/^(?:j_)?(?:bip_)?(?:c_|l_|r_)?/i, ''),
+    ].filter(Boolean);
+    for (const variant of variants) {
+        if (byKey.has(variant)) return byKey.get(variant);
+    }
+    // Some exporters retain a Unity/Blender prefix around the original PMX
+    // name. Accept a unique suffix match, but avoid short ambiguous names.
+    const suffixMatches = bones.filter(bone => {
+        const key = normalizedBoneKey(bone.name);
+        return Math.min(key.length, rawKey.length) >= 5 && (key.endsWith(rawKey) || rawKey.endsWith(key));
+    });
+    return suffixMatches.length === 1 ? suffixMatches[0].name : rawName;
+}
+
+function loadVmdAnimationForTarget(loader, url, target, onLoad, onError) {
+    if (state.modelFormat !== 'glb') {
+        loader.loadAnimation(url, target, onLoad, undefined, onError);
+        return;
+    }
+    loader.loadVMD(url, vmd => {
+        const morphTarget = target?.userData?.glbMorphTarget || target;
+        const motions = vmd.motions || [];
+        motions.forEach(motion => {
+            motion.boneName = resolveVmdBoneName(motion.boneName, target);
+        });
+        // Morph names are usually preserved by UnityGLTF. Keep exact matches
+        // and let AnimationBuilder discard only morphs absent from the GLB.
+        const morphs = vmd.morphs || [];
+        const dictionary = morphTarget?.morphTargetDictionary || {};
+        const morphKeys = Object.keys(dictionary);
+        const morphKey = value => {
+            const raw = String(value || '').trim();
+            const aliases = [raw, raw.replace(/^b_mouth\./i, '')];
+            for (const alias of aliases) if (dictionary[alias] !== undefined) return alias;
+            const normalized = aliases.map(alias => normalizedBoneKey(alias));
+            return morphKeys.find(name => normalized.includes(normalizedBoneKey(name))) || '';
+        };
+        let matchedMorphs = 0;
+        morphs.forEach(morph => {
+            const key = morphKey(morph.morphName);
+            if (key) {
+                morph.morphName = key;
+                matchedMorphs++;
+            }
+        });
+        const clip = loader.animationBuilder.build(vmd, target);
+        if (vmd.metadata?.morphCount && !matchedMorphs) {
+            console.warn('[MMD Stage] no VMD morphs matched GLB dictionary', {
+                sourceMorphs: vmd.metadata.morphCount,
+                glbMorphs: morphKeys.length,
+                sample: morphs.slice(0, 8).map(morph => morph.morphName),
+            });
+        }
+        // Unity -> PMX/VMD uses (-x, y, -z, w). MMDParser then applies
+        // (-x, -y, z, w), which is exactly the UnityGLTF GLB basis. There is
+        // no additional left/right or per-side reflection at this point.
+        if (target?.skeleton?.bones?.length) {
+            const bones = new Map(target.skeleton.bones.map(bone => [bone.name, bone]));
+            const quaternionTracks = new Map();
+            clip.tracks.forEach(track => {
+                const match = track.name.match(/^\.bones\[([^\]]+)\]\.quaternion$/)
+                    || track.name.match(/^([^\.]+)\.quaternion$/);
+                if (match && track.values.length % 4 === 0 && bones.has(match[1])) quaternionTracks.set(match[1], track);
+            });
+            const rest = new Map((state.restPose || []).map(entry => [entry.bone, entry.quaternion.clone()]));
+            const depth = bone => {
+                let value = 0;
+                for (let parent = bone.parent; parent && parent !== target; parent = parent.parent) value++;
+                return value;
+            };
+            const orderedBones = [...bones.values()].sort((left, right) => depth(left) - depth(right));
+            const deltaWorld = new Map();
+            const restWorld = new Map();
+            const animationWorld = new Map();
+            const identity = new THREE.Quaternion();
+            const trackLength = [...quaternionTracks.values()][0]?.values.length || 0;
+            const frameCount = Math.floor(trackLength / 4);
+            for (let frame = 0; frame < frameCount; frame++) {
+                deltaWorld.clear();
+                restWorld.clear();
+                animationWorld.clear();
+                for (const bone of orderedBones) {
+                    const parent = bones.get(bone.parent?.name);
+                    const parentDelta = parent ? deltaWorld.get(parent) || identity : identity;
+                    const parentRest = parent ? restWorld.get(parent) || identity : identity;
+                    const track = quaternionTracks.get(bone.name);
+                    const offset = track
+                        ? new THREE.Quaternion(track.values[frame * 4], track.values[frame * 4 + 1], track.values[frame * 4 + 2], track.values[frame * 4 + 3]).normalize()
+                        : identity;
+                    const bind = rest.get(bone) || bone.quaternion.clone();
+                    const currentDelta = parentDelta.clone().multiply(offset).normalize();
+                    const currentRest = parentRest.clone().multiply(bind).normalize();
+                    const currentAnimation = currentDelta.clone().multiply(currentRest).normalize();
+                    deltaWorld.set(bone, currentDelta);
+                    restWorld.set(bone, currentRest);
+                    animationWorld.set(bone, currentAnimation);
+                    if (!track) continue;
+                    const local = parent
+                        ? (animationWorld.get(parent) || identity).clone().invert().multiply(currentAnimation).normalize()
+                        : currentAnimation;
+                    track.values[frame * 4] = local.x;
+                    track.values[frame * 4 + 1] = local.y;
+                    track.values[frame * 4 + 2] = local.z;
+                    track.values[frame * 4 + 3] = local.w;
+                }
+            }
+            clip.tracks.forEach(track => {
+                const match = track.name.match(/^\.bones\[([^\]]+)\]\.position$/);
+                if (!match || track.values.length % 3 !== 0) return;
+                const bone = bones.get(match[1]);
+                if (!bone) return;
+                const bind = bone.position;
+                for (let i = 0; i < track.values.length; i += 3) {
+                    track.values[i] = bind.x + (track.values[i] - bind.x) / 12.5;
+                    track.values[i + 1] = bind.y + (track.values[i + 1] - bind.y) / 12.5;
+                    track.values[i + 2] = bind.z + (track.values[i + 2] - bind.z) / 12.5;
+                }
+            });
+        }
+        const morphBinding = bindGlbMorphTracks(clip, dictionary, state.model);
+        console.info('[MMD Stage] GLB VMD morph binding', {
+            url, sourceMorphFrames: morphs.length, matchedMorphFrames: matchedMorphs, ...morphBinding,
+        });
+        if (morphs.length && morphBinding.boundTracks === 0) showToast('面部 VMD 未绑定到 GLB 网格，请查看表情绑定诊断', true);
+        // MMDAnimationHelper uses the `.bones[Name]` convention. For GLB,
+        // bind directly to the named Bone node so AnimationMixer does not
+        // depend on the root Group exposing a MMD-style bones array.
+        clip.tracks.forEach(track => {
+            const match = track.name.match(/^\.bones\[([^\]]+)\](\..+)$/);
+            if (match) track.name = `${match[1]}${match[2]}`;
+        });
+        onLoad(clip);
+    }, undefined, onError);
+}
+
 async function importMotionEntries(entries, options = {}) {
     const loader = new MMDLoader();
     let loaded = 0;
     for (const entry of entries) {
         if (state.actions.has(entry.id)) continue;
         try {
-            const clip = await new Promise((resolve, reject) => loader.loadAnimation(entry.url, state.model, resolve, undefined, reject));
+            const clip = await new Promise((resolve, reject) => loadVmdAnimationForTarget(
+                loader,
+                entry.url,
+                state.animationTarget || state.model,
+                resolve,
+                reject,
+            ));
+            rebaseHairAnimationTracks(clip, state.hairRestRebase);
             clip.name = entry.id;
             const { kind } = classifyClipTracks(clip.tracks.map(track => track.name));
             state.actions.set(entry.id, { id: entry.id, label: entry.label || entry.name?.replace(/\.vmd$/i, '') || entry.id, clip, kind });
@@ -1076,7 +1604,7 @@ function libraryOverrides() {
 async function initLibrary() {
     try {
         const [config, map] = await Promise.all([
-            fetch('./library.json?v=20260911-idols1', { cache: 'no-store' }).then(response => response.json()),
+            fetch('./library.json?v=20261002-idol-glb', { cache: 'no-store' }).then(response => response.json()),
             fetch('./gakumas-motion-map.json?v=20260911-fktn2').then(response => response.json()),
         ]);
         state.library.config = config;
@@ -1091,6 +1619,7 @@ async function initLibrary() {
         updateLibrarySourceUi();
         renderIdolList();
         renderMotionLibrary();
+        renderSceneOptions();
     } catch (error) {
         console.error('[MMD Stage] library init failed', error);
         const list = $('#motionLibraryList');
@@ -1147,15 +1676,18 @@ async function loadIdol(idolId) {
     if (!idol) return showToast('未找到该偶像', true);
     const packFiles = state.library.status?.packs?.[idol.pack]?.files || [];
     const textureNames = packFiles
-        .filter(name => !idol.textureDir || name.startsWith(`${idol.textureDir}/`) || !name.includes('/'))
+        .filter(name => !idol.textureDir || name.replaceAll('\\', '/').startsWith(`${idol.textureDir}/`))
         .map(name => name.split('/').pop());
-    const assets = idolAssetUrls(idol, state.library.config, textureNames.filter(name => /\.(png|jpe?g|webp)$/i.test(name)), libraryOverrides());
+    const model = selectIdolModel(idol, packFiles);
+    const assets = idolAssetUrls({ ...idol, model: model.name }, state.library.config, textureNames.filter(name => /\.(png|jpe?g|webp|spa|sph)$/i.test(name)), libraryOverrides());
     setStatus(`正在载入 ${idol.name}`);
     const loaded = await loadModelFromSource({
-        name: idol.model,
+        name: model.name,
         url: assets.modelUrl,
         textures: assets.textures,
         idolId: idol.id,
+        modelKey: model.format === 'glb' ? modelVariantKey(model.name) : '',
+        format: model.format,
     });
     if (loaded) {
         applyRenderPreset('gakumas');
@@ -1301,7 +1833,8 @@ function renderSecondaryMotionStatus() {
         return;
     }
     const idol = state.library.config?.idols?.find(item => item.id === state.library.activeIdol);
-    if (!supportsSecondaryMotion(idol)) {
+    const glbProfile = state.modelFormat === 'glb';
+    if (!supportsSecondaryMotion(idol) && !glbProfile) {
         status.textContent = '当前模型尚未配置专用二次运动；未套用琴音的头发、裙摆和碰撞参数。';
         renderColliderAuthoring();
         return;
@@ -1310,14 +1843,68 @@ function renderSecondaryMotionStatus() {
     const springs = secondaryMotion.springs.length;
     const colliders = secondaryMotion.colliders.length;
     const missing = secondaryMotion.missing;
+    const runtime = secondaryMotion.runtime || {};
+    const skirtQuartz = glbProfile
+        ? `，裙摆公式 ${Number(runtime.skirtQuartzDrivers) || 0} 根，最大根部转角 ${(Number(runtime.skirtQuartzMaxAngle) || 0).toFixed(1)}°`
+        : '';
+    const ticking = Number(runtime.fixedSteps || 0) > 0
+        ? `，已运行 ${runtime.fixedSteps} 个物理步${skirtQuartz}，最大弹簧偏转 ${(Number(runtime.maxAngularOffset) || 0).toFixed(1)}°，碰撞命中 ${Number(runtime.staticCollisionHits) || 0} 次（大腿 ${Number(runtime.thighCollisionHits) || 0}，链段 ${Number(runtime.thighChainCollisionHits) || 0}）`
+        : '，尚未运行物理步';
     status.textContent = missing.length
-        ? `二次动作已绑定跟随 ${follow}、弹簧 ${springs}、碰撞 ${colliders}，未找到 ${missing.length} 项`
-        : `二次动作已绑定 ${follow} 个跟随、${springs} 个弹簧、${colliders} 个碰撞体。游戏半径为米，当前骨架缩放 ${secondaryMotion.scale.toFixed(2)}。`;
+        ? `二次动作已绑定跟随 ${follow}、弹簧 ${springs}、碰撞 ${colliders}，未找到 ${missing.length} 项${ticking}`
+        : `二次动作已绑定 ${follow} 个跟随、${springs} 个弹簧、${colliders} 个碰撞体${ticking}。游戏半径为米，当前骨架缩放 ${secondaryMotion.scale.toFixed(2)}。`;
     renderColliderAuthoring();
 }
 
 function colliderDebugMaterial(color, opacity) {
     return new THREE.MeshBasicMaterial({ color, wireframe: true, transparent: true, opacity, depthWrite: false });
+}
+
+function makeDebugTaperedCapsuleGeometry(length, startRadius, endRadius) {
+    const radialSegments = 16;
+    const capSegments = 4;
+    const profile = [];
+    const halfLength = length * 0.5;
+    const safeStartRadius = Math.max(Number(startRadius) || 0, 0.001);
+    const safeEndRadius = Math.max(Number(endRadius) || 0, 0.001);
+    for (let index = 0; index < capSegments; index++) {
+        const angle = -Math.PI * 0.5 + (index / capSegments) * Math.PI * 0.5;
+        profile.push({ y: -halfLength + Math.sin(angle) * safeStartRadius, radius: Math.cos(angle) * safeStartRadius });
+    }
+    for (let index = 0; index <= capSegments; index++) {
+        const t = index / capSegments;
+        profile.push({
+            y: -halfLength + length * t,
+            radius: safeStartRadius + (safeEndRadius - safeStartRadius) * t,
+        });
+    }
+    for (let index = 1; index <= capSegments; index++) {
+        const angle = (index / capSegments) * Math.PI * 0.5;
+        profile.push({ y: halfLength + Math.sin(angle) * safeEndRadius, radius: Math.cos(angle) * safeEndRadius });
+    }
+    const positions = [];
+    const indices = [];
+    profile.forEach(({ y, radius }) => {
+        for (let segment = 0; segment < radialSegments; segment++) {
+            const angle = (segment / radialSegments) * Math.PI * 2;
+            positions.push(Math.cos(angle) * radius, y, Math.sin(angle) * radius);
+        }
+    });
+    for (let ring = 0; ring < profile.length - 1; ring++) {
+        for (let segment = 0; segment < radialSegments; segment++) {
+            const next = (segment + 1) % radialSegments;
+            const a = ring * radialSegments + segment;
+            const b = ring * radialSegments + next;
+            const c = (ring + 1) * radialSegments + next;
+            const d = (ring + 1) * radialSegments + segment;
+            indices.push(a, b, d, b, c, d);
+        }
+    }
+    const geometry = new THREE.BufferGeometry();
+    geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+    geometry.setIndex(indices);
+    geometry.computeBoundingSphere();
+    return geometry;
 }
 
 function clearColliderDebug() {
@@ -1356,21 +1943,28 @@ function fitDebugSphere(mesh, center, radius) {
     mesh.quaternion.identity();
 }
 
-function fitDebugCapsule(mesh, start, end, radius) {
+function fitDebugCapsule(mesh, start, end, startRadius, endRadius) {
     const sx = start[0];
     const sy = start[1];
     const sz = start[2];
     const length = Math.hypot(end[0] - sx, end[1] - sy, end[2] - sz);
-    if (length < 1e-4) return fitDebugSphere(mesh, start, radius);
+    const radiusA = Math.max(Number(startRadius) || 0, 0.001);
+    const radiusB = Math.max(Number(endRadius) || 0, 0.001);
+    if (length < 1e-4) return fitDebugSphere(mesh, start, Math.max(radiusA, radiusB));
     mesh.visible = true;
-    if (mesh.userData.debugKind !== 'capsule' || Math.abs((mesh.userData.debugLength || 0) - length) > 0.03 || Math.abs((mesh.userData.debugRadius || 0) - radius) > 0.01) {
+    if (mesh.userData.debugKind !== 'capsule'
+        || Math.abs((mesh.userData.debugLength || 0) - length) > 0.03
+        || Math.abs((mesh.userData.debugRadiusA || 0) - radiusA) > 0.01
+        || Math.abs((mesh.userData.debugRadiusB || 0) - radiusB) > 0.01) {
         mesh.geometry.dispose();
-        mesh.geometry = new THREE.CapsuleGeometry(Math.max(radius, 0.001), length, 3, 8);
+        mesh.geometry = makeDebugTaperedCapsuleGeometry(length, radiusA, radiusB);
         mesh.userData.debugKind = 'capsule';
         mesh.userData.debugLength = length;
-        mesh.userData.debugRadius = radius;
+        mesh.userData.debugRadiusA = radiusA;
+        mesh.userData.debugRadiusB = radiusB;
     }
     mesh.position.set((sx + end[0]) / 2, (sy + end[1]) / 2, (sz + end[2]) / 2);
+    mesh.scale.setScalar(1);
     colliderDebugDir.set(end[0] - sx, end[1] - sy, end[2] - sz).normalize();
     mesh.quaternion.setFromUnitVectors(colliderDebugUp, colliderDebugDir);
 }
@@ -1388,7 +1982,7 @@ function updateColliderDebug() {
         mesh.material.color.setHex(selectedIndex === null ? 0x2bb5a8 : 0xffc857);
         mesh.material.opacity = selectedIndex === null ? 0.8 : 1;
         if (!isSelected) return;
-        if (shape.kind === 'capsule') fitDebugCapsule(mesh, shape.start, shape.end, Math.max(shape.radiusA, shape.radiusB));
+        if (shape.kind === 'capsule') fitDebugCapsule(mesh, shape.start, shape.end, shape.radiusA, shape.radiusB);
         else fitDebugSphere(mesh, shape.start, shape.radiusA);
     });
     resizeDebugPool(colliderDebug.particleMeshes, debug.particles.length, 0xef765f, 0.45);
@@ -1448,25 +2042,44 @@ function renderColliderAuthoring() {
 async function bindSecondaryMotion() {
     const generation = ++secondaryMotionBindGeneration;
     const idolId = state.library.activeIdol;
+    const modelKey = state.modelFormat === 'glb' ? state.modelFile?.modelKey : '';
     const idol = state.library.config?.idols?.find(item => item.id === idolId);
     secondaryMotion.bind([]);
     colliderDebug.selected = 'all';
     renderColliderDebugSelect();
     updateColliderDebug();
-    if (!supportsSecondaryMotion(idol)) {
+    const glbProfile = state.modelFormat === 'glb';
+    if (!supportsSecondaryMotion(idol) && !glbProfile) {
         renderSecondaryMotionStatus();
         return;
     }
-    const table = await secondaryMotionReady(idolId);
-    if (generation !== secondaryMotionBindGeneration || state.library.activeIdol !== idolId || !state.model) return;
+    const table = await secondaryMotionReady(glbProfile ? modelKey : idolId, idolId);
+    if (generation !== secondaryMotionBindGeneration || state.library.activeIdol !== idolId
+        || (state.modelFormat === 'glb' && state.modelFile?.modelKey !== modelKey) || !state.model) return;
     if (!table) {
         renderSecondaryMotionStatus();
         showToast('二次动作参数表载入失败，头发送裙跟随暂不可用', true);
         return;
     }
     if (!state.restPose) return;
-    secondaryMotion.table = table;
-    secondaryMotion.startClothingTrace({ idolId, model: state.model?.name || null, source: "secondary-motion-profile" });
+    // The HSKI GLB is exported by UnityGLTF and retains Unity's authored
+    // skirt driver frame. Its profile coefficients are the raw game values;
+    // the GLB path converts them once inside NativeSkirtCalculate. PMX uses a
+    // different bone basis, so it keeps the historical adapter.
+    secondaryMotion.table = glbProfile
+        ? { ...table, skirtDriverBasis: 'gltf-unity', skirtDriverSettingsConverted: false }
+        : table;
+    // Diagnostics are opt-in. Recording every clothing particle and the full
+    // skeleton during normal playback causes a large CPU spike for profiles
+    // with many hair/spring nodes. The buttons below still start both traces
+    // together when a capture is explicitly requested.
+    // The Unity GLB already contains the validated native bind rotations.
+    // PMX keeps its historical rest rebase because that model has a different
+    // bind frame; applying it to GLB would rotate the hair twice.
+    state.hairRestRebase = state.modelFormat === 'glb'
+        ? []
+        : applyHairRestRotationRebase(state.restPose, table);
+    if (state.hairRestRebase.length) refreshRestInverseBinds(state.model);
     secondaryMotion.bind(state.restPose);
     renderColliderDebugSelect();
     renderSecondaryMotionStatus();
@@ -1478,8 +2091,26 @@ async function bindSecondaryMotion() {
 }
 
 function captureRestPose(model) {
-    const bones = model?.skeleton?.bones ?? [];
-    state.restPose = bones.map(bone => ({
+    // A GLB exported from Unity can contain several independent skins:
+    // body, face, skirt and one or more hair skins. `model.skeleton` is the
+    // animation target selected above (the largest body skeleton), but it is
+    // not the complete physics hierarchy. The old path captured only that
+    // skeleton, which left all hair/skirt particles and their `_A` drivers
+    // outside state.restPose and produced the "未绑定 133 项" warning.
+    const bones = [];
+    const physicsNodes = [];
+    model?.traverse?.(child => {
+        if (child.isSkinnedMesh && child.skeleton?.bones) bones.push(...child.skeleton.bones);
+        // UnityGLTF keeps some driver/end nodes as ordinary Object3D nodes,
+        // not THREE.Bone instances. They still have a local quaternion and
+        // are part of the authored secondary-motion hierarchy.
+        if (child.name && child.quaternion && !child.isMesh) physicsNodes.push(child);
+    });
+    if (model?.skeleton?.bones?.length) bones.push(...model.skeleton.bones);
+    const uniqueBones = [...new Set(bones)];
+    state.skeletonBones = uniqueBones;
+    const restNodes = [...new Set([...uniqueBones, ...physicsNodes])];
+    state.restPose = restNodes.map(bone => ({
         bone,
         position: bone.position.clone(),
         quaternion: bone.quaternion.clone(),
@@ -1499,12 +2130,32 @@ function playAction(id) {
 
 function ensureMixer() {
     if (!state.model) return null;
-    if (!state.helper.objects.get(state.model)) {
-        state.helper.add(state.model, { physics: false });
+    if (state.modelFormat === 'glb') {
+        if (!state.animationMixer) {
+            // Bind against the GLB root. The exporter can contain several
+            // SkinnedMesh objects sharing one skeleton; binding the mixer to
+            // only the first mesh can leave valid .bones[...] tracks playing
+            // without changing the visible hierarchy.
+            state.animationMixer = new THREE.AnimationMixer(state.model);
+            state.animationMixer.addEventListener('loop', event => {
+                const tracks = event.action.getClip()?.tracks || [];
+                if (tracks.length > 0 && !String(tracks[0].name).startsWith('.bones')) return;
+                state.animationMixer.looped = true;
+            });
+        }
+        return state.animationMixer;
     }
-    const objects = state.helper.objects.get(state.model);
+    const target = state.animationTarget || state.model;
+    if (!state.helper.objects.get(target)) {
+        state.helper.add(target, {
+            physics: false,
+            ik: state.modelFormat !== 'glb',
+            grant: state.modelFormat !== 'glb',
+        });
+    }
+    const objects = state.helper.objects.get(target);
     if (!objects.mixer) {
-        objects.mixer = new THREE.AnimationMixer(state.model);
+        objects.mixer = new THREE.AnimationMixer(target);
         objects.mixer.addEventListener('loop', event => {
             const tracks = event.action.getClip()?.tracks || [];
             if (tracks.length > 0 && !String(tracks[0].name).startsWith('.bones')) return;
@@ -1512,6 +2163,12 @@ function ensureMixer() {
         });
     }
     return objects.mixer;
+}
+
+function currentMixer() {
+    return state.modelFormat === 'glb'
+        ? state.animationMixer
+        : state.helper.objects.get(state.animationTarget || state.model)?.mixer;
 }
 
 function clipKind(clipId) {
@@ -1595,7 +2252,8 @@ function playPlaylistIndex(index, options = {}) {
         if (fadeIncoming && fade > 0 && !isKept) action.fadeIn(fade);
     }
 
-    state.helper.update(0);
+    if (state.modelFormat === 'glb') currentMixer()?.update(0);
+    else state.helper.update(0);
     if (bodyFade <= 0) {
         for (const action of outgoing) action.stop();
     }
@@ -1640,7 +2298,7 @@ function flushPendingFinish() {
 }
 
 function finishCurrentMotion() {
-    const mixer = state.helper.objects.get(state.model)?.mixer;
+    const mixer = currentMixer();
     if (mixer) mixer.timeScale = 0;
     state.playing = false;
     updatePlaybackUi();
@@ -1895,7 +2553,7 @@ function togglePlayback() {
         playPlaylistIndex(0);
         return;
     }
-    const mixer = state.helper.objects.get(state.model)?.mixer;
+    const mixer = currentMixer();
     if (!mixer) return;
     state.playing = !state.playing;
     mixer.timeScale = state.playing ? 1 : 0;
@@ -1904,7 +2562,7 @@ function togglePlayback() {
 
 function applyLoopMode() {
     const item = state.playlistIndex >= 0 ? state.playlist[state.playlistIndex] : null;
-    const mixer = state.helper.objects.get(state.model)?.mixer;
+    const mixer = currentMixer();
     if (!item || !mixer || !state.liveActions.length) return;
     const loop = shouldLoopMotion(item, $('#loopToggle').checked);
     for (const action of state.liveActions) {
@@ -1946,30 +2604,150 @@ function resetCamera() {
     controls.update();
 }
 
+function renderSceneOptions() {
+    const select = $('#sceneSelect');
+    if (!select) return;
+    const scenes = state.library.config?.scenes || [];
+    select.replaceChildren(new Option('无场景（默认地台）', ''), ...scenes.map(item => new Option(item.name || item.id, item.id)));
+}
+
+function renderSceneLayoutOptions() {
+    const select = $('#sceneLayout');
+    if (!select) return;
+    const options = sceneStage.layoutOptions();
+    select.replaceChildren(...(options.length ? options.map(item => new Option(item.label, item.id)) : [new Option('先选择场景', '')]));
+    select.value = sceneStage.layoutId;
+    select.disabled = !options.length;
+    $('#sceneCameraBtn').disabled = !options.length;
+}
+
+function renderSceneStatus(text) {
+    const status = $('#sceneStatus');
+    if (!status) return;
+    if (text) {
+        status.textContent = text;
+        return;
+    }
+    if (!sceneStage.loaded) {
+        status.textContent = '场景只作背景，不投射阴影到角色；VN 立绘不受影响。';
+        return;
+    }
+    const volumes = sceneStage.grade?.volumes?.map(path => path.split('/').pop()).join('、') || '无';
+    status.textContent = `${sceneStage.sidecar.scene} · 生效后处理体积：${volumes}`;
+}
+
+function setStageFloorVisible(visible) {
+    floor.visible = visible;
+    grid.visible = visible && gridWanted;
+}
+
+function syncScenePost() {
+    const controls = $('#scenePostControls');
+    if (!sceneStage.loaded || !sceneStage.post) {
+        postPass.enabled = false;
+        postPass.apply(null);
+        if (controls) controls.hidden = true;
+        return;
+    }
+    postPass.enabled = true;
+    postPass.apply(sceneStage.post);
+    if (controls) controls.hidden = false;
+    for (const [id, name] of POST_MODULES) {
+        const input = $(`#${id}`);
+        if (input) input.checked = postPass.modules[name];
+    }
+}
+
+function applySceneCamera() {
+    const view = sceneStage.cameraView();
+    if (!view) return;
+    camera.position.fromArray(view.position);
+    controls.target.fromArray(view.target);
+    if (view.fov) camera.fov = view.fov;
+    sceneStage.ensureCameraRange(camera);
+    camera.updateProjectionMatrix();
+    controls.maxDistance = Math.max(60, camera.position.distanceTo(controls.target) * 1.5);
+    controls.update();
+}
+
+async function selectStageScene(sceneId) {
+    const entry = (state.library.config?.scenes || []).find(item => item.id === sceneId);
+    const select = $('#sceneSelect');
+    if (!entry) {
+        sceneStage.unload();
+        syncScenePost();
+        setStageFloorVisible(true);
+        camera.fov = DEFAULT_CAMERA_FOV;
+        camera.updateProjectionMatrix();
+        controls.maxDistance = 60;
+        renderSceneLayoutOptions();
+        renderSceneStatus();
+        return;
+    }
+    if (select) select.disabled = true;
+    renderSceneStatus(`正在载入 ${entry.name || entry.id}……`);
+    setStatus('正在载入场景');
+    try {
+        const url = libraryFileUrl(state.library.config, entry.pack, entry.path, libraryOverrides());
+        const stats = await sceneStage.load(url, { layout: entry.defaultLayout });
+        if (!stats) return;
+        setStageFloorVisible(false);
+        renderSceneLayoutOptions();
+        applySceneCamera();
+        syncScenePost();
+        renderSceneStatus();
+        setStatus('场景已载入', 'ready');
+        showToast(`已载入场景：${entry.name || entry.id}（${stats.meshes} 个网格，${stats.decals} 个贴花）`);
+    } catch (error) {
+        console.error('[MMD Stage] scene load failed', error);
+        sceneStage.unload();
+        syncScenePost();
+        setStageFloorVisible(true);
+        if (select) select.value = '';
+        renderSceneLayoutOptions();
+        renderSceneStatus(`场景载入失败：${error.message || error}`);
+        setStatus('场景载入失败', 'error');
+        showToast(`场景载入失败：${error.message || error}`, true);
+    } finally {
+        if (select) select.disabled = false;
+    }
+}
+
 function animate() {
     requestAnimationFrame(animate);
     const delta = Math.min(clock.getDelta(), 0.05);
     keyLight.target.updateMatrixWorld();
     keyLight.updateMatrixWorld();
     if (state.model) {
-        state.helper.update(delta);
+        secondaryMotion.restoreBeforeAnimation?.();
+        if (state.modelFormat === 'glb') currentMixer()?.update(delta);
+        else state.helper.update(delta);
+        captureMotionDebugFrame('after-animation');
         harvestFadedActions();
         flushPendingFinish();
         applyPerformanceOverlays();
-        secondaryMotion.update(delta);
         state.model.updateMatrixWorld(true);
+        captureStageBoneTraceFrame('input');
+        // Match HskiHairPortRunner.Update: animation has been sampled above;
+        // the fixed-step solver now writes secondary bones before rendering.
+        secondaryMotion.update(delta);
+        if (secondaryMotion.runtime?.renderFrames % 30 === 0) renderSecondaryMotionStatus();
+        captureMotionDebugFrame('after-secondary');
+        state.model.updateMatrixWorld(true);
+        captureStageBoneTraceFrame('output');
         updateColliderDebug();
     }
     controls.update();
     resizeRenderer();
+    sceneStage.ensureCameraRange(camera);
     if (state.materialMode === 'gakumas') {
         state.model?.updateMatrixWorld(true);
         camera.updateMatrixWorld();
-        if (state.gakumasPasses.hairShadow) hairShadowStage.capture(renderer, scene, camera);
         updateGakumasUniforms();
     }
     const draw = () => hairCoverStage.renderFrame(renderer, outlineEffect, scene, camera, state.materialMode === 'gakumas' && state.gakumasPasses.hairCover);
-    if (lookPass.enabled) lookPass.render(draw);
+    if (sceneStage.loaded && postPass.active) postPass.render(draw, camera);
+    else if (lookPass.enabled) lookPass.render(draw);
     else draw();
 }
 
@@ -2042,6 +2820,7 @@ function disposeObject(object) {
         });
     });
 }
+
 
 
 

@@ -57,12 +57,15 @@ export function parsePerformanceCommand(input) {
 }
 
 // MMDLoader names bone tracks `.bones[<name>].<property>` and morph tracks
-// `.morphTargetInfluences[<index>]`, so a clip's own tracks say whether it is a
-// body motion or a facial one. Trusting that beats trusting the file name.
+// `.morphTargetInfluences[<index>]`. GLB retargeting uses direct Bone node and
+// face-mesh paths, so classify both forms before pairing body and face clips.
 export function classifyClipTracks(trackNames) {
     const names = Array.isArray(trackNames) ? trackNames : [];
-    const bones = names.filter(name => String(name).startsWith('.bones[')).length;
-    const morphs = names.filter(name => String(name).startsWith('.morphTargetInfluences')).length;
+    const bones = names.filter(name => {
+        const value = String(name);
+        return value.startsWith('.bones[') || /\.(?:position|quaternion)$/.test(value) && !value.includes('morphTargetInfluences');
+    }).length;
+    const morphs = names.filter(name => /(?:^|\.)morphTargetInfluences\[/.test(String(name))).length;
     let kind = 'empty';
     if (bones && morphs) kind = 'mixed';
     else if (bones) kind = 'body';

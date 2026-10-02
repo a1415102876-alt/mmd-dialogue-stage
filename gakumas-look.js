@@ -11,15 +11,16 @@ export const GAKUMAS_LOOK = Object.freeze({
     shadowElevation: 16,
     keyColor: '#ffffff',
     rimColor: '#ffb197',
+    // View-space rim from the captured actor parameters: xyz direction, w power.
+    // Alpha 1 tints the rim by the ramped albedo. The MMD preset still uses rim/rimColor above.
+    rimView: [-0.4, -0.26, 0.87],
+    rimPower: 10,
+    rimAlbedo: 1,
     skinSaturation: 1.12,
     skinLift: 0.055,
     lightTermOffset: 0.16,
     shadowFloor: 0.22,
     specStrength: 0.38,
-    hairShadowStrength: 1.3,
-    hairShadowFloor: 0.12,
-    hairShadowSoftness: 0.045,
-    hairShadowRampPower: 1.25,
     shadeMultiply: [1, 1, 1],
     specSky: [0.72, 0.74, 0.78],
     specFloor: [0.16, 0.14, 0.13],
@@ -51,10 +52,9 @@ export function applyGakumasLookUniforms(uniforms, look = GAKUMAS_LOOK) {
     if (uniforms.gkSpecFloor) uniforms.gkSpecFloor.value.setRGB(...look.specFloor);
     if (uniforms.gkSpecHorizon) uniforms.gkSpecHorizon.value.setRGB(...look.specHorizon);
     if (uniforms.gkSpecStrength) uniforms.gkSpecStrength.value = look.specStrength;
-    if (uniforms.gkHairShadowStrength) uniforms.gkHairShadowStrength.value = look.hairShadowStrength;
-    if (uniforms.gkHairShadowFloor) uniforms.gkHairShadowFloor.value = look.hairShadowFloor;
-    if (uniforms.gkHairShadowSoftness) uniforms.gkHairShadowSoftness.value = look.hairShadowSoftness;
-    if (uniforms.gkHairShadowRampPower) uniforms.gkHairShadowRampPower.value = look.hairShadowRampPower;
+    if (uniforms.gkRimPower) uniforms.gkRimPower.value = look.rimPower ?? GAKUMAS_LOOK.rimPower;
+    if (uniforms.gkRimAlbedo) uniforms.gkRimAlbedo.value = look.rimAlbedo ?? GAKUMAS_LOOK.rimAlbedo;
+    if (uniforms.gkRimDirection && look.rimView) uniforms.gkRimDirection.value.set(look.rimView[0], look.rimView[1], look.rimView[2]);
     return uniforms;
 }
 
@@ -69,10 +69,6 @@ export function createGakumasLookUniformValues(look = GAKUMAS_LOOK) {
         gkSpecFloor: { value: new THREE.Color().setRGB(look.specFloor[0], look.specFloor[1], look.specFloor[2]) },
         gkSpecHorizon: { value: new THREE.Color().setRGB(look.specHorizon[0], look.specHorizon[1], look.specHorizon[2]) },
         gkSpecStrength: { value: look.specStrength },
-        gkHairShadowStrength: { value: look.hairShadowStrength },
-        gkHairShadowFloor: { value: look.hairShadowFloor },
-        gkHairShadowSoftness: { value: look.hairShadowSoftness },
-        gkHairShadowRampPower: { value: look.hairShadowRampPower },
     };
 }
 

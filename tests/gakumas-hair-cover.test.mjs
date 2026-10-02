@@ -47,7 +47,11 @@ test('only hair has a second pass; base arrays, geometry, maps and scene stay in
     assert.equal(entry.material.map, materials[1].map);
     assert.equal(entry.material.opacity, 1);
     assert.equal(entry.material.depthWrite, false);
-    assert.equal(entry.material.stencilWrite, false);
+    assert.equal(entry.material.depthTest, true);
+    assert.equal(entry.material.stencilWrite, true);
+    assert.equal(entry.material.stencilFunc, THREE.GreaterEqualStencilFunc);
+    assert.equal(entry.material.stencilRef, 64);
+    assert.equal(entry.material.stencilFuncMask, 0xff);
     assert.equal(entry.material.blendSrc, THREE.SrcAlphaFactor);
     assert.equal(entry.material.blendDst, THREE.OneMinusSrcAlphaFactor);
     assert.equal(entry.material.blendSrcAlpha, THREE.OneFactor);
@@ -91,14 +95,13 @@ test('stage restores callbacks on success and failure and never runs during outl
         getRenderTarget: () => null,
         render: () => {
             events.push('base');
-            const entry = stage.entries[0];
-            mesh.onAfterRender(renderer, scene, camera, geometry, entry.source, entry.groups[0]);
+            scene.onAfterRender(renderer, scene, camera);
         },
         renderBufferDirect: () => events.push('cover'),
     };
     const outline = { enabled: true, renderOutline: () => { events.push('outline'); scene.onAfterRender(renderer, scene, camera); } };
     stage.renderFrame(renderer, outline, scene, camera, true);
-    assert.deepEqual(events, ['base', 'cover', 'outline', 'base-hook']);
+    assert.deepEqual(events, ['base', 'cover', 'base-hook', 'outline', 'base-hook']);
     assert.equal(scene.onAfterRender, original);
     assert.equal(mesh.material, materials);
     events.length = 0;
@@ -110,6 +113,31 @@ test('stage restores callbacks on success and failure and never runs during outl
     assert.equal(mesh.material, materials);
 });
 
+test('single-material meshes still draw when three omits the geometry group', () => {
+    const geometry = new THREE.BufferGeometry();
+    geometry.setAttribute('position', new THREE.Float32BufferAttribute(new Float32Array(9), 3));
+    geometry.setIndex([0, 1, 2]);
+    const source = new THREE.MeshToonMaterial({ name: 'm_hir' });
+    const mesh = new THREE.SkinnedMesh(geometry, source);
+    const scene = new THREE.Scene();
+    scene.add(mesh);
+    const camera = new THREE.PerspectiveCamera();
+    scene.updateMatrixWorld(true);
+    const stage = new HairCoverStage();
+    stage.add(mesh, source, 0, {}, 't_chr_test_hir_col_alp.png');
+    const draws = [];
+    const renderer = {
+        render: () => scene.onAfterRender(renderer, scene, camera),
+        renderBufferDirect: (...args) => draws.push(args[5]),
+    };
+    stage.renderFrame(renderer, { enabled: false, renderOutline() {} }, scene, camera, true);
+    assert.equal(draws.length, 1);
+    assert.equal(draws[0].start, 0);
+    assert.equal(draws[0].count, 3);
+    assert.equal(stage.lastDraws.length, 1);
+    assert.equal(stage.lastDraws[0].name, 'm_hir');
+});
+
 test('hair cover can draw into a color render target', () => {
     const { stage, scene, camera, mesh, geometry } = fixture();
     const events = [];
@@ -117,8 +145,7 @@ test('hair cover can draw into a color render target', () => {
         getRenderTarget: () => ({}),
         render: () => {
             events.push('base');
-            const entry = stage.entries[0];
-            mesh.onAfterRender(renderer, scene, camera, geometry, entry.source, entry.groups[0]);
+            scene.onAfterRender(renderer, scene, camera);
         },
         renderBufferDirect: () => events.push('cover'),
     };

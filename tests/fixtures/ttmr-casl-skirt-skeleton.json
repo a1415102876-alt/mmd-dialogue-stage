@@ -1,0 +1,591 @@
+{
+  "source": "E:/gakumas-pmx-workflow/output/ttmr-casl/ttmr-casl.glb",
+  "sourceSha256": "0e9d951fd2650267f63892d26475d5933c0d2f9577abe7cb3433c45ddf2108a9",
+  "purpose": "Actual GLB transform hierarchy for seated skirt carrier regressions; mesh data omitted",
+  "nodes": [
+    {
+      "name": "mdl_chr_ttmr-casl-0000_body(Clone)_GLB",
+      "children": [
+        1
+      ]
+    },
+    {
+      "name": "Reference",
+      "children": [
+        2
+      ]
+    },
+    {
+      "name": "Hips",
+      "translation": [
+        0,
+        0.9521691,
+        0.01467801
+      ],
+      "children": [
+        3
+      ]
+    },
+    {
+      "name": "Pelvis",
+      "children": [
+        4,
+        25
+      ]
+    },
+    {
+      "name": "LeftUpLeg",
+      "translation": [
+        0.07311269,
+        -0.05846571,
+        -0.0125431884
+      ],
+      "rotation": [
+        0.5033075,
+        -0.496671,
+        -0.503307,
+        0.496670485
+      ],
+      "children": [
+        5,
+        24
+      ]
+    },
+    {
+      "name": "LeftUpLeg_H",
+      "translation": [
+        1.42108544e-16,
+        1.97952764e-15,
+        1.93542471e-9
+      ],
+      "children": [
+        6,
+        9,
+        12,
+        15,
+        18,
+        21
+      ]
+    },
+    {
+      "name": "LeftBackInSkirt1_S",
+      "translation": [
+        0.0388272144,
+        -0.0490651056,
+        0.0703
+      ],
+      "rotation": [
+        0.939671755,
+        0.006236273,
+        0.00226982124,
+        0.3420131
+      ],
+      "children": [
+        7
+      ]
+    },
+    {
+      "name": "LeftBackInSkirt2_S",
+      "translation": [
+        0.0387402326,
+        9.391306e-18,
+        5.888207e-19
+      ],
+      "rotation": [
+        -8.467514e-37,
+        1.68544605e-18,
+        5.023901e-19,
+        1
+      ],
+      "children": [
+        8
+      ]
+    },
+    {
+      "name": "LeftBackInSkirt3_S_End",
+      "translation": [
+        0.03461021,
+        0,
+        0
+      ],
+      "children": []
+    },
+    {
+      "name": "LeftBackSideSkirt1_S",
+      "translation": [
+        -0.0510379,
+        -0.0503313132,
+        -0.05694229
+      ],
+      "rotation": [
+        0.8922827,
+        -0.0491340831,
+        -0.0517937653,
+        -0.4457969
+      ],
+      "children": [
+        10
+      ]
+    },
+    {
+      "name": "LeftBackSideSkirt2_S",
+      "translation": [
+        0.08099648,
+        0,
+        2.52575729e-17
+      ],
+      "children": [
+        11
+      ]
+    },
+    {
+      "name": "LeftBackSideSkirt3_S_End",
+      "translation": [
+        0.08360197,
+        -2.7755575e-19,
+        -2.69229075e-17
+      ],
+      "children": []
+    },
+    {
+      "name": "LeftBackSkirt1_S",
+      "translation": [
+        -0.0142072234,
+        -0.107123956,
+        -0.0075000017
+      ],
+      "rotation": [
+        0.996172845,
+        0.00661125034,
+        -0.0005784061,
+        -0.0871533155
+      ],
+      "children": [
+        13
+      ]
+    },
+    {
+      "name": "LeftBackSkirt2_S",
+      "translation": [
+        0.0608569644,
+        -3.0846113e-18,
+        9.484282e-18
+      ],
+      "children": [
+        14
+      ]
+    },
+    {
+      "name": "LeftBackSkirt3_S_End",
+      "translation": [
+        0.066015996,
+        -3.0846113e-18,
+        6.192741e-18
+      ],
+      "children": []
+    },
+    {
+      "name": "LeftFrontInSkirt1_S",
+      "translation": [
+        0.037427213,
+        0.0574348867,
+        0.0703
+      ],
+      "rotation": [
+        0.422608554,
+        0.00280473754,
+        0.006014786,
+        0.906288
+      ],
+      "children": [
+        16
+      ]
+    },
+    {
+      "name": "LeftFrontInSkirt2_S",
+      "translation": [
+        0.0387402326,
+        1.827309e-17,
+        2.72341739e-17
+      ],
+      "children": [
+        17
+      ]
+    },
+    {
+      "name": "LeftFrontInSkirt3_S_End",
+      "translation": [
+        0.03461021,
+        8.881784e-18,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0.511085451,
+        0.85953
+      ],
+      "children": []
+    },
+    {
+      "name": "LeftFrontSideSkirt1_S",
+      "translation": [
+        -0.052406624,
+        0.0564515144,
+        -0.0572978668
+      ],
+      "rotation": [
+        -0.40419358,
+        0.050425306,
+        0.0524091274,
+        0.911777437
+      ],
+      "children": [
+        19
+      ]
+    },
+    {
+      "name": "LeftFrontSideSkirt2_S",
+      "translation": [
+        0.08099648,
+        -7.48012744e-17,
+        -1.91513471e-17
+      ],
+      "rotation": [
+        0,
+        1.73472348e-18,
+        0,
+        1
+      ],
+      "children": [
+        20
+      ]
+    },
+    {
+      "name": "LeftFrontSideSkirt3_S_End",
+      "translation": [
+        0.08360197,
+        -3.580469e-17,
+        8.60422851e-18
+      ],
+      "children": []
+    },
+    {
+      "name": "LeftFrontSkirt1_S",
+      "translation": [
+        -0.016405182,
+        0.09667608,
+        -0.00566683151
+      ],
+      "rotation": [
+        -0.00002600893,
+        0.00382945174,
+        0.00663637044,
+        0.9999707
+      ],
+      "children": [
+        22
+      ]
+    },
+    {
+      "name": "LeftFrontSkirt2_S",
+      "translation": [
+        0.0608569644,
+        1.59924056e-17,
+        -4.63427442e-17
+      ],
+      "rotation": [
+        -1.2700831e-23,
+        -1.01636633e-18,
+        -1.73223211e-18,
+        1
+      ],
+      "children": [
+        23
+      ]
+    },
+    {
+      "name": "LeftFrontSkirt3_S_End",
+      "translation": [
+        0.066015996,
+        -3.0846113e-18,
+        5.94834446e-17
+      ],
+      "children": []
+    },
+    {
+      "name": "LeftUpLeg_Roll_H",
+      "translation": [
+        0.13411729,
+        -0.000587737246,
+        8.881784e-18
+      ],
+      "children": []
+    },
+    {
+      "name": "RightUpLeg",
+      "translation": [
+        -0.07311269,
+        -0.0584660359,
+        -0.0125431865
+      ],
+      "rotation": [
+        -0.496670485,
+        -0.503307,
+        0.496671,
+        0.5033075
+      ],
+      "children": [
+        26,
+        45
+      ]
+    },
+    {
+      "name": "RightUpLeg_H",
+      "translation": [
+        1.42108544e-16,
+        -1.98063789e-15,
+        0
+      ],
+      "children": [
+        27,
+        30,
+        33,
+        36,
+        39,
+        42
+      ]
+    },
+    {
+      "name": "RightBackInSkirt1_S",
+      "translation": [
+        -0.0388272144,
+        0.0490651056,
+        -0.0703
+      ],
+      "rotation": [
+        0.006236273,
+        -0.939671755,
+        0.3420131,
+        -0.00226982124
+      ],
+      "children": [
+        28
+      ]
+    },
+    {
+      "name": "RightBackInSkirt2_S",
+      "translation": [
+        0.0387402326,
+        4.95041334e-18,
+        5.888207e-19
+      ],
+      "children": [
+        29
+      ]
+    },
+    {
+      "name": "RightBackInSkirt3_S_End",
+      "translation": [
+        0.03461021,
+        -4.440892e-18,
+        4.440892e-18
+      ],
+      "children": []
+    },
+    {
+      "name": "RightBackSideSkirt1_S",
+      "translation": [
+        0.0510379,
+        0.0503313132,
+        0.0569422841
+      ],
+      "rotation": [
+        -0.0491340831,
+        -0.8922827,
+        -0.4457969,
+        0.0517937653
+      ],
+      "children": [
+        31
+      ]
+    },
+    {
+      "name": "RightBackSideSkirt2_S",
+      "translation": [
+        0.08099648,
+        -3.927414e-17,
+        5.19029265e-17
+      ],
+      "children": [
+        32
+      ]
+    },
+    {
+      "name": "RightBackSideSkirt3_S_End",
+      "translation": [
+        0.08360197,
+        -3.580469e-17,
+        -2.69229075e-17
+      ],
+      "children": []
+    },
+    {
+      "name": "RightBackSkirt1_S",
+      "translation": [
+        0.0142072234,
+        0.107123956,
+        0.0075
+      ],
+      "rotation": [
+        0.00661125127,
+        -0.996172845,
+        -0.08715333,
+        0.000578406034
+      ],
+      "children": [
+        34
+      ]
+    },
+    {
+      "name": "RightBackSkirt2_S",
+      "translation": [
+        0.0608569644,
+        -2.05783114e-17,
+        1.24473113e-17
+      ],
+      "children": [
+        35
+      ]
+    },
+    {
+      "name": "RightBackSkirt3_S_End",
+      "translation": [
+        0.066015996,
+        -3.0846113e-18,
+        -2.6890432e-18
+      ],
+      "children": []
+    },
+    {
+      "name": "RightFrontInSkirt1_S",
+      "translation": [
+        -0.037427213,
+        -0.0574348867,
+        -0.0703
+      ],
+      "rotation": [
+        -0.00280473661,
+        0.422608435,
+        -0.9062881,
+        0.00601478666
+      ],
+      "children": [
+        37
+      ]
+    },
+    {
+      "name": "RightFrontInSkirt2_S",
+      "translation": [
+        0.0387402326,
+        1.38321977e-17,
+        1.835239e-17
+      ],
+      "children": [
+        38
+      ]
+    },
+    {
+      "name": "RightFrontInSkirt3_S_End",
+      "translation": [
+        0.03461021,
+        0,
+        -8.881784e-18
+      ],
+      "children": []
+    },
+    {
+      "name": "RightFrontSideSkirt1_S",
+      "translation": [
+        0.052406624,
+        -0.0564515144,
+        0.0572978668
+      ],
+      "rotation": [
+        -0.050425306,
+        -0.40419358,
+        -0.911777437,
+        0.0524091274
+      ],
+      "children": [
+        40
+      ]
+    },
+    {
+      "name": "RightFrontSideSkirt2_S",
+      "translation": [
+        0.08099648,
+        -3.927414e-17,
+        8.743006e-17
+      ],
+      "children": [
+        41
+      ]
+    },
+    {
+      "name": "RightFrontSideSkirt3_S_End",
+      "translation": [
+        0.08360197,
+        -3.580469e-17,
+        -2.69229075e-17
+      ],
+      "children": []
+    },
+    {
+      "name": "RightFrontSkirt1_S",
+      "translation": [
+        0.016405182,
+        -0.09667605,
+        0.00566682965
+      ],
+      "rotation": [
+        -0.00382938,
+        -0.0000367992943,
+        -0.9999707,
+        0.00663657859
+      ],
+      "children": [
+        43
+      ]
+    },
+    {
+      "name": "RightFrontSkirt2_S",
+      "translation": [
+        0.0608569644,
+        2.09132015e-13,
+        1.90892582e-8
+      ],
+      "children": [
+        44
+      ]
+    },
+    {
+      "name": "RightFrontSkirt3_S_End",
+      "translation": [
+        0.066015996,
+        1.46789569e-17,
+        6.192741e-18
+      ],
+      "children": []
+    },
+    {
+      "name": "RightUpLeg_Roll_H",
+      "translation": [
+        -0.134117335,
+        0.00058769196,
+        6.83936241e-10
+      ],
+      "children": []
+    }
+  ]
+}

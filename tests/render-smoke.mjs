@@ -32,7 +32,7 @@ const server = createServer(async (request, response) => {
         const file = resolve(root, `.${pathname === '/' ? '/index.html' : pathname}`);
         if (!file.startsWith(root + sep)) { response.writeHead(403).end(); return; }
         let body = await readFile(file);
-        if (file === resolve(root, 'app.js')) body = Buffer.concat([body, Buffer.from('\nglobalThis.__stageTest = { state, renderer, camera, controls, frameModel, applyMaterialStyle, hairCoverStage, hairShadowStage, secondaryMotion, scene, playPlaylistIndex, resetModelPose };')]);
+        if (file === resolve(root, 'app.js')) body = Buffer.concat([body, Buffer.from('\nglobalThis.__stageTest = { state, renderer, camera, controls, frameModel, applyMaterialStyle, hairCoverStage, secondaryMotion, scene, playPlaylistIndex, resetModelPose };')]);
         response.writeHead(200, { 'Content-Type': types[extname(file)] || 'application/octet-stream' }).end(body);
     } catch { response.writeHead(404).end(); }
 });
@@ -116,32 +116,44 @@ try {
     assert.equal(secondary.hairRestored, true, 'Disabling secondary motion did not restore hair rest');
     assert.equal(secondary.skirtMoved, true, 'UpLeg tilt did not drive LeftFrontSkirt_A');
     assert.equal(secondary.skirtRestored, true, 'Disabling secondary motion did not restore skirt rest');
-    for (const mode of ['0', '1', '2', '3', '4', '5', '6', '7', '8']) {
+    for (const mode of ['0', '1', '2', '3', '4', '5', '6', '7']) {
         await page.selectOption('#gakumasDebugView', mode);
         await settle();
         assert.equal(await page.evaluate(() => [...globalThis.__stageTest.state.gakumasUniforms][0].gkDebugView.value), Number(mode));
     }
     await page.selectOption('#gakumasDebugView', '0');
-    assert.equal(await page.locator('#gakumasCharacterShadow').isChecked(), false);
+    assert.equal(await page.locator('#gakumasCharacterShadow').isChecked(), true);
     assert.equal(await page.locator('#gakumasHairCover').isChecked(), true);
-    assert.equal(await page.locator('#gakumasHairShadow').isChecked(), true);
-    assert.equal(await page.evaluate(() => [...globalThis.__stageTest.state.gakumasUniforms][0].gkHairShadowEnabled.value), 1);
-    const hairShadowPolicy = await page.evaluate(() => {
+    assert.equal(await page.locator('#gakumasHairShadow').count(), 0);
+    await settle();
+    assert.equal(await page.evaluate(() => [...globalThis.__stageTest.state.gakumasUniforms][0].gkCharacterShadowEnabled.value), 1);
+    const shadowPolicy = await page.evaluate(() => {
         const mesh = globalThis.__stageTest.state.model;
+        const light = globalThis.__stageTest.scene.children.find(child => child.isDirectionalLight && child.userData?.gakumasCharacterShadow);
         return {
-            draws: globalThis.__stageTest.hairShadowStage.lastDraws.length,
-            receive: mesh.material.map(material => ({
+            mapSize: light?.shadow.mapSize.toArray(),
+            bias: light?.shadow.bias,
+            normalBias: light?.shadow.normalBias,
+            materials: mesh.material.map((material, index) => ({
+                name: material.name,
                 pass: material.userData.gakumasActorPass,
-                receive: material.userData.gakumasUniforms?.gkHairShadowReceive?.value,
+                receive: material.userData.gakumasUniforms?.gkCharacterShadowReceive?.value,
+                cast: mesh.userData.gakumasShadowMaterialMask?.[index],
             })),
         };
     });
-    assert.ok(hairShadowPolicy.draws > 0, 'hair shadow pass drew no hair groups');
-    assert.equal(hairShadowPolicy.receive.find(entry => entry.pass === 'face')?.receive, 1);
-    assert.equal(hairShadowPolicy.receive.find(entry => entry.pass === 'eye')?.receive, 1);
-    assert.equal(hairShadowPolicy.receive.find(entry => entry.pass === 'hair')?.receive, 0);
-    assert.equal(hairShadowPolicy.receive.find(entry => entry.pass === 'body')?.receive, 0);
-    await page.screenshot({ path: resolve(output, 'gakumas-hair-shadow-front.png') });
+    assert.deepEqual(shadowPolicy.mapSize, [4096, 4096]);
+    assert.equal(shadowPolicy.bias, 0);
+    assert.equal(shadowPolicy.normalBias, 0);
+    assert.equal(shadowPolicy.materials.find(entry => entry.pass === 'hair')?.receive, 1);
+    assert.equal(shadowPolicy.materials.find(entry => entry.pass === 'hair')?.cast, true);
+    assert.equal(shadowPolicy.materials.find(entry => entry.pass === 'face')?.receive, 1);
+    assert.equal(shadowPolicy.materials.find(entry => entry.pass === 'face')?.cast, false);
+    assert.equal(shadowPolicy.materials.find(entry => entry.pass === 'eye')?.receive, 1);
+    assert.equal(shadowPolicy.materials.find(entry => entry.pass === 'eye')?.cast, false);
+    assert.equal(shadowPolicy.materials.find(entry => entry.pass === 'body')?.receive, 1);
+    assert.equal(shadowPolicy.materials.find(entry => entry.pass === 'body')?.cast, true);
+    await page.screenshot({ path: resolve(output, 'gakumas-character-shadow-front.png') });
     const faceView = () => page.evaluate(() => {
         const { state, camera, controls } = globalThis.__stageTest;
         const headMatrix = state.gakumasHeadBone.matrixWorld.elements;
@@ -151,20 +163,18 @@ try {
     });
     await faceView();
     await settle();
-    const faceLit = await page.locator('#stageCanvas').screenshot({ path: resolve(output, 'hair-shadow-face.png') });
-    await page.selectOption('#gakumasDebugView', '8');
+    const faceLit = await page.locator('#stageCanvas').screenshot({ path: resolve(output, 'character-shadow-face.png') });
+    await page.selectOption('#gakumasDebugView', '7');
     await settle();
-    await page.screenshot({ path: resolve(output, 'hair-shadow-face-debug.png') });
+    await page.screenshot({ path: resolve(output, 'character-shadow-face-debug.png') });
     await page.selectOption('#gakumasDebugView', '0');
-    await page.locator('#gakumasHairShadow').uncheck();
+    await page.locator('#gakumasCharacterShadow').uncheck();
     await settle();
-    const faceUnlit = await page.locator('#stageCanvas').screenshot({ path: resolve(output, 'hair-shadow-face-off.png') });
+    const faceUnlit = await page.locator('#stageCanvas').screenshot({ path: resolve(output, 'character-shadow-face-off.png') });
     const faceShadowDifference = pixelDifference(faceLit, faceUnlit);
-    assert.ok(faceShadowDifference > 20000, `Bangs shadow made no visible difference on the face (${faceShadowDifference})`);
-    await page.locator('#gakumasHairShadow').check();
+    assert.ok(faceShadowDifference > 20000, `Character shadow made no visible difference on the face (${faceShadowDifference})`);
+    await page.locator('#gakumasCharacterShadow').check();
     await settle();
-    // Window depth is non-linear, so a badly biased comparison keeps working up
-    // close and silently loses the shadow as the camera pulls back.
     const distanceDifferences = [];
     for (const distance of [9, 26, 60]) {
         await page.evaluate(distance => {
@@ -176,10 +186,10 @@ try {
         }, distance);
         await settle();
         const lit = await page.locator('#stageCanvas').screenshot();
-        await page.locator('#gakumasHairShadow').uncheck();
+        await page.locator('#gakumasCharacterShadow').uncheck();
         await settle();
         const unlit = await page.locator('#stageCanvas').screenshot();
-        await page.locator('#gakumasHairShadow').check();
+        await page.locator('#gakumasCharacterShadow').check();
         await settle();
         distanceDifferences.push({ distance, difference: pixelDifference(lit, unlit) });
     }
@@ -195,19 +205,19 @@ try {
         }, angle);
         await settle();
         const lit = await page.locator('#stageCanvas').screenshot();
-        await page.locator('#gakumasHairShadow').uncheck();
+        await page.locator('#gakumasCharacterShadow').uncheck();
         await settle();
         const unlit = await page.locator('#stageCanvas').screenshot();
-        await page.locator('#gakumasHairShadow').check();
+        await page.locator('#gakumasCharacterShadow').check();
         await settle();
         angleDifferences.push({ angle, difference: pixelDifference(lit, unlit) });
     }
     console.log(JSON.stringify({ faceShadowDifference, distanceDifferences, angleDifferences }, null, 2));
     for (const entry of distanceDifferences) {
-        assert.ok(entry.difference > 5000, `Bangs shadow vanished at camera distance ${entry.distance} (${entry.difference})`);
+        assert.ok(entry.difference > 5000, `Character shadow vanished at camera distance ${entry.distance} (${entry.difference})`);
     }
     for (const entry of angleDifferences) {
-        assert.ok(entry.difference > 5000, `Bangs shadow vanished at camera azimuth ${entry.angle} (${entry.difference})`);
+        assert.ok(entry.difference > 5000, `Character shadow vanished at camera azimuth ${entry.angle} (${entry.difference})`);
     }
     await page.evaluate(() => {
         const { state, camera, controls, frameModel } = globalThis.__stageTest;
@@ -216,29 +226,8 @@ try {
         controls.update();
     });
     await settle();
-    await page.selectOption('#gakumasDebugView', '8');
-    await settle();
-    await page.screenshot({ path: resolve(output, 'gakumas-hair-shadow-debug.png') });
-    await page.selectOption('#gakumasDebugView', '0');
     await page.locator('#gakumasCharacterShadow').check();
     await settle();
-    assert.equal(await page.evaluate(() => [...globalThis.__stageTest.state.gakumasUniforms][0].gkCharacterShadowEnabled.value), 1);
-    const shadowPolicy = await page.evaluate(() => {
-        const mesh = globalThis.__stageTest.state.model;
-        return mesh.material.map((material, index) => ({
-            name: material.name,
-            pass: material.userData.gakumasActorPass,
-            receive: material.userData.gakumasUniforms?.gkCharacterShadowReceive?.value,
-            cast: mesh.userData.gakumasShadowMaterialMask?.[index],
-        }));
-    });
-    assert.equal(shadowPolicy.find(entry => entry.pass === 'hair')?.receive, 0);
-    assert.equal(shadowPolicy.find(entry => entry.pass === 'hair')?.cast, false);
-    assert.equal(shadowPolicy.find(entry => entry.pass === 'face')?.receive, 0);
-    assert.equal(shadowPolicy.find(entry => entry.pass === 'face')?.cast, false);
-    assert.equal(shadowPolicy.find(entry => entry.pass === 'body')?.receive, 1);
-    assert.equal(shadowPolicy.find(entry => entry.pass === 'body')?.cast, false);
-    await page.screenshot({ path: resolve(output, 'gakumas-character-shadow-front.png') });
     await page.evaluate(() => {
         const { camera, controls } = globalThis.__stageTest;
         camera.position.set(controls.target.x + 12, controls.target.y + 2, controls.target.z + 12);

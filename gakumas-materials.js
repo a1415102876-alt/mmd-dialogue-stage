@@ -1,6 +1,6 @@
 const suffixKinds = {
     col: 'base', col_alp: 'base', sdw: 'shade', shade: 'shade', def: 'def',
-    rmp: 'ramp', ramp: 'ramp', toon: 'ramp', hhl: 'highlight', highlight: 'highlight', hl: 'highlight',
+    rmp: 'ramp', ramp: 'ramp', toon: 'ramp', hhl: 'highlight', sph: 'highlight', highlight: 'highlight', hl: 'highlight',
     rma: 'rampAdd', lyr: 'layer', aniso: 'anisotropic', anisotropic: 'anisotropic',
 };
 
@@ -9,7 +9,10 @@ export const GAKUMAS_ACTIVE_TEXTURE_KINDS = ['shade', 'def', 'ramp', 'highlight'
 
 export function textureDescriptor(path) {
     const name = String(path || '').replace(/\\/g, '/').split('/').pop().toLowerCase();
-    const match = name.match(/^(.*?)[_-](col_alp|col|sdw|shade|def|rmp|ramp|toon|hhl|highlight|hl|rma|lyr|aniso|anisotropic)\.(?:png|jpe?g|webp)$/);
+    // GLTFLoader keeps the embedded image name without its original file
+    // extension. Accept both `foo_sdw.png` and `foo_sdw` so GLB materials can
+    // use the same texture table as PMX materials.
+    const match = name.match(/^(.*?)[_-](col_alp|col|sdw|shade|def|rmp|ramp|toon|hhl|sph|highlight|hl|rma|lyr|aniso|anisotropic)(?:_[a-z0-9]+)?(?:\.(?:png|jpe?g|webp))?$/);
     const stem = match?.[1] || name.replace(/\.[^.]+$/, '');
     const character = stem.match(/(?:^|_)chr_([a-z0-9]+)-/)?.[1] || '';
     return { name, stem, character, kind: suffixKinds[match?.[2]] || '', role: materialRole(stem) };
@@ -28,7 +31,11 @@ export function materialRole(name) {
 }
 
 export function describeMaterial(material) {
-    const source = material.userData?.MMD?.mapFileName || material.map?.userData?.sourceName || material.name || '';
+    const source = material.userData?.MMD?.mapFileName
+        || material.map?.userData?.sourceName
+        || material.map?.name
+        || material.name
+        || '';
     const descriptor = textureDescriptor(source);
     return { ...descriptor, role: descriptor.role === 'other' ? materialRole(material.name) : descriptor.role };
 }

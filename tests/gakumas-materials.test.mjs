@@ -82,7 +82,8 @@ test('shader preserves MMD source and installs one actor lighting replacement', 
     injectActorShader(shader, uniforms);
     assert.equal(shader.uniforms.gkDebugView, uniforms.gkDebugView);
     assert.equal(shader.fragmentShader.match(/#include <lights_fragment_end>/g).length, 1);
-    assert.match(shader.fragmentShader, /#include <shadowmask_pars_fragment>/);
+    assert.match(shader.fragmentShader, /unpackRGBAToDepth\(texture2D\(gkCharacterShadowMap, gkShadowProj\.xy\)\)/);
+    assert.doesNotMatch(shader.fragmentShader, /gkHairShadow/);
     assert.match(shader.fragmentShader, /gkDef.r \* 2.0 - 1.0/);
     assert.match(shader.fragmentShader, /gkSkinMask = gkShade.a/);
     assert.match(shader.fragmentShader, /reflect\(gkNormalWS, normalize\(gkHeadRight\)\)/);

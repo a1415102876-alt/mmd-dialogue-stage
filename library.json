@@ -4,7 +4,7 @@
   "localBase": "/mmd-dialogue-stage/library/file",
   "r2": {
     "baseUrl": "",
-    "comment": "Objects live on R2 bucket gakuen under idols/ and motions/. Set baseUrl to gakuen public pub-*.r2.dev then source=r2.",
+    "comment": "gakuen bucket objects are under idols/ and motions/. Enable R2.dev public access on bucket gakuen, then set baseUrl to that pub-*.r2.dev URL (the hatsuboshi pub-cfdeb8f... host is a different bucket).",
     "bucket": "gakuen",
     "accountId": "3b8121f92099336587cf87837240c3be"
   },
@@ -14,7 +14,7 @@
       "name": "藤田琴音",
       "outfit": "CASL",
       "pack": "idols/fktn",
-      "model": "fktn-casl-reference-matched-vmd-face.pmx",
+      "model": "fktn-casl.glb",
       "textureDir": "Texture2D",
       "note": "试探口型：あ mouth_032，い 025+026，う 021，え 025，お 023；情绪规则以后再加",
       "visemes": {
@@ -32,7 +32,7 @@
       "name": "有村麻央",
       "outfit": "CASL",
       "pack": "idols/amao",
-      "model": "amao-casl-vmd.pmx",
+      "model": "amao-casl.glb",
       "textureDir": "Texture2D",
       "note": "已导出CASL；口型与二次运动尚未专门适配"
     },
@@ -41,7 +41,7 @@
       "name": "月村手毬",
       "outfit": "CASL",
       "pack": "idols/ttmr",
-      "model": "ttmr-casl-vmd.pmx",
+      "model": "ttmr-casl.glb",
       "textureDir": "Texture2D",
       "note": "已导出CASL；口型与二次运动尚未专门适配"
     },
@@ -50,7 +50,7 @@
       "name": "仓本千奈",
       "outfit": "CASL",
       "pack": "idols/kcna",
-      "model": "kcna-casl-vmd.pmx",
+      "model": "kcna-casl.glb",
       "textureDir": "Texture2D",
       "note": "已导出CASL；口型与二次运动尚未专门适配"
     },
@@ -59,7 +59,7 @@
       "name": "筱泽广",
       "outfit": "CASL",
       "pack": "idols/shro",
-      "model": "shro-casl-vmd.pmx",
+      "model": "shro-casl.glb",
       "textureDir": "Texture2D",
       "note": "已导出CASL；口型与二次运动尚未专门适配"
     },
@@ -68,7 +68,7 @@
       "name": "花海咲季",
       "outfit": "SCHL-0000",
       "pack": "idols/hski",
-      "model": "hski-schl-0000-vmd.pmx",
+      "model": "hski-schl-0000-glb-hair-layer.glb",
       "textureDir": "Texture2D",
       "note": "已导出SCHL学校制服；口型与二次运动尚未专门适配"
     },
@@ -77,7 +77,7 @@
       "name": "花海佑芽",
       "outfit": "SCHL-0000",
       "pack": "idols/hume",
-      "model": "hume-schl-0000-vmd.pmx",
+      "model": "hume-schl-0000.glb",
       "textureDir": "Texture2D",
       "note": "已导出SCHL学校制服；口型与二次运动尚未专门适配"
     },
@@ -86,7 +86,7 @@
       "name": "姬崎莉波",
       "outfit": "SCHL-0000",
       "pack": "idols/hrnm",
-      "model": "hrnm-schl-0000-vmd.pmx",
+      "model": "hrnm-schl-0000.glb",
       "textureDir": "Texture2D",
       "note": "已导出SCHL学校制服；口型与二次运动尚未专门适配"
     },
@@ -95,7 +95,7 @@
       "name": "紫云清夏",
       "outfit": "SCHL-0000",
       "pack": "idols/ssmk",
-      "model": "ssmk-schl-0000-vmd.pmx",
+      "model": "ssmk-schl-0000.glb",
       "textureDir": "Texture2D",
       "note": "已导出SCHL学校制服；口型与二次运动尚未专门适配"
     },
@@ -104,7 +104,7 @@
       "name": "葛城莉莉娅",
       "outfit": "SCHL-0000",
       "pack": "idols/kllj",
-      "model": "kllj-schl-0000-vmd.pmx",
+      "model": "kllj-schl-0000.glb",
       "textureDir": "Texture2D",
       "note": "已导出SCHL学校制服；口型与二次运动尚未专门适配"
     },
@@ -113,7 +113,7 @@
       "name": "十王星南",
       "outfit": "SCHL-0000",
       "pack": "idols/jsna",
-      "model": "jsna-schl-0000-vmd.pmx",
+      "model": "jsna-schl-0000.glb",
       "textureDir": "Texture2D",
       "note": "已导出SCHL学校制服；口型与二次运动尚未专门适配"
     },
@@ -122,7 +122,7 @@
       "name": "秦谷美铃",
       "outfit": "SCHL-0000",
       "pack": "idols/hmsz",
-      "model": "hmsz-schl-0000-vmd.pmx",
+      "model": "hmsz-schl-0000.glb",
       "textureDir": "Texture2D",
       "note": "已导出SCHL学校制服；口型与二次运动尚未专门适配"
     },
@@ -131,127 +131,518 @@
       "name": "雨夜燕",
       "outfit": "SCHL-0000",
       "pack": "idols/atbm",
-      "model": "atbm-schl-0000-vmd.pmx",
+      "model": "atbm-schl-0000.glb",
       "textureDir": "Texture2D",
       "note": "已导出SCHL学校制服；口型与二次运动尚未专门适配"
     }
   ],
   "packs": {
     "idols/fktn": {
-      "root": "library/file/idols/fktn",
+      "root": "E:/gakumas-pmx-workflow/output/fktn-casl",
       "r2Prefix": "idols/fktn"
     },
     "motions/cmmn-body": {
-      "root": "library/file/motions/cmmn-body",
+      "root": "E:/gakumas-motion-batches/cmmn-001/vmd-hips",
       "r2Prefix": "motions/cmmn-body"
     },
     "motions/cmmn-face": {
-      "root": "library/file/motions/cmmn-face",
+      "root": "E:/gakumas-motion-batches/cmmn-001/vmd-face",
       "r2Prefix": "motions/cmmn-face"
     },
     "motions/fktn-body": {
-      "root": "library/file/motions/fktn-body",
+      "root": "G:/SillyTavern/SillyTavern/tools/gakumas-motion-workbench/generated/batches/fktn-001/vmd-hips",
       "r2Prefix": "motions/fktn-body"
     },
     "idols/amao": {
-      "root": "library/file/idols/amao",
+      "root": "E:/gakumas-pmx-workflow/output/amao-casl",
       "r2Prefix": "idols/amao"
     },
     "idols/ttmr": {
-      "root": "library/file/idols/ttmr",
+      "root": "E:/gakumas-pmx-workflow/output/ttmr-casl",
       "r2Prefix": "idols/ttmr"
     },
     "idols/kcna": {
-      "root": "library/file/idols/kcna",
+      "root": "E:/gakumas-pmx-workflow/output/kcna-casl",
       "r2Prefix": "idols/kcna"
     },
     "idols/shro": {
-      "root": "library/file/idols/shro",
+      "root": "E:/gakumas-pmx-workflow/output/shro-casl",
       "r2Prefix": "idols/shro"
     },
     "idols/hski": {
-      "root": "library/file/idols/hski",
+      "root": "E:/gakumas-pmx-workflow/output/hski-schl-0000",
       "r2Prefix": "idols/hski"
     },
     "idols/hume": {
-      "root": "library/file/idols/hume",
+      "root": "E:/gakumas-pmx-workflow/output/hume-schl-0000",
       "r2Prefix": "idols/hume"
     },
     "idols/hrnm": {
-      "root": "library/file/idols/hrnm",
+      "root": "E:/gakumas-pmx-workflow/output/hrnm-schl-0000",
       "r2Prefix": "idols/hrnm"
     },
     "idols/ssmk": {
-      "root": "library/file/idols/ssmk",
+      "root": "E:/gakumas-pmx-workflow/output/ssmk-schl-0000",
       "r2Prefix": "idols/ssmk"
     },
     "idols/kllj": {
-      "root": "library/file/idols/kllj",
+      "root": "E:/gakumas-pmx-workflow/output/kllj-schl-0000",
       "r2Prefix": "idols/kllj"
     },
     "idols/jsna": {
-      "root": "library/file/idols/jsna",
+      "root": "E:/gakumas-pmx-workflow/output/jsna-schl-0000",
       "r2Prefix": "idols/jsna"
     },
     "idols/hmsz": {
-      "root": "library/file/idols/hmsz",
+      "root": "E:/gakumas-pmx-workflow/output/hmsz-schl-0000",
       "r2Prefix": "idols/hmsz"
     },
     "idols/atbm": {
-      "root": "library/file/idols/atbm",
+      "root": "E:/gakumas-pmx-workflow/output/atbm-schl-0000",
       "r2Prefix": "idols/atbm"
     },
     "motions/amao-dedicated-body": {
-      "root": "library/file/motions/amao-dedicated-body",
+      "root": "G:\\SillyTavern\\SillyTavern\\tools\\gakumas-motion-workbench\\generated\\dedicated-vmd\\amao",
       "r2Prefix": "motions/amao-dedicated-body"
     },
     "motions/atbm-dedicated-body": {
-      "root": "library/file/motions/atbm-dedicated-body",
+      "root": "G:\\SillyTavern\\SillyTavern\\tools\\gakumas-motion-workbench\\generated\\dedicated-vmd\\atbm",
       "r2Prefix": "motions/atbm-dedicated-body"
     },
     "motions/hmsz-dedicated-body": {
-      "root": "library/file/motions/hmsz-dedicated-body",
+      "root": "G:\\SillyTavern\\SillyTavern\\tools\\gakumas-motion-workbench\\generated\\dedicated-vmd\\hmsz",
       "r2Prefix": "motions/hmsz-dedicated-body"
     },
     "motions/hrnm-dedicated-body": {
-      "root": "library/file/motions/hrnm-dedicated-body",
+      "root": "G:\\SillyTavern\\SillyTavern\\tools\\gakumas-motion-workbench\\generated\\dedicated-vmd\\hrnm",
       "r2Prefix": "motions/hrnm-dedicated-body"
     },
     "motions/hski-dedicated-body": {
-      "root": "library/file/motions/hski-dedicated-body",
+      "root": "G:\\SillyTavern\\SillyTavern\\tools\\gakumas-motion-workbench\\generated\\dedicated-vmd\\hski",
       "r2Prefix": "motions/hski-dedicated-body"
     },
     "motions/hume-dedicated-body": {
-      "root": "library/file/motions/hume-dedicated-body",
+      "root": "G:\\SillyTavern\\SillyTavern\\tools\\gakumas-motion-workbench\\generated\\dedicated-vmd\\hume",
       "r2Prefix": "motions/hume-dedicated-body"
     },
     "motions/jsna-dedicated-body": {
-      "root": "library/file/motions/jsna-dedicated-body",
+      "root": "G:\\SillyTavern\\SillyTavern\\tools\\gakumas-motion-workbench\\generated\\dedicated-vmd\\jsna",
       "r2Prefix": "motions/jsna-dedicated-body"
     },
     "motions/kcna-dedicated-body": {
-      "root": "library/file/motions/kcna-dedicated-body",
+      "root": "G:\\SillyTavern\\SillyTavern\\tools\\gakumas-motion-workbench\\generated\\dedicated-vmd\\kcna",
       "r2Prefix": "motions/kcna-dedicated-body"
     },
     "motions/kllj-dedicated-body": {
-      "root": "library/file/motions/kllj-dedicated-body",
+      "root": "G:\\SillyTavern\\SillyTavern\\tools\\gakumas-motion-workbench\\generated\\dedicated-vmd\\kllj",
       "r2Prefix": "motions/kllj-dedicated-body"
     },
     "motions/shro-dedicated-body": {
-      "root": "library/file/motions/shro-dedicated-body",
+      "root": "G:\\SillyTavern\\SillyTavern\\tools\\gakumas-motion-workbench\\generated\\dedicated-vmd\\shro",
       "r2Prefix": "motions/shro-dedicated-body"
     },
     "motions/ssmk-dedicated-body": {
-      "root": "library/file/motions/ssmk-dedicated-body",
+      "root": "G:\\SillyTavern\\SillyTavern\\tools\\gakumas-motion-workbench\\generated\\dedicated-vmd\\ssmk",
       "r2Prefix": "motions/ssmk-dedicated-body"
     },
     "motions/ttmr-dedicated-body": {
-      "root": "library/file/motions/ttmr-dedicated-body",
+      "root": "G:\\SillyTavern\\SillyTavern\\tools\\gakumas-motion-workbench\\generated\\dedicated-vmd\\ttmr",
       "r2Prefix": "motions/ttmr-dedicated-body"
     },
     "motions/fktn-dedicated-body": {
-      "root": "library/file/motions/fktn-dedicated-body",
+      "root": "G:\\SillyTavern\\SillyTavern\\tools\\gakumas-motion-workbench\\generated\\dedicated-vmd\\fktn",
       "r2Prefix": "motions/fktn-dedicated-body"
+    },
+    "scenes/gakumas": {
+      "root": "E:/gakumas-scene-export/output",
+      "r2Prefix": "scenes/gakumas"
     }
-  }
+  },
+  "scenes": [
+    {
+      "id": "home-classroom-noon",
+      "name": "家·教室（午）",
+      "pack": "scenes/gakumas",
+      "path": "env_3d_home_classroom-00-00-noon/scene.json",
+      "defaultLayout": "home-commu"
+    },
+    {
+      "id": "home-classroom-night",
+      "name": "家·教室（夜）",
+      "pack": "scenes/gakumas",
+      "path": "env_3d_home_classroom-00-00-night/scene.json",
+      "defaultLayout": "home-commu"
+    },
+    {
+      "id": "adv-classroom-00-00-evening",
+      "name": "教室（晚）",
+      "pack": "scenes/gakumas",
+      "path": "env_3d_adv_classroom-00-00-evening/scene.json",
+      "defaultLayout": "overview"
+    },
+    {
+      "id": "adv-classroom-00-00-noon",
+      "name": "教室（午）",
+      "pack": "scenes/gakumas",
+      "path": "env_3d_adv_classroom-00-00-noon/scene.json",
+      "defaultLayout": "overview"
+    },
+    {
+      "id": "adv-classroom-00-01-evening",
+      "name": "教室 00-01（晚）",
+      "pack": "scenes/gakumas",
+      "path": "env_3d_adv_classroom-00-01-evening/scene.json",
+      "defaultLayout": "overview"
+    },
+    {
+      "id": "adv-classroom-00-01-noon",
+      "name": "教室 00-01（午）",
+      "pack": "scenes/gakumas",
+      "path": "env_3d_adv_classroom-00-01-noon/scene.json",
+      "defaultLayout": "overview"
+    },
+    {
+      "id": "adv-consultingroom-00-00-noon",
+      "name": "保健室（午）",
+      "pack": "scenes/gakumas",
+      "path": "env_3d_adv_consultingroom-00-00-noon/scene.json",
+      "defaultLayout": "overview"
+    },
+    {
+      "id": "adv-corridor-00-00-noon",
+      "name": "走廊（午）",
+      "pack": "scenes/gakumas",
+      "path": "env_3d_adv_corridor-00-00-noon/scene.json",
+      "defaultLayout": "overview"
+    },
+    {
+      "id": "adv-councilroom-00-00-noon",
+      "name": "学生会室（午）",
+      "pack": "scenes/gakumas",
+      "path": "env_3d_adv_councilroom-00-00-noon/scene.json",
+      "defaultLayout": "overview"
+    },
+    {
+      "id": "adv-councilroom-00-01-noon",
+      "name": "学生会室 00-01（午）",
+      "pack": "scenes/gakumas",
+      "path": "env_3d_adv_councilroom-00-01-noon/scene.json",
+      "defaultLayout": "overview"
+    },
+    {
+      "id": "adv-courtyard-00-00-evening",
+      "name": "中庭（晚）",
+      "pack": "scenes/gakumas",
+      "path": "env_3d_adv_courtyard-00-00-evening/scene.json",
+      "defaultLayout": "overview"
+    },
+    {
+      "id": "adv-courtyard-00-01-evening",
+      "name": "中庭 00-01（晚）",
+      "pack": "scenes/gakumas",
+      "path": "env_3d_adv_courtyard-00-01-evening/scene.json",
+      "defaultLayout": "overview"
+    },
+    {
+      "id": "adv-danceroom-00-00-noon",
+      "name": "舞蹈室（午）",
+      "pack": "scenes/gakumas",
+      "path": "env_3d_adv_danceroom-00-00-noon/scene.json",
+      "defaultLayout": "overview"
+    },
+    {
+      "id": "adv-riverbed-00-00-evening",
+      "name": "河岸（晚）",
+      "pack": "scenes/gakumas",
+      "path": "env_3d_adv_riverbed-00-00-evening/scene.json",
+      "defaultLayout": "overview"
+    },
+    {
+      "id": "adv-riverbed-00-00-noon",
+      "name": "河岸（午）",
+      "pack": "scenes/gakumas",
+      "path": "env_3d_adv_riverbed-00-00-noon/scene.json",
+      "defaultLayout": "overview"
+    },
+    {
+      "id": "adv-rooftop-00-00-noon",
+      "name": "屋顶（午）",
+      "pack": "scenes/gakumas",
+      "path": "env_3d_adv_rooftop-00-00-noon/scene.json",
+      "defaultLayout": "overview"
+    },
+    {
+      "id": "adv-schoolgarden-00-00-noon",
+      "name": "校园（午）",
+      "pack": "scenes/gakumas",
+      "path": "env_3d_adv_schoolgarden-00-00-noon/scene.json",
+      "defaultLayout": "overview"
+    },
+    {
+      "id": "adv-schoolgarden-00-03-noon",
+      "name": "校园 00-03（午）",
+      "pack": "scenes/gakumas",
+      "path": "env_3d_adv_schoolgarden-00-03-noon/scene.json",
+      "defaultLayout": "overview"
+    },
+    {
+      "id": "adv-schoolroom-00-00-evening",
+      "name": "学园教室（晚）",
+      "pack": "scenes/gakumas",
+      "path": "env_3d_adv_schoolroom-00-00-evening/scene.json",
+      "defaultLayout": "overview"
+    },
+    {
+      "id": "adv-schoolroom-00-00-noon",
+      "name": "学园教室（午）",
+      "pack": "scenes/gakumas",
+      "path": "env_3d_adv_schoolroom-00-00-noon/scene.json",
+      "defaultLayout": "overview"
+    },
+    {
+      "id": "adv-schoolroom-00-02-noon",
+      "name": "学园教室 00-02（午）",
+      "pack": "scenes/gakumas",
+      "path": "env_3d_adv_schoolroom-00-02-noon/scene.json",
+      "defaultLayout": "overview"
+    },
+    {
+      "id": "adv-sharedspace-00-00-noon",
+      "name": "共享空间（午）",
+      "pack": "scenes/gakumas",
+      "path": "env_3d_adv_sharedspace-00-00-noon/scene.json",
+      "defaultLayout": "overview"
+    },
+    {
+      "id": "adv-toschool-00-00-night",
+      "name": "上学路（夜）",
+      "pack": "scenes/gakumas",
+      "path": "env_3d_adv_toschool-00-00-night/scene.json",
+      "defaultLayout": "overview"
+    },
+    {
+      "id": "adv-toschool-00-00-noon",
+      "name": "上学路（午）",
+      "pack": "scenes/gakumas",
+      "path": "env_3d_adv_toschool-00-00-noon/scene.json",
+      "defaultLayout": "overview"
+    },
+    {
+      "id": "adv-toschool-00-02-night",
+      "name": "上学路 00-02（夜）",
+      "pack": "scenes/gakumas",
+      "path": "env_3d_adv_toschool-00-02-night/scene.json",
+      "defaultLayout": "overview"
+    },
+    {
+      "id": "adv-toschool-00-02-noon",
+      "name": "上学路 00-02（午）",
+      "pack": "scenes/gakumas",
+      "path": "env_3d_adv_toschool-00-02-noon/scene.json",
+      "defaultLayout": "overview"
+    },
+    {
+      "id": "adv-toschoolop-00-00-noon",
+      "name": "上学路·开场（午）",
+      "pack": "scenes/gakumas",
+      "path": "env_3d_adv_toschoolop-00-00-noon/scene.json",
+      "defaultLayout": "overview"
+    },
+    {
+      "id": "adv-visualroom-00-02-noon",
+      "name": "影像室 00-02（午）",
+      "pack": "scenes/gakumas",
+      "path": "env_3d_adv_visualroom-00-02-noon/scene.json",
+      "defaultLayout": "overview"
+    },
+    {
+      "id": "adv-vocalroom-00-00-noon",
+      "name": "声乐室（午）",
+      "pack": "scenes/gakumas",
+      "path": "env_3d_adv_vocalroom-00-00-noon/scene.json",
+      "defaultLayout": "overview"
+    },
+    {
+      "id": "adv-vocalroom-00-01-noon",
+      "name": "声乐室 00-01（午）",
+      "pack": "scenes/gakumas",
+      "path": "env_3d_adv_vocalroom-00-01-noon/scene.json",
+      "defaultLayout": "overview"
+    },
+    {
+      "id": "adv-waitingroom-00-00-noon",
+      "name": "等候室（午）",
+      "pack": "scenes/gakumas",
+      "path": "env_3d_adv_waitingroom-00-00-noon/scene.json",
+      "defaultLayout": "overview"
+    },
+    {
+      "id": "dress-dressroom-00-00-noon",
+      "name": "服装室（午）",
+      "pack": "scenes/gakumas",
+      "path": "env_3d_dress_dressroom-00-00-noon/scene.json",
+      "defaultLayout": "overview"
+    },
+    {
+      "id": "home-classroom-00-00-evening",
+      "name": "家·教室（晚）",
+      "pack": "scenes/gakumas",
+      "path": "env_3d_home_classroom-00-00-evening/scene.json",
+      "defaultLayout": "home-commu"
+    },
+    {
+      "id": "home-classroom-00-00-morning",
+      "name": "家·教室（早）",
+      "pack": "scenes/gakumas",
+      "path": "env_3d_home_classroom-00-00-morning/scene.json",
+      "defaultLayout": "home-commu"
+    },
+    {
+      "id": "home-classroom-01-00-evening",
+      "name": "家·教室 01-00（晚）",
+      "pack": "scenes/gakumas",
+      "path": "env_3d_home_classroom-01-00-evening/scene.json",
+      "defaultLayout": "home-commu"
+    },
+    {
+      "id": "home-classroom-01-00-morning",
+      "name": "家·教室 01-00（早）",
+      "pack": "scenes/gakumas",
+      "path": "env_3d_home_classroom-01-00-morning/scene.json",
+      "defaultLayout": "home-commu"
+    },
+    {
+      "id": "home-classroom-01-00-night",
+      "name": "家·教室 01-00（夜）",
+      "pack": "scenes/gakumas",
+      "path": "env_3d_home_classroom-01-00-night/scene.json",
+      "defaultLayout": "home-commu"
+    },
+    {
+      "id": "home-classroom-01-00-noon",
+      "name": "家·教室 01-00（午）",
+      "pack": "scenes/gakumas",
+      "path": "env_3d_home_classroom-01-00-noon/scene.json",
+      "defaultLayout": "home-commu"
+    },
+    {
+      "id": "lesson-danceroom-00-00-noon",
+      "name": "课程·舞蹈室（午）",
+      "pack": "scenes/gakumas",
+      "path": "env_3d_lesson_danceroom-00-00-noon/scene.json",
+      "defaultLayout": "overview"
+    },
+    {
+      "id": "lesson-danceroom-00-01-noon",
+      "name": "课程·舞蹈室 00-01（午）",
+      "pack": "scenes/gakumas",
+      "path": "env_3d_lesson_danceroom-00-01-noon/scene.json",
+      "defaultLayout": "overview"
+    },
+    {
+      "id": "lesson-visualroom-00-00-noon",
+      "name": "课程·影像室（午）",
+      "pack": "scenes/gakumas",
+      "path": "env_3d_lesson_visualroom-00-00-noon/scene.json",
+      "defaultLayout": "overview"
+    },
+    {
+      "id": "lesson-vocalroom-00-00-noon",
+      "name": "课程·声乐室（午）",
+      "pack": "scenes/gakumas",
+      "path": "env_3d_lesson_vocalroom-00-00-noon/scene.json",
+      "defaultLayout": "overview"
+    },
+    {
+      "id": "live-all001-00-noon",
+      "name": "演出舞台（午）",
+      "pack": "scenes/gakumas",
+      "path": "env_3d_live_all001-00-noon/scene.json",
+      "defaultLayout": "overview"
+    },
+    {
+      "id": "live-courtyard-00-00-evening",
+      "name": "中庭演出（晚）",
+      "pack": "scenes/gakumas",
+      "path": "env_3d_live_courtyard-00-00-evening/scene.json",
+      "defaultLayout": "overview"
+    },
+    {
+      "id": "live-courtyard-00-01-noon",
+      "name": "中庭演出 00-01（午）",
+      "pack": "scenes/gakumas",
+      "path": "env_3d_live_courtyard-00-01-noon/scene.json",
+      "defaultLayout": "overview"
+    },
+    {
+      "id": "live-schoolgarden-00-00-noon",
+      "name": "校园演出（午）",
+      "pack": "scenes/gakumas",
+      "path": "env_3d_live_schoolgarden-00-00-noon/scene.json",
+      "defaultLayout": "overview"
+    },
+    {
+      "id": "prod-classroom-00-00-noon",
+      "name": "制作·教室（午）",
+      "pack": "scenes/gakumas",
+      "path": "env_3d_prod_classroom-00-00-noon/scene.json",
+      "defaultLayout": "overview"
+    },
+    {
+      "id": "prod-classroom-00-02-noon",
+      "name": "制作·教室 00-02（午）",
+      "pack": "scenes/gakumas",
+      "path": "env_3d_prod_classroom-00-02-noon/scene.json",
+      "defaultLayout": "overview"
+    },
+    {
+      "id": "prod-classroom-00-03-noon",
+      "name": "制作·教室 00-03（午）",
+      "pack": "scenes/gakumas",
+      "path": "env_3d_prod_classroom-00-03-noon/scene.json",
+      "defaultLayout": "overview"
+    },
+    {
+      "id": "prod-courtyard-01-00-noon",
+      "name": "制作·中庭 01-00（午）",
+      "pack": "scenes/gakumas",
+      "path": "env_3d_prod_courtyard-01-00-noon/scene.json",
+      "defaultLayout": "overview"
+    },
+    {
+      "id": "prod-rooftop-01-00-noon",
+      "name": "制作·屋顶 01-00（午）",
+      "pack": "scenes/gakumas",
+      "path": "env_3d_prod_rooftop-01-00-noon/scene.json",
+      "defaultLayout": "overview"
+    },
+    {
+      "id": "prod-schoolgarden-01-01-noon",
+      "name": "制作·校园 01-01（午）",
+      "pack": "scenes/gakumas",
+      "path": "env_3d_prod_schoolgarden-01-01-noon/scene.json",
+      "defaultLayout": "overview"
+    },
+    {
+      "id": "prod-schoolroom-01-00-noon",
+      "name": "制作·学园教室 01-00（午）",
+      "pack": "scenes/gakumas",
+      "path": "env_3d_prod_schoolroom-01-00-noon/scene.json",
+      "defaultLayout": "overview"
+    },
+    {
+      "id": "prod-schoolroom-01-02-noon",
+      "name": "制作·学园教室 01-02（午）",
+      "pack": "scenes/gakumas",
+      "path": "env_3d_prod_schoolroom-01-02-noon/scene.json",
+      "defaultLayout": "overview"
+    },
+    {
+      "id": "gasha-all001-00-noon",
+      "name": "抽卡（午）",
+      "pack": "scenes/gakumas",
+      "path": "env_3d_gasha_all001-00-noon/scene.json",
+      "defaultLayout": "overview"
+    }
+  ]
 }

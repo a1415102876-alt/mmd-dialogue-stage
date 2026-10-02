@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { actorStencilState, classifyActorPass, isHairCoverSourceMaterial, shouldCastCharacterShadow, shouldReceiveCharacterShadow, shouldReceiveHairShadow, shouldWriteHairShadow } from '../gakumas-passes.js';
+import { actorStencilState, characterShadowFrustum, characterShadowLightOffset, characterShadowViewBasis, classifyActorPass, isHairCoverSourceMaterial, shouldCastCharacterShadow, shouldReceiveCharacterShadow } from '../gakumas-passes.js';
 
 test('classifies actor materials without including highlights in HairCover', () => {
     assert.equal(classifyActorPass('m_bdy', ''), 'body');
@@ -12,21 +12,35 @@ test('classifies actor materials without including highlights in HairCover', () 
     assert.equal(classifyActorPass('', 't_chr_fktn-base-0000_hir_sph.png'), 'hairHighlight');
 });
 
-test('character shadow only allows separately authored clothing to cast', () => {
-    for (const role of ['face', 'faceDetail', 'eye', 'hairHighlight', 'hairCover', 'internal', 'body', 'hair']) assert.equal(shouldCastCharacterShadow(role), false);
-    assert.equal(shouldCastCharacterShadow('clothing'), true);
+test('character shadow depth includes hair, body and clothing, and omits the face', () => {
+    for (const role of ['hair', 'body', 'clothing', 'bodyAccessory']) assert.equal(shouldCastCharacterShadow(role), true);
+    for (const role of ['face', 'faceDetail', 'eye', 'hairHighlight', 'hairCover', 'internal']) assert.equal(shouldCastCharacterShadow(role), false);
 });
 
-test('screen-space hair shadow is written by hair and received by face and eyes', () => {
-    assert.equal(shouldWriteHairShadow('hair'), true);
-    for (const role of ['hairHighlight', 'face', 'eye', 'body', 'clothing']) assert.equal(shouldWriteHairShadow(role), false);
-    for (const role of ['face', 'faceDetail', 'eye']) assert.equal(shouldReceiveHairShadow(role), true);
-    for (const role of ['hair', 'hairHighlight', 'body', 'clothing', 'internal']) assert.equal(shouldReceiveHairShadow(role), false);
+test('face, eyes, hair, body and clothing sample the character shadow', () => {
+    for (const role of ['face', 'eye', 'hair', 'body', 'clothing', 'bodyAccessory']) assert.equal(shouldReceiveCharacterShadow(role), true);
+    assert.equal(shouldReceiveCharacterShadow('faceDetail'), false);
+    for (const role of ['hairHighlight', 'hairCover', 'internal']) assert.equal(shouldReceiveCharacterShadow(role), false);
 });
 
-test('only body and clothing receive character shadow; hair and face do not', () => {
-    for (const role of ['hair', 'hairHighlight', 'hairCover', 'eye', 'internal', 'face', 'faceDetail']) assert.equal(shouldReceiveCharacterShadow(role), false);
-    for (const role of ['body', 'clothing']) assert.equal(shouldReceiveCharacterShadow(role), true);
+test('character shadow light follows the camera forward instead of the body center', () => {
+    const frustum = characterShadowFrustum(8);
+    assert.equal(frustum.mapSize, 4096);
+    assert.ok(frustum.contact > 0 && frustum.contact < 0.01);
+    const placement = characterShadowLightOffset([0, 0, -1], [0, 8, 0], frustum.distance);
+    assert.ok(Math.abs(placement.direction[0]) < 1e-6);
+    assert.ok(Math.abs(placement.direction[1]) < 1e-6);
+    assert.ok(placement.direction[2] < -0.99);
+    assert.equal(placement.position[1], 8);
+    assert.ok(placement.position[2] > 0);
+    const basis = characterShadowViewBasis([
+        1, 0, 0, 0,
+        0, 1, 0, 0,
+        0, 0, 1, 0,
+        0, 0, 0, 1,
+    ]);
+    assert.ok(basis.forward[2] < -0.99);
+    assert.ok(Math.abs(basis.up[1] - 1) < 1e-6);
 });
 
 test('m_hir and its base texture must both match to enable the extra pass', () => {

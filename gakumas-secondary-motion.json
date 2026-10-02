@@ -1,5 +1,8 @@
 {
   "version": 3,
+  "physicsAlgorithm": "gakumas-runtime-recovered-v1",
+  "skirtCollidesWithThigh": true,
+  "skirtStaticParticleRadius": "tail-particle",
   "drivers": [
     {
       "className": "ActorAnimationQuartzDriverSkirtBone",

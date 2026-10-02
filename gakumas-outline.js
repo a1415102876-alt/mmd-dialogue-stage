@@ -15,5 +15,6 @@ export function hasGakumasVertexColorAttribute(mesh) {
     const attribute = mesh?.geometry?.getAttribute?.('gakumasVertexColor');
     const extraUvCount = mesh?.geometry?.userData?.MMD?.additionalUvNum ?? 0;
     const position = mesh?.geometry?.getAttribute?.('position');
-    return extraUvCount >= 3 && attribute?.itemSize === 4 && attribute.count > 0 && attribute.count === position?.count;
+    const packed = extraUvCount >= 3 || mesh?.geometry?.userData?.gakumasPackedVertexColor === true;
+    return packed && attribute?.itemSize === 4 && attribute.count > 0 && attribute.count === position?.count;
 }

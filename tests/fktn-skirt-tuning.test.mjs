@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { SecondaryMotion, selectQuartzDrivers, recoveredSkirtDriverQuaternion, recoveredHairDriverQuaternion, recoveredHairLocalOffset, connectionAxisPermute, skirtReferenceQuaternion, eulerDegreesToQuaternionXYZ, quaternionToEulerDegreesXYZ } from '../gakumas-secondary-motion.js';
+import { SecondaryMotion, selectQuartzDrivers, recoveredSkirtDriverQuaternion, recoveredHairDriverQuaternion, recoveredHairLocalOffset, connectionAxisPermute, skirtReferenceQuaternion, nativeSkirtDriverQuaternion, gltfQuaternionToUnity, unityQuaternionToGltf, eulerDegreesToQuaternionXYZ, quaternionToEulerDegreesXYZ } from '../gakumas-secondary-motion.js';
 
 function rotationAngle(quaternion) {
     return 2 * Math.acos(Math.min(1, Math.abs(quaternion[3]))) * 180 / Math.PI;
@@ -107,4 +107,45 @@ test('recovered skirt binding uses the thigh delta, not the bind pose', () => {
     const expected = recoveredSkirtDriverQuaternion(skirtReferenceQuaternion(rest, live), driver.setting);
     const got = skirt.quaternion.toArray();
     for (let index = 0; index < 4; index += 1) assert.ok(Math.abs(got[index] - expected[index]) < 1e-4);
+});
+
+test('GLB skirt Quartz uses UnityGLTF basis and keeps the authored front/back limits', () => {
+    const profile = JSON.parse(readFileSync(new URL('../secondary-motion-profiles/hski.json', import.meta.url), 'utf8'));
+    const leftFront = profile.drivers.find(item => item.bone === 'LeftFrontSkirt_A').setting;
+    const leftBack = profile.drivers.find(item => item.bone === 'LeftBackSkirt_A').setting;
+    const rightFront = profile.drivers.find(item => item.bone === 'RightFrontSkirt_A').setting;
+    const identity = [0, 0, 0, 1];
+    const flexed = eulerDegreesToQuaternionXYZ([55, 0, 0]);
+    const roundTrip = unityQuaternionToGltf(gltfQuaternionToUnity(flexed));
+    assert.ok(roundTrip.every((value, index) => Math.abs(value - flexed[index]) < 1e-8));
+    const front = nativeSkirtDriverQuaternion(identity, flexed, leftFront);
+    const back = nativeSkirtDriverQuaternion(identity, flexed, leftBack);
+    const right = nativeSkirtDriverQuaternion(identity, flexed, rightFront);
+    assert.ok(rotationAngle(front) > 5, 'the front root responds directly to thigh flexion');
+    assert.ok(rotationAngle(back) > 5, 'the back root responds directly to thigh flexion');
+    assert.ok(rotationAngle(right) > 5, 'the opposite side also responds to thigh flexion');
+    assert.ok(front.every(Number.isFinite) && back.every(Number.isFinite) && right.every(Number.isFinite));
+    assert.ok(rotationAngle(nativeSkirtDriverQuaternion(identity, identity, leftFront)) < 1e-6);
+});
+
+test('GLB skirt Quartz writes an _A driver independently of collision and springs', () => {
+    const profile = JSON.parse(readFileSync(new URL('../secondary-motion-profiles/hski.json', import.meta.url), 'utf8'));
+    const driver = profile.drivers.find(item => item.bone === 'LeftFrontSkirt_A');
+    const initial = eulerDegreesToQuaternionXYZ([30, -12, 8]);
+    const flexion = eulerDegreesToQuaternionXYZ([90, 0, 0]);
+    const current = multiply(initial, flexion);
+    const legValue = [...current];
+    const skirtValue = [0, 0, 0, 1];
+    const leg = { name: 'LeftUpLeg', quaternion: { toArray: () => [...legValue], set(x,y,z,w) { legValue.splice(0, 4, x,y,z,w); } }, updateMatrixWorld() {} };
+    const skirt = { name: 'LeftFrontSkirt_A', quaternion: { toArray: () => [...skirtValue], set(x,y,z,w) { skirtValue.splice(0, 4, x,y,z,w); } }, updateMatrixWorld() {} };
+    const motion = new SecondaryMotion({ physicsAlgorithm: profile.physicsAlgorithm, skirtDriverBasis: 'gltf-unity', drivers: [driver], springs: [], colliders: [], chains: [] });
+    motion.bind([
+        { bone: leg, quaternion: { toArray: () => [...initial] } },
+        { bone: skirt, quaternion: { toArray: () => [0, 0, 0, 1] } },
+    ]);
+    motion.update();
+    const expected = nativeSkirtDriverQuaternion(initial, current, driver.setting);
+    assert.ok(skirtValue.every((value, index) => Math.abs(value - expected[index]) < 1e-5));
+    assert.equal(motion.runtime.skirtQuartzDrivers, 1);
+    assert.ok(motion.runtime.skirtQuartzMaxAngle > 5);
 });

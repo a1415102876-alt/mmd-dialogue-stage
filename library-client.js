@@ -42,6 +42,27 @@ export function libraryFileUrl(config, packId, filePath, overrides) {
     return joinLibraryUrl(resolved.base, packPrefix(config, packId, resolved.usingR2), filePath);
 }
 
+export function selectIdolModel(idol, files = []) {
+    const names = files.map(file => String(file || '').replaceAll('\\', '/'));
+    const glbs = names.filter(name => name && !name.includes('/') && name.toLowerCase().endsWith('.glb'));
+    const configured = String(idol?.model || '');
+    if (!glbs.length) {
+        return { name: configured, format: configured.toLowerCase().endsWith('.glb') ? 'glb' : 'pmx' };
+    }
+    const outfit = String(idol?.outfit || '').toLowerCase().replaceAll('_', '-');
+    const id = String(idol?.id || '').toLowerCase();
+    const ranked = [...glbs].sort((a, b) => rank(b) - rank(a) || a.length - b.length);
+    return { name: ranked[0], format: 'glb' };
+
+    function rank(name) {
+        const stem = name.replace(/\.[^.]+$/, '').replace(/-glb-hair-layer$/i, '').toLowerCase();
+        let score = 0;
+        if (id && (stem === id || stem.startsWith(`${id}-`))) score += 2;
+        if (outfit && stem.includes(outfit)) score += 4;
+        return score;
+    }
+}
+
 export function idolAssetUrls(idol, config, textureNames = [], overrides) {
     if (!idol) return null;
     const modelUrl = libraryFileUrl(config, idol.pack, idol.model, overrides);

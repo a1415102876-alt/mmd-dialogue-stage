@@ -21,28 +21,17 @@ test('MatCap basis matches the sample: world axes, Unity cross order, light in t
     assert.doesNotMatch(fragmentShader, /cross\(gkUp, gkView\)/);
 });
 
-test('character shadow uses Unity-like caster bias, PCF and the sample contrast curve', () => {
+test('character shadow samples the depth map directly and keeps the contrast curve', () => {
     const shader = compileActorShader();
-    assert.match(shader.vertexShader, /gkCharacterShadowLightDir \* gkCharacterShadowConstantBias/);
-    assert.match(shader.vertexShader, /\(1\.0 - gkShadowNdotL\) \* gkCharacterShadowNormalBias/);
-    assert.match(shader.fragmentShader, /for \(int gkShadowY = -1; gkShadowY <= 1; gkShadowY \+\+\)/);
+    assert.match(shader.vertexShader, /gkCharacterShadowCoord = gkCharacterShadowMatrix \* gkWorldPosition/);
+    assert.doesNotMatch(shader.vertexShader, /gkCharacterShadowNormalBias/);
+    assert.doesNotMatch(shader.fragmentShader, /for \(int gkShadowY = -1; gkShadowY <= 1; gkShadowY \+\+\)/);
+    assert.match(shader.fragmentShader, /unpackRGBAToDepth\(texture2D\(gkCharacterShadowMap, gkShadowProj\.xy\)\)/);
     assert.match(shader.fragmentShader, /gkCharacterShadowContact/);
-    assert.match(shader.fragmentShader, /4\.0 \* gkCharacterShadow - 6\.0/);
+    assert.match(shader.fragmentShader, /4\.0 \* gkShadow - 6\.0/);
     assert.match(shader.fragmentShader, /gkCharacterShadowReceive > 0\.5/);
-    assert.doesNotMatch(shader.fragmentShader, /step\(gkShadowProj\.z - 0\.0015/);
-});
-
-test('screen-space bangs shadow offsets toward the light and rejects farther hair', () => {
-    const { fragmentShader } = compileActorShader();
-    assert.match(fragmentShader, /gkHairScreen = gl_FragCoord\.xy \/ max\(gkHairShadowResolution, vec2\(1\.0\)\)/);
-    assert.doesNotMatch(fragmentShader, /gkHairScreen\.y = 1\.0 - gkHairScreen\.y/);
-    assert.doesNotMatch(fragmentShader, /gkHairShift\.y = -gkHairShift\.y/);
-    assert.match(fragmentShader, /gkHairShadowLightVS\.xy \* \(\(gkHairShadowOffset \* gkHairShadowFocus\) \/ gkHairViewZ\)/);
-    assert.match(fragmentShader, /gkHairOccluderZ = -perspectiveDepthToViewZ\(gkHairDepth, gkHairShadowNear, gkHairShadowFar\)/);
-    assert.match(fragmentShader, /gkHairSample\.a > 0\.5 && gkHairOccluderZ \+ gkHairShadowBias < gkHairViewZ/);
-    assert.doesNotMatch(fragmentShader, /gkHairDepth \+ gkHairShadowBias < gl_FragCoord\.z/);
-    assert.doesNotMatch(fragmentShader, /gkHairDepth < 0\.999/);
-    assert.match(fragmentShader, /gkDebugView == 8/);
+    assert.doesNotMatch(shader.fragmentShader, /gkHairShadow/);
+    assert.doesNotMatch(shader.fragmentShader, /gkDebugView == 8/);
 });
 
 test('gakumas look darkens the terminator, saturates skin, and adds env spec plus rampAdd spec multiply', () => {
@@ -52,8 +41,10 @@ test('gakumas look darkens the terminator, saturates skin, and adds env spec plu
     assert.match(fragmentShader, /gkSkinSaturation/);
     assert.match(fragmentShader, /gkSpecSky/);
     assert.match(fragmentShader, /mix\(reflectedLight\.directSpecular, reflectedLight\.directSpecular \* gkRampAddTint, gkRampAddSample\.a\)/);
-    assert.match(fragmentShader, /pow\(1\.0 - max\(gkMatNormal\.z, 0\.0\), 8\.0\)/);
-    assert.match(fragmentShader, /min\(gkDef\.r \* gkDef\.r, 1\.0\) \* gkRimMask/);
+    assert.match(fragmentShader, /pow\(max\(1\.0 - dot\(normalize\(normal\), gkRimDir\), 0\.0\), max\(gkRimPower, 0\.0\)\)/);
+    assert.match(fragmentShader, /min\(gkRim, 1\.0\) \* min\(gkDef\.r \* gkDef\.r, 1\.0\) \* gkRimMask/);
+    assert.match(fragmentShader, /mix\(vec3\(1\.0\), gkActorColor, clamp\(gkRimAlbedo, 0\.0, 1\.0\)\)/);
+    assert.doesNotMatch(fragmentShader, /pow\(1\.0 - max\(gkMatNormal\.z, 0\.0\), 8\.0\)/);
     assert.match(fragmentShader, /gkLighting = max\(gkLighting, gkShadowFloor\)/);
       assert.match(fragmentShader, /mix\(gkBase, gkShadeTint, gkRamp\.a\)/);
       assert.match(fragmentShader, /gkShadowForLighting = mix\(1\.0, gkShadow, clamp\(gkShadowStrength/);
@@ -65,6 +56,6 @@ test('vertex shadow bias does not depend on Three.js worldPosition being declare
     const { vertexShader } = compileActorShader();
     assert.match(vertexShader, /vec4 gkWorldPosition = vec4\(transformed, 1\.0\)/);
     assert.match(vertexShader, /gkWorldPosition = modelMatrix \* gkWorldPosition/);
-    assert.match(vertexShader, /gkShadowBiased = gkWorldPosition\.xyz \+/);
+    assert.match(vertexShader, /gkCharacterShadowCoord = gkCharacterShadowMatrix \* gkWorldPosition/);
     assert.doesNotMatch(vertexShader, /gkShadowBiased = worldPosition\.xyz \+/);
 });

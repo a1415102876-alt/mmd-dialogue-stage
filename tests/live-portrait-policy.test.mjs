@@ -48,7 +48,8 @@ test('VN live portrait uses the Stage Gakumas shader path', () => {
     assert.match(livePortraitSource, /injectActorShader/);
     assert.match(livePortraitSource, /applyGakumasMaterials/);
     assert.match(livePortraitSource, /HairCoverStage/);
-    assert.match(livePortraitSource, /HairShadowStage/);
+    assert.match(livePortraitSource, /placeCharacterShadowLight/);
+    assert.doesNotMatch(livePortraitSource, /HairShadowStage/);
     assert.match(livePortraitSource, /waitForModelTextures/);
     assert.match(livePortraitSource, /loadGakumasTextures/);
     assert.match(livePortraitSource, /waitForModelTextures/);

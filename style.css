@@ -85,6 +85,8 @@ svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width:
 .upload-row small { margin-top: 4px; color: var(--muted); font-size: 10px; }
 .upload-row .chevron { width: 16px; color: #8b989b; }
 .motion-list, .morph-list { display: grid; gap: 7px; margin-top: 12px; }
+.motion-debug-controls { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 8px; }
+.motion-debug-output { max-height: 180px; overflow: auto; margin: 7px 0 0; padding: 8px; border: 1px solid var(--line); border-radius: 4px; background: #f7f9f9; color: var(--muted); font-size: 10px; line-height: 1.45; white-space: pre-wrap; }
 .motion-list { max-height: min(52vh, 640px); overflow-y: auto; padding: 2px 6px 2px 0; scrollbar-width: thin; scrollbar-color: #8db9b5 transparent; }
 .motion-list::-webkit-scrollbar { width: 7px; }
 .motion-list::-webkit-scrollbar-thumb { border-radius: 4px; background: #8db9b5; }
@@ -148,6 +150,8 @@ textarea:focus { border-color: var(--teal); box-shadow: 0 0 0 3px rgba(22,125,12
 .gakumas-inspector label { display: block; margin: 12px 0 6px; }
 .gakumas-inspector select { width: 100%; min-height: 32px; padding: 4px; border: 1px solid var(--line); border-radius: 3px; background: #fff; color: var(--ink); font: inherit; }
 .gakumas-toggle { display: flex; align-items: center; gap: 7px; margin-top: 10px; cursor: pointer; }
+.scene-post-controls { display: flex; flex-wrap: wrap; gap: 4px 14px; margin: 8px 0 2px; }
+.scene-post-controls .gakumas-toggle { margin-top: 0; }
 .gakumas-toggle input { accent-color: var(--teal); }
 #secondaryMotionStatus { margin: 8px 0 0; color: var(--muted); font-size: 11px; line-height: 1.6; }
 .collider-authoring { max-height: 220px; overflow: auto; margin: 8px 0 0; padding: 8px; border: 1px solid var(--line); border-radius: 4px; background: #f7f9f9; color: var(--muted); font-size: 11px; line-height: 1.55; white-space: pre-wrap; }

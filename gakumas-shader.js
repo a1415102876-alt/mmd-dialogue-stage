@@ -2,9 +2,6 @@ export function injectActorShader(shader, uniforms) {
     Object.assign(shader.uniforms, uniforms);
     shader.vertexShader = `
 uniform mat4 gkCharacterShadowMatrix;
-uniform vec3 gkCharacterShadowLightDir;
-uniform float gkCharacterShadowNormalBias;
-uniform float gkCharacterShadowConstantBias;
 varying vec4 gkCharacterShadowCoord;
 attribute vec4 gakumasVertexColor;
 varying float gkRampAddId;
@@ -22,10 +19,7 @@ gkWorldPosition = batchingMatrix * gkWorldPosition;
 gkWorldPosition = instanceMatrix * gkWorldPosition;
 #endif
 gkWorldPosition = modelMatrix * gkWorldPosition;
-vec3 gkShadowWorldNormal = inverseTransformDirection(normalize(transformedNormal), viewMatrix);
-float gkShadowNdotL = clamp(dot(gkShadowWorldNormal, -gkCharacterShadowLightDir), 0.0, 1.0);
-vec3 gkShadowBiased = gkWorldPosition.xyz + gkCharacterShadowLightDir * gkCharacterShadowConstantBias + gkShadowWorldNormal * ((1.0 - gkShadowNdotL) * gkCharacterShadowNormalBias);
-gkCharacterShadowCoord = gkCharacterShadowMatrix * vec4(gkShadowBiased, 1.0);`);
+gkCharacterShadowCoord = gkCharacterShadowMatrix * gkWorldPosition;`);
     shader.fragmentShader = `
 #undef USE_MATCAP
 uniform sampler2D gkShadeMap;
@@ -55,28 +49,13 @@ uniform vec3 gkHeadRight;
 uniform vec3 gkRimDirection;
 uniform vec3 gkRimColor;
 uniform float gkRimStrength;
+uniform float gkRimPower;
+uniform float gkRimAlbedo;
 uniform int gkDebugView;
 uniform sampler2D gkCharacterShadowMap;
 uniform float gkCharacterShadowEnabled;
 uniform float gkCharacterShadowReceive;
-uniform vec2 gkCharacterShadowMapSize;
-uniform float gkCharacterShadowRadius;
 uniform float gkCharacterShadowContact;
-uniform sampler2D gkHairShadowMap;
-uniform sampler2D gkHairShadowDepth;
-uniform float gkHairShadowEnabled;
-uniform float gkHairShadowReceive;
-uniform float gkHairShadowStrength;
-uniform float gkHairShadowFloor;
-uniform float gkHairShadowSoftness;
-uniform float gkHairShadowRampPower;
-uniform float gkHairShadowOffset;
-uniform float gkHairShadowFocus;
-uniform float gkHairShadowBias;
-uniform float gkHairShadowNear;
-uniform float gkHairShadowFar;
-uniform vec2 gkHairShadowResolution;
-uniform vec3 gkHairShadowLightVS;
 #ifdef GK_HAIR_COVER_PASS
 uniform vec3 gkHairHeadForward;
 uniform vec3 gkHairHeadUp;
@@ -92,6 +71,10 @@ vec4 gkVertexHigh = floor(gakumasVertexColor * 15.9375 + 0.03125);
 vec4 gkVertexLow = gakumasVertexColor * 255.0 - gkVertexHigh * 16.0;
 gkRampAddId = gkVertexLow.y / 15.0;
 gkRimMask = gkVertexHigh.w / 15.0;`);
+    shader.vertexShader = shader.vertexShader.replace('#include <project_vertex>', `#include <project_vertex>
+#ifdef GK_HAIR_COVER_PASS
+gl_Position.z -= 0.0015 * gl_Position.w;
+#endif`);
     shader.fragmentShader = shader.fragmentShader.replace('#include <alphatest_fragment>', `
 #ifdef GK_HAIR_COVER_PASS
 float gkHairFadeMask = 0.0;
@@ -104,8 +87,14 @@ float gkHairFadeZ = clamp((abs(dot(gkHairHeadUp, gkHairViewWorld)) - gkHairFadeP
 float gkHairFade = max(max(gkHairFadeX, gkHairFadeZ), gkHairMinimumCoverage);
 diffuseColor.a = mix(1.0, gkHairFade, gkHairFadeMask) * opacity;
 #endif
+#ifdef GK_EYE_HIGHLIGHT
+// The exported m_ehl image is an RGB glow atlas with an opaque black
+// background. Unity's material used the shader mask to discard that black;
+// reconstruct the same mask here because the PNG alpha is fully opaque.
+float gkEyeHighlightMask = max(max(diffuseColor.r, diffuseColor.g), diffuseColor.b);
+diffuseColor.a *= smoothstep(0.015, 0.08, gkEyeHighlightMask);
+#endif
 #include <alphatest_fragment>`);
-    shader.fragmentShader = shader.fragmentShader.replace('#include <shadowmap_pars_fragment>', '#include <shadowmap_pars_fragment>\n#include <shadowmask_pars_fragment>');
     shader.fragmentShader = shader.fragmentShader.replace('#include <lights_fragment_end>', `
 #include <lights_fragment_end>
 vec2 gkUv = vec2(0.5);
@@ -144,74 +133,29 @@ float gkFaceLight = clamp((dot(gkReflectedMat, gkLight) + gkOffset) * 0.5 + 0.5,
 gkLighting = mix(gkLighting, max(gkLighting, gkFaceLight), gkDef.b);
 gkMetallic = 0.0;
 #endif
-float gkShadow = getShadowMask();
-if (gkCharacterShadowEnabled > 0.5) {
-    float gkCharacterShadow = 1.0;
-    if (gkCharacterShadowReceive > 0.5) {
-        vec3 gkShadowProj = gkCharacterShadowCoord.xyz / max(gkCharacterShadowCoord.w, 0.0001);
-        if (all(greaterThanEqual(gkShadowProj.xy, vec2(0.0))) && all(lessThanEqual(gkShadowProj.xy, vec2(1.0))) && gkShadowProj.z <= 1.0) {
-            vec2 gkShadowTexel = gkCharacterShadowRadius / max(gkCharacterShadowMapSize, vec2(1.0));
-            float gkShadowAcc = 0.0;
-            for (int gkShadowY = -1; gkShadowY <= 1; gkShadowY ++) {
-                for (int gkShadowX = -1; gkShadowX <= 1; gkShadowX ++) {
-                    float gkSampleDepth = unpackRGBAToDepth(texture2D(gkCharacterShadowMap, gkShadowProj.xy + vec2(float(gkShadowX), float(gkShadowY)) * gkShadowTexel));
-                    gkShadowAcc += (gkShadowProj.z - gkSampleDepth) > gkCharacterShadowContact ? 0.0 : 1.0;
-                }
-            }
-            gkCharacterShadow = gkShadowAcc / 9.0;
-            gkCharacterShadow = clamp(gkCharacterShadow * ((4.0 * gkCharacterShadow - 6.0) * gkCharacterShadow + 3.0), 0.0, 1.0);
-        }
+float gkShadow = 1.0;
+if (gkCharacterShadowEnabled > 0.5 && gkCharacterShadowReceive > 0.5) {
+    vec3 gkShadowProj = gkCharacterShadowCoord.xyz / max(gkCharacterShadowCoord.w, 0.0001);
+    if (all(greaterThanEqual(gkShadowProj.xy, vec2(0.0))) && all(lessThanEqual(gkShadowProj.xy, vec2(1.0))) && gkShadowProj.z <= 1.0) {
+        float gkSampleDepth = unpackRGBAToDepth(texture2D(gkCharacterShadowMap, gkShadowProj.xy));
+        gkShadow = (gkShadowProj.z - gkSampleDepth) > gkCharacterShadowContact ? 0.0 : 1.0;
+        gkShadow = clamp(gkShadow * ((4.0 * gkShadow - 6.0) * gkShadow + 3.0), 0.0, 1.0);
     }
-    gkShadow = gkCharacterShadow;
 }
-float gkHairShadow = 1.0;
-if (gkHairShadowEnabled > 0.5 && gkHairShadowReceive > 0.5) {
-    // gl_FragCoord and render target samples share the lower-left origin, so the
-    // sample position needs no vertical flip. The UE reference flips Y only
-    // because its ScreenUV is top-down.
-    vec2 gkHairScreen = gl_FragCoord.xy / max(gkHairShadowResolution, vec2(1.0));
-    float gkHairViewZ = max(-perspectiveDepthToViewZ(gl_FragCoord.z, gkHairShadowNear, gkHairShadowFar), 0.001);
-    vec2 gkHairShift = gkHairShadowLightVS.xy * ((gkHairShadowOffset * gkHairShadowFocus) / gkHairViewZ) / max(gkHairShadowResolution, vec2(1.0));
-    vec2 gkHairTexel = 1.0 / max(gkHairShadowResolution, vec2(1.0));
-    float gkHairShadowAccum = 0.0;
-    float gkHairShadowWeight = 0.0;
-    for (int gkHairY = -1; gkHairY <= 1; gkHairY ++) {
-        for (int gkHairX = -1; gkHairX <= 1; gkHairX ++) {
-            vec2 gkHairUV = clamp(gkHairScreen + gkHairShift + vec2(float(gkHairX), float(gkHairY)) * gkHairTexel, vec2(0.0), vec2(1.0));
-            vec4 gkHairSample = texture2D(gkHairShadowMap, gkHairUV);
-            if (gkHairSample.a > 0.5) {
-                float gkHairDepth = texture2D(gkHairShadowDepth, gkHairUV).x;
-                // Window depth is non-linear, so compare linear view distances.
-                float gkHairOccluderZ = -perspectiveDepthToViewZ(gkHairDepth, gkHairShadowNear, gkHairShadowFar);
-                float gkHairGap = max(gkHairViewZ - gkHairOccluderZ - gkHairShadowBias, 0.0);
-                float gkHairOcclusion = smoothstep(0.0, max(gkHairShadowSoftness, 0.0001), gkHairGap);
-                gkHairOcclusion = pow(gkHairOcclusion, max(gkHairShadowRampPower, 0.1));
-                gkHairShadowAccum += 1.0 - gkHairOcclusion;
-                gkHairShadowWeight += 1.0;
-            }
-        }
-    }
-    if (gkHairShadowWeight > 0.0) gkHairShadow = gkHairShadowAccum / gkHairShadowWeight;
-}
-gkShadow = min(gkShadow, gkHairShadow);
-float gkShadowResponse = gkShadowStrength;
-#ifdef GK_HAIR
-gkShadowResponse *= gkHairShadowStrength;
-#endif
-float gkShadowForLighting = mix(1.0, gkShadow, clamp(gkShadowResponse, 0.0, 1.0));
+float gkShadowForLighting = mix(1.0, gkShadow, clamp(gkShadowStrength, 0.0, 1.0));
 gkLighting = min(gkLighting, gkShadowForLighting);
-float gkLightingFloor = gkShadowFloor;
-#ifdef GK_HAIR
-gkLightingFloor = gkHairShadowFloor;
-#endif
-gkLighting = max(gkLighting, gkLightingFloor);
+gkLighting = max(gkLighting, gkShadowFloor);
 float gkSpecMask = min(gkDef.a, gkShadowForLighting);
 #ifdef GK_HAIR
+#ifdef GK_HAIR_COVER_PASS
+gkSpecMask = 0.0;
+#else
 float gkHairProp = step(0.75001, gkUv.x) * step(0.75001, gkUv.y);
 float gkHairHighlight = smoothstep(0.35, 0.65, pow(clamp(gkMatNormal.z, 0.0, 1.0), 4.0));
 gkHairHighlight *= gkSpecMask * gkHasHighlight * (1.0 - gkHairProp);
 gkBase = mix(gkBase, texture2D(gkHighlightMap, gkUv).rgb, gkHairHighlight);
 gkSpecMask *= gkHairProp;
+#endif
 #endif
 vec4 gkRamp = texture2D(gkRampMap, vec2(gkLighting, 0.5));
 float gkFallbackShade = 1.0 - smoothstep(0.35, 0.65, gkLighting);
@@ -262,9 +206,10 @@ if (gkHasRampAdd > 0.5) {
     reflectedLight.directSpecular = mix(reflectedLight.directSpecular, reflectedLight.directSpecular * gkRampAddTint, gkRampAddSample.a);
     reflectedLight.indirectSpecular = mix(reflectedLight.indirectSpecular, reflectedLight.indirectSpecular * gkRampAddTint, gkRampAddSample.a);
 }
-float gkRim = pow(1.0 - max(gkMatNormal.z, 0.0), 8.0);
-gkRim *= min(gkDef.r * gkDef.r, 1.0) * gkRimMask;
-vec3 gkRimLit = mix(vec3(1.0), gkActorColor, 0.7) * gkRimColor * gkRimStrength * gkRim;
+vec3 gkRimDir = gkRimDirection / max(length(gkRimDirection), 0.0001);
+float gkRim = pow(max(1.0 - dot(normalize(normal), gkRimDir), 0.0), max(gkRimPower, 0.0));
+gkRim = min(gkRim, 1.0) * min(gkDef.r * gkDef.r, 1.0) * gkRimMask;
+vec3 gkRimLit = mix(vec3(1.0), gkActorColor, clamp(gkRimAlbedo, 0.0, 1.0)) * gkRimColor * gkRimStrength * gkRim;
 reflectedLight.directDiffuse += gkRimLit;
 if (gkDebugView > 0) {
     vec3 gkDebugColor = diffuseColor.rgb;
@@ -274,7 +219,6 @@ if (gkDebugView > 0) {
     if (gkDebugView == 5) gkDebugColor = vec3(gkSkinMask);
     if (gkDebugView == 6) gkDebugColor = vec3(gkLighting);
     if (gkDebugView == 7) gkDebugColor = vec3(gkShadow);
-    if (gkDebugView == 8) gkDebugColor = vec3(gkHairShadow);
     reflectedLight.directDiffuse = gkDebugColor;
     reflectedLight.indirectDiffuse = vec3(0.0);
     reflectedLight.directSpecular = vec3(0.0);

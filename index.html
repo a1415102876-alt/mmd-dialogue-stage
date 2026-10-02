@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#f5f7f8">
   <title>MMD 对话舞台</title>
-  <link rel="stylesheet" href="./style.css?v=20260910-library1">
+  <link rel="stylesheet" href="./style.css?v=20260929-motion-debug-v1">
   <script type="importmap">
     {
       "imports": {
@@ -30,7 +30,7 @@
           <svg viewBox="0 0 24 24"><path d="M12 3 4 7v10l8 4 8-4V7l-8-4Z"/><path d="m4 7 8 4 8-4M12 11v10"/></svg>
         </div>
         <h1>载入你的角色</h1>
-        <p>可从偶像库一键载入琴音，或自行选择包含 PMX 与贴图的文件夹。</p>
+        <p>可从偶像库一键载入琴音，或自行选择包含 GLB 与贴图的文件夹。</p>
         <div class="empty-actions">
           <button id="emptyLoadIdolBtn" class="primary-button" type="button" data-idol="fktn">
             <svg viewBox="0 0 24 24"><path d="M12 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z"/><path d="M5 20a7 7 0 0 1 14 0"/></svg>
@@ -102,10 +102,20 @@
           <div class="section-heading"><div><span>01</span><h3>动作库</h3></div><small>点击即载入播放</small></div>
           <p class="hint">同名的身体动作与面部表情会配对播放。站立动作交叉淡化；未循环的动作播完停在结束姿势。</p>
           <input id="motionInput" class="visually-hidden" type="file" accept=".vmd" multiple>
+          <input id="glbMotionPackInput" class="visually-hidden" type="file" accept=".json" multiple>
           <button id="importMotionBtn" class="secondary-button" type="button">
             <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
             <span>导入外部动作和表情 VMD</span>
           </button>
+          <div class="motion-debug-controls">
+            <button id="exportGlbMotionPackBtn" class="secondary-button" type="button">导出当前 GLB 动作包</button>
+            <button id="importGlbMotionPackBtn" class="secondary-button" type="button">导入 GLB 动作包</button>
+          </div>
+          <div class="motion-debug-controls">
+            <button id="motionDebugStartBtn" class="secondary-button" type="button">开始动作诊断（180帧）</button>
+            <button id="motionDebugExportBtn" class="secondary-button" type="button">导出动作诊断 JSON</button>
+          </div>
+          <pre id="motionDebugOutput" class="motion-debug-output">动作诊断尚未开始。</pre>
           <label class="motion-filter-row" for="motionFilter">
             <span>分类</span>
             <select id="motionFilter">
@@ -119,11 +129,11 @@
 
         <section class="tab-panel" data-panel="assets">
           <div class="section-heading"><div><span>01</span><h3>模型</h3></div><small>手动导入</small></div>
-          <input id="modelFileInput" class="visually-hidden" type="file" accept=".pmx">
+          <input id="modelFileInput" class="visually-hidden" type="file" accept=".pmx,.glb">
           <input id="textureFolderInput" class="visually-hidden" type="file" accept="image/*,.spa,.sph" webkitdirectory directory multiple>
           <button id="importModelBtn" class="upload-row" type="button">
             <svg viewBox="0 0 24 24"><path d="M12 16V4m0 0L7 9m5-5 5 5M5 14v5h14v-5"/></svg>
-            <span><strong>选择 PMX 模型文件</strong><small id="modelFileName">尚未选择 PMX，可再补充贴图目录</small></span>
+            <span><strong>选择 GLB 或 PMX 模型文件</strong><small id="modelFileName">尚未选择模型；默认使用 GLB，贴图从角色目录补齐</small></span>
             <svg class="chevron" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg>
           </button>
           <button id="importTextureBtn" class="secondary-button texture-button" type="button">
@@ -140,7 +150,7 @@
           </label>
           <label class="light-row preset-row collider-debug-select-row"><span>单独高亮</span><select id="colliderDebugSelect"><option value="all">全部碰撞体</option></select><output></output></label>
           <p id="secondaryMotionStatus">载入模型后绑定跟随、弹簧与碰撞体。</p>
-          <div class="secondary-motion-trace-controls"><button id="clothingTraceStartBtn" class="secondary-button" type="button">重新记录衣物诊断</button><button id="clothingTraceExportBtn" class="secondary-button" type="button">导出衣物诊断 JSON</button><span id="clothingTraceStatus" role="status">自动记录加载后的前 300 帧。</span></div>
+          <div class="secondary-motion-trace-controls"><button id="clothingTraceStartBtn" class="secondary-button" type="button">重新记录衣物诊断</button><button id="clothingTraceExportBtn" class="secondary-button" type="button">导出衣物诊断 JSON</button><button id="stageBoneTraceExportBtn" class="secondary-button" type="button">导出骨骼对齐 JSON</button><span id="clothingTraceStatus" role="status">自动记录加载后的前 300 帧。</span><span id="stageBoneTraceStatus" role="status">骨骼对齐：未记录；每帧含 input/output，咲季对应“肯定 / 型A-001进入”（108帧）</span></div>
           <div class="secondary-motion-tuning" aria-label="二次运动临时调试参数">
             <label class="light-row"><span>物理总倍率</span><input id="secondaryPhysicsScale" type="range" min="0" max="2" step="0.05" value="1"><output id="secondaryPhysicsScaleValue">1.00</output></label>
             <label class="light-row"><span>下向力</span><input id="secondaryGravityScale" type="range" min="0" max="8" step="0.1" value="1"><output id="secondaryGravityScaleValue">1.00</output></label>
@@ -154,6 +164,23 @@
             <div class="secondary-tuning-actions"><button id="secondaryChainResetBtn" class="secondary-button" type="button">恢复链约束默认值</button></div>
           </div>
           <pre id="colliderAuthoring" class="collider-authoring">载入模型后列出游戏原始碰撞半径（米）。</pre>
+
+          <div class="section-heading section-gap"><div><span>02</span><h3>场景</h3></div><small>游戏场景导出</small></div>
+          <div class="light-controls" aria-label="舞台场景">
+            <label class="light-row preset-row"><span>场景</span><select id="sceneSelect"><option value="">无场景（默认地台）</option></select><output></output></label>
+            <label class="light-row preset-row"><span>机位布局</span><select id="sceneLayout" disabled><option value="">先选择场景</option></select><output></output></label>
+          </div>
+          <button id="sceneCameraBtn" class="secondary-button" type="button" disabled>切换到场景机位</button>
+          <div id="scenePostControls" class="scene-post-controls" hidden>
+            <label class="gakumas-toggle"><input id="postBloom" type="checkbox"><span>泛光</span></label>
+            <label class="gakumas-toggle"><input id="postDiffusion" type="checkbox"><span>柔光</span></label>
+            <label class="gakumas-toggle"><input id="postParaffin" type="checkbox"><span>石蜡光</span></label>
+            <label class="gakumas-toggle"><input id="postChroma" type="checkbox"><span>色差</span></label>
+            <label class="gakumas-toggle"><input id="postVignette" type="checkbox"><span>暗角</span></label>
+            <label class="gakumas-toggle"><input id="postTaa" type="checkbox"><span>时域抗锯齿</span></label>
+            <p class="hint">开关对应游戏后处理体积。时域抗锯齿是管线默认项，用抖动和历史帧。角色快速运动没有运动矢量，拖影靠颜色夹取压住。色调映射和调色已经在场景着色里。</p>
+          </div>
+          <p class="hint" id="sceneStatus" role="status">场景只作背景，不投射阴影到角色；VN 立绘不受影响。</p>
 
           <div class="section-heading section-gap"><div><span>03</span><h3>灯光</h3></div><small>实时调整</small></div>
           <div class="light-controls" aria-label="舞台灯光控制">
@@ -188,18 +215,15 @@
               <option value="5">皮肤遮罩</option>
               <option value="6">Ramp 输入光照</option>
               <option value="7">角色投影</option>
-              <option value="8">刘海投影</option>
             </select>
-            <label class="gakumas-toggle"><input id="gakumasCharacterShadow" type="checkbox" checked><span>启用角色专用阴影采样</span></label>
+            <label class="gakumas-toggle"><input id="gakumasCharacterShadow" type="checkbox" checked><span>启用角色阴影（4K，跟摄像机）</span></label>
             <label class="gakumas-toggle"><input id="gakumasHairCover" type="checkbox" checked><span>启用眉眼半透（HairCover）</span></label>
-            <label class="gakumas-toggle"><input id="gakumasHairShadow" type="checkbox" checked><span>启用屏幕空间刘海影</span></label>
             <label class="light-row"><span>正面最低覆盖（补偿）</span><input id="gakumasHairCoverMinimum" type="range" min="0" max="1" step="0.01" value="0.35"><output id="gakumasHairCoverMinimumValue">0.35</output></label>
-            <label class="light-row"><span>刘海偏移</span><input id="gakumasHairShadowOffset" type="range" min="0" max="80" step="1" value="32"><output id="gakumasHairShadowOffsetValue">32</output></label>
             <p class="hint">关闭时保留原有眉眼全透。补偿设为 0 使用示例视角公式；当前琴音贴图 A 全白，正面覆盖可能接近 0。补偿不是游戏原始参数。</p>
             <p id="gakumasHeadStatus"></p>
             <p id="gakumasHairCoverStatus">HairCover：载入模型后检查头发面组。</p>
-            <p id="gakumasHairShadowStatus">刘海影：载入模型后检查头发面组。</p>
-            <p>角色专用阴影默认关闭，眉眼半透（HairCover）默认开启。刘海影按 Yu-ki 后续方案：沿主光在屏幕上偏移，只接受比脸更近镜头的头发，后发不会盖到脸上。偏移随镜头距离缩放。角色阴影仍不让头发写深度图。</p>
+            <p id="gakumasCharacterShadowStatus">角色阴影：载入模型后写入 4K 深度图。</p>
+            <p>角色阴影跟摄像机，分辨率 4096。脸、眼睛、眉毛和高光层不写入深度；头发、身体和衣服写入。额发、裙摆的投影来自这张深度图，直接采样，不再使用屏幕空间刘海影。阴影角度滑条仍控制主光，不改变这张阴影的方向。</p>
             <pre id="gakumasBindings">载入模型和贴图后显示逐材质绑定结果。</pre>
           </details>
         </section>
@@ -251,7 +275,7 @@
   <div id="toastStack" class="toast-stack" aria-live="polite"></div>
   <script src="./picker-bootstrap.js"></script>
   <script type="module">
-    import('./app.js?v=20260925-ttmr-backhair-gravity0-v1').catch(function (error) {
+      import('./app.js?v=20261002-hair-cover-base').catch(function (error) {
       console.error('[MMD Stage] 运行库启动失败', error);
       var status = document.getElementById('statusText');
       var badge = document.getElementById('runtimeBadge');

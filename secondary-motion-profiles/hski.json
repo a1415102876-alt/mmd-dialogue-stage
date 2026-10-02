@@ -17232,7 +17232,7 @@
     {
       "bone": "Head_Face",
       "restBone": "Head",
-      "carrierBone": "mdl_chr_hski-base-0000_face(Clone)",
+      "carrierBone": "Head_Face",
       "type": 1,
       "collisionMask": 65336,
       "offsetA": [
@@ -17257,7 +17257,7 @@
       ],
       "unityOffsetB": [
         0.0,
-        0.010000001639127731,
+        0.009999999776482582,
         0.03500000014901161
       ],
       "unityLength": 0.04999999701976776,
@@ -18124,19 +18124,17 @@
         "LeftBackSideRHair1_S",
         "LeftFrontHair1_S",
         "LeftFrontSideHair1_S",
-        "LeftFrontSideLHair1_S",
-        "LeftHair1_S",
-        "LeftHairSide1_S",
-        "LeftSideBackHair1_S",
+      "LeftFrontSideLHair1_S",
+      "LeftHair1_S",
+      "LeftSideBackHair1_S",
         "RightBackHair1_S",
         "RightBackSideCHair1_S",
         "RightBackSideLHair1_S",
         "RightBackSideRHair1_S",
         "RightFrontHair1_S",
-        "RightFrontSideRHair1_S",
-        "RightHair1_S",
-        "RightHairSide1_S",
-        "RightSideBackHair1_S"
+      "RightFrontSideRHair1_S",
+      "RightHair1_S",
+      "RightSideBackHair1_S"
       ],
       "colliders": [
         "Head_Face"
@@ -18159,10 +18157,11 @@
       ]
     }
   ],
-  "useModelingHairRestPose": true,
+  "useModelingHairRestPose": false,
+  "hairRestRotationRebase": true,
   "stableHairContacts": true,
   "gravityScaleByBoneGroup": {
-    "backHair": 0
+    "backHair": 1
   },
   "skirtDriverSwingSigns": {
     "flexion": -1,
@@ -18175,6 +18174,67 @@
   "stageAdaptationNotes": {
     "skirtDriverSwingSigns": "inference + stage adaptation: hski skirt driver uses a mirrored flexion channel and a left-side abduction sign; retained as an idol-scoped profile rule.",
     "skirtRootColliderSkip": "stage adaptation: mask -1 skirt roots skip the hand capsules; later skirt particles keep normal collision.",
-    "skirtStaticParticleRadius": "inference + stage adaptation: use the authored particle radius at each skirt spring tail so the front frill does not sink into the thigh mesh while sitting."
-  }
+    "skirtStaticParticleRadius": "inference + stage adaptation: use the authored particle radius at each skirt spring tail so the front frill does not sink into the thigh mesh while sitting.",
+    "hairCollisionAtRenderedChild": "native evidence + stage adaptation: for the two HairSide2 roots, static collision is evaluated at the rendered PMX child joint and the physics tail receives the same correction. This keeps the modeling rest pose and native limits while preventing the visible side hair from entering Head_Face.",
+    "nativeColliderOrder": "native evidence: static colliders are applied by nativeIndex; exported asset order is not used for the recovered collision pass.",
+    "nativeSpine2Mask16": "native evidence: Spine2 mask16 is the long chest capsule, so it uses ordinary outside contact resolution rather than a hair-volume inside clamp.",
+    "hairStaticColliderSkip": "stage adaptation under visual verification: the full HSKI side-hair chain bypasses the oversized Spine2 mask16 torso capsule; Head_Face, neck, hand and other static collision paths remain preserved.",
+    "staticCollisionIgnoreBones": "stage adaptation under visual verification: the two LRibbon chains use authored pose and limits without the over-sized static Spine2 mask64 projection; other ribbon nodes retain their native static collision path.",
+    "hairRootColliderSkip": "stage adaptation: preserve the original HSKI root skip list; native root links use the child dynamic collision radius, so HairSide1 and SideHair1 keep the Unity Head_Face collision path without the oversized root shell.",
+    "nativeParticleHairLimits": "native evidence: hski hair particles carry nativeBoneAxis and asymmetric limitInfo; use the tail particle limit in the parent particle modeling frame.",
+    "nativeParticleHairLimitExcludeBones": "stage adaptation under Unity trace verification: RightBackSideRHair uses the GLB local limit path because the recovered native particle frame suppresses its right-side swing.",
+    "hairGravityFromPendulum": "inference + stage adaptation: use each hair tail particle pendulum as the gravity scale, capped at the hski reference 0.009.",
+    "skipHairInitialRotationOffset": "native evidence + stage adaptation: hair initialRotationOffset is not seeded during reset because the captured modeling rest tail already supplies the visible rest pose.",
+    "sideBackHairRestTail": "stage evidence: hair rest tails follow the parented PMX child. Unity modeling translations lie on the bone axis, while PMX stores the visible offset; modelingLocalTx.rotation stays in the limit frame and is not written onto the bone.",
+    "hairRestRotationRebase": "stage adaptation: once at rest, HSKI hair springs adopt the converted Unity local rotation while child joints stay in place and the skin inverse bind is rebuilt. Unity axis translations are not copied onto the joints, because those translations lie on the bone axis and are not the PMX tail direction. The Unity rotation is not written again during physics."
+  },
+  "hairCollisionAtRenderedChild": {
+    "bones": [
+      "LeftHairSide2_S",
+      "RightHairSide2_S"
+    ]
+  },
+  "nativeParticleHairLimits": true,
+  "nativeParticleHairLimitExcludeBones": [
+    "RightBackSideRHair1_S",
+    "RightBackSideRHair2_S",
+    "RightBackSideRHair3_S",
+    "RightBackSideRHair4_S",
+    "RightBackSideRHair5_S_End"
+  ],
+  "nativeUnityLocalLimitBones": [
+    "LeftHairSide2_S",
+    "RightHairSide2_S",
+    "RightBackSideLHair1_S",
+    "RightBackSideLHair2_S",
+    "RightBackSideLHair3_S",
+    "RightBackSideLHair4_S",
+    "RightBackSideLHair5_S_End"
+  ],
+  "nativeUnityLocalLimitGlbBones": [
+    "RightBackSideLHair1_S",
+    "RightBackSideLHair2_S",
+    "RightBackSideLHair3_S",
+    "RightBackSideLHair4_S",
+    "RightBackSideLHair5_S_End"
+  ],
+  "nativePrewarmSteps": 0,
+  "hairStaticColliderSkip": {
+    "colliders": [
+      "Spine2"
+    ],
+    "masks": [
+      16
+    ]
+  },
+  "staticCollisionIgnoreBones": [
+    "CenterLeftLRibbon1_S",
+    "CenterLeftLRibbon2_S_End",
+    "CenterRightLRibbon1_S",
+    "CenterRightRRibbon2_S_End"
+  ],
+  "hairGravityFromPendulum": {
+    "reference": 0.009
+  },
+  "skipHairInitialRotationOffset": true
 }

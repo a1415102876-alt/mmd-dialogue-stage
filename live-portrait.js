@@ -16,11 +16,10 @@ import {
 } from './core.js?v=20260914-idol-types';
 import { idolAssetUrls, motionAssetUrls, motionAvailability } from './library-client.js?v=20260913-nested-motion';
 import { GAKUMAS_TEXTURE_KINDS, GAKUMAS_ACTIVE_TEXTURE_KINDS, selectMaterialTextures, textureDescriptor, textureUsesColorSpace } from './gakumas-materials.js?v=20260910-shadow1';
-import { injectActorShader } from './gakumas-shader.js?v=20260925-rendering-v3';
-import { actorStencilState, classifyActorPass, shouldCastCharacterShadow, shouldReceiveCharacterShadow, shouldReceiveHairShadow, shouldWriteHairShadow } from './gakumas-passes.js?v=20260925-rendering-v3';
-import { HairCoverStage } from './gakumas-hair-cover.js?v=20260925-rendering-v3';
-import { HAIR_SHADOW_BIAS, HAIR_SHADOW_FOCUS, HairShadowStage } from './gakumas-hair-shadow.js?v=20260925-rendering-v3';
-import { GAKUMAS_LOOK, GakumasLookPass, applyGakumasLookUniforms, createGakumasLookUniformValues } from './gakumas-look.js?v=20260925-rendering-v3';
+import { injectActorShader } from './gakumas-shader.js?v=20261002-rim-v1';
+import { actorStencilState, classifyActorPass, placeCharacterShadowLight, shouldCastCharacterShadow, shouldReceiveCharacterShadow } from './gakumas-passes.js?v=20261002-hair-cover-base';
+import { HairCoverStage } from './gakumas-hair-cover.js?v=20261002-hair-cover-base';
+import { GAKUMAS_LOOK, GakumasLookPass, applyGakumasLookUniforms, createGakumasLookUniformValues } from './gakumas-look.js?v=20261002-rim-v1';
 import { hasGakumasVertexColorAttribute } from './gakumas-outline.js?v=20260909-outline1';
 import {
     LIVE_PORTRAIT_IDOL_ID,
@@ -38,7 +37,7 @@ import { SceneDirector } from './scene-director.js';
 export function createSceneDirector(container) {
     return new SceneDirector(container, canvas => new LivePortraitRuntime(canvas));
 }
-import { SecondaryMotion } from './gakumas-secondary-motion.js?v=20260926-hski-skirt-hem-v17';
+import { SecondaryMotion, applyHairRestRotationRebase, rebaseHairAnimationTracks, refreshRestInverseBinds } from './gakumas-secondary-motion.js?v=20261002-secondary-motion-v42-lilia-skirt-child-chain';
 
 export {
     LIVE_PORTRAIT_IDOL_ID,
@@ -51,8 +50,8 @@ export {
 
 const LIBRARY_JSON = '/mmd-dialogue-stage/library.json?v=20260911-vn1';
 const MOTION_MAP_JSON = '/mmd-dialogue-stage/gakumas-motion-map.json?v=20260910-library1';
-const SECONDARY_MOTION_JSON = '/mmd-dialogue-stage/gakumas-secondary-motion.json?v=20260926-hski-skirt-hem-v17';
-const SECONDARY_PROFILE_VERSION = '20260926-hski-skirt-hem-v17';
+const SECONDARY_MOTION_JSON = '/mmd-dialogue-stage/gakumas-secondary-motion.json?v=20260927-native-fixedstep-v3';
+const SECONDARY_PROFILE_VERSION = '20261002-secondary-motion-v25-kcna-native-skirt';
 const LIBRARY_STATUS = '/mmd-dialogue-stage/library/status?v=20260912-fallback';
 
 let singleton = null;
@@ -101,14 +100,11 @@ export class LivePortraitRuntime {
         this.gakumasFallbacks = {};
         this.gakumasUniforms = new Set();
         this.hairCoverStage = new HairCoverStage();
-        this.hairShadowStage = new HairShadowStage();
-        this.hairShadowLightVS = new THREE.Vector3();
         this.shadowStrength = GAKUMAS_LOOK.shadow;
-        this.gakumasPasses = { characterShadow: true, hairCover: true, hairCoverMinimum: 0.35, hairShadow: true, hairShadowOffset: 32 };
+        this.gakumasPasses = { characterShadow: true, hairCover: true, hairCoverMinimum: 0.35 };
         this.outline = { color: '#000000', alpha: 0.82, thickness: 0.004 };
         this.characterCenter = new THREE.Vector3(0, 8, 0);
         this.characterShadowFit = { center: new THREE.Vector3(0, 8, 0), radius: 10 };
-        this.characterShadowTravel = new THREE.Vector3();
         this.renderer = null;
         this.outlineEffect = null;
         this.lookPass = null;
@@ -158,13 +154,14 @@ export class LivePortraitRuntime {
         this.keyLight.position.set(8, 16, 10);
         this.keyLight.target.position.copy(this.characterCenter);
         this.keyPointLight = new THREE.PointLight(GAKUMAS_LOOK.keyColor, GAKUMAS_LOOK.key * 0.05, 0, 0);
-        this.rimLight = new THREE.DirectionalLight(GAKUMAS_LOOK.rimColor, GAKUMAS_LOOK.rim);
+        this.rimLight = new THREE.DirectionalLight(0xffffff, 1);
         this.rimLight.position.set(-8, 10, -7);
         this.characterShadowLight = new THREE.DirectionalLight(0xffffff, 0);
         this.characterShadowLight.castShadow = true;
-        this.characterShadowLight.shadow.mapSize.set(1024, 1024);
-        this.characterShadowLight.shadow.bias = -0.0002;
-        this.characterShadowLight.shadow.normalBias = 0.045;
+        this.characterShadowLight.shadow.mapSize.set(4096, 4096);
+        this.characterShadowLight.shadow.bias = 0;
+        this.characterShadowLight.shadow.normalBias = 0;
+        this.characterShadowLight.shadow.radius = 0;
         this.characterShadowLight.userData.gakumasCharacterShadow = true;
         this.scene.add(this.hemi, this.keyLight.target, this.keyLight, this.keyPointLight, this.rimLight, this.characterShadowLight.target, this.characterShadowLight);
         this.applyKeyLight(GAKUMAS_LOOK.keyAzimuth, GAKUMAS_LOOK.keyElevation);
@@ -304,6 +301,9 @@ export class LivePortraitRuntime {
                 if (child.isBone) bones.push(child);
             });
             this.secondaryMotion.table = table;
+            const restPose = bones.map(bone => ({ bone }));
+            this.hairRestRebase = applyHairRestRotationRebase(restPose, table);
+            if (this.hairRestRebase.length) refreshRestInverseBinds(model);
             this.secondaryMotion.bind(bones.map(bone => ({
                 bone,
                 position: bone.position.clone(),
@@ -451,6 +451,7 @@ export class LivePortraitRuntime {
             if (this.actions.has(entry.id)) continue;
             try {
                 const clip = await new Promise((resolve, reject) => loader.loadAnimation(entry.url, this.model, resolve, undefined, reject));
+                rebaseHairAnimationTracks(clip, this.hairRestRebase);
                 clip.name = entry.id;
                 const { kind } = classifyClipTracks(clip.tracks.map(track => track.name));
                 this.actions.set(entry.id, { id: entry.id, label: entry.label || entry.id, clip, kind });
@@ -593,6 +594,7 @@ export class LivePortraitRuntime {
             this.frameId = requestAnimationFrame(tick);
             const delta = Math.min(this.clock.getDelta(), 0.05);
             if (this.model) {
+                this.secondaryMotion?.restoreBeforeAnimation?.();
                 this.helper.update(delta);
                 if (this.secondaryMotionBound) this.secondaryMotion.update(delta);
                 this.updateAttention(delta);
@@ -602,7 +604,6 @@ export class LivePortraitRuntime {
             }
             this.resize();
             this.camera.updateMatrixWorld();
-            if (this.gakumasPasses.hairShadow) this.hairShadowStage.capture(this.renderer, this.scene, this.camera);
             this.updateGakumasUniforms();
             const draw = () => this.hairCoverStage.renderFrame(
                 this.renderer,
@@ -620,7 +621,6 @@ export class LivePortraitRuntime {
     renderFrame() {
         this.resize();
         this.camera.updateMatrixWorld();
-        if (this.gakumasPasses.hairShadow) this.hairShadowStage.capture(this.renderer, this.scene, this.camera);
         this.updateGakumasUniforms();
         const draw = () => this.hairCoverStage.renderFrame(this.renderer, this.outlineEffect, this.scene, this.camera, this.gakumasPasses.hairCover);
         if (this.lookPass?.enabled) this.lookPass.render(draw);
@@ -679,22 +679,6 @@ export class LivePortraitRuntime {
         this.keyPointLight.position.copy(this.keyLight.position);
         this.keyLight.target.updateMatrixWorld();
         this.keyLight.updateMatrixWorld();
-        if (this.characterShadowLight) {
-            const shadowDistance = this.characterShadowFit.radius + 6;
-            this.characterShadowLight.target.position.copy(this.characterShadowFit.center);
-            this.characterShadowLight.position.copy(this.characterShadowFit.center).addScaledVector(direction, shadowDistance);
-            this.characterShadowLight.target.updateMatrixWorld();
-            this.characterShadowLight.updateMatrixWorld();
-            const shadowCamera = this.characterShadowLight.shadow.camera;
-            shadowCamera.left = -this.characterShadowFit.radius;
-            shadowCamera.right = this.characterShadowFit.radius;
-            shadowCamera.top = this.characterShadowFit.radius;
-            shadowCamera.bottom = -this.characterShadowFit.radius;
-            shadowCamera.near = 0.25;
-            shadowCamera.far = shadowDistance + this.characterShadowFit.radius + 4;
-            shadowCamera.updateProjectionMatrix();
-            this.characterShadowLight.shadow.updateMatrices(this.characterShadowLight);
-        }
     }
 
     resize() {
@@ -835,31 +819,17 @@ export class LivePortraitRuntime {
             gkLightStrength: { value: GAKUMAS_LOOK.key },
             gkShadowStrength: { value: this.shadowStrength },
             gkHeadRight: { value: new THREE.Vector3(1, 0, 0) },
-            gkRimDirection: { value: new THREE.Vector3(-0.7, 0.6, 0.3).normalize() },
-            gkRimColor: { value: new THREE.Color(GAKUMAS_LOOK.rimColor) },
-            gkRimStrength: { value: GAKUMAS_LOOK.rim * 0.42 },
+            gkRimDirection: { value: new THREE.Vector3(...GAKUMAS_LOOK.rimView) },
+            gkRimColor: { value: new THREE.Color(0xffffff) },
+            gkRimStrength: { value: 1 },
+            gkRimPower: { value: GAKUMAS_LOOK.rimPower },
+            gkRimAlbedo: { value: GAKUMAS_LOOK.rimAlbedo },
             gkDebugView: { value: 0 },
             gkCharacterShadowMap: { value: null },
             gkCharacterShadowMatrix: { value: new THREE.Matrix4() },
             gkCharacterShadowEnabled: { value: 0 },
             gkCharacterShadowReceive: { value: 1 },
-            gkCharacterShadowLightDir: { value: new THREE.Vector3(0, -1, 0) },
-            gkCharacterShadowMapSize: { value: new THREE.Vector2(1, 1) },
-            gkCharacterShadowNormalBias: { value: 0.08 },
-            gkCharacterShadowConstantBias: { value: 0 },
-            gkCharacterShadowRadius: { value: 1.25 },
-            gkCharacterShadowContact: { value: 0.008 },
-            gkHairShadowMap: { value: null },
-            gkHairShadowDepth: { value: null },
-            gkHairShadowEnabled: { value: 0 },
-            gkHairShadowReceive: { value: 0 },
-            gkHairShadowOffset: { value: 32 },
-            gkHairShadowFocus: { value: HAIR_SHADOW_FOCUS },
-            gkHairShadowBias: { value: HAIR_SHADOW_BIAS },
-            gkHairShadowNear: { value: 0.1 },
-            gkHairShadowFar: { value: 1000 },
-            gkHairShadowResolution: { value: new THREE.Vector2(1, 1) },
-            gkHairShadowLightVS: { value: new THREE.Vector3(0, 1, 0) },
+            gkCharacterShadowContact: { value: 0.001 },
             gkHairFadeParam: { value: new THREE.Vector4(0.15, 4.0, 0.3, 2.0) },
             ...createGakumasLookUniformValues(),
         };
@@ -868,7 +838,6 @@ export class LivePortraitRuntime {
     applyGakumasMaterials() {
         if (!this.model) return;
         this.hairCoverStage.dispose();
-        this.hairShadowStage.dispose();
         this.gakumasUniforms.clear();
         this.model.traverse(child => {
             if (!child.isMesh) return;
@@ -898,7 +867,6 @@ export class LivePortraitRuntime {
                 const actorPass = classifyActorPass(material.name, selection.descriptor.name);
                 child.userData.gakumasShadowMaterialMask[materialIndex] = shouldCastCharacterShadow(actorPass);
                 uniforms.gkCharacterShadowReceive.value = shouldReceiveCharacterShadow(actorPass) ? 1 : 0;
-                uniforms.gkHairShadowReceive.value = shouldReceiveHairShadow(actorPass) ? 1 : 0;
                 const rampAddAllowed = ['body', 'bodyAccessory', 'clothing', 'face'].includes(role);
                 uniforms.gkHasRampAdd.value = selection.bindings.rampAdd?.texture && rampAddAllowed ? 1 : 0;
                 const baseBlending = material.userData.gakumasBaseBlending ?? material.blending;
@@ -934,11 +902,10 @@ export class LivePortraitRuntime {
                 if ('toneMapped' in material) material.toneMapped = false;
                 this.applyStencil(material, actorStencilState(material.name, actorPass));
                 material.onBeforeCompile = shader => injectActorShader(shader, uniforms);
-                material.customProgramCacheKey = () => `gakumas-v2:gakumas:${role}:rendering-v2`;
+                material.customProgramCacheKey = () => `gakumas-v2:gakumas:${role}:rim-v1`;
                 material.needsUpdate = true;
                 material.visible = true;
                 this.hairCoverStage.add(child, material, materialIndex, uniforms, hairTextureName);
-                if (shouldWriteHairShadow(actorPass)) this.hairShadowStage.add(child, material, materialIndex);
             });
             child.castShadow = hasCharacterShadowCaster;
             child.receiveShadow = false;
@@ -963,41 +930,20 @@ export class LivePortraitRuntime {
         const axis = this.gakumasHeadBone || this.model;
         this.hairCoverStage.update(axis, this.gakumasPasses.hairCoverMinimum);
         if (axis) this.gakumasHeadRight.setFromMatrixColumn(axis.matrixWorld, 0).normalize();
-        this.hairShadowLightVS.copy(direction).transformDirection(this.camera.matrixWorldInverse);
         const shadowLight = this.characterShadowLight;
-        if (shadowLight) this.characterShadowTravel.copy(shadowLight.target.position).sub(shadowLight.position).normalize();
-        const shadowMapSize = shadowLight?.shadow.mapSize;
+        const characterShadow = placeCharacterShadowLight(shadowLight, this.camera, this.characterShadowFit);
         this.gakumasUniforms.forEach(uniforms => {
             uniforms.gkLightDirection.value.copy(direction);
             uniforms.gkLightColor.value.copy(this.keyLight.color);
             uniforms.gkLightStrength.value = this.keyLight.intensity;
             uniforms.gkRimColor.value.copy(this.rimLight.color);
-            uniforms.gkRimStrength.value = this.rimLight.intensity * 0.42;
+            uniforms.gkRimStrength.value = this.rimLight.intensity;
             uniforms.gkShadowStrength.value = this.shadowStrength;
             uniforms.gkHeadRight.value.copy(this.gakumasHeadRight);
             uniforms.gkCharacterShadowEnabled.value = this.gakumasPasses.characterShadow && shadowLight?.shadow.map ? 1 : 0;
             uniforms.gkCharacterShadowMap.value = shadowLight?.shadow.map?.texture || null;
-            if (shadowLight && shadowMapSize) {
-                shadowLight.shadow.updateMatrices(shadowLight);
-                uniforms.gkCharacterShadowMatrix.value.copy(shadowLight.shadow.matrix);
-                uniforms.gkCharacterShadowLightDir.value.copy(this.characterShadowTravel);
-                uniforms.gkCharacterShadowMapSize.value.set(shadowMapSize.x, shadowMapSize.y);
-                uniforms.gkCharacterShadowNormalBias.value = Math.max(0.04, this.characterShadowFit.radius * 0.006);
-                uniforms.gkCharacterShadowConstantBias.value = 0;
-                uniforms.gkCharacterShadowRadius.value = 1.25;
-                const depthRange = Math.max(shadowLight.shadow.camera.far - shadowLight.shadow.camera.near, 0.001);
-                uniforms.gkCharacterShadowContact.value = Math.max(0.16, this.characterShadowFit.radius * 0.014) / depthRange;
-            }
-            uniforms.gkHairShadowEnabled.value = this.gakumasPasses.hairShadow && this.hairShadowStage.entries.length ? 1 : 0;
-            uniforms.gkHairShadowMap.value = this.hairShadowStage.map();
-            uniforms.gkHairShadowDepth.value = this.hairShadowStage.depthMap();
-            uniforms.gkHairShadowOffset.value = this.gakumasPasses.hairShadowOffset;
-            uniforms.gkHairShadowFocus.value = HAIR_SHADOW_FOCUS;
-            uniforms.gkHairShadowBias.value = Math.max(HAIR_SHADOW_BIAS, this.characterShadowFit.radius * 0.0015);
-            uniforms.gkHairShadowNear.value = this.camera.near;
-            uniforms.gkHairShadowFar.value = this.camera.far;
-            uniforms.gkHairShadowResolution.value.copy(this.hairShadowStage.resolution);
-            uniforms.gkHairShadowLightVS.value.copy(this.hairShadowLightVS);
+            if (shadowLight) uniforms.gkCharacterShadowMatrix.value.copy(shadowLight.shadow.matrix);
+            uniforms.gkCharacterShadowContact.value = characterShadow?.contact || 0.001;
             applyGakumasLookUniforms(uniforms);
         });
     }
@@ -1032,7 +978,6 @@ export class LivePortraitRuntime {
         const mixer = this.model ? this.ensureMixer() : null;
         this.clearFinishedHandler(mixer);
         this.hairCoverStage.dispose();
-        this.hairShadowStage.dispose();
         this.gakumasTextures.forEach(entry => entry.texture?.dispose());
         this.gakumasTextures = [];
         Object.values(this.gakumasFallbacks).forEach(texture => texture.dispose());
@@ -1050,6 +995,7 @@ export class LivePortraitRuntime {
         if (singleton === this) singleton = null;
     }
 }
+
 
 
 

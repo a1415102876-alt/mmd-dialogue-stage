@@ -1,6 +1,6 @@
 import * as THREE from './vendor/three/build/three.module.js';
-import { isHairCoverSourceMaterial } from './gakumas-passes.js?v=20260925-rendering-v3';
-import { injectActorShader } from './gakumas-shader.js?v=20260925-rendering-v3';
+import { isHairCoverSourceMaterial } from './gakumas-passes.js?v=20261002-hair-cover-base';
+import { injectActorShader } from './gakumas-shader.js?v=20261002-hair-cover-base';
 
 export const HAIR_FADE_PARAMETERS = Object.freeze([0.75, 2, 0.4, 4]);
 
@@ -53,9 +53,13 @@ export class HairCoverStage {
         material.depthWrite = false;
         material.depthTest = true;
         material.depthFunc = THREE.LessEqualDepth;
-        material.stencilWrite = false;
-        material.stencilFunc = THREE.AlwaysStencilFunc;
-        material.stencilRef = 0;
+        material.polygonOffset = false;
+        // Face, brows and eye white all write stencil 64 or above. This pass
+        // redraws the bangs there, after the eye cards, so the view fade covers
+        // the eyes instead of the eye highlight.
+        material.stencilWrite = true;
+        material.stencilFunc = THREE.GreaterEqualStencilFunc;
+        material.stencilRef = 64;
         material.stencilFuncMask = 0xff;
         material.stencilWriteMask = 0;
         material.stencilFail = THREE.KeepStencilOp;
@@ -72,7 +76,7 @@ export class HairCoverStage {
         material.blendDstAlpha = THREE.OneMinusSrcAlphaFactor;
         material.premultipliedAlpha = false;
         material.onBeforeCompile = shader => injectActorShader(shader, { ...actorUniforms, ...this.uniforms });
-        material.customProgramCacheKey = () => 'gakumas-actor-hair-cover-pass-rendering-v2';
+        material.customProgramCacheKey = () => 'gakumas-actor-hair-cover-pass-view-v6';
         this.entries.push({ mesh, source, material, groups });
     }
 
@@ -98,42 +102,26 @@ export class HairCoverStage {
         }
     }
 
-    drawForMaterial(renderer, scene, camera, mesh, geometry, source, group) {
-        for (const entry of this.entries) {
-            if (entry.mesh !== mesh || entry.source !== source) continue;
-            if (!entry.groups.some(candidate => candidate.start === group?.start && candidate.count === group?.count && candidate.materialIndex === group?.materialIndex)) continue;
-            mesh.modelViewMatrix.multiplyMatrices(camera.matrixWorldInverse, mesh.matrixWorld);
-            mesh.normalMatrix.getNormalMatrix(mesh.modelViewMatrix);
-            entry.material.opacity = source.opacity;
-            entry.material.color.copy(source.color);
-            renderer.renderBufferDirect(camera, scene, geometry, entry.material, mesh, group);
-            this.lastDraws.push({ name: source.name, start: group.start, count: group.count, materialIndex: group.materialIndex });
-        }
-    }
-
     renderFrame(renderer, outline, scene, camera, enabled) {
         this.lastDraws = [];
-        const originalAfterRenders = new Map();
+        const originalSceneAfter = scene.onAfterRender;
         if (enabled && this.entries.length) {
             if (camera.isArrayCamera) {
                 throw new Error('HairCover currently requires a single camera');
             }
-            const meshes = new Set(this.entries.map(entry => entry.mesh));
             this.active = true;
-            for (const mesh of meshes) {
-                const originalAfterRender = mesh.onAfterRender;
-                originalAfterRenders.set(mesh, originalAfterRender);
-                mesh.onAfterRender = (activeRenderer, activeScene, activeCamera, geometry, material, group) => {
-                    originalAfterRender.call(mesh, activeRenderer, activeScene, activeCamera, geometry, material, group);
-                    if (this.active && material && group) this.drawForMaterial(activeRenderer, activeScene, activeCamera, mesh, geometry, material, group);
-                };
-            }
+            // Draw after the eyes. Mesh onAfterRender runs in the opaque pass,
+            // before the transparent eye cards, so the eyes would cover the fade.
+            scene.onAfterRender = (activeRenderer, activeScene, activeCamera) => {
+                if (this.active) this.draw(activeRenderer, activeScene, activeCamera);
+                if (originalSceneAfter) originalSceneAfter.call(scene, activeRenderer, activeScene, activeCamera);
+            };
         }
         try {
             renderer.render(scene, camera);
         } finally {
             this.active = false;
-            for (const [mesh, originalAfterRender] of originalAfterRenders) mesh.onAfterRender = originalAfterRender;
+            scene.onAfterRender = originalSceneAfter;
         }
         if (outline.enabled) outline.renderOutline(scene, camera);
     }

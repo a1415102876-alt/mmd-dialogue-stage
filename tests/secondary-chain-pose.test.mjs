@@ -99,3 +99,54 @@ test('authored particle metadata must not create unverified all-pairs self colli
         }
     }
 });
+
+test('captured GLB chains bind named child particles to the owning spring', () => {
+    const root = new Bone();
+    root.name = 'Spine';
+    const bones = [root];
+    for (let index = 1; index <= 4; index += 1) {
+        const bone = new Bone();
+        bone.name = `Jacket${index}_S`;
+        bone.position.set(1, 0, 0);
+        (bones.at(-1)).add(bone);
+        bones.push(bone);
+    }
+    root.updateMatrixWorld(true);
+    const springs = bones.slice(1, 4).map((bone, index) => ({
+        bone: bone.name,
+        part: 'body',
+        damping: 0.5,
+        stiffness: 0,
+        spring: 0,
+        mass: 1,
+        collisionMask: 0,
+        colliderType: 4,
+        particleRadius: 0.01,
+        unityLocalPosition: [1, 0, 0],
+        referenceLimitInfo: { bone: null, min: [0, 0, 0], max: [0, 0, 0] },
+        initialRotationEuler: [0, 0, 0],
+    }));
+    const motion = new SecondaryMotion({
+        physicsAlgorithm: 'gakumas-runtime-recovered-v1',
+        drivers: [],
+        springs,
+        colliders: [],
+        chains: [],
+        nativeChainGeometry: {
+            records: [{
+                active: 1,
+                depth: 1,
+                around: 0,
+                radiusA: 0.01,
+                radiusB: 0.01,
+                sourceBone: 'Jacket2_S',
+                targetBone: 'Jacket3_S',
+                particleBinding: 'child',
+            }],
+        },
+    });
+    motion.bind(bones.map(bone => ({ bone, position: bone.position.clone(), quaternion: bone.quaternion.clone() })));
+    assert.equal(motion.nativeChainLinks.length, 1);
+    assert.equal(motion.nativeChainLinks[0].source.record.bone, 'Jacket1_S');
+    assert.equal(motion.nativeChainLinks[0].target.record.bone, 'Jacket2_S');
+});
