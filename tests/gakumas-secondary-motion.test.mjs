@@ -234,6 +234,10 @@ test('latest candidate profiles keep all three humanoid Quartz classes and nativ
             assert.equal(profile.drivers.filter(driver => driver.className === className).length, 4, `${profileName} should keep four ${className} jobs`);
         }
         assert.equal(profile.quartzStageAdaptation.status, 'stage-adaptation-native-io-unverified');
+        const expectedCaptureOnlyGaps = profile.quartzStageAdaptation.captureJobs
+            .filter(job => /Frill|Waist/.test(job.name || '') && job.itemsCount === 0)
+            .map(job => job.name);
+        assert.deepEqual(profile.quartzStageAdaptation.unsupportedCaptureOnlyJobs, expectedCaptureOnlyGaps);
     }
     for (const bone of ['LeftToeBase', 'RightToeBase']) {
         const collider = ssmkTable.colliders.find(item => item.bone === bone);

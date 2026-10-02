@@ -21493,7 +21493,8 @@
         "itemsRead": 8,
         "itemsAttempted": 8,
         "status": "read",
-        "executionVerified": false
+        "executionVerified": false,
+        "itemsCount": 1
       },
       {
         "name": "_quartzDriverRotationJobBones",
@@ -21502,7 +21503,8 @@
         "itemsRead": 16,
         "itemsAttempted": 16,
         "status": "read",
-        "executionVerified": false
+        "executionVerified": false,
+        "itemsCount": 4
       },
       {
         "name": "_quartzDriverFrillJobBones",
@@ -21511,7 +21513,8 @@
         "itemsRead": 4,
         "itemsAttempted": 4,
         "status": "read",
-        "executionVerified": false
+        "executionVerified": false,
+        "itemsCount": 0
       },
       {
         "name": "_quartzDriverSkirtJobBones",
@@ -21520,7 +21523,8 @@
         "itemsRead": 12,
         "itemsAttempted": 12,
         "status": "read",
-        "executionVerified": false
+        "executionVerified": false,
+        "itemsCount": 8
       },
       {
         "name": "_quartzDriverHairJobBones",
@@ -21529,7 +21533,8 @@
         "itemsRead": 10,
         "itemsAttempted": 10,
         "status": "read",
-        "executionVerified": false
+        "executionVerified": false,
+        "itemsCount": 9
       },
       {
         "name": "_quartzDriverHumanoidHandJobBones",
@@ -21538,7 +21543,8 @@
         "itemsRead": 4,
         "itemsAttempted": 4,
         "status": "read",
-        "executionVerified": false
+        "executionVerified": false,
+        "itemsCount": 4
       },
       {
         "name": "_quartzDriverHumanoidSleeveJobBones",
@@ -21547,7 +21553,8 @@
         "itemsRead": 8,
         "itemsAttempted": 8,
         "status": "read",
-        "executionVerified": false
+        "executionVerified": false,
+        "itemsCount": 0
       },
       {
         "name": "_quartzDriverHumanoidUpLegJobBones",
@@ -21556,7 +21563,8 @@
         "itemsRead": 4,
         "itemsAttempted": 4,
         "status": "read",
-        "executionVerified": false
+        "executionVerified": false,
+        "itemsCount": 4
       },
       {
         "name": "_quartzDriverHumanoidArmJobBones",
@@ -21565,7 +21573,8 @@
         "itemsRead": 4,
         "itemsAttempted": 4,
         "status": "read",
-        "executionVerified": false
+        "executionVerified": false,
+        "itemsCount": 4
       },
       {
         "name": "_quartzDriverWaistJobBones",
@@ -21574,7 +21583,8 @@
         "itemsRead": 2,
         "itemsAttempted": 2,
         "status": "read",
-        "executionVerified": false
+        "executionVerified": false,
+        "itemsCount": 0
       },
       {
         "name": "_quartzDriverFurisodeJobBones",
@@ -21583,7 +21593,8 @@
         "itemsRead": 4,
         "itemsAttempted": 4,
         "status": "read",
-        "executionVerified": false
+        "executionVerified": false,
+        "itemsCount": 0
       },
       {
         "name": "_quartzDriverPonchoJobBones",
@@ -21592,9 +21603,13 @@
         "itemsRead": 6,
         "itemsAttempted": 6,
         "status": "read",
-        "executionVerified": false
+        "executionVerified": false,
+        "itemsCount": 0
       }
     ],
-    "unsupportedCaptureOnlyJobs": []
+    "unsupportedCaptureOnlyJobs": [
+      "_quartzDriverFrillJobBones",
+      "_quartzDriverWaistJobBones"
+    ]
   }
 }
