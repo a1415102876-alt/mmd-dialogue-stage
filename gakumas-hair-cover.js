@@ -111,8 +111,41 @@ export class HairCoverStage {
             if (!source.visible || !isVisible(mesh, camera)) continue;
             mesh.modelViewMatrix.multiplyMatrices(camera.matrixWorldInverse, mesh.matrixWorld);
             mesh.normalMatrix.getNormalMatrix(mesh.modelViewMatrix);
-            for (const group of groups) {
-                renderer.renderBufferDirect(camera, scene, mesh.geometry, source, mesh, group);
+            // This callback runs after the regular render list, so the
+            // m_hir+ overlay is at the same depth as the already drawn hair.
+            // Reuse the source shader, but make this one redraw an overlay:
+            // depth must not reject it, while the existing hair stencil (64)
+            // keeps it out of the higher-stencil eye layer. Restore every
+            // state field before returning because the source is still used
+            // by the normal scene render on the next frame.
+            const state = {
+                depthTest: source.depthTest,
+                depthWrite: source.depthWrite,
+                stencilWrite: source.stencilWrite,
+                stencilFunc: source.stencilFunc,
+                stencilRef: source.stencilRef,
+                stencilFuncMask: source.stencilFuncMask,
+                stencilWriteMask: source.stencilWriteMask,
+                stencilFail: source.stencilFail,
+                stencilZFail: source.stencilZFail,
+                stencilZPass: source.stencilZPass,
+            };
+            source.depthTest = false;
+            source.depthWrite = false;
+            source.stencilWrite = true;
+            source.stencilFunc = THREE.EqualStencilFunc;
+            source.stencilRef = 64;
+            source.stencilFuncMask = 0xff;
+            source.stencilWriteMask = 0;
+            source.stencilFail = THREE.KeepStencilOp;
+            source.stencilZFail = THREE.KeepStencilOp;
+            source.stencilZPass = THREE.KeepStencilOp;
+            try {
+                for (const group of groups) {
+                    renderer.renderBufferDirect(camera, scene, mesh.geometry, source, mesh, group);
+                }
+            } finally {
+                Object.assign(source, state);
             }
         }
     }

@@ -906,6 +906,7 @@ export class LivePortraitRuntime {
                 material.needsUpdate = true;
                 material.visible = true;
                 this.hairCoverStage.add(child, material, materialIndex, uniforms, hairTextureName);
+                if (actorPass === 'hairHighlight') this.hairCoverStage.addHighlight(child, material, materialIndex);
             });
             child.castShadow = hasCharacterShadowCaster;
             child.receiveShadow = false;

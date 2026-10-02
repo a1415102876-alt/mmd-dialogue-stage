@@ -91,11 +91,22 @@ test('redraws m_hir+ after HairCover so the highlight is not buried by the fade 
             scene.onAfterRender(renderer, scene, camera);
         },
         renderBufferDirect: (activeCamera, activeScene, geometry, material) => {
+            if (material === materials[2]) {
+                assert.equal(material.depthTest, false);
+                assert.equal(material.depthWrite, false);
+                assert.equal(material.stencilWrite, true);
+                assert.equal(material.stencilFunc, THREE.EqualStencilFunc);
+                assert.equal(material.stencilRef, 64);
+                assert.equal(material.stencilWriteMask, 0);
+            }
             events.push(material === materials[2] ? 'highlight' : 'cover');
         },
     };
     stage.renderFrame(renderer, { enabled: false, renderOutline() {} }, scene, camera, true);
     assert.deepEqual(events, ['base', 'cover', 'highlight']);
+    assert.equal(materials[2].depthTest, true);
+    assert.equal(materials[2].depthWrite, true);
+    assert.equal(materials[2].stencilWrite, false);
 });
 
 test('extra drawing respects visibility, camera layers and material visibility', () => {

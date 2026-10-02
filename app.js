@@ -1272,7 +1272,7 @@ function renderGakumasInspector() {
     $('#gakumasHeadStatus').textContent = state.gakumasHeadBone ? `脸部朝向跟随：${state.gakumasHeadBone.name}` : '未找到 Head／頭 骨骼；脸部朝向暂跟随模型。';
     if ($('#gakumasCharacterShadow')) $('#gakumasCharacterShadow').checked = state.gakumasPasses.characterShadow;
     if ($('#gakumasHairCover')) $('#gakumasHairCover').checked = state.gakumasPasses.hairCover;
-    $('#gakumasHairCoverStatus').textContent = `HairCover：${hairCoverStage.entries.reduce((count, entry) => count + entry.groups.length, 0)} 个 m_hir 面组就绪；m_hir+ 高光和其他材质不补绘。`;
+    $('#gakumasHairCoverStatus').textContent = `HairCover：${hairCoverStage.entries.reduce((count, entry) => count + entry.groups.length, 0)} 个 m_hir 面组就绪；m_hir+ 高光在 HairCover 后补绘。`;
     const shadowStatus = $('#gakumasCharacterShadowStatus');
     if (shadowStatus) shadowStatus.textContent = '角色阴影：4K 深度图，光源跟摄像机。脸、眼睛和高光层不写入；头发、身体和衣服写入，并在脸、眼睛、头发、身体和衣服上采样。';
 }
