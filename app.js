@@ -1121,6 +1121,7 @@ function applyMaterialStyle() {
             material.visible = true;
             if (state.materialMode === 'gakumas') {
                 hairCoverStage.add(child, material, materialIndex, uniforms, hairTextureName);
+                if (actorPass === 'hairHighlight') hairCoverStage.addHighlight(child, material, materialIndex);
             }
         });
         if (state.materialMode === 'gakumas') {

@@ -22,6 +22,7 @@ function isVisible(mesh, camera) {
 export class HairCoverStage {
     constructor() {
         this.entries = [];
+        this.highlightEntries = [];
         this.lastDraws = [];
         this.active = false;
         this.uniforms = {
@@ -54,19 +55,11 @@ export class HairCoverStage {
         material.depthTest = true;
         material.depthFunc = THREE.LessEqualDepth;
         material.polygonOffset = false;
-        // Face, brows and eye white all write stencil 64 or above. The second
-        // hair pass is gated by that existing mask and uses a zero write mask,
-        // so it can reveal the eyes without changing the mask for later
-        // passes. Keeping the test here also prevents the pass from painting
-        // over the separate m_hir+ highlight geometry outside the face.
-        material.stencilWrite = true;
-        material.stencilFunc = THREE.GreaterEqualStencilFunc;
-        material.stencilRef = 64;
-        material.stencilFuncMask = 0xff;
-        material.stencilWriteMask = 0;
-        material.stencilFail = THREE.KeepStencilOp;
-        material.stencilZFail = THREE.KeepStencilOp;
-        material.stencilZPass = THREE.KeepStencilOp;
+        // This model's eyes already use a higher stencil layer and show
+        // through the ordinary hair pass. HairCover only supplies the view
+        // dependent fade; it must not add a late stencil-gated redraw that
+        // paints the whole face in front of the eye layer.
+        material.stencilWrite = false;
         material.alphaTest = 0;
         material.colorWrite = true;
         material.blending = THREE.CustomBlending;
@@ -80,6 +73,15 @@ export class HairCoverStage {
         material.onBeforeCompile = shader => injectActorShader(shader, { ...actorUniforms, ...this.uniforms });
         material.customProgramCacheKey = () => 'gakumas-actor-hair-cover-pass-view-v8';
         this.entries.push({ mesh, source, material, groups });
+    }
+
+    addHighlight(mesh, source, materialIndex) {
+        const geometry = mesh.geometry;
+        const groups = Array.isArray(mesh.material)
+            ? geometry.groups.filter(group => group.materialIndex === materialIndex)
+            : [{ start: 0, count: geometry.index?.count ?? geometry.attributes.position.count, materialIndex: 0 }];
+        if (!groups.length) return;
+        this.highlightEntries.push({ mesh, source, groups });
     }
 
     update(head, minimumCoverage) {
@@ -104,6 +106,17 @@ export class HairCoverStage {
         }
     }
 
+    drawHighlights(renderer, scene, camera) {
+        for (const { mesh, source, groups } of this.highlightEntries) {
+            if (!source.visible || !isVisible(mesh, camera)) continue;
+            mesh.modelViewMatrix.multiplyMatrices(camera.matrixWorldInverse, mesh.matrixWorld);
+            mesh.normalMatrix.getNormalMatrix(mesh.modelViewMatrix);
+            for (const group of groups) {
+                renderer.renderBufferDirect(camera, scene, mesh.geometry, source, mesh, group);
+            }
+        }
+    }
+
     renderFrame(renderer, outline, scene, camera, enabled) {
         this.lastDraws = [];
         const originalSceneAfter = scene.onAfterRender;
@@ -115,7 +128,10 @@ export class HairCoverStage {
             // Draw after the eyes. Mesh onAfterRender runs in the opaque pass,
             // before the transparent eye cards, so the eyes would cover the fade.
             scene.onAfterRender = (activeRenderer, activeScene, activeCamera) => {
-                if (this.active) this.draw(activeRenderer, activeScene, activeCamera);
+                if (this.active) {
+                    this.draw(activeRenderer, activeScene, activeCamera);
+                    this.drawHighlights(activeRenderer, activeScene, activeCamera);
+                }
                 if (originalSceneAfter) originalSceneAfter.call(scene, activeRenderer, activeScene, activeCamera);
             };
         }
@@ -131,7 +147,7 @@ export class HairCoverStage {
     dispose() {
         this.entries.forEach(entry => entry.material.dispose());
         this.entries = [];
+        this.highlightEntries = [];
         this.lastDraws = [];
     }
 }
-

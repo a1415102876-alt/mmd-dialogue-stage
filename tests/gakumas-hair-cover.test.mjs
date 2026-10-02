@@ -45,8 +45,9 @@ test('cover shader only fades m_hir and leaves the m_hir+ highlight branch to it
         fragmentShader: '#include <alphatest_fragment>\n#include <lights_fragment_end>',
     };
     injectActorShader(shader, {});
-    assert.match(shader.vertexShader, /#ifdef GK_HAIR_COVER_PASS\s+gl_Position\.z -= 0\.0015 \* gl_Position\.w;/);
+    assert.doesNotMatch(shader.vertexShader, /gl_Position\.z -= 0\.0015 \* gl_Position\.w;/);
     assert.match(shader.fragmentShader, /#ifdef GK_HAIR_COVER_PASS[\s\S]*gkSpecMask = 0\.0;[\s\S]*#else[\s\S]*gkHairHighlight/);
+    assert.match(shader.fragmentShader, /gkSpecMask \*= gkHairProp;\s*#endif\s*#endif\s*vec4 gkRamp/);
 });
 
 test('only hair has a second pass; base arrays, geometry, maps and scene stay intact', () => {
@@ -60,13 +61,10 @@ test('only hair has a second pass; base arrays, geometry, maps and scene stay in
     assert.equal(entry.material.opacity, 1);
     assert.equal(entry.material.depthWrite, false);
     assert.equal(entry.material.depthTest, true);
-    // HairCover is the second, stencil-gated hair pass.  It must only redraw
-    // the face/eye stencil region and must never modify the stencil buffer.
-    assert.equal(entry.material.stencilWrite, true);
-    assert.equal(entry.material.stencilFunc, THREE.GreaterEqualStencilFunc);
-    assert.equal(entry.material.stencilRef, 64);
-    assert.equal(entry.material.stencilFuncMask, 0xff);
-    assert.equal(entry.material.stencilWriteMask, 0);
+    // The model already has a high eye stencil. HairCover must leave that
+    // existing ordering alone and therefore must not run a second stencil
+    // test or write to the stencil buffer.
+    assert.equal(entry.material.stencilWrite, false);
     assert.equal(entry.material.blendSrc, THREE.SrcAlphaFactor);
     assert.equal(entry.material.blendDst, THREE.OneMinusSrcAlphaFactor);
     assert.equal(entry.material.blendSrcAlpha, THREE.OneFactor);
@@ -81,6 +79,23 @@ test('only hair has a second pass; base arrays, geometry, maps and scene stay in
     assert.deepEqual(geometry.groups, groups);
     assert.equal(scene.children.length, 1);
     assert.ok(materials.every(material => material.visible));
+});
+
+test('redraws m_hir+ after HairCover so the highlight is not buried by the fade pass', () => {
+    const { stage, scene, camera, mesh, materials } = fixture();
+    stage.addHighlight(mesh, materials[2], 2);
+    const events = [];
+    const renderer = {
+        render: () => {
+            events.push('base');
+            scene.onAfterRender(renderer, scene, camera);
+        },
+        renderBufferDirect: (activeCamera, activeScene, geometry, material) => {
+            events.push(material === materials[2] ? 'highlight' : 'cover');
+        },
+    };
+    stage.renderFrame(renderer, { enabled: false, renderOutline() {} }, scene, camera, true);
+    assert.deepEqual(events, ['base', 'cover', 'highlight']);
 });
 
 test('extra drawing respects visibility, camera layers and material visibility', () => {
