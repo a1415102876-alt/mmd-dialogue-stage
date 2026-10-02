@@ -71,6 +71,9 @@ vec4 gkVertexHigh = floor(gakumasVertexColor * 15.9375 + 0.03125);
 vec4 gkVertexLow = gakumasVertexColor * 255.0 - gkVertexHigh * 16.0;
 gkRampAddId = gkVertexLow.y / 15.0;
 gkRimMask = gkVertexHigh.w / 15.0;`);
+    // HairCover is a late, stencil-gated redraw. Pull only this pass toward
+    // the camera so it can blend over the face/eye depth without changing the
+    // base hair or the separate m_hir+ pass ordering.
     shader.vertexShader = shader.vertexShader.replace('#include <project_vertex>', `#include <project_vertex>
 #ifdef GK_HAIR_COVER_PASS
 gl_Position.z -= 0.0015 * gl_Position.w;
@@ -148,6 +151,8 @@ gkLighting = max(gkLighting, gkShadowFloor);
 float gkSpecMask = min(gkDef.a, gkShadowForLighting);
 #ifdef GK_HAIR
 #ifdef GK_HAIR_COVER_PASS
+// HairCover exists to apply the view-dependent alpha. Do not run the regular
+// hair highlight/specular branch in this redraw; m_hir+ owns that layer.
 gkSpecMask = 0.0;
 #else
 float gkHairProp = step(0.75001, gkUv.x) * step(0.75001, gkUv.y);
@@ -155,7 +160,6 @@ float gkHairHighlight = smoothstep(0.35, 0.65, pow(clamp(gkMatNormal.z, 0.0, 1.0
 gkHairHighlight *= gkSpecMask * gkHasHighlight * (1.0 - gkHairProp);
 gkBase = mix(gkBase, texture2D(gkHighlightMap, gkUv).rgb, gkHairHighlight);
 gkSpecMask *= gkHairProp;
-#endif
 #endif
 vec4 gkRamp = texture2D(gkRampMap, vec2(gkLighting, 0.5));
 float gkFallbackShade = 1.0 - smoothstep(0.35, 0.65, gkLighting);

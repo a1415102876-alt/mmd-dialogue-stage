@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import * as THREE from '../vendor/three/build/three.module.js';
 import { HairCoverStage, evaluateHairCoverAlpha } from '../gakumas-hair-cover.js';
+import { injectActorShader } from '../gakumas-shader.js';
 
 function fixture() {
     const geometry = new THREE.BufferGeometry();
@@ -37,6 +38,17 @@ test('source formula treats texture alpha as fade weight, not coverage', () => {
     assert.equal(evaluateHairCoverAlpha(0, 0, 1, 0.35), 1);
 });
 
+test('cover shader only fades m_hir and leaves the m_hir+ highlight branch to its own pass', () => {
+    const shader = {
+        uniforms: {},
+        vertexShader: '#include <worldpos_vertex>\n#include <begin_vertex>\n#include <project_vertex>',
+        fragmentShader: '#include <alphatest_fragment>\n#include <lights_fragment_end>',
+    };
+    injectActorShader(shader, {});
+    assert.match(shader.vertexShader, /#ifdef GK_HAIR_COVER_PASS\s+gl_Position\.z -= 0\.0015 \* gl_Position\.w;/);
+    assert.match(shader.fragmentShader, /#ifdef GK_HAIR_COVER_PASS[\s\S]*gkSpecMask = 0\.0;[\s\S]*#else[\s\S]*gkHairHighlight/);
+});
+
 test('only hair has a second pass; base arrays, geometry, maps and scene stay intact', () => {
     const { stage, mesh, materials, geometry, scene, camera } = fixture();
     const groups = structuredClone(geometry.groups);
@@ -48,10 +60,13 @@ test('only hair has a second pass; base arrays, geometry, maps and scene stay in
     assert.equal(entry.material.opacity, 1);
     assert.equal(entry.material.depthWrite, false);
     assert.equal(entry.material.depthTest, true);
+    // HairCover is the second, stencil-gated hair pass.  It must only redraw
+    // the face/eye stencil region and must never modify the stencil buffer.
     assert.equal(entry.material.stencilWrite, true);
     assert.equal(entry.material.stencilFunc, THREE.GreaterEqualStencilFunc);
     assert.equal(entry.material.stencilRef, 64);
     assert.equal(entry.material.stencilFuncMask, 0xff);
+    assert.equal(entry.material.stencilWriteMask, 0);
     assert.equal(entry.material.blendSrc, THREE.SrcAlphaFactor);
     assert.equal(entry.material.blendDst, THREE.OneMinusSrcAlphaFactor);
     assert.equal(entry.material.blendSrcAlpha, THREE.OneFactor);

@@ -1,6 +1,6 @@
 import * as THREE from './vendor/three/build/three.module.js';
-import { isHairCoverSourceMaterial } from './gakumas-passes.js?v=20261002-hair-cover-base';
-import { injectActorShader } from './gakumas-shader.js?v=20261002-hair-cover-base';
+import { isHairCoverSourceMaterial } from './gakumas-passes.js?v=20261003-hair-cover-fix-v8';
+import { injectActorShader } from './gakumas-shader.js?v=20261003-hair-cover-fix-v8';
 
 export const HAIR_FADE_PARAMETERS = Object.freeze([0.75, 2, 0.4, 4]);
 
@@ -54,9 +54,11 @@ export class HairCoverStage {
         material.depthTest = true;
         material.depthFunc = THREE.LessEqualDepth;
         material.polygonOffset = false;
-        // Face, brows and eye white all write stencil 64 or above. This pass
-        // redraws the bangs there, after the eye cards, so the view fade covers
-        // the eyes instead of the eye highlight.
+        // Face, brows and eye white all write stencil 64 or above. The second
+        // hair pass is gated by that existing mask and uses a zero write mask,
+        // so it can reveal the eyes without changing the mask for later
+        // passes. Keeping the test here also prevents the pass from painting
+        // over the separate m_hir+ highlight geometry outside the face.
         material.stencilWrite = true;
         material.stencilFunc = THREE.GreaterEqualStencilFunc;
         material.stencilRef = 64;
@@ -76,7 +78,7 @@ export class HairCoverStage {
         material.blendDstAlpha = THREE.OneMinusSrcAlphaFactor;
         material.premultipliedAlpha = false;
         material.onBeforeCompile = shader => injectActorShader(shader, { ...actorUniforms, ...this.uniforms });
-        material.customProgramCacheKey = () => 'gakumas-actor-hair-cover-pass-view-v6';
+        material.customProgramCacheKey = () => 'gakumas-actor-hair-cover-pass-view-v8';
         this.entries.push({ mesh, source, material, groups });
     }
 
@@ -132,5 +134,4 @@ export class HairCoverStage {
         this.lastDraws = [];
     }
 }
-
 
