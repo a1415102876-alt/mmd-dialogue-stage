@@ -1,0 +1,14 @@
+{
+    "enableConsole": true,
+    "checkBuiltInAssets": false,
+    "transRemoteZipUrl": "https://github.com/chinosk6/GakumasTranslationData/releases/download/v1.0.2/GakumasTranslationData.zip",
+    "useRemoteAssets": true,
+    "useAPIAssets": false,
+    "useAPIAssetsURL": "https://uma.chinosk6.cn/api/gkms_trans_data",
+    "useAPITextureAssets": false,
+    "useAPITextureAssetsURL": "https://texture.gakumas.cn/api/gkms_texture_data",
+    "delTextureRemoteAfterUpdate": true,
+    "delRemoteAfterUpdate": false,
+    "cleanLocalAssets": false,
+    "p": false
+}

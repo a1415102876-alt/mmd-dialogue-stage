@@ -2,6 +2,16 @@
   "version": 2,
   "drivers": [
     {
+      "className": "ActorAnimationQuartzDriverHumanoidUpLegBone",
+      "bone": "RightUpLeg_Roll_H",
+      "enabled": true,
+      "setting": {
+        "humanPartDof": 3,
+        "coefficient": -0.6000000238418579
+      },
+      "part": "body"
+    },
+    {
       "className": "ActorAnimationQuartzDriverSkirtBone",
       "bone": "LeftBackSkirt_A",
       "enabled": true,
@@ -32,6 +42,16 @@
           "pathId": 452468201732406456,
           "name": "LeftUpLeg"
         }
+      },
+      "part": "body"
+    },
+    {
+      "className": "ActorAnimationQuartzDriverHumanoidHandBone",
+      "bone": "RightHand_H",
+      "enabled": true,
+      "setting": {
+        "humanPartDof": 5,
+        "coefficient": 0.8999999761581421
       },
       "part": "body"
     },
@@ -138,6 +158,88 @@
       "part": "body"
     },
     {
+      "className": "ActorAnimationQuartzDriverRotationBone",
+      "bone": "RightForeArm_H",
+      "enabled": true,
+      "setting": {
+        "rotationOrder": 1,
+        "limitMin": [
+          -180.0,
+          -180.0,
+          -180.0
+        ],
+        "limitMax": [
+          180.0,
+          180.0,
+          180.0
+        ],
+        "coefficient": [
+          0.0,
+          -0.4000000059604645,
+          0.0
+        ],
+        "connectionAxis": 0,
+        "decomposeType": 0,
+        "composeType": 3,
+        "referenceBone": {
+          "pathId": 2984267706541636792,
+          "name": "RightForeArm"
+        }
+      },
+      "part": "body"
+    },
+    {
+      "className": "ActorAnimationQuartzDriverHumanoidUpLegBone",
+      "bone": "LeftUpLeg_H",
+      "enabled": true,
+      "setting": {
+        "humanPartDof": 2,
+        "coefficient": -1.0
+      },
+      "part": "body"
+    },
+    {
+      "className": "ActorAnimationQuartzDriverHumanoidHandBone",
+      "bone": "LeftHand_H",
+      "enabled": true,
+      "setting": {
+        "humanPartDof": 4,
+        "coefficient": 0.8999999761581421
+      },
+      "part": "body"
+    },
+    {
+      "className": "ActorAnimationQuartzDriverRotationBone",
+      "bone": "LeftForeArm_H",
+      "enabled": true,
+      "setting": {
+        "rotationOrder": 1,
+        "limitMin": [
+          -180.0,
+          -180.0,
+          -180.0
+        ],
+        "limitMax": [
+          180.0,
+          180.0,
+          180.0
+        ],
+        "coefficient": [
+          0.0,
+          -0.4000000059604645,
+          0.0
+        ],
+        "connectionAxis": 0,
+        "decomposeType": 0,
+        "composeType": 3,
+        "referenceBone": {
+          "pathId": 1009886822169803960,
+          "name": "LeftForeArm"
+        }
+      },
+      "part": "body"
+    },
+    {
       "className": "ActorAnimationQuartzDriverSkirtBone",
       "bone": "LeftBackSideSkirt_A",
       "enabled": true,
@@ -206,6 +308,37 @@
       "part": "body"
     },
     {
+      "className": "ActorAnimationQuartzDriverRotationBone",
+      "bone": "LeftLeg_H",
+      "enabled": true,
+      "setting": {
+        "rotationOrder": 0,
+        "limitMin": [
+          -180.0,
+          -180.0,
+          -180.0
+        ],
+        "limitMax": [
+          180.0,
+          180.0,
+          180.0
+        ],
+        "coefficient": [
+          0.0,
+          0.0,
+          -0.5
+        ],
+        "connectionAxis": 0,
+        "decomposeType": 0,
+        "composeType": 3,
+        "referenceBone": {
+          "pathId": -710119466046423880,
+          "name": "LeftLeg"
+        }
+      },
+      "part": "body"
+    },
+    {
       "className": "ActorAnimationQuartzDriverSkirtBone",
       "bone": "RightBackSkirt_A",
       "enabled": true,
@@ -240,6 +373,67 @@
       "part": "body"
     },
     {
+      "className": "ActorAnimationQuartzDriverRotationBone",
+      "bone": "RightLeg_H",
+      "enabled": true,
+      "setting": {
+        "rotationOrder": 0,
+        "limitMin": [
+          -180.0,
+          -180.0,
+          -180.0
+        ],
+        "limitMax": [
+          180.0,
+          180.0,
+          180.0
+        ],
+        "coefficient": [
+          0.0,
+          0.0,
+          -0.5
+        ],
+        "connectionAxis": 0,
+        "decomposeType": 0,
+        "composeType": 3,
+        "referenceBone": {
+          "pathId": -569593496442733384,
+          "name": "RightLeg"
+        }
+      },
+      "part": "body"
+    },
+    {
+      "className": "ActorAnimationQuartzDriverHumanoidUpLegBone",
+      "bone": "RightUpLeg_H",
+      "enabled": true,
+      "setting": {
+        "humanPartDof": 3,
+        "coefficient": -1.0
+      },
+      "part": "body"
+    },
+    {
+      "className": "ActorAnimationQuartzDriverHumanoidHandBone",
+      "bone": "RightForeArm_Roll_H",
+      "enabled": true,
+      "setting": {
+        "humanPartDof": 5,
+        "coefficient": 0.5
+      },
+      "part": "body"
+    },
+    {
+      "className": "ActorAnimationQuartzDriverHumanoidHandBone",
+      "bone": "LeftForeArm_Roll_H",
+      "enabled": true,
+      "setting": {
+        "humanPartDof": 4,
+        "coefficient": 0.5
+      },
+      "part": "body"
+    },
+    {
       "className": "ActorAnimationQuartzDriverSkirtBone",
       "bone": "RightBackSideSkirt_A",
       "enabled": true,
@@ -270,6 +464,56 @@
           "pathId": 2126952988902325432,
           "name": "RightUpLeg"
         }
+      },
+      "part": "body"
+    },
+    {
+      "className": "ActorAnimationQuartzDriverHumanoidArmBone",
+      "bone": "RightArm_H",
+      "enabled": true,
+      "setting": {
+        "humanPartDof": 5,
+        "coefficient": -0.800000011920929
+      },
+      "part": "body"
+    },
+    {
+      "className": "ActorAnimationQuartzDriverHumanoidArmBone",
+      "bone": "LeftArm_Roll_H",
+      "enabled": true,
+      "setting": {
+        "humanPartDof": 4,
+        "coefficient": -0.30000001192092896
+      },
+      "part": "body"
+    },
+    {
+      "className": "ActorAnimationQuartzDriverHumanoidArmBone",
+      "bone": "RightArm_Roll_H",
+      "enabled": true,
+      "setting": {
+        "humanPartDof": 5,
+        "coefficient": -0.30000001192092896
+      },
+      "part": "body"
+    },
+    {
+      "className": "ActorAnimationQuartzDriverHumanoidArmBone",
+      "bone": "LeftArm_H",
+      "enabled": true,
+      "setting": {
+        "humanPartDof": 4,
+        "coefficient": -0.800000011920929
+      },
+      "part": "body"
+    },
+    {
+      "className": "ActorAnimationQuartzDriverHumanoidUpLegBone",
+      "bone": "LeftUpLeg_Roll_H",
+      "enabled": true,
+      "setting": {
+        "humanPartDof": 2,
+        "coefficient": -0.6000000238418579
       },
       "part": "body"
     }
@@ -323,7 +567,7 @@
           0.0
         ],
         "radiusA": 0.05000000074505806,
-        "radiusB": 0.05000000074505806
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 0,
@@ -368,7 +612,15 @@
         0.44248756766319275,
         1.2653088569641113,
         -0.022409513592720032
-      ]
+      ],
+      "nativeDynamicIndex": 139,
+      "nativeBoneAxis": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "nativeParentIndex": -1,
+      "nativeChildIndex": 173
     },
     {
       "bone": "RightFrontJacket2_S_End",
@@ -418,7 +670,7 @@
           0.0
         ],
         "radiusA": 0.014999999664723873,
-        "radiusB": 0.05000000074505806
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -463,7 +715,15 @@
         0.05236783251166344,
         1.0660572052001953,
         0.10126838088035583
-      ]
+      ],
+      "nativeDynamicIndex": 11,
+      "nativeBoneAxis": [
+        -1.0,
+        2.368475909392639e-16,
+        0.0
+      ],
+      "nativeParentIndex": 6,
+      "nativeChildIndex": -1
     },
     {
       "bone": "RightBackSideSkirt3_S",
@@ -498,7 +758,7 @@
       },
       "collisionMask": 1,
       "colliderType": 0,
-      "particleRadius": 0.019999999552965164,
+      "particleRadius": 0.020000001415610313,
       "dynamicCollider": {
         "type": 0,
         "collisionMask": 1,
@@ -512,8 +772,8 @@
           0.0,
           0.0
         ],
-        "radiusA": 0.019999999552965164,
-        "radiusB": 0.05000000074505806
+        "radiusA": 0.020000001415610313,
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -558,7 +818,15 @@
         0.15890416502952576,
         0.8259798884391785,
         -0.06129687279462814
-      ]
+      ],
+      "nativeDynamicIndex": 53,
+      "nativeBoneAxis": [
+        -1.0,
+        0.0,
+        6.544472482622671e-16
+      ],
+      "nativeParentIndex": 39,
+      "nativeChildIndex": 97
     },
     {
       "bone": "RightBackSideSkirt2_S",
@@ -593,7 +861,7 @@
       },
       "collisionMask": 1,
       "colliderType": 0,
-      "particleRadius": 0.019999999552965164,
+      "particleRadius": 0.020000001415610313,
       "dynamicCollider": {
         "type": 0,
         "collisionMask": 1,
@@ -607,8 +875,8 @@
           0.0,
           0.0
         ],
-        "radiusA": 0.019999999552965164,
-        "radiusB": 0.05000000074505806
+        "radiusA": 0.020000001415610313,
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -653,7 +921,15 @@
         0.13066092133522034,
         0.9150157570838928,
         -0.04397840425372124
-      ]
+      ],
+      "nativeDynamicIndex": 39,
+      "nativeBoneAxis": [
+        -1.0,
+        0.0,
+        -5.921189773481597e-17
+      ],
+      "nativeParentIndex": 28,
+      "nativeChildIndex": 53
     },
     {
       "bone": "LeftFrontSkirt2_S",
@@ -703,7 +979,7 @@
           0.0
         ],
         "radiusA": 0.019999999552965164,
-        "radiusB": 0.05000000074505806
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -748,7 +1024,15 @@
         -0.06838750839233398,
         0.9112253785133362,
         0.11943932622671127
-      ]
+      ],
+      "nativeDynamicIndex": 43,
+      "nativeBoneAxis": [
+        -1.0,
+        0.0,
+        -2.368475909392639e-16
+      ],
+      "nativeParentIndex": 27,
+      "nativeChildIndex": 54
     },
     {
       "bone": "LeftBackSideSkirt2_S",
@@ -798,7 +1082,7 @@
           0.0
         ],
         "radiusA": 0.019999999552965164,
-        "radiusB": 0.05000000074505806
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -843,7 +1127,15 @@
         -0.13066092133522034,
         0.9150160551071167,
         -0.04397840052843094
-      ]
+      ],
+      "nativeDynamicIndex": 46,
+      "nativeBoneAxis": [
+        -1.0,
+        -9.473903637570555e-16,
+        -2.9605948205663494e-16
+      ],
+      "nativeParentIndex": 24,
+      "nativeChildIndex": 55
     },
     {
       "bone": "LeftBackSkirt2_S",
@@ -878,7 +1170,7 @@
       },
       "collisionMask": 1,
       "colliderType": 0,
-      "particleRadius": 0.019999999552965164,
+      "particleRadius": 0.019999997690320015,
       "dynamicCollider": {
         "type": 0,
         "collisionMask": 1,
@@ -892,8 +1184,8 @@
           0.0,
           0.0
         ],
-        "radiusA": 0.019999999552965164,
-        "radiusB": 0.05000000074505806
+        "radiusA": 0.019999997690320015,
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -938,7 +1230,15 @@
         -0.05307137221097946,
         0.9131799340248108,
         -0.10050500184297562
-      ]
+      ],
+      "nativeDynamicIndex": 40,
+      "nativeBoneAxis": [
+        -1.0,
+        0.0,
+        2.9605948867407985e-17
+      ],
+      "nativeParentIndex": 30,
+      "nativeChildIndex": 61
     },
     {
       "bone": "RightFrontSkirt3_S",
@@ -973,7 +1273,7 @@
       },
       "collisionMask": 1,
       "colliderType": 0,
-      "particleRadius": 0.019999999552965164,
+      "particleRadius": 0.02000000700354576,
       "dynamicCollider": {
         "type": 0,
         "collisionMask": 1,
@@ -987,8 +1287,8 @@
           0.0,
           0.0
         ],
-        "radiusA": 0.019999999552965164,
-        "radiusB": 0.05000000074505806
+        "radiusA": 0.02000000700354576,
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -1033,7 +1333,15 @@
         0.075611412525177,
         0.8284856081008911,
         0.13751353323459625
-      ]
+      ],
+      "nativeDynamicIndex": 51,
+      "nativeBoneAxis": [
+        -1.0,
+        8.359325804805327e-16,
+        -1.1102230246251565e-16
+      ],
+      "nativeParentIndex": 32,
+      "nativeChildIndex": 94
     },
     {
       "bone": "RightArmSleeve1_S",
@@ -1083,7 +1391,7 @@
           0.0
         ],
         "radiusA": 0.05000000074505806,
-        "radiusB": 0.05000000074505806
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 0,
@@ -1128,7 +1436,15 @@
         0.23961739242076874,
         1.2653088569641113,
         -0.022409513592720032
-      ]
+      ],
+      "nativeDynamicIndex": 92,
+      "nativeBoneAxis": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "nativeParentIndex": -1,
+      "nativeChildIndex": 130
     },
     {
       "bone": "LeftBackSkirt1_S",
@@ -1163,7 +1479,7 @@
       },
       "collisionMask": -1,
       "colliderType": 0,
-      "particleRadius": 0.05000000074505806,
+      "particleRadius": 0.04999999701976776,
       "dynamicCollider": {
         "type": 0,
         "collisionMask": -1,
@@ -1177,8 +1493,8 @@
           0.0,
           0.0
         ],
-        "radiusA": 0.05000000074505806,
-        "radiusB": 0.05000000074505806
+        "radiusA": 0.04999999701976776,
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -1223,7 +1539,15 @@
         -0.044513653963804245,
         0.9845553636550903,
         -0.07912027835845947
-      ]
+      ],
+      "nativeDynamicIndex": 30,
+      "nativeBoneAxis": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "nativeParentIndex": -1,
+      "nativeChildIndex": 40
     },
     {
       "bone": "RightArmSleeve3_S_End",
@@ -1258,7 +1582,7 @@
       },
       "collisionMask": 0,
       "colliderType": 4,
-      "particleRadius": 0.05000000074505806,
+      "particleRadius": 0.0,
       "dynamicCollider": {
         "type": 4,
         "collisionMask": 0,
@@ -1272,8 +1596,8 @@
           0.0,
           0.0
         ],
-        "radiusA": 0.05000000074505806,
-        "radiusB": 0.05000000074505806
+        "radiusA": 0.0,
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -1318,7 +1642,15 @@
         0.23961739242076874,
         1.2653088569641113,
         -0.022409513592720032
-      ]
+      ],
+      "nativeDynamicIndex": 173,
+      "nativeBoneAxis": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "nativeParentIndex": 139,
+      "nativeChildIndex": 198
     },
     {
       "bone": "LeftUpLegSkin3_S_End",
@@ -1353,7 +1685,7 @@
       },
       "collisionMask": 0,
       "colliderType": 4,
-      "particleRadius": 0.05000000074505806,
+      "particleRadius": 0.0,
       "dynamicCollider": {
         "type": 4,
         "collisionMask": 0,
@@ -1367,8 +1699,8 @@
           0.0,
           0.0
         ],
-        "radiusA": 0.05000000074505806,
-        "radiusB": 0.05000000074505806
+        "radiusA": 0.0,
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -1413,7 +1745,15 @@
         -0.07201357930898666,
         0.7481863498687744,
         -0.0002294648438692093
-      ]
+      ],
+      "nativeDynamicIndex": 58,
+      "nativeBoneAxis": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "nativeParentIndex": 44,
+      "nativeChildIndex": -1
     },
     {
       "bone": "CenterLeftRibbon3_S_End",
@@ -1463,7 +1803,7 @@
           0.0
         ],
         "radiusA": 0.005000000353902578,
-        "radiusB": 0.05000000074505806
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -1508,7 +1848,15 @@
         -0.028764035552740097,
         1.1893128156661987,
         0.10704517364501953
-      ]
+      ],
+      "nativeDynamicIndex": 50,
+      "nativeBoneAxis": [
+        -1.0,
+        -7.225857655008671e-15,
+        3.0107741111528783e-16
+      ],
+      "nativeParentIndex": 33,
+      "nativeChildIndex": -1
     },
     {
       "bone": "RightUpLegSkin1_S",
@@ -1543,7 +1891,7 @@
       },
       "collisionMask": -1,
       "colliderType": 4,
-      "particleRadius": 0.05000000074505806,
+      "particleRadius": 0.0,
       "dynamicCollider": {
         "type": 4,
         "collisionMask": -1,
@@ -1557,8 +1905,8 @@
           0.0,
           0.0
         ],
-        "radiusA": 0.05000000074505806,
-        "radiusB": 0.05000000074505806
+        "radiusA": 0.0,
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 0,
@@ -1603,7 +1951,15 @@
         0.07201357930898666,
         0.7481860518455505,
         -0.00022942014038562775
-      ]
+      ],
+      "nativeDynamicIndex": 26,
+      "nativeBoneAxis": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "nativeParentIndex": -1,
+      "nativeChildIndex": 41
     },
     {
       "bone": "CenterLeftLRibbon2_S_End",
@@ -1638,7 +1994,7 @@
       },
       "collisionMask": 64,
       "colliderType": 0,
-      "particleRadius": 0.009000000543892384,
+      "particleRadius": 0.008999999612569809,
       "dynamicCollider": {
         "type": 0,
         "collisionMask": 64,
@@ -1652,8 +2008,8 @@
           0.0,
           0.0
         ],
-        "radiusA": 0.009000000543892384,
-        "radiusB": 0.05000000074505806
+        "radiusA": 0.008999999612569809,
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -1698,7 +2054,15 @@
         -0.04091249406337738,
         1.2519563436508179,
         0.0657077357172966
-      ]
+      ],
+      "nativeDynamicIndex": 37,
+      "nativeBoneAxis": [
+        -1.0,
+        2.587977033195743e-15,
+        1.2939885165978715e-15
+      ],
+      "nativeParentIndex": 18,
+      "nativeChildIndex": -1
     },
     {
       "bone": "RightFrontSkirt2_S",
@@ -1733,7 +2097,7 @@
       },
       "collisionMask": 1,
       "colliderType": 0,
-      "particleRadius": 0.019999999552965164,
+      "particleRadius": 0.020000001415610313,
       "dynamicCollider": {
         "type": 0,
         "collisionMask": 1,
@@ -1747,8 +2111,8 @@
           0.0,
           0.0
         ],
-        "radiusA": 0.019999999552965164,
-        "radiusB": 0.05000000074505806
+        "radiusA": 0.020000001415610313,
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -1793,7 +2157,15 @@
         0.06838750839233398,
         0.9112269878387451,
         0.11943935602903366
-      ]
+      ],
+      "nativeDynamicIndex": 32,
+      "nativeBoneAxis": [
+        -1.0,
+        0.0,
+        -2.4424907071149036e-16
+      ],
+      "nativeParentIndex": 20,
+      "nativeChildIndex": 51
     },
     {
       "bone": "RightFrontSkirt5_S_End",
@@ -1828,7 +2200,7 @@
       },
       "collisionMask": 1,
       "colliderType": 0,
-      "particleRadius": 0.019999999552965164,
+      "particleRadius": 0.02000000700354576,
       "dynamicCollider": {
         "type": 0,
         "collisionMask": 1,
@@ -1842,8 +2214,8 @@
           0.0,
           0.0
         ],
-        "radiusA": 0.019999999552965164,
-        "radiusB": 0.05000000074505806
+        "radiusA": 0.02000000700354576,
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -1888,7 +2260,15 @@
         0.09260883927345276,
         0.6337999105453491,
         0.18004098534584045
-      ]
+      ],
+      "nativeDynamicIndex": 128,
+      "nativeBoneAxis": [
+        -1.0,
+        0.0,
+        -9.933574256713377e-17
+      ],
+      "nativeParentIndex": 94,
+      "nativeChildIndex": -1
     },
     {
       "bone": "LeftBackSideSkirt4_S",
@@ -1938,7 +2318,7 @@
           0.0
         ],
         "radiusA": 0.019999999552965164,
-        "radiusB": 0.05000000074505806
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -1983,7 +2363,15 @@
         -0.1901203989982605,
         0.7275721430778503,
         -0.08043833076953888
-      ]
+      ],
+      "nativeDynamicIndex": 101,
+      "nativeBoneAxis": [
+        -0.9999999403953552,
+        -6.767073270556694e-16,
+        -1.6917683176391734e-16
+      ],
+      "nativeParentIndex": 55,
+      "nativeChildIndex": 147
     },
     {
       "bone": "LeftForeArmSleeve2_S",
@@ -2018,7 +2406,7 @@
       },
       "collisionMask": 0,
       "colliderType": 4,
-      "particleRadius": 0.05000000074505806,
+      "particleRadius": 0.0,
       "dynamicCollider": {
         "type": 4,
         "collisionMask": 0,
@@ -2032,8 +2420,8 @@
           0.0,
           0.0
         ],
-        "radiusA": 0.05000000074505806,
-        "radiusB": 0.05000000074505806
+        "radiusA": 0.0,
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -2078,7 +2466,15 @@
         -0.44249075651168823,
         1.2653088569641113,
         -0.022409558296203613
-      ]
+      ],
+      "nativeDynamicIndex": 175,
+      "nativeBoneAxis": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "nativeParentIndex": 134,
+      "nativeChildIndex": 197
     },
     {
       "bone": "LeftBackSideJacket2_S_End",
@@ -2128,7 +2524,7 @@
           0.0
         ],
         "radiusA": 0.009999999776482582,
-        "radiusB": 0.05000000074505806
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -2173,7 +2569,15 @@
         -0.10399998724460602,
         1.0660572052001953,
         -0.010841618292033672
-      ]
+      ],
+      "nativeDynamicIndex": 15,
+      "nativeBoneAxis": [
+        -1.0,
+        0.0,
+        0.0
+      ],
+      "nativeParentIndex": 1,
+      "nativeChildIndex": -1
     },
     {
       "bone": "RightFrontSideSkirt2_S",
@@ -2208,7 +2612,7 @@
       },
       "collisionMask": 1,
       "colliderType": 0,
-      "particleRadius": 0.019999999552965164,
+      "particleRadius": 0.020000005140900612,
       "dynamicCollider": {
         "type": 0,
         "collisionMask": 1,
@@ -2222,8 +2626,8 @@
           0.0,
           0.0
         ],
-        "radiusA": 0.019999999552965164,
-        "radiusB": 0.05000000074505806
+        "radiusA": 0.020000005140900612,
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -2268,7 +2672,15 @@
         0.1301518678665161,
         0.911129891872406,
         0.05551377311348915
-      ]
+      ],
+      "nativeDynamicIndex": 38,
+      "nativeBoneAxis": [
+        -1.0,
+        0.0,
+        2.883696206530929e-17
+      ],
+      "nativeParentIndex": 29,
+      "nativeChildIndex": 52
     },
     {
       "bone": "RightLegSkin1_S",
@@ -2303,7 +2715,7 @@
       },
       "collisionMask": -1,
       "colliderType": 4,
-      "particleRadius": 0.05000000074505806,
+      "particleRadius": 0.0,
       "dynamicCollider": {
         "type": 4,
         "collisionMask": -1,
@@ -2317,8 +2729,8 @@
           0.0,
           0.0
         ],
-        "radiusA": 0.05000000074505806,
-        "radiusB": 0.05000000074505806
+        "radiusA": 0.0,
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -2363,7 +2775,15 @@
         0.07201358675956726,
         0.38549941778182983,
         -0.010966937057673931
-      ]
+      ],
+      "nativeDynamicIndex": 25,
+      "nativeBoneAxis": [
+        1.0,
+        3.4665362688141626e-17,
+        0.0
+      ],
+      "nativeParentIndex": -1,
+      "nativeChildIndex": 42
     },
     {
       "bone": "LeftBackSkirt5_S_End",
@@ -2398,7 +2818,7 @@
       },
       "collisionMask": 1,
       "colliderType": 0,
-      "particleRadius": 0.019999999552965164,
+      "particleRadius": 0.020000001415610313,
       "dynamicCollider": {
         "type": 0,
         "collisionMask": 1,
@@ -2412,8 +2832,8 @@
           0.0,
           0.0
         ],
-        "radiusA": 0.019999999552965164,
-        "radiusB": 0.05000000074505806
+        "radiusA": 0.020000001415610313,
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -2458,7 +2878,15 @@
         -0.08593301475048065,
         0.639098048210144,
         -0.1826222985982895
-      ]
+      ],
+      "nativeDynamicIndex": 142,
+      "nativeBoneAxis": [
+        -1.0,
+        7.47939674485763e-16,
+        -2.1035803841220452e-16
+      ],
+      "nativeParentIndex": 100,
+      "nativeChildIndex": -1
     },
     {
       "bone": "RightFrontSideSkirt5_S_End",
@@ -2493,7 +2921,7 @@
       },
       "collisionMask": 1,
       "colliderType": 0,
-      "particleRadius": 0.019999999552965164,
+      "particleRadius": 0.020000001415610313,
       "dynamicCollider": {
         "type": 0,
         "collisionMask": 1,
@@ -2507,8 +2935,8 @@
           0.0,
           0.0
         ],
-        "radiusA": 0.019999999552965164,
-        "radiusB": 0.05000000074505806
+        "radiusA": 0.020000001415610313,
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -2553,7 +2981,15 @@
         0.20648667216300964,
         0.6336401104927063,
         0.08184658735990524
-      ]
+      ],
+      "nativeDynamicIndex": 132,
+      "nativeBoneAxis": [
+        -0.9999999403953552,
+        0.0,
+        2.265761186962785e-17
+      ],
+      "nativeParentIndex": 95,
+      "nativeChildIndex": -1
     },
     {
       "bone": "RightBackSideJacket2_S_End",
@@ -2588,7 +3024,7 @@
       },
       "collisionMask": 64,
       "colliderType": 0,
-      "particleRadius": 0.009999999776482582,
+      "particleRadius": 0.010000000707805157,
       "dynamicCollider": {
         "type": 0,
         "collisionMask": 64,
@@ -2602,8 +3038,8 @@
           0.0,
           0.0
         ],
-        "radiusA": 0.009999999776482582,
-        "radiusB": 0.05000000074505806
+        "radiusA": 0.010000000707805157,
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -2648,7 +3084,15 @@
         0.10400000214576721,
         1.0660572052001953,
         -0.01084159966558218
-      ]
+      ],
+      "nativeDynamicIndex": 10,
+      "nativeBoneAxis": [
+        -1.0,
+        0.0,
+        0.0
+      ],
+      "nativeParentIndex": 5,
+      "nativeChildIndex": -1
     },
     {
       "bone": "RightFrontSideSkirt4_S",
@@ -2683,7 +3127,7 @@
       },
       "collisionMask": 1,
       "colliderType": 0,
-      "particleRadius": 0.019999999552965164,
+      "particleRadius": 0.020000001415610313,
       "dynamicCollider": {
         "type": 0,
         "collisionMask": 1,
@@ -2697,8 +3141,8 @@
           0.0,
           0.0
         ],
-        "radiusA": 0.019999999552965164,
-        "radiusB": 0.05000000074505806
+        "radiusA": 0.020000001415610313,
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -2743,7 +3187,15 @@
         0.18060150742530823,
         0.7277369499206543,
         0.07291713356971741
-      ]
+      ],
+      "nativeDynamicIndex": 95,
+      "nativeBoneAxis": [
+        -0.9999999403953552,
+        6.767073270556694e-16,
+        3.5950079396810395e-16
+      ],
+      "nativeParentIndex": 52,
+      "nativeChildIndex": 132
     },
     {
       "bone": "RightBackJacket2_S_End",
@@ -2778,7 +3230,7 @@
       },
       "collisionMask": 64,
       "colliderType": 0,
-      "particleRadius": 0.009999999776482582,
+      "particleRadius": 0.009999998845160007,
       "dynamicCollider": {
         "type": 0,
         "collisionMask": 64,
@@ -2792,8 +3244,8 @@
           0.0,
           0.0
         ],
-        "radiusA": 0.009999999776482582,
-        "radiusB": 0.05000000074505806
+        "radiusA": 0.009999998845160007,
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -2838,7 +3290,15 @@
         0.05080616846680641,
         1.0660572052001953,
         -0.06023688614368439
-      ]
+      ],
+      "nativeDynamicIndex": 12,
+      "nativeBoneAxis": [
+        -1.0,
+        0.0,
+        0.0
+      ],
+      "nativeParentIndex": 4,
+      "nativeChildIndex": -1
     },
     {
       "bone": "RightArmSleeve2_S",
@@ -2968,7 +3428,7 @@
       },
       "collisionMask": 0,
       "colliderType": 4,
-      "particleRadius": 0.05000000074505806,
+      "particleRadius": 0.0,
       "dynamicCollider": {
         "type": 4,
         "collisionMask": 0,
@@ -2982,8 +3442,8 @@
           0.0,
           0.0
         ],
-        "radiusA": 0.05000000074505806,
-        "radiusB": 0.05000000074505806
+        "radiusA": 0.0,
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -3028,7 +3488,15 @@
         0.07201357930898666,
         0.7481860518455505,
         -0.00022942014038562775
-      ]
+      ],
+      "nativeDynamicIndex": 56,
+      "nativeBoneAxis": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "nativeParentIndex": 41,
+      "nativeChildIndex": -1
     },
     {
       "bone": "CenterLeftRibbon1_S",
@@ -3078,7 +3546,7 @@
           0.0
         ],
         "radiusA": 0.05000000074505806,
-        "radiusB": 0.05000000074505806
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -3123,7 +3591,15 @@
         -0.0075048101134598255,
         1.280676007270813,
         0.03545735031366348
-      ]
+      ],
+      "nativeDynamicIndex": 14,
+      "nativeBoneAxis": [
+        -0.06820474565029144,
+        0.9792467355728149,
+        0.1908508688211441
+      ],
+      "nativeParentIndex": -1,
+      "nativeChildIndex": 33
     },
     {
       "bone": "LeftFrontSkirt3_S",
@@ -3158,7 +3634,7 @@
       },
       "collisionMask": 1,
       "colliderType": 0,
-      "particleRadius": 0.019999999552965164,
+      "particleRadius": 0.019999997690320015,
       "dynamicCollider": {
         "type": 0,
         "collisionMask": 1,
@@ -3172,8 +3648,8 @@
           0.0,
           0.0
         ],
-        "radiusA": 0.019999999552965164,
-        "radiusB": 0.05000000074505806
+        "radiusA": 0.019999997690320015,
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -3218,7 +3694,15 @@
         -0.075611412525177,
         0.8284839391708374,
         0.13751350343227386
-      ]
+      ],
+      "nativeDynamicIndex": 54,
+      "nativeBoneAxis": [
+        -1.0,
+        0.0,
+        3.1347471768019977e-16
+      ],
+      "nativeParentIndex": 43,
+      "nativeChildIndex": 98
     },
     {
       "bone": "CenterLeftLRibbon1_S",
@@ -3253,7 +3737,7 @@
       },
       "collisionMask": -1,
       "colliderType": 0,
-      "particleRadius": 0.05000000074505806,
+      "particleRadius": 0.04999999329447746,
       "dynamicCollider": {
         "type": 0,
         "collisionMask": -1,
@@ -3267,8 +3751,8 @@
           0.0,
           0.0
         ],
-        "radiusA": 0.05000000074505806,
-        "radiusB": 0.05000000074505806
+        "radiusA": 0.04999999329447746,
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -3313,7 +3797,15 @@
         -0.007094853557646275,
         1.2829259634017944,
         0.03550056368112564
-      ]
+      ],
+      "nativeDynamicIndex": 18,
+      "nativeBoneAxis": [
+        -0.06322315335273743,
+        0.9802241921424866,
+        0.18751877546310425
+      ],
+      "nativeParentIndex": -1,
+      "nativeChildIndex": 37
     },
     {
       "bone": "LeftBackSideSkirt5_S_End",
@@ -3363,7 +3855,7 @@
           0.0
         ],
         "radiusA": 0.019999999552965164,
-        "radiusB": 0.05000000074505806
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -3408,7 +3900,15 @@
         -0.21836364269256592,
         0.6385362148284912,
         -0.09775680303573608
-      ]
+      ],
+      "nativeDynamicIndex": 147,
+      "nativeBoneAxis": [
+        -1.0,
+        -7.47939674485763e-16,
+        9.349245931072038e-17
+      ],
+      "nativeParentIndex": 101,
+      "nativeChildIndex": -1
     },
     {
       "bone": "RightBackSideJacket1_S",
@@ -3443,7 +3943,7 @@
       },
       "collisionMask": -1,
       "colliderType": 0,
-      "particleRadius": 0.009999999776482582,
+      "particleRadius": 0.010000000707805157,
       "dynamicCollider": {
         "type": 0,
         "collisionMask": -1,
@@ -3457,8 +3957,8 @@
           0.0,
           0.0
         ],
-        "radiusA": 0.009999999776482582,
-        "radiusB": 0.05000000074505806
+        "radiusA": 0.010000000707805157,
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -3503,7 +4003,15 @@
         0.10399999469518661,
         1.1410572528839111,
         -0.01084159966558218
-      ]
+      ],
+      "nativeDynamicIndex": 5,
+      "nativeBoneAxis": [
+        0.889375627040863,
+        0.4027459919452667,
+        -0.2163487821817398
+      ],
+      "nativeParentIndex": -1,
+      "nativeChildIndex": 10
     },
     {
       "bone": "LeftFrontJacket1_S",
@@ -3553,7 +4061,7 @@
           0.0
         ],
         "radiusA": 0.009999999776482582,
-        "radiusB": 0.05000000074505806
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -3598,7 +4106,15 @@
         -0.05236783251166344,
         1.1410572528839111,
         0.10126838088035583
-      ]
+      ],
+      "nativeDynamicIndex": 2,
+      "nativeBoneAxis": [
+        -0.4684571623802185,
+        0.42129334807395935,
+        0.7765692472457886
+      ],
+      "nativeParentIndex": -1,
+      "nativeChildIndex": 8
     },
     {
       "bone": "CenterRightLRibbon1_S",
@@ -3648,7 +4164,7 @@
           0.0
         ],
         "radiusA": 0.05000000074505806,
-        "radiusB": 0.05000000074505806
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -3693,7 +4209,15 @@
         0.007094852160662413,
         1.2829259634017944,
         0.035500600934028625
-      ]
+      ],
+      "nativeDynamicIndex": 17,
+      "nativeBoneAxis": [
+        0.06322314590215683,
+        0.9802241921424866,
+        0.1875191032886505
+      ],
+      "nativeParentIndex": -1,
+      "nativeChildIndex": 36
     },
     {
       "bone": "CenterRightRibbon2_S",
@@ -3728,7 +4252,7 @@
       },
       "collisionMask": 64,
       "colliderType": 0,
-      "particleRadius": 0.005000000353902578,
+      "particleRadius": 0.005000000819563866,
       "dynamicCollider": {
         "type": 0,
         "collisionMask": 64,
@@ -3742,8 +4266,8 @@
           0.0,
           0.0
         ],
-        "radiusA": 0.005000000353902578,
-        "radiusB": 0.05000000074505806
+        "radiusA": 0.005000000819563866,
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -3788,7 +4312,15 @@
         0.018130119889974594,
         1.2349947690963745,
         0.07125163823366165
-      ]
+      ],
+      "nativeDynamicIndex": 35,
+      "nativeBoneAxis": [
+        -1.0,
+        1.4218476280802861e-05,
+        -1.5053869761671003e-15
+      ],
+      "nativeParentIndex": 13,
+      "nativeChildIndex": 48
     },
     {
       "bone": "LeftArmSleeve1_S",
@@ -3838,7 +4370,7 @@
           0.0
         ],
         "radiusA": 0.05000000074505806,
-        "radiusB": 0.05000000074505806
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 0,
@@ -3883,7 +4415,15 @@
         -0.23961420357227325,
         1.2653088569641113,
         -0.022409558296203613
-      ]
+      ],
+      "nativeDynamicIndex": 103,
+      "nativeBoneAxis": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "nativeParentIndex": -1,
+      "nativeChildIndex": 137
     },
     {
       "bone": "LeftFrontSkirt5_S_End",
@@ -3918,7 +4458,7 @@
       },
       "collisionMask": 1,
       "colliderType": 0,
-      "particleRadius": 0.019999999552965164,
+      "particleRadius": 0.019999997690320015,
       "dynamicCollider": {
         "type": 0,
         "collisionMask": 1,
@@ -3932,8 +4472,8 @@
           0.0,
           0.0
         ],
-        "radiusA": 0.019999999552965164,
-        "radiusB": 0.05000000074505806
+        "radiusA": 0.019999997690320015,
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -3978,7 +4518,15 @@
         -0.09260883927345276,
         0.633798360824585,
         0.18004097044467926
-      ]
+      ],
+      "nativeDynamicIndex": 146,
+      "nativeBoneAxis": [
+        -1.0,
+        -7.47939674485763e-16,
+        9.349245931072038e-17
+      ],
+      "nativeParentIndex": 98,
+      "nativeChildIndex": -1
     },
     {
       "bone": "RightFrontSkirt4_S",
@@ -4013,7 +4561,7 @@
       },
       "collisionMask": 1,
       "colliderType": 0,
-      "particleRadius": 0.019999999552965164,
+      "particleRadius": 0.02000000700354576,
       "dynamicCollider": {
         "type": 0,
         "collisionMask": 1,
@@ -4027,8 +4575,8 @@
           0.0,
           0.0
         ],
-        "radiusA": 0.019999999552965164,
-        "radiusB": 0.05000000074505806
+        "radiusA": 0.02000000700354576,
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -4073,7 +4621,15 @@
         0.08453506231307983,
         0.7262755632400513,
         0.1598404347896576
-      ]
+      ],
+      "nativeDynamicIndex": 94,
+      "nativeBoneAxis": [
+        -0.9999999403953552,
+        0.0,
+        7.930163988933625e-17
+      ],
+      "nativeParentIndex": 51,
+      "nativeChildIndex": 128
     },
     {
       "bone": "LeftLegSkin3_S_End",
@@ -4108,7 +4664,7 @@
       },
       "collisionMask": 0,
       "colliderType": 4,
-      "particleRadius": 0.05000000074505806,
+      "particleRadius": 0.0,
       "dynamicCollider": {
         "type": 4,
         "collisionMask": 0,
@@ -4122,8 +4678,8 @@
           0.0,
           0.0
         ],
-        "radiusA": 0.05000000074505806,
-        "radiusB": 0.05000000074505806
+        "radiusA": 0.0,
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -4168,7 +4724,15 @@
         -0.07201358675956726,
         0.3854988217353821,
         -0.010966953821480274
-      ]
+      ],
+      "nativeDynamicIndex": 60,
+      "nativeBoneAxis": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "nativeParentIndex": 45,
+      "nativeChildIndex": -1
     },
     {
       "bone": "LeftArmSleeve2_S",
@@ -4203,7 +4767,7 @@
       },
       "collisionMask": 0,
       "colliderType": 4,
-      "particleRadius": 0.05000000074505806,
+      "particleRadius": 0.0,
       "dynamicCollider": {
         "type": 4,
         "collisionMask": 0,
@@ -4217,8 +4781,8 @@
           0.0,
           0.0
         ],
-        "radiusA": 0.05000000074505806,
-        "radiusB": 0.05000000074505806
+        "radiusA": 0.0,
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -4263,7 +4827,15 @@
         -0.23961420357227325,
         1.2653088569641113,
         -0.022409558296203613
-      ]
+      ],
+      "nativeDynamicIndex": 137,
+      "nativeBoneAxis": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "nativeParentIndex": 103,
+      "nativeChildIndex": 176
     },
     {
       "bone": "RightUpLegSkin2_S",
@@ -4298,7 +4870,7 @@
       },
       "collisionMask": 0,
       "colliderType": 4,
-      "particleRadius": 0.05000000074505806,
+      "particleRadius": 0.0,
       "dynamicCollider": {
         "type": 4,
         "collisionMask": 0,
@@ -4312,8 +4884,8 @@
           0.0,
           0.0
         ],
-        "radiusA": 0.05000000074505806,
-        "radiusB": 0.05000000074505806
+        "radiusA": 0.0,
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -4358,7 +4930,15 @@
         0.07201357930898666,
         0.7481860518455505,
         -0.00022942014038562775
-      ]
+      ],
+      "nativeDynamicIndex": 41,
+      "nativeBoneAxis": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "nativeParentIndex": 26,
+      "nativeChildIndex": 56
     },
     {
       "bone": "LeftBackSideSkirt1_S",
@@ -4408,7 +4988,7 @@
           0.0
         ],
         "radiusA": 0.05000000074505806,
-        "radiusB": 0.05000000074505806
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -4453,7 +5033,15 @@
         -0.10836361348628998,
         0.9853075742721558,
         -0.030305936932563782
-      ]
+      ],
+      "nativeDynamicIndex": 24,
+      "nativeBoneAxis": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "nativeParentIndex": -1,
+      "nativeChildIndex": 46
     },
     {
       "bone": "RightLegSkin3_S_End",
@@ -4488,7 +5076,7 @@
       },
       "collisionMask": 0,
       "colliderType": 4,
-      "particleRadius": 0.05000000074505806,
+      "particleRadius": 0.0,
       "dynamicCollider": {
         "type": 4,
         "collisionMask": 0,
@@ -4502,8 +5090,8 @@
           0.0,
           0.0
         ],
-        "radiusA": 0.05000000074505806,
-        "radiusB": 0.05000000074505806
+        "radiusA": 0.0,
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -4548,7 +5136,15 @@
         0.07201358675956726,
         0.38549941778182983,
         -0.010966937057673931
-      ]
+      ],
+      "nativeDynamicIndex": 57,
+      "nativeBoneAxis": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "nativeParentIndex": 42,
+      "nativeChildIndex": -1
     },
     {
       "bone": "LeftFrontSideSkirt2_S",
@@ -4598,7 +5194,7 @@
           0.0
         ],
         "radiusA": 0.019999999552965164,
-        "radiusB": 0.05000000074505806
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -4643,7 +5239,15 @@
         -0.1301518678665161,
         0.9111283421516418,
         0.05551376938819885
-      ]
+      ],
+      "nativeDynamicIndex": 47,
+      "nativeBoneAxis": [
+        -1.0,
+        0.0,
+        -2.0185872453099766e-16
+      ],
+      "nativeParentIndex": 21,
+      "nativeChildIndex": 59
     },
     {
       "bone": "LeftFrontSideSkirt3_S",
@@ -4693,7 +5297,7 @@
           0.0
         ],
         "radiusA": 0.019999999552965164,
-        "radiusB": 0.05000000074505806
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -4738,7 +5342,15 @@
         -0.1528674066066742,
         0.8285534977912903,
         0.06334983557462692
-      ]
+      ],
+      "nativeDynamicIndex": 59,
+      "nativeBoneAxis": [
+        -1.0,
+        -8.26212453894316e-16,
+        3.356487961596761e-16
+      ],
+      "nativeParentIndex": 47,
+      "nativeChildIndex": 99
     },
     {
       "bone": "RightFrontSkirt1_S",
@@ -4788,7 +5400,7 @@
           0.0
         ],
         "radiusA": 0.05000000074505806,
-        "radiusB": 0.05000000074505806
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -4833,7 +5445,15 @@
         0.062013477087020874,
         0.984234094619751,
         0.10349155962467194
-      ]
+      ],
+      "nativeDynamicIndex": 20,
+      "nativeBoneAxis": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "nativeParentIndex": -1,
+      "nativeChildIndex": 32
     },
     {
       "bone": "RightForeArmSleeve2_S",
@@ -4963,7 +5583,7 @@
       },
       "collisionMask": 64,
       "colliderType": 0,
-      "particleRadius": 0.009999999776482582,
+      "particleRadius": 0.010000002570450306,
       "dynamicCollider": {
         "type": 0,
         "collisionMask": 64,
@@ -4977,8 +5597,8 @@
           0.0,
           0.0
         ],
-        "radiusA": 0.009999999776482582,
-        "radiusB": 0.05000000074505806
+        "radiusA": 0.010000002570450306,
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -5023,7 +5643,15 @@
         -0.050806161016225815,
         1.0660572052001953,
         -0.06023690849542618
-      ]
+      ],
+      "nativeDynamicIndex": 19,
+      "nativeBoneAxis": [
+        -1.0,
+        0.0,
+        0.0
+      ],
+      "nativeParentIndex": 0,
+      "nativeChildIndex": -1
     },
     {
       "bone": "LeftFrontSkirt1_S",
@@ -5073,7 +5701,7 @@
           0.0
         ],
         "radiusA": 0.05000000074505806,
-        "radiusB": 0.05000000074505806
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -5118,7 +5746,15 @@
         -0.062013477087020874,
         0.984232485294342,
         0.10349152982234955
-      ]
+      ],
+      "nativeDynamicIndex": 27,
+      "nativeBoneAxis": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "nativeParentIndex": -1,
+      "nativeChildIndex": 43
     },
     {
       "bone": "RightFrontSideSkirt3_S",
@@ -5153,7 +5789,7 @@
       },
       "collisionMask": 1,
       "colliderType": 0,
-      "particleRadius": 0.019999999552965164,
+      "particleRadius": 0.020000005140900612,
       "dynamicCollider": {
         "type": 0,
         "collisionMask": 1,
@@ -5167,8 +5803,8 @@
           0.0,
           0.0
         ],
-        "radiusA": 0.019999999552965164,
-        "radiusB": 0.05000000074505806
+        "radiusA": 0.020000005140900612,
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -5213,7 +5849,15 @@
         0.1528674066066742,
         0.8285551071166992,
         0.06334984302520752
-      ]
+      ],
+      "nativeDynamicIndex": 52,
+      "nativeBoneAxis": [
+        -1.0,
+        -8.26212453894316e-16,
+        -3.8728707452807083e-16
+      ],
+      "nativeParentIndex": 38,
+      "nativeChildIndex": 95
     },
     {
       "bone": "LeftUpLegSkin2_S",
@@ -5248,7 +5892,7 @@
       },
       "collisionMask": 0,
       "colliderType": 4,
-      "particleRadius": 0.05000000074505806,
+      "particleRadius": 0.0,
       "dynamicCollider": {
         "type": 4,
         "collisionMask": 0,
@@ -5262,8 +5906,8 @@
           0.0,
           0.0
         ],
-        "radiusA": 0.05000000074505806,
-        "radiusB": 0.05000000074505806
+        "radiusA": 0.0,
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -5308,7 +5952,15 @@
         -0.07201357930898666,
         0.7481863498687744,
         -0.0002294648438692093
-      ]
+      ],
+      "nativeDynamicIndex": 44,
+      "nativeBoneAxis": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "nativeParentIndex": 23,
+      "nativeChildIndex": 58
     },
     {
       "bone": "CenterRightLRibbon2_S_End",
@@ -5358,7 +6010,7 @@
           0.0
         ],
         "radiusA": 0.009000000543892384,
-        "radiusB": 0.05000000074505806
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -5403,7 +6055,15 @@
         0.04091190919280052,
         1.251958966255188,
         0.06570915877819061
-      ]
+      ],
+      "nativeDynamicIndex": 36,
+      "nativeBoneAxis": [
+        -1.0,
+        4.5997207053005695e-05,
+        0.0
+      ],
+      "nativeParentIndex": 17,
+      "nativeChildIndex": -1
     },
     {
       "bone": "LeftLegSkin2_S",
@@ -5438,7 +6098,7 @@
       },
       "collisionMask": 0,
       "colliderType": 4,
-      "particleRadius": 0.05000000074505806,
+      "particleRadius": 0.0,
       "dynamicCollider": {
         "type": 4,
         "collisionMask": 0,
@@ -5452,8 +6112,8 @@
           0.0,
           0.0
         ],
-        "radiusA": 0.05000000074505806,
-        "radiusB": 0.05000000074505806
+        "radiusA": 0.0,
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -5498,7 +6158,15 @@
         -0.07201358675956726,
         0.3854988217353821,
         -0.010966953821480274
-      ]
+      ],
+      "nativeDynamicIndex": 45,
+      "nativeBoneAxis": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "nativeParentIndex": 22,
+      "nativeChildIndex": 60
     },
     {
       "bone": "LeftBackSideSkirt3_S",
@@ -5533,7 +6201,7 @@
       },
       "collisionMask": 1,
       "colliderType": 0,
-      "particleRadius": 0.019999999552965164,
+      "particleRadius": 0.019999997690320015,
       "dynamicCollider": {
         "type": 0,
         "collisionMask": 1,
@@ -5547,8 +6215,8 @@
           0.0,
           0.0
         ],
-        "radiusA": 0.019999999552965164,
-        "radiusB": 0.05000000074505806
+        "radiusA": 0.019999997690320015,
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -5593,7 +6261,15 @@
         -0.15890416502952576,
         0.8259801864624023,
         -0.061296865344047546
-      ]
+      ],
+      "nativeDynamicIndex": 55,
+      "nativeBoneAxis": [
+        -1.0,
+        7.47939674485763e-16,
+        2.8047738454960603e-16
+      ],
+      "nativeParentIndex": 46,
+      "nativeChildIndex": 101
     },
     {
       "bone": "LeftFrontJacket2_S_End",
@@ -5643,7 +6319,7 @@
           0.0
         ],
         "radiusA": 0.014999999664723873,
-        "radiusB": 0.05000000074505806
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -5688,7 +6364,15 @@
         -0.05236783251166344,
         1.0660572052001953,
         0.10126838088035583
-      ]
+      ],
+      "nativeDynamicIndex": 8,
+      "nativeBoneAxis": [
+        -1.0,
+        -2.368475909392639e-16,
+        0.0
+      ],
+      "nativeParentIndex": 2,
+      "nativeChildIndex": -1
     },
     {
       "bone": "LeftFrontSideSkirt5_S_End",
@@ -5738,7 +6422,7 @@
           0.0
         ],
         "radiusA": 0.019999999552965164,
-        "radiusB": 0.05000000074505806
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -5783,7 +6467,15 @@
         -0.20648667216300964,
         0.6336385607719421,
         0.08184660226106644
-      ]
+      ],
+      "nativeDynamicIndex": 138,
+      "nativeBoneAxis": [
+        -0.9999999403953552,
+        -7.250435798280912e-16,
+        2.039185101353731e-16
+      ],
+      "nativeParentIndex": 99,
+      "nativeChildIndex": -1
     },
     {
       "bone": "LeftFrontSideSkirt1_S",
@@ -5833,7 +6525,7 @@
           0.0
         ],
         "radiusA": 0.05000000074505806,
-        "radiusB": 0.05000000074505806
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -5878,7 +6570,15 @@
         -0.10981352627277374,
         0.9850615859031677,
         0.0484977588057518
-      ]
+      ],
+      "nativeDynamicIndex": 21,
+      "nativeBoneAxis": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "nativeParentIndex": -1,
+      "nativeChildIndex": 47
     },
     {
       "bone": "RightLegSkin2_S",
@@ -5913,7 +6613,7 @@
       },
       "collisionMask": 0,
       "colliderType": 4,
-      "particleRadius": 0.05000000074505806,
+      "particleRadius": 0.0,
       "dynamicCollider": {
         "type": 4,
         "collisionMask": 0,
@@ -5927,8 +6627,8 @@
           0.0,
           0.0
         ],
-        "radiusA": 0.05000000074505806,
-        "radiusB": 0.05000000074505806
+        "radiusA": 0.0,
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -5973,7 +6673,15 @@
         0.07201358675956726,
         0.38549941778182983,
         -0.010966937057673931
-      ]
+      ],
+      "nativeDynamicIndex": 42,
+      "nativeBoneAxis": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "nativeParentIndex": 25,
+      "nativeChildIndex": 57
     },
     {
       "bone": "LeftBackJacket1_S",
@@ -6008,7 +6716,7 @@
       },
       "collisionMask": -1,
       "colliderType": 0,
-      "particleRadius": 0.009999999776482582,
+      "particleRadius": 0.010000002570450306,
       "dynamicCollider": {
         "type": 0,
         "collisionMask": -1,
@@ -6022,8 +6730,8 @@
           0.0,
           0.0
         ],
-        "radiusA": 0.009999999776482582,
-        "radiusB": 0.05000000074505806
+        "radiusA": 0.010000002570450306,
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -6068,7 +6776,15 @@
         -0.05080616846680641,
         1.1410572528839111,
         -0.06023690849542618
-      ]
+      ],
+      "nativeDynamicIndex": 0,
+      "nativeBoneAxis": [
+        -0.49871161580085754,
+        0.46228769421577454,
+        -0.7331963181495667
+      ],
+      "nativeParentIndex": -1,
+      "nativeChildIndex": 19
     },
     {
       "bone": "LeftBackSkirt3_S",
@@ -6103,7 +6819,7 @@
       },
       "collisionMask": 1,
       "colliderType": 0,
-      "particleRadius": 0.019999999552965164,
+      "particleRadius": 0.020000001415610313,
       "dynamicCollider": {
         "type": 0,
         "collisionMask": 1,
@@ -6117,8 +6833,8 @@
           0.0,
           0.0
         ],
-        "radiusA": 0.019999999552965164,
-        "radiusB": 0.05000000074505806
+        "radiusA": 0.020000001415610313,
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -6163,7 +6879,15 @@
         -0.06311243027448654,
         0.8294327259063721,
         -0.12559640407562256
-      ]
+      ],
+      "nativeDynamicIndex": 61,
+      "nativeBoneAxis": [
+        -0.9999999403953552,
+        8.074348981239906e-16,
+        -1.261616929057062e-16
+      ],
+      "nativeParentIndex": 40,
+      "nativeChildIndex": 100
     },
     {
       "bone": "LeftFrontSkirt4_S",
@@ -6198,7 +6922,7 @@
       },
       "collisionMask": 1,
       "colliderType": 0,
-      "particleRadius": 0.019999999552965164,
+      "particleRadius": 0.019999997690320015,
       "dynamicCollider": {
         "type": 0,
         "collisionMask": 1,
@@ -6212,8 +6936,8 @@
           0.0,
           0.0
         ],
-        "radiusA": 0.019999999552965164,
-        "radiusB": 0.05000000074505806
+        "radiusA": 0.019999997690320015,
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -6258,7 +6982,15 @@
         -0.08453506231307983,
         0.7262740135192871,
         0.1598404049873352
-      ]
+      ],
+      "nativeDynamicIndex": 98,
+      "nativeBoneAxis": [
+        -0.9999999403953552,
+        6.767073270556694e-16,
+        0.0
+      ],
+      "nativeParentIndex": 54,
+      "nativeChildIndex": 146
     },
     {
       "bone": "RightBackSideSkirt4_S",
@@ -6293,7 +7025,7 @@
       },
       "collisionMask": 1,
       "colliderType": 0,
-      "particleRadius": 0.019999999552965164,
+      "particleRadius": 0.020000001415610313,
       "dynamicCollider": {
         "type": 0,
         "collisionMask": 1,
@@ -6307,8 +7039,8 @@
           0.0,
           0.0
         ],
-        "radiusA": 0.019999999552965164,
-        "radiusB": 0.05000000074505806
+        "radiusA": 0.020000001415610313,
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -6353,7 +7085,15 @@
         0.1901203989982605,
         0.7275718450546265,
         -0.08043833822011948
-      ]
+      ],
+      "nativeDynamicIndex": 97,
+      "nativeBoneAxis": [
+        -0.9999999403953552,
+        6.767073270556694e-16,
+        2.53765247645876e-16
+      ],
+      "nativeParentIndex": 53,
+      "nativeChildIndex": 140
     },
     {
       "bone": "LeftArmSleeve3_S_End",
@@ -6388,7 +7128,7 @@
       },
       "collisionMask": 0,
       "colliderType": 4,
-      "particleRadius": 0.05000000074505806,
+      "particleRadius": 0.0,
       "dynamicCollider": {
         "type": 4,
         "collisionMask": 0,
@@ -6402,8 +7142,8 @@
           0.0,
           0.0
         ],
-        "radiusA": 0.05000000074505806,
-        "radiusB": 0.05000000074505806
+        "radiusA": 0.0,
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -6448,7 +7188,15 @@
         -0.23961420357227325,
         1.2653088569641113,
         -0.022409558296203613
-      ]
+      ],
+      "nativeDynamicIndex": 176,
+      "nativeBoneAxis": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "nativeParentIndex": 137,
+      "nativeChildIndex": -1
     },
     {
       "bone": "RightFrontJacket1_S",
@@ -6498,7 +7246,7 @@
           0.0
         ],
         "radiusA": 0.009999999776482582,
-        "radiusB": 0.05000000074505806
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -6543,7 +7291,15 @@
         0.05236783251166344,
         1.1410572528839111,
         0.10126838088035583
-      ]
+      ],
+      "nativeDynamicIndex": 6,
+      "nativeBoneAxis": [
+        0.4684571623802185,
+        0.42129334807395935,
+        0.7765692472457886
+      ],
+      "nativeParentIndex": -1,
+      "nativeChildIndex": 11
     },
     {
       "bone": "LeftUpLegSkin1_S",
@@ -6578,7 +7334,7 @@
       },
       "collisionMask": -1,
       "colliderType": 4,
-      "particleRadius": 0.05000000074505806,
+      "particleRadius": 0.0,
       "dynamicCollider": {
         "type": 4,
         "collisionMask": -1,
@@ -6592,8 +7348,8 @@
           0.0,
           0.0
         ],
-        "radiusA": 0.05000000074505806,
-        "radiusB": 0.05000000074505806
+        "radiusA": 0.0,
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 0,
@@ -6638,7 +7394,15 @@
         -0.07201357930898666,
         0.7481863498687744,
         -0.0002294648438692093
-      ]
+      ],
+      "nativeDynamicIndex": 23,
+      "nativeBoneAxis": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "nativeParentIndex": -1,
+      "nativeChildIndex": 44
     },
     {
       "bone": "RightBackSkirt3_S",
@@ -6673,7 +7437,7 @@
       },
       "collisionMask": 1,
       "colliderType": 0,
-      "particleRadius": 0.019999999552965164,
+      "particleRadius": 0.019999997690320015,
       "dynamicCollider": {
         "type": 0,
         "collisionMask": 1,
@@ -6687,8 +7451,8 @@
           0.0,
           0.0
         ],
-        "radiusA": 0.019999999552965164,
-        "radiusB": 0.05000000074505806
+        "radiusA": 0.019999997690320015,
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -6733,7 +7497,15 @@
         0.06311243772506714,
         0.8294359445571899,
         -0.12559634447097778
-      ]
+      ],
+      "nativeDynamicIndex": 49,
+      "nativeBoneAxis": [
+        -0.9999999403953552,
+        -8.074348981239906e-16,
+        -3.027880735616067e-16
+      ],
+      "nativeParentIndex": 34,
+      "nativeChildIndex": 96
     },
     {
       "bone": "CenterRightRibbon3_S_End",
@@ -6768,7 +7540,7 @@
       },
       "collisionMask": 64,
       "colliderType": 0,
-      "particleRadius": 0.005000000353902578,
+      "particleRadius": 0.005000000819563866,
       "dynamicCollider": {
         "type": 0,
         "collisionMask": 64,
@@ -6782,8 +7554,8 @@
           0.0,
           0.0
         ],
-        "radiusA": 0.005000000353902578,
-        "radiusB": 0.05000000074505806
+        "radiusA": 0.005000000819563866,
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -6828,7 +7600,15 @@
         0.028760405257344246,
         1.189314603805542,
         0.10704714804887772
-      ]
+      ],
+      "nativeDynamicIndex": 48,
+      "nativeBoneAxis": [
+        -1.0,
+        4.120533412788063e-05,
+        9.032322068760839e-16
+      ],
+      "nativeParentIndex": 35,
+      "nativeChildIndex": -1
     },
     {
       "bone": "RightFrontSideSkirt1_S",
@@ -6863,7 +7643,7 @@
       },
       "collisionMask": -1,
       "colliderType": 0,
-      "particleRadius": 0.05000000074505806,
+      "particleRadius": 0.05000000819563866,
       "dynamicCollider": {
         "type": 0,
         "collisionMask": -1,
@@ -6877,8 +7657,8 @@
           0.0,
           0.0
         ],
-        "radiusA": 0.05000000074505806,
-        "radiusB": 0.05000000074505806
+        "radiusA": 0.05000000819563866,
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -6923,7 +7703,15 @@
         0.10981352627277374,
         0.9850631356239319,
         0.0484977550804615
-      ]
+      ],
+      "nativeDynamicIndex": 29,
+      "nativeBoneAxis": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "nativeParentIndex": -1,
+      "nativeChildIndex": 38
     },
     {
       "bone": "LeftFrontSideJacket2_S_End",
@@ -6958,7 +7746,7 @@
       },
       "collisionMask": 64,
       "colliderType": 0,
-      "particleRadius": 0.009999999776482582,
+      "particleRadius": 0.009999998845160007,
       "dynamicCollider": {
         "type": 0,
         "collisionMask": 64,
@@ -6972,8 +7760,8 @@
           0.0,
           0.0
         ],
-        "radiusA": 0.009999999776482582,
-        "radiusB": 0.05000000074505806
+        "radiusA": 0.009999998845160007,
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -7018,7 +7806,15 @@
         -0.10199999809265137,
         1.0660572052001953,
         0.05445735156536102
-      ]
+      ],
+      "nativeDynamicIndex": 9,
+      "nativeBoneAxis": [
+        -1.0,
+        0.0,
+        0.0
+      ],
+      "nativeParentIndex": 3,
+      "nativeChildIndex": -1
     },
     {
       "bone": "LeftForeArmSleeve3_S_End",
@@ -7053,7 +7849,7 @@
       },
       "collisionMask": 0,
       "colliderType": 4,
-      "particleRadius": 0.05000000074505806,
+      "particleRadius": 0.0,
       "dynamicCollider": {
         "type": 4,
         "collisionMask": 0,
@@ -7067,8 +7863,8 @@
           0.0,
           0.0
         ],
-        "radiusA": 0.05000000074505806,
-        "radiusB": 0.05000000074505806
+        "radiusA": 0.0,
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -7113,7 +7909,15 @@
         -0.44249075651168823,
         1.2653088569641113,
         -0.022409558296203613
-      ]
+      ],
+      "nativeDynamicIndex": 197,
+      "nativeBoneAxis": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "nativeParentIndex": 175,
+      "nativeChildIndex": -1
     },
     {
       "bone": "CenterRightRibbon1_S",
@@ -7148,7 +7952,7 @@
       },
       "collisionMask": -1,
       "colliderType": 0,
-      "particleRadius": 0.05000000074505806,
+      "particleRadius": 0.05000000819563866,
       "dynamicCollider": {
         "type": 0,
         "collisionMask": -1,
@@ -7162,8 +7966,8 @@
           0.0,
           0.0
         ],
-        "radiusA": 0.05000000074505806,
-        "radiusB": 0.05000000074505806
+        "radiusA": 0.05000000819563866,
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -7208,7 +8012,15 @@
         0.007499999832361937,
         1.280676007270813,
         0.03545735031366348
-      ]
+      ],
+      "nativeDynamicIndex": 13,
+      "nativeBoneAxis": [
+        0.06816122680902481,
+        0.9792495369911194,
+        0.19085140526294708
+      ],
+      "nativeParentIndex": -1,
+      "nativeChildIndex": 35
     },
     {
       "bone": "LeftFrontSideSkirt4_S",
@@ -7258,7 +8070,7 @@
           0.0
         ],
         "radiusA": 0.019999999552965164,
-        "radiusB": 0.05000000074505806
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -7303,7 +8115,15 @@
         -0.18060150742530823,
         0.7277354001998901,
         0.07291712611913681
-      ]
+      ],
+      "nativeDynamicIndex": 99,
+      "nativeBoneAxis": [
+        -0.9999999403953552,
+        6.767073270556694e-16,
+        -2.3261814367538634e-16
+      ],
+      "nativeParentIndex": 59,
+      "nativeChildIndex": 138
     },
     {
       "bone": "RightBackSkirt2_S",
@@ -7338,7 +8158,7 @@
       },
       "collisionMask": 1,
       "colliderType": 0,
-      "particleRadius": 0.019999999552965164,
+      "particleRadius": 0.020000001415610313,
       "dynamicCollider": {
         "type": 0,
         "collisionMask": 1,
@@ -7352,8 +8172,8 @@
           0.0,
           0.0
         ],
-        "radiusA": 0.019999999552965164,
-        "radiusB": 0.05000000074505806
+        "radiusA": 0.020000001415610313,
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -7398,7 +8218,15 @@
         0.05307137966156006,
         0.9131831526756287,
         -0.10050494968891144
-      ]
+      ],
+      "nativeDynamicIndex": 34,
+      "nativeBoneAxis": [
+        -1.0,
+        0.0,
+        1.77635686587003e-16
+      ],
+      "nativeParentIndex": 31,
+      "nativeChildIndex": 49
     },
     {
       "bone": "CenterLeftRibbon2_S",
@@ -7448,7 +8276,7 @@
           0.0
         ],
         "radiusA": 0.005000000353902578,
-        "radiusB": 0.05000000074505806
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -7493,7 +8321,15 @@
         -0.018134422600269318,
         1.2349944114685059,
         0.0712512657046318
-      ]
+      ],
+      "nativeDynamicIndex": 33,
+      "nativeBoneAxis": [
+        -1.0,
+        9.63447715568921e-15,
+        -6.322625765769942e-15
+      ],
+      "nativeParentIndex": 14,
+      "nativeChildIndex": 50
     },
     {
       "bone": "LeftLegSkin1_S",
@@ -7528,7 +8364,7 @@
       },
       "collisionMask": -1,
       "colliderType": 4,
-      "particleRadius": 0.05000000074505806,
+      "particleRadius": 0.0,
       "dynamicCollider": {
         "type": 4,
         "collisionMask": -1,
@@ -7542,8 +8378,8 @@
           0.0,
           0.0
         ],
-        "radiusA": 0.05000000074505806,
-        "radiusB": 0.05000000074505806
+        "radiusA": 0.0,
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -7588,7 +8424,15 @@
         -0.07201358675956726,
         0.3854988217353821,
         -0.010966953821480274
-      ]
+      ],
+      "nativeDynamicIndex": 22,
+      "nativeBoneAxis": [
+        -1.0,
+        3.4665346144529375e-17,
+        6.933069228905875e-17
+      ],
+      "nativeParentIndex": -1,
+      "nativeChildIndex": 45
     },
     {
       "bone": "LeftBackSideJacket1_S",
@@ -7638,7 +8482,7 @@
           0.0
         ],
         "radiusA": 0.009999999776482582,
-        "radiusB": 0.05000000074505806
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -7683,7 +8527,15 @@
         -0.10399999469518661,
         1.1410572528839111,
         -0.010841618292033672
-      ]
+      ],
+      "nativeDynamicIndex": 1,
+      "nativeBoneAxis": [
+        -0.8893755078315735,
+        0.40274593234062195,
+        -0.21634891629219055
+      ],
+      "nativeParentIndex": -1,
+      "nativeChildIndex": 15
     },
     {
       "bone": "LeftBackSkirt4_S",
@@ -7718,7 +8570,7 @@
       },
       "collisionMask": 1,
       "colliderType": 0,
-      "particleRadius": 0.019999999552965164,
+      "particleRadius": 0.020000001415610313,
       "dynamicCollider": {
         "type": 0,
         "collisionMask": 1,
@@ -7732,8 +8584,8 @@
           0.0,
           0.0
         ],
-        "radiusA": 0.019999999552965164,
-        "radiusB": 0.05000000074505806
+        "radiusA": 0.020000001415610313,
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -7778,7 +8630,15 @@
         -0.07509323954582214,
         0.7295070290565491,
         -0.1555349975824356
-      ]
+      ],
+      "nativeDynamicIndex": 100,
+      "nativeBoneAxis": [
+        -0.9999999403953552,
+        -6.767073270556694e-16,
+        1.4802974102831747e-16
+      ],
+      "nativeParentIndex": 61,
+      "nativeChildIndex": 142
     },
     {
       "bone": "RightFrontSideJacket1_S",
@@ -7813,7 +8673,7 @@
       },
       "collisionMask": -1,
       "colliderType": 0,
-      "particleRadius": 0.009999999776482582,
+      "particleRadius": 0.010000002570450306,
       "dynamicCollider": {
         "type": 0,
         "collisionMask": -1,
@@ -7827,8 +8687,8 @@
           0.0,
           0.0
         ],
-        "radiusA": 0.009999999776482582,
-        "radiusB": 0.05000000074505806
+        "radiusA": 0.010000002570450306,
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -7873,7 +8733,15 @@
         0.10199999809265137,
         1.1410572528839111,
         0.05445735156536102
-      ]
+      ],
+      "nativeDynamicIndex": 7,
+      "nativeBoneAxis": [
+        0.8553031086921692,
+        0.3949109613895416,
+        0.33541297912597656
+      ],
+      "nativeParentIndex": -1,
+      "nativeChildIndex": 16
     },
     {
       "bone": "RightForeArmSleeve3_S_End",
@@ -8003,7 +8871,7 @@
       },
       "collisionMask": 1,
       "colliderType": 0,
-      "particleRadius": 0.019999999552965164,
+      "particleRadius": 0.020000001415610313,
       "dynamicCollider": {
         "type": 0,
         "collisionMask": 1,
@@ -8017,8 +8885,8 @@
           0.0,
           0.0
         ],
-        "radiusA": 0.019999999552965164,
-        "radiusB": 0.05000000074505806
+        "radiusA": 0.020000001415610313,
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -8063,7 +8931,15 @@
         0.21836364269256592,
         0.6385359764099121,
         -0.09775682538747787
-      ]
+      ],
+      "nativeDynamicIndex": 140,
+      "nativeBoneAxis": [
+        -1.0,
+        -7.47939674485763e-16,
+        -5.609547690992121e-16
+      ],
+      "nativeParentIndex": 97,
+      "nativeChildIndex": -1
     },
     {
       "bone": "LeftForeArmSleeve1_S",
@@ -8113,7 +8989,7 @@
           0.0
         ],
         "radiusA": 0.05000000074505806,
-        "radiusB": 0.05000000074505806
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 0,
@@ -8158,7 +9034,15 @@
         -0.44249075651168823,
         1.2653088569641113,
         -0.022409558296203613
-      ]
+      ],
+      "nativeDynamicIndex": 134,
+      "nativeBoneAxis": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "nativeParentIndex": -1,
+      "nativeChildIndex": 175
     },
     {
       "bone": "LeftFrontSideJacket1_S",
@@ -8193,7 +9077,7 @@
       },
       "collisionMask": -1,
       "colliderType": 0,
-      "particleRadius": 0.009999999776482582,
+      "particleRadius": 0.009999998845160007,
       "dynamicCollider": {
         "type": 0,
         "collisionMask": -1,
@@ -8207,8 +9091,8 @@
           0.0,
           0.0
         ],
-        "radiusA": 0.009999999776482582,
-        "radiusB": 0.05000000074505806
+        "radiusA": 0.009999998845160007,
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -8253,7 +9137,15 @@
         -0.10199999809265137,
         1.1410572528839111,
         0.05445735156536102
-      ]
+      ],
+      "nativeDynamicIndex": 3,
+      "nativeBoneAxis": [
+        -0.8553031086921692,
+        0.3949109613895416,
+        0.33541297912597656
+      ],
+      "nativeParentIndex": -1,
+      "nativeChildIndex": 9
     },
     {
       "bone": "RightFrontSideJacket2_S_End",
@@ -8288,7 +9180,7 @@
       },
       "collisionMask": 64,
       "colliderType": 0,
-      "particleRadius": 0.009999999776482582,
+      "particleRadius": 0.010000002570450306,
       "dynamicCollider": {
         "type": 0,
         "collisionMask": 64,
@@ -8302,8 +9194,8 @@
           0.0,
           0.0
         ],
-        "radiusA": 0.009999999776482582,
-        "radiusB": 0.05000000074505806
+        "radiusA": 0.010000002570450306,
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -8348,7 +9240,15 @@
         0.10200000554323196,
         1.0660572052001953,
         0.05445735156536102
-      ]
+      ],
+      "nativeDynamicIndex": 16,
+      "nativeBoneAxis": [
+        -1.0,
+        0.0,
+        1.1842379546963194e-16
+      ],
+      "nativeParentIndex": 7,
+      "nativeChildIndex": -1
     },
     {
       "bone": "RightBackSkirt5_S_End",
@@ -8398,7 +9298,7 @@
           0.0
         ],
         "radiusA": 0.019999999552965164,
-        "radiusB": 0.05000000074505806
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -8443,7 +9343,15 @@
         0.08593302220106125,
         0.6391012668609619,
         -0.1826222538948059
-      ]
+      ],
+      "nativeDynamicIndex": 135,
+      "nativeBoneAxis": [
+        -1.0,
+        0.0,
+        -1.8698491862144075e-16
+      ],
+      "nativeParentIndex": 96,
+      "nativeChildIndex": -1
     },
     {
       "bone": "RightBackJacket1_S",
@@ -8478,7 +9386,7 @@
       },
       "collisionMask": -1,
       "colliderType": 0,
-      "particleRadius": 0.009999999776482582,
+      "particleRadius": 0.009999998845160007,
       "dynamicCollider": {
         "type": 0,
         "collisionMask": -1,
@@ -8492,8 +9400,8 @@
           0.0,
           0.0
         ],
-        "radiusA": 0.009999999776482582,
-        "radiusB": 0.05000000074505806
+        "radiusA": 0.009999998845160007,
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -8538,7 +9446,15 @@
         0.05080616846680641,
         1.1410572528839111,
         -0.06023688614368439
-      ]
+      ],
+      "nativeDynamicIndex": 4,
+      "nativeBoneAxis": [
+        0.4987117052078247,
+        0.4622877836227417,
+        -0.7331961989402771
+      ],
+      "nativeParentIndex": -1,
+      "nativeChildIndex": 12
     },
     {
       "bone": "RightBackSideSkirt1_S",
@@ -8588,7 +9504,7 @@
           0.0
         ],
         "radiusA": 0.05000000074505806,
-        "radiusB": 0.05000000074505806
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -8633,7 +9549,15 @@
         0.10836361348628998,
         0.9853072166442871,
         -0.030305936932563782
-      ]
+      ],
+      "nativeDynamicIndex": 28,
+      "nativeBoneAxis": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "nativeParentIndex": -1,
+      "nativeChildIndex": 39
     },
     {
       "bone": "RightBackSkirt4_S",
@@ -8683,7 +9607,7 @@
           0.0
         ],
         "radiusA": 0.019999999552965164,
-        "radiusB": 0.05000000074505806
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -8728,7 +9652,15 @@
         0.07509324699640274,
         0.7295101881027222,
         -0.15553495287895203
-      ]
+      ],
+      "nativeDynamicIndex": 96,
+      "nativeBoneAxis": [
+        -0.9999999403953552,
+        0.0,
+        8.458841588195867e-17
+      ],
+      "nativeParentIndex": 49,
+      "nativeChildIndex": 135
     },
     {
       "bone": "RightBackSkirt1_S",
@@ -8778,7 +9710,7 @@
           0.0
         ],
         "radiusA": 0.05000000074505806,
-        "radiusB": 0.05000000074505806
+        "radiusB": 0.0
       },
       "limitInfo": {
         "useLimit": 1,
@@ -8823,7 +9755,15 @@
         0.04451366141438484,
         0.984558641910553,
         -0.0791202262043953
-      ]
+      ],
+      "nativeDynamicIndex": 31,
+      "nativeBoneAxis": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "nativeParentIndex": -1,
+      "nativeChildIndex": 34
     },
     {
       "bone": "LeftDHair2_S",
@@ -21316,135 +22256,1020 @@
   ],
   "nativeDynamicCollision": true,
   "counts": {
+    "ActorAnimationQuartzDriverHumanoidUpLegBone": 4,
     "ActorAnimationQuartzDriverSkirtBone": 8,
+    "ActorAnimationQuartzDriverHumanoidHandBone": 4,
+    "ActorAnimationQuartzDriverRotationBone": 4,
+    "ActorAnimationQuartzDriverHumanoidArmBone": 4,
     "ActorSwingDynamicBone": 202,
     "ActorSwingStaticBone": 15,
     "ActorSwingChain": 4
   },
   "scope": "QuartzDriver follow plus ActorSwing springs, captured dynamic/static colliders, and inferred skirt/jacket rings. Collider offsets are baked from Unity rest into PMX/THREE local space when rest+skeleton are supplied. Dynamic collider masks/radii come from the captured NativeList when supplied; game assemblies are not executed.",
-  "nativeDynamicGeometryApplied": 112,
+  "nativeDynamicGeometryApplied": 199,
+  "nativeChainGeometry": {
+    "source": "repo/tmp-secondary-motion-candidates\\latest-20261002\\native\\hmsz-schl-0000\\hmsz-native-chain-geometry.json",
+    "schemaVersion": 2,
+    "records": [
+      {
+        "dynamicBoneIndex": 19,
+        "chainOffsetIndex": -4,
+        "depth": 7,
+        "smoothing": 0.0,
+        "around": false,
+        "initialLoopLength": 0.5170268416404724,
+        "active": 1,
+        "type": 2,
+        "collisionMask": 64,
+        "radiusA": 0.00500000175088644,
+        "radiusB": 0.00500000175088644,
+        "fastHitRadius": 0.04552069306373596,
+        "sourceBone": "LeftBackJacket2_S_End",
+        "targetBone": "LeftBackSideJacket2_S_End",
+        "particleBinding": "child"
+      },
+      {
+        "dynamicBoneIndex": 15,
+        "chainOffsetIndex": -6,
+        "depth": 7,
+        "smoothing": 0.0,
+        "around": false,
+        "initialLoopLength": 0.5170268416404724,
+        "active": 1,
+        "type": 2,
+        "collisionMask": 64,
+        "radiusA": 0.005000000353902578,
+        "radiusB": 0.005000000353902578,
+        "fastHitRadius": 0.04143337905406952,
+        "sourceBone": "LeftBackSideJacket2_S_End",
+        "targetBone": "LeftFrontSideJacket2_S_End",
+        "particleBinding": "child"
+      },
+      {
+        "dynamicBoneIndex": 9,
+        "chainOffsetIndex": -1,
+        "depth": 7,
+        "smoothing": 0.0,
+        "around": false,
+        "initialLoopLength": 0.5170268416404724,
+        "active": 1,
+        "type": 2,
+        "collisionMask": 64,
+        "radiusA": 0.004999999888241291,
+        "radiusB": 0.004999999888241291,
+        "fastHitRadius": 0.04442329704761505,
+        "sourceBone": "LeftFrontSideJacket2_S_End",
+        "targetBone": "LeftFrontJacket2_S_End",
+        "particleBinding": "child"
+      },
+      {
+        "dynamicBoneIndex": 8,
+        "chainOffsetIndex": 3,
+        "depth": 7,
+        "smoothing": 0.0,
+        "around": false,
+        "initialLoopLength": 0.5170268416404724,
+        "active": 1,
+        "type": 2,
+        "collisionMask": 64,
+        "radiusA": 0.005000000353902578,
+        "radiusB": 0.005000000353902578,
+        "fastHitRadius": 0.06320296227931976,
+        "sourceBone": "LeftFrontJacket2_S_End",
+        "targetBone": "RightFrontJacket2_S_End",
+        "particleBinding": "child"
+      },
+      {
+        "dynamicBoneIndex": 11,
+        "chainOffsetIndex": 5,
+        "depth": 7,
+        "smoothing": 0.0,
+        "around": false,
+        "initialLoopLength": 0.5170268416404724,
+        "active": 1,
+        "type": 2,
+        "collisionMask": 64,
+        "radiusA": 0.005000000353902578,
+        "radiusB": 0.005000000353902578,
+        "fastHitRadius": 0.046905551105737686,
+        "sourceBone": "RightFrontJacket2_S_End",
+        "targetBone": "RightFrontSideJacket2_S_End",
+        "particleBinding": "child"
+      },
+      {
+        "dynamicBoneIndex": 16,
+        "chainOffsetIndex": -6,
+        "depth": 7,
+        "smoothing": 0.0,
+        "around": false,
+        "initialLoopLength": 0.5170268416404724,
+        "active": 1,
+        "type": 2,
+        "collisionMask": 64,
+        "radiusA": 0.00500000175088644,
+        "radiusB": 0.00500000175088644,
+        "fastHitRadius": 0.041552990674972534,
+        "sourceBone": "RightFrontSideJacket2_S_End",
+        "targetBone": "RightBackSideJacket2_S_End",
+        "particleBinding": "child"
+      },
+      {
+        "dynamicBoneIndex": 10,
+        "chainOffsetIndex": 2,
+        "depth": 7,
+        "smoothing": 0.0,
+        "around": false,
+        "initialLoopLength": 0.5170268416404724,
+        "active": 1,
+        "type": 2,
+        "collisionMask": 64,
+        "radiusA": 0.005000000819563866,
+        "radiusB": 0.005000000819563866,
+        "fastHitRadius": 0.045511890202760696,
+        "sourceBone": "RightBackSideJacket2_S_End",
+        "targetBone": "RightBackJacket2_S_End",
+        "particleBinding": "child"
+      },
+      {
+        "dynamicBoneIndex": 40,
+        "chainOffsetIndex": 6,
+        "depth": 8,
+        "smoothing": 0.0,
+        "around": false,
+        "initialLoopLength": 0.7067012190818787,
+        "active": 1,
+        "type": 2,
+        "collisionMask": 1,
+        "radiusA": 0.014999999664723873,
+        "radiusB": 0.014999999664723873,
+        "fastHitRadius": 0.06685592979192734,
+        "sourceBone": "LeftBackSkirt2_S",
+        "targetBone": "LeftBackSideSkirt2_S",
+        "particleBinding": "child"
+      },
+      {
+        "dynamicBoneIndex": 46,
+        "chainOffsetIndex": 1,
+        "depth": 8,
+        "smoothing": 0.0,
+        "around": false,
+        "initialLoopLength": 0.7067012190818787,
+        "active": 1,
+        "type": 2,
+        "collisionMask": 1,
+        "radiusA": 0.015000000596046448,
+        "radiusB": 0.015000000596046448,
+        "fastHitRadius": 0.07394865155220032,
+        "sourceBone": "LeftBackSideSkirt2_S",
+        "targetBone": "LeftFrontSideSkirt2_S",
+        "particleBinding": "child"
+      },
+      {
+        "dynamicBoneIndex": 47,
+        "chainOffsetIndex": -4,
+        "depth": 8,
+        "smoothing": 0.0,
+        "around": false,
+        "initialLoopLength": 0.7067012190818787,
+        "active": 1,
+        "type": 2,
+        "collisionMask": 1,
+        "radiusA": 0.015000000596046448,
+        "radiusB": 0.015000000596046448,
+        "fastHitRadius": 0.06295762956142426,
+        "sourceBone": "LeftFrontSideSkirt2_S",
+        "targetBone": "LeftFrontSkirt2_S",
+        "particleBinding": "child"
+      },
+      {
+        "dynamicBoneIndex": 43,
+        "chainOffsetIndex": -11,
+        "depth": 8,
+        "smoothing": 0.0,
+        "around": false,
+        "initialLoopLength": 0.7067012190818787,
+        "active": 1,
+        "type": 2,
+        "collisionMask": 1,
+        "radiusA": 0.015000000596046448,
+        "radiusB": 0.015000000596046448,
+        "fastHitRadius": 0.09359598904848099,
+        "sourceBone": "LeftFrontSkirt2_S",
+        "targetBone": "RightFrontSkirt2_S",
+        "particleBinding": "child"
+      },
+      {
+        "dynamicBoneIndex": 32,
+        "chainOffsetIndex": 6,
+        "depth": 8,
+        "smoothing": 0.0,
+        "around": false,
+        "initialLoopLength": 0.7067012190818787,
+        "active": 1,
+        "type": 2,
+        "collisionMask": 1,
+        "radiusA": 0.015000002458691597,
+        "radiusB": 0.015000002458691597,
+        "fastHitRadius": 0.06255759298801422,
+        "sourceBone": "RightFrontSkirt2_S",
+        "targetBone": "RightFrontSideSkirt2_S",
+        "particleBinding": "child"
+      },
+      {
+        "dynamicBoneIndex": 38,
+        "chainOffsetIndex": 1,
+        "depth": 8,
+        "smoothing": 0.0,
+        "around": false,
+        "initialLoopLength": 0.7067012190818787,
+        "active": 1,
+        "type": 2,
+        "collisionMask": 1,
+        "radiusA": 0.015000004321336746,
+        "radiusB": 0.015000004321336746,
+        "fastHitRadius": 0.07399880141019821,
+        "sourceBone": "RightFrontSideSkirt2_S",
+        "targetBone": "RightBackSideSkirt2_S",
+        "particleBinding": "child"
+      },
+      {
+        "dynamicBoneIndex": 39,
+        "chainOffsetIndex": -5,
+        "depth": 8,
+        "smoothing": 0.0,
+        "around": false,
+        "initialLoopLength": 0.7067012190818787,
+        "active": 1,
+        "type": 2,
+        "collisionMask": 1,
+        "radiusA": 0.015000002458691597,
+        "radiusB": 0.015000002458691597,
+        "fastHitRadius": 0.0669412836432457,
+        "sourceBone": "RightBackSideSkirt2_S",
+        "targetBone": "RightBackSkirt2_S",
+        "particleBinding": "child"
+      },
+      {
+        "dynamicBoneIndex": 61,
+        "chainOffsetIndex": -6,
+        "depth": 9,
+        "smoothing": 0.0,
+        "around": false,
+        "initialLoopLength": 0.8614488244056702,
+        "active": 1,
+        "type": 2,
+        "collisionMask": 1,
+        "radiusA": 0.015000002458691597,
+        "radiusB": 0.015000002458691597,
+        "fastHitRadius": 0.07507015764713287,
+        "sourceBone": "LeftBackSkirt3_S",
+        "targetBone": "LeftBackSideSkirt3_S",
+        "particleBinding": "child"
+      },
+      {
+        "dynamicBoneIndex": 55,
+        "chainOffsetIndex": 4,
+        "depth": 9,
+        "smoothing": 0.0,
+        "around": false,
+        "initialLoopLength": 0.8614488244056702,
+        "active": 1,
+        "type": 2,
+        "collisionMask": 1,
+        "radiusA": 0.014999998733401299,
+        "radiusB": 0.014999998733401299,
+        "fastHitRadius": 0.08783626556396484,
+        "sourceBone": "LeftBackSideSkirt3_S",
+        "targetBone": "LeftFrontSideSkirt3_S",
+        "particleBinding": "child"
+      },
+      {
+        "dynamicBoneIndex": 59,
+        "chainOffsetIndex": -5,
+        "depth": 9,
+        "smoothing": 0.0,
+        "around": false,
+        "initialLoopLength": 0.8614488244056702,
+        "active": 1,
+        "type": 2,
+        "collisionMask": 1,
+        "radiusA": 0.015000000596046448,
+        "radiusB": 0.015000000596046448,
+        "fastHitRadius": 0.07138487696647644,
+        "sourceBone": "LeftFrontSideSkirt3_S",
+        "targetBone": "LeftFrontSkirt3_S",
+        "particleBinding": "child"
+      },
+      {
+        "dynamicBoneIndex": 54,
+        "chainOffsetIndex": -3,
+        "depth": 9,
+        "smoothing": 0.0,
+        "around": false,
+        "initialLoopLength": 0.8614488244056702,
+        "active": 1,
+        "type": 2,
+        "collisionMask": 1,
+        "radiusA": 0.014999999664723873,
+        "radiusB": 0.014999999664723873,
+        "fastHitRadius": 0.10203669220209122,
+        "sourceBone": "LeftFrontSkirt3_S",
+        "targetBone": "RightFrontSkirt3_S",
+        "particleBinding": "child"
+      },
+      {
+        "dynamicBoneIndex": 51,
+        "chainOffsetIndex": 1,
+        "depth": 9,
+        "smoothing": 0.0,
+        "around": false,
+        "initialLoopLength": 0.8614488244056702,
+        "active": 1,
+        "type": 2,
+        "collisionMask": 1,
+        "radiusA": 0.015000006183981895,
+        "radiusB": 0.015000006183981895,
+        "fastHitRadius": 0.06998138129711151,
+        "sourceBone": "RightFrontSkirt3_S",
+        "targetBone": "RightFrontSideSkirt3_S",
+        "particleBinding": "child"
+      },
+      {
+        "dynamicBoneIndex": 52,
+        "chainOffsetIndex": 1,
+        "depth": 9,
+        "smoothing": 0.0,
+        "around": false,
+        "initialLoopLength": 0.8614488244056702,
+        "active": 1,
+        "type": 2,
+        "collisionMask": 1,
+        "radiusA": 0.015000004321336746,
+        "radiusB": 0.015000004321336746,
+        "fastHitRadius": 0.09007685631513596,
+        "sourceBone": "RightFrontSideSkirt3_S",
+        "targetBone": "RightBackSideSkirt3_S",
+        "particleBinding": "child"
+      },
+      {
+        "dynamicBoneIndex": 53,
+        "chainOffsetIndex": -4,
+        "depth": 9,
+        "smoothing": 0.0,
+        "around": false,
+        "initialLoopLength": 0.8614488244056702,
+        "active": 1,
+        "type": 2,
+        "collisionMask": 1,
+        "radiusA": 0.015000002458691597,
+        "radiusB": 0.015000002458691597,
+        "fastHitRadius": 0.07528520375490189,
+        "sourceBone": "RightBackSideSkirt3_S",
+        "targetBone": "RightBackSkirt3_S",
+        "particleBinding": "child"
+      },
+      {
+        "dynamicBoneIndex": 100,
+        "chainOffsetIndex": 1,
+        "depth": 10,
+        "smoothing": 0.0,
+        "around": false,
+        "initialLoopLength": 1.0845338106155396,
+        "active": 1,
+        "type": 2,
+        "collisionMask": 1,
+        "radiusA": 0.015000002458691597,
+        "radiusB": 0.015000002458691597,
+        "fastHitRadius": 0.08522596210241318,
+        "sourceBone": "LeftBackSkirt4_S",
+        "targetBone": "LeftBackSideSkirt4_S",
+        "particleBinding": "child"
+      },
+      {
+        "dynamicBoneIndex": 101,
+        "chainOffsetIndex": -2,
+        "depth": 10,
+        "smoothing": 0.0,
+        "around": false,
+        "initialLoopLength": 1.0845338106155396,
+        "active": 1,
+        "type": 2,
+        "collisionMask": 1,
+        "radiusA": 0.015000000596046448,
+        "radiusB": 0.015000000596046448,
+        "fastHitRadius": 0.10344483703374863,
+        "sourceBone": "LeftBackSideSkirt4_S",
+        "targetBone": "LeftFrontSideSkirt4_S",
+        "particleBinding": "child"
+      },
+      {
+        "dynamicBoneIndex": 99,
+        "chainOffsetIndex": -1,
+        "depth": 10,
+        "smoothing": 0.0,
+        "around": false,
+        "initialLoopLength": 1.0845338106155396,
+        "active": 1,
+        "type": 2,
+        "collisionMask": 1,
+        "radiusA": 0.015000000596046448,
+        "radiusB": 0.015000000596046448,
+        "fastHitRadius": 0.08182206004858017,
+        "sourceBone": "LeftFrontSideSkirt4_S",
+        "targetBone": "LeftFrontSkirt4_S",
+        "particleBinding": "child"
+      },
+      {
+        "dynamicBoneIndex": 98,
+        "chainOffsetIndex": -4,
+        "depth": 10,
+        "smoothing": 0.0,
+        "around": false,
+        "initialLoopLength": 1.0845338106155396,
+        "active": 1,
+        "type": 2,
+        "collisionMask": 1,
+        "radiusA": 0.014999999664723873,
+        "radiusB": 0.014999999664723873,
+        "fastHitRadius": 0.1090945452451706,
+        "sourceBone": "LeftFrontSkirt4_S",
+        "targetBone": "RightFrontSkirt4_S",
+        "particleBinding": "child"
+      },
+      {
+        "dynamicBoneIndex": 94,
+        "chainOffsetIndex": 1,
+        "depth": 10,
+        "smoothing": 0.0,
+        "around": false,
+        "initialLoopLength": 1.0845338106155396,
+        "active": 1,
+        "type": 2,
+        "collisionMask": 1,
+        "radiusA": 0.015000006183981895,
+        "radiusB": 0.015000006183981895,
+        "fastHitRadius": 0.0796574056148529,
+        "sourceBone": "RightFrontSkirt4_S",
+        "targetBone": "RightFrontSideSkirt4_S",
+        "particleBinding": "child"
+      },
+      {
+        "dynamicBoneIndex": 95,
+        "chainOffsetIndex": 2,
+        "depth": 10,
+        "smoothing": 0.0,
+        "around": false,
+        "initialLoopLength": 1.0845338106155396,
+        "active": 1,
+        "type": 2,
+        "collisionMask": 1,
+        "radiusA": 0.015000002458691597,
+        "radiusB": 0.015000002458691597,
+        "fastHitRadius": 0.10696098953485489,
+        "sourceBone": "RightFrontSideSkirt4_S",
+        "targetBone": "RightBackSideSkirt4_S",
+        "particleBinding": "child"
+      },
+      {
+        "dynamicBoneIndex": 97,
+        "chainOffsetIndex": -1,
+        "depth": 10,
+        "smoothing": 0.0,
+        "around": false,
+        "initialLoopLength": 1.0845338106155396,
+        "active": 1,
+        "type": 2,
+        "collisionMask": 1,
+        "radiusA": 0.015000002458691597,
+        "radiusB": 0.015000002458691597,
+        "fastHitRadius": 0.08603485673666,
+        "sourceBone": "RightBackSideSkirt4_S",
+        "targetBone": "RightBackSkirt4_S",
+        "particleBinding": "child"
+      },
+      {
+        "dynamicBoneIndex": 142,
+        "chainOffsetIndex": 5,
+        "depth": 11,
+        "smoothing": 0.0,
+        "around": false,
+        "initialLoopLength": 1.354986310005188,
+        "active": 1,
+        "type": 2,
+        "collisionMask": 1,
+        "radiusA": 0.015000002458691597,
+        "radiusB": 0.015000002458691597,
+        "fastHitRadius": 0.09637553244829178,
+        "sourceBone": "LeftBackSkirt5_S_End",
+        "targetBone": "LeftBackSideSkirt5_S_End",
+        "particleBinding": "child"
+      },
+      {
+        "dynamicBoneIndex": 147,
+        "chainOffsetIndex": -9,
+        "depth": 11,
+        "smoothing": 0.0,
+        "around": false,
+        "initialLoopLength": 1.354986310005188,
+        "active": 1,
+        "type": 2,
+        "collisionMask": 1,
+        "radiusA": 0.015000000596046448,
+        "radiusB": 0.015000000596046448,
+        "fastHitRadius": 0.11868727952241898,
+        "sourceBone": "LeftBackSideSkirt5_S_End",
+        "targetBone": "LeftFrontSideSkirt5_S_End",
+        "particleBinding": "child"
+      },
+      {
+        "dynamicBoneIndex": 138,
+        "chainOffsetIndex": 8,
+        "depth": 11,
+        "smoothing": 0.0,
+        "around": false,
+        "initialLoopLength": 1.354986310005188,
+        "active": 1,
+        "type": 2,
+        "collisionMask": 1,
+        "radiusA": 0.015000000596046448,
+        "radiusB": 0.015000000596046448,
+        "fastHitRadius": 0.09392762929201126,
+        "sourceBone": "LeftFrontSideSkirt5_S_End",
+        "targetBone": "LeftFrontSkirt5_S_End",
+        "particleBinding": "child"
+      },
+      {
+        "dynamicBoneIndex": 146,
+        "chainOffsetIndex": -18,
+        "depth": 11,
+        "smoothing": 0.0,
+        "around": false,
+        "initialLoopLength": 1.354986310005188,
+        "active": 1,
+        "type": 2,
+        "collisionMask": 1,
+        "radiusA": 0.014999999664723873,
+        "radiusB": 0.014999999664723873,
+        "fastHitRadius": 0.11413737386465073,
+        "sourceBone": "LeftFrontSkirt5_S_End",
+        "targetBone": "RightFrontSkirt5_S_End",
+        "particleBinding": "child"
+      },
+      {
+        "dynamicBoneIndex": 128,
+        "chainOffsetIndex": 4,
+        "depth": 11,
+        "smoothing": 0.0,
+        "around": false,
+        "initialLoopLength": 1.354986310005188,
+        "active": 1,
+        "type": 2,
+        "collisionMask": 1,
+        "radiusA": 0.015000006183981895,
+        "radiusB": 0.015000006183981895,
+        "fastHitRadius": 0.09103722125291824,
+        "sourceBone": "RightFrontSkirt5_S_End",
+        "targetBone": "RightFrontSideSkirt5_S_End",
+        "particleBinding": "child"
+      },
+      {
+        "dynamicBoneIndex": 132,
+        "chainOffsetIndex": 8,
+        "depth": 11,
+        "smoothing": 0.0,
+        "around": false,
+        "initialLoopLength": 1.354986310005188,
+        "active": 1,
+        "type": 2,
+        "collisionMask": 1,
+        "radiusA": 0.015000002458691597,
+        "radiusB": 0.015000002458691597,
+        "fastHitRadius": 0.12321402132511139,
+        "sourceBone": "RightFrontSideSkirt5_S_End",
+        "targetBone": "RightBackSideSkirt5_S_End",
+        "particleBinding": "child"
+      },
+      {
+        "dynamicBoneIndex": 140,
+        "chainOffsetIndex": -5,
+        "depth": 11,
+        "smoothing": 0.0,
+        "around": false,
+        "initialLoopLength": 1.354986310005188,
+        "active": 1,
+        "type": 2,
+        "collisionMask": 1,
+        "radiusA": 0.015000002458691597,
+        "radiusB": 0.015000002458691597,
+        "fastHitRadius": 0.09783543646335602,
+        "sourceBone": "RightBackSideSkirt5_S_End",
+        "targetBone": "RightBackSkirt5_S_End",
+        "particleBinding": "child"
+      },
+      {
+        "dynamicBoneIndex": 152,
+        "chainOffsetIndex": 2,
+        "depth": 12,
+        "smoothing": 0.0,
+        "around": false,
+        "initialLoopLength": 0.31509795784950256,
+        "active": 1,
+        "type": 2,
+        "collisionMask": 8,
+        "radiusA": 0.004999999888241291,
+        "radiusB": 0.004999999888241291,
+        "fastHitRadius": 0.03634020313620567,
+        "sourceBone": "LeftDHair3_S_End",
+        "targetBone": "LeftSideDHair3_S_End",
+        "particleBinding": "child"
+      },
+      {
+        "dynamicBoneIndex": 154,
+        "chainOffsetIndex": 14,
+        "depth": 12,
+        "smoothing": 0.0,
+        "around": false,
+        "initialLoopLength": 0.31509795784950256,
+        "active": 1,
+        "type": 2,
+        "collisionMask": 8,
+        "radiusA": 0.005000000353902578,
+        "radiusB": 0.005000000353902578,
+        "fastHitRadius": 0.02887626364827156,
+        "sourceBone": "LeftSideDHair3_S_End",
+        "targetBone": "LeftBackSideDHair3_S_End",
+        "particleBinding": "child"
+      },
+      {
+        "dynamicBoneIndex": 168,
+        "chainOffsetIndex": -2,
+        "depth": 12,
+        "smoothing": 0.0,
+        "around": false,
+        "initialLoopLength": 0.31509795784950256,
+        "active": 1,
+        "type": 2,
+        "collisionMask": 8,
+        "radiusA": 0.005000000819563866,
+        "radiusB": 0.005000000819563866,
+        "fastHitRadius": 0.026516081765294075,
+        "sourceBone": "LeftBackSideDHair3_S_End",
+        "targetBone": "LeftBackDHair3_S_End",
+        "particleBinding": "child"
+      },
+      {
+        "dynamicBoneIndex": 166,
+        "chainOffsetIndex": 3,
+        "depth": 12,
+        "smoothing": 0.0,
+        "around": false,
+        "initialLoopLength": 0.31509795784950256,
+        "active": 1,
+        "type": 2,
+        "collisionMask": 8,
+        "radiusA": 0.00500000175088644,
+        "radiusB": 0.00500000175088644,
+        "fastHitRadius": 0.02412322349846363,
+        "sourceBone": "LeftBackDHair3_S_End",
+        "targetBone": "CenterBackDHair3_S_End",
+        "particleBinding": "child"
+      },
+      {
+        "dynamicBoneIndex": 169,
+        "chainOffsetIndex": -7,
+        "depth": 12,
+        "smoothing": 0.0,
+        "around": false,
+        "initialLoopLength": 0.31509795784950256,
+        "active": 1,
+        "type": 2,
+        "collisionMask": 8,
+        "radiusA": 0.004999999422580004,
+        "radiusB": 0.004999999422580004,
+        "fastHitRadius": 0.023544544354081154,
+        "sourceBone": "CenterBackDHair3_S_End",
+        "targetBone": "RightBackDHair3_S_End",
+        "particleBinding": "child"
+      },
+      {
+        "dynamicBoneIndex": 162,
+        "chainOffsetIndex": -5,
+        "depth": 12,
+        "smoothing": 0.0,
+        "around": false,
+        "initialLoopLength": 0.31509795784950256,
+        "active": 1,
+        "type": 2,
+        "collisionMask": 8,
+        "radiusA": 0.005000000819563866,
+        "radiusB": 0.005000000819563866,
+        "fastHitRadius": 0.028420623391866684,
+        "sourceBone": "RightBackDHair3_S_End",
+        "targetBone": "RightBackSideDHair3_S_End",
+        "particleBinding": "child"
+      },
+      {
+        "dynamicBoneIndex": 157,
+        "chainOffsetIndex": 8,
+        "depth": 12,
+        "smoothing": 0.0,
+        "around": false,
+        "initialLoopLength": 0.31509795784950256,
+        "active": 1,
+        "type": 2,
+        "collisionMask": 8,
+        "radiusA": 0.005000000353902578,
+        "radiusB": 0.005000000353902578,
+        "fastHitRadius": 0.02788860909640789,
+        "sourceBone": "RightBackSideDHair3_S_End",
+        "targetBone": "RightSideDHair3_S_End",
+        "particleBinding": "child"
+      },
+      {
+        "dynamicBoneIndex": 165,
+        "chainOffsetIndex": -9,
+        "depth": 12,
+        "smoothing": 0.0,
+        "around": false,
+        "initialLoopLength": 0.31509795784950256,
+        "active": 1,
+        "type": 2,
+        "collisionMask": 8,
+        "radiusA": 0.005000000353902578,
+        "radiusB": 0.005000000353902578,
+        "fastHitRadius": 0.043025534600019455,
+        "sourceBone": "RightSideDHair3_S_End",
+        "targetBone": "RightDHair3_S_End",
+        "particleBinding": "child"
+      },
+      {
+        "dynamicBoneIndex": 187,
+        "chainOffsetIndex": -3,
+        "depth": 13,
+        "smoothing": 0.0,
+        "around": false,
+        "initialLoopLength": 0.3592056930065155,
+        "active": 1,
+        "type": 2,
+        "collisionMask": 8,
+        "radiusA": 0.005000000353902578,
+        "radiusB": 0.005000000353902578,
+        "fastHitRadius": 0.03799227252602577,
+        "sourceBone": "LeftSideHair4_S_End",
+        "targetBone": "LeftBackSideHair4_S_End",
+        "particleBinding": "child"
+      },
+      {
+        "dynamicBoneIndex": 184,
+        "chainOffsetIndex": 15,
+        "depth": 13,
+        "smoothing": 0.0,
+        "around": false,
+        "initialLoopLength": 0.3592056930065155,
+        "active": 1,
+        "type": 2,
+        "collisionMask": 8,
+        "radiusA": 0.005000000353902578,
+        "radiusB": 0.005000000353902578,
+        "fastHitRadius": 0.04423936456441879,
+        "sourceBone": "LeftBackSideHair4_S_End",
+        "targetBone": "LeftBackHair4_S_End",
+        "particleBinding": "child"
+      },
+      {
+        "dynamicBoneIndex": 199,
+        "chainOffsetIndex": -4,
+        "depth": 13,
+        "smoothing": 0.0,
+        "around": false,
+        "initialLoopLength": 0.3592056930065155,
+        "active": 1,
+        "type": 2,
+        "collisionMask": 8,
+        "radiusA": 0.005000000819563866,
+        "radiusB": 0.005000000819563866,
+        "fastHitRadius": 0.03855922818183899,
+        "sourceBone": "LeftBackHair4_S_End",
+        "targetBone": "CenterBackHair4_S_End",
+        "particleBinding": "child"
+      },
+      {
+        "dynamicBoneIndex": 195,
+        "chainOffsetIndex": -9,
+        "depth": 13,
+        "smoothing": 0.0,
+        "around": false,
+        "initialLoopLength": 0.3592056930065155,
+        "active": 1,
+        "type": 2,
+        "collisionMask": 8,
+        "radiusA": 0.005000000353902578,
+        "radiusB": 0.005000000353902578,
+        "fastHitRadius": 0.038427628576755524,
+        "sourceBone": "CenterBackHair4_S_End",
+        "targetBone": "RightBackHair4_S_End",
+        "particleBinding": "child"
+      },
+      {
+        "dynamicBoneIndex": 186,
+        "chainOffsetIndex": 5,
+        "depth": 13,
+        "smoothing": 0.0,
+        "around": false,
+        "initialLoopLength": 0.3592056930065155,
+        "active": 1,
+        "type": 2,
+        "collisionMask": 8,
+        "radiusA": 0.004999999888241291,
+        "radiusB": 0.004999999888241291,
+        "fastHitRadius": 0.03971424698829651,
+        "sourceBone": "RightBackHair4_S_End",
+        "targetBone": "RightBackSideHair4_S_End",
+        "particleBinding": "child"
+      }
+    ],
+    "status": "captured-indexes-with-named-child-bindings"
+  },
   "profileId": "hmsz-schl-0000",
   "physicsAlgorithm": "gakumas-runtime-recovered-v1",
   "useModelingRestPose": true,
-  "adaptationStatus": "provisional-native-dynamic-static-plus-authored-chain",
+  "adaptationStatus": "provisional-native-dynamic-static-plus-native-chain",
   "adaptationScope": {
-    "nativeDynamic": "hair-only",
+    "nativeDynamic": "all",
     "nativeStatic": "captured-runtime-all",
-    "nativeChain": "not-merged-outfit-mismatch-safe",
+    "nativeChain": "captured-runtime-named-child",
     "clothing": "variant-authored"
   },
   "source": {
-    "body": "mdl_chr_hmsz-schl-0000_body",
-    "hair": "mdl_chr_hmsz-base-0000_hair",
-    "capture": "capture-2026-9-25-8-26-50-37200-9319203",
-    "report": "G:\\SillyTavern\\SillyTavern\\tools\\gakumas-vmd-prototype\\variant-candidates\\authored\\hmsz-schl-0000-swing-params.json",
-    "nativeDynamic": "G:\\SillyTavern\\SillyTavern\\tools\\gakumas-vmd-prototype\\variant-candidates\\native\\hmsz-schl-0000\\hmsz-native-dynamic-geometry.json",
-    "nativeStatic": "G:\\SillyTavern\\SillyTavern\\tools\\gakumas-vmd-prototype\\variant-candidates\\native\\hmsz-schl-0000\\hmsz-native-static-geometry.json",
-    "nativeChain": "G:\\SillyTavern\\SillyTavern\\tools\\gakumas-vmd-prototype\\variant-candidates\\native\\hmsz-schl-0000\\hmsz-native-chain-geometry.json",
-    "rest": "G:\\SillyTavern\\SillyTavern\\tools\\gakumas-vmd-prototype\\variant-candidates\\rests\\hmsz-schl-0000.json",
-    "pmx": "G:\\SillyTavern\\SillyTavern\\tools\\gakumas-vmd-prototype\\variant-candidates\\skeletons\\hmsz-schl-0000.json",
-    "glb": "E:\\gakumas-pmx-workflow\\output\\hmsz-schl-0000\\hmsz-schl-0000.glb"
+    "body": "capture://body",
+    "hair": "capture://hair",
+    "capture": "gakumas-local/physics-diagnostics\\capture-2026-10-2-14-6-2-7660-87672015\\idol-parameters.json",
+    "report": "repo/tools\\gakumas-vmd-prototype\\variant-candidates\\authored\\hmsz-schl-0000-swing-params.json",
+    "nativeDynamic": "repo/tmp-secondary-motion-candidates\\latest-20261002\\native\\hmsz-schl-0000\\hmsz-native-dynamic-geometry.json",
+    "nativeStatic": "repo/tmp-secondary-motion-candidates\\latest-20261002\\native\\hmsz-schl-0000\\hmsz-native-static-geometry.json",
+    "nativeChain": "repo/tmp-secondary-motion-candidates\\latest-20261002\\native\\hmsz-schl-0000\\hmsz-native-chain-geometry.json",
+    "rest": "repo/tools\\gakumas-vmd-prototype\\variant-candidates\\rests\\hmsz-schl-0000.json",
+    "pmx": "repo/tools\\gakumas-vmd-prototype\\variant-candidates\\skeletons\\hmsz-schl-0000.json",
+    "glb": "capture://hmsz-schl-0000.glb",
+    "captureStatus": "main_callback_snapshot_not_solver_io"
   },
-  "nativeDynamicGeometrySource": "G:\\SillyTavern\\SillyTavern\\tools\\gakumas-vmd-prototype\\variant-candidates\\native\\hmsz-schl-0000\\hmsz-native-dynamic-geometry.json",
-  "nativeStaticGeometrySource": "G:\\SillyTavern\\SillyTavern\\tools\\gakumas-vmd-prototype\\variant-candidates\\native\\hmsz-schl-0000\\hmsz-native-static-geometry.json",
+  "nativeDynamicGeometrySource": "repo/tmp-secondary-motion-candidates\\latest-20261002\\native\\hmsz-schl-0000\\hmsz-native-dynamic-geometry.json",
+  "nativeStaticGeometrySource": "repo/tmp-secondary-motion-candidates\\latest-20261002\\native\\hmsz-schl-0000\\hmsz-native-static-geometry.json",
   "nativeStaticGeometryApplied": 16,
-  "nativeChainGeometryApplied": 0,
+  "nativeChainGeometryApplied": 48,
+  "nativeReferenceLimits": false,
+  "nativeReferenceLimitCoverage": {
+    "enabled": false,
+    "space": null,
+    "configuredRecords": 0,
+    "referenceBones": [],
+    "unresolvedReferenceBones": []
+  },
   "nativeCaptureCoverage": {
     "capturedDynamicRecords": 199,
-    "joinedDynamicRecords": 112,
+    "joinedDynamicRecords": 199,
+    "nativeUnresolvedDynamicBones": [
+      "RightArmSleeve2_S",
+      "RightForeArmSleeve2_S",
+      "RightForeArmSleeve3_S_End"
+    ],
     "variantHairSpringBones": 112,
     "stageOnlyStaticRecords": 1,
     "joinedStaticRecords": 16,
-    "rejectedNativeDynamicBones": [
-      "CenterLeftLRibbon1_S",
-      "CenterLeftLRibbon2_S_End",
-      "CenterLeftRibbon1_S",
-      "CenterLeftRibbon2_S",
-      "CenterLeftRibbon3_S_End",
-      "CenterRightLRibbon1_S",
-      "CenterRightLRibbon2_S_End",
-      "CenterRightRibbon1_S",
-      "CenterRightRibbon2_S",
-      "CenterRightRibbon3_S_End",
-      "LeftArmSleeve1_S",
-      "LeftArmSleeve2_S",
-      "LeftArmSleeve3_S_End",
-      "LeftBackJacket1_S",
-      "LeftBackJacket2_S_End",
-      "LeftBackSideJacket1_S",
-      "LeftBackSideJacket2_S_End",
-      "LeftBackSideSkirt1_S",
-      "LeftBackSideSkirt2_S",
-      "LeftBackSideSkirt3_S",
-      "LeftBackSideSkirt4_S",
-      "LeftBackSideSkirt5_S_End",
-      "LeftBackSkirt1_S",
-      "LeftBackSkirt2_S",
-      "LeftBackSkirt3_S",
-      "LeftBackSkirt4_S",
-      "LeftBackSkirt5_S_End",
-      "LeftForeArmSleeve1_S",
-      "LeftForeArmSleeve2_S",
-      "LeftForeArmSleeve3_S_End",
-      "LeftFrontJacket1_S",
-      "LeftFrontJacket2_S_End",
-      "LeftFrontSideJacket1_S",
-      "LeftFrontSideJacket2_S_End",
-      "LeftFrontSideSkirt1_S",
-      "LeftFrontSideSkirt2_S",
-      "LeftFrontSideSkirt3_S",
-      "LeftFrontSideSkirt4_S",
-      "LeftFrontSideSkirt5_S_End",
-      "LeftFrontSkirt1_S",
-      "LeftFrontSkirt2_S",
-      "LeftFrontSkirt3_S",
-      "LeftFrontSkirt4_S",
-      "LeftFrontSkirt5_S_End",
-      "LeftLegSkin1_S",
-      "LeftLegSkin2_S",
-      "LeftLegSkin3_S_End",
-      "LeftUpLegSkin1_S",
-      "LeftUpLegSkin2_S",
-      "LeftUpLegSkin3_S_End",
-      "RightArmSleeve1_S",
-      "RightArmSleeve3_S_End",
-      "RightBackJacket1_S",
-      "RightBackJacket2_S_End",
-      "RightBackSideJacket1_S",
-      "RightBackSideJacket2_S_End",
-      "RightBackSideSkirt1_S",
-      "RightBackSideSkirt2_S",
-      "RightBackSideSkirt3_S",
-      "RightBackSideSkirt4_S",
-      "RightBackSideSkirt5_S_End",
-      "RightBackSkirt1_S",
-      "RightBackSkirt2_S",
-      "RightBackSkirt3_S",
-      "RightBackSkirt4_S",
-      "RightBackSkirt5_S_End",
-      "RightForeArmSleeve1_S",
-      "RightFrontJacket1_S",
-      "RightFrontJacket2_S_End",
-      "RightFrontSideJacket1_S",
-      "RightFrontSideJacket2_S_End",
-      "RightFrontSideSkirt1_S",
-      "RightFrontSideSkirt2_S",
-      "RightFrontSideSkirt3_S",
-      "RightFrontSideSkirt4_S",
-      "RightFrontSideSkirt5_S_End",
-      "RightFrontSkirt1_S",
-      "RightFrontSkirt2_S",
-      "RightFrontSkirt3_S",
-      "RightFrontSkirt4_S",
-      "RightFrontSkirt5_S_End",
-      "RightLegSkin1_S",
-      "RightLegSkin2_S",
-      "RightLegSkin3_S_End",
-      "RightUpLegSkin1_S",
-      "RightUpLegSkin2_S",
-      "RightUpLegSkin3_S_End"
-    ],
+    "capturedChainRecords": 48,
+    "joinedChainRecords": 48,
+    "rejectedNativeChainRecords": [],
+    "rejectedNativeDynamicBones": [],
     "unknownSwingClasses": [],
     "unresolvedBones": []
+  },
+  "quartzStageAdaptation": {
+    "status": "stage-adaptation-native-io-unverified",
+    "formulaSource": "serialized Quartz settings; capture job IO was not executed",
+    "supportedClasses": [
+      "ActorAnimationQuartzDriverHumanoidArmBone",
+      "ActorAnimationQuartzDriverHumanoidHandBone",
+      "ActorAnimationQuartzDriverHumanoidUpLegBone",
+      "ActorAnimationQuartzDriverRotationBone",
+      "ActorAnimationQuartzDriverSkirtBone"
+    ],
+    "driverCounts": {
+      "ActorAnimationQuartzDriverHumanoidUpLegBone": 4,
+      "ActorAnimationQuartzDriverSkirtBone": 8,
+      "ActorAnimationQuartzDriverHumanoidHandBone": 4,
+      "ActorAnimationQuartzDriverRotationBone": 4,
+      "ActorAnimationQuartzDriverHumanoidArmBone": 4
+    },
+    "captureJobs": [
+      {
+        "name": "_constraintTransformJobBones",
+        "elementType": "ActorAnimation.ActorAnimationConstraintTransformJobBone",
+        "length": 8,
+        "itemsRead": 8,
+        "itemsAttempted": 8,
+        "status": "read",
+        "executionVerified": false
+      },
+      {
+        "name": "_quartzDriverRotationJobBones",
+        "elementType": "ActorAnimation.ActorAnimationQuartzDriverRotationJobBone",
+        "length": 16,
+        "itemsRead": 16,
+        "itemsAttempted": 16,
+        "status": "read",
+        "executionVerified": false
+      },
+      {
+        "name": "_quartzDriverFrillJobBones",
+        "elementType": "ActorAnimation.ActorAnimationQuartzDriverFrillJobBone",
+        "length": 4,
+        "itemsRead": 4,
+        "itemsAttempted": 4,
+        "status": "read",
+        "executionVerified": false
+      },
+      {
+        "name": "_quartzDriverSkirtJobBones",
+        "elementType": "ActorAnimation.ActorAnimationQuartzDriverSkirtJobBone",
+        "length": 12,
+        "itemsRead": 12,
+        "itemsAttempted": 12,
+        "status": "read",
+        "executionVerified": false
+      },
+      {
+        "name": "_quartzDriverHairJobBones",
+        "elementType": "ActorAnimation.ActorAnimationQuartzDriverHairJobBone",
+        "length": 10,
+        "itemsRead": 10,
+        "itemsAttempted": 10,
+        "status": "read",
+        "executionVerified": false
+      },
+      {
+        "name": "_quartzDriverHumanoidHandJobBones",
+        "elementType": "ActorAnimation.ActorAnimationQuartzDriverHumanoidHandJobBone",
+        "length": 4,
+        "itemsRead": 4,
+        "itemsAttempted": 4,
+        "status": "read",
+        "executionVerified": false
+      },
+      {
+        "name": "_quartzDriverHumanoidSleeveJobBones",
+        "elementType": "ActorAnimation.ActorAnimationQuartzDriverHumanoidSleeveJobBone",
+        "length": 8,
+        "itemsRead": 8,
+        "itemsAttempted": 8,
+        "status": "read",
+        "executionVerified": false
+      },
+      {
+        "name": "_quartzDriverHumanoidUpLegJobBones",
+        "elementType": "ActorAnimation.ActorAnimationQuartzDriverHumanoidUpLegJobBone",
+        "length": 4,
+        "itemsRead": 4,
+        "itemsAttempted": 4,
+        "status": "read",
+        "executionVerified": false
+      },
+      {
+        "name": "_quartzDriverHumanoidArmJobBones",
+        "elementType": "ActorAnimation.ActorAnimationQuartzDriverHumanoidArmJobBone",
+        "length": 4,
+        "itemsRead": 4,
+        "itemsAttempted": 4,
+        "status": "read",
+        "executionVerified": false
+      },
+      {
+        "name": "_quartzDriverWaistJobBones",
+        "elementType": "ActorAnimation.ActorAnimationQuartzDriverWaistJobBone",
+        "length": 2,
+        "itemsRead": 2,
+        "itemsAttempted": 2,
+        "status": "read",
+        "executionVerified": false
+      },
+      {
+        "name": "_quartzDriverFurisodeJobBones",
+        "elementType": "ActorAnimation.ActorAnimationQuartzDriverFurisodeJobBone",
+        "length": 4,
+        "itemsRead": 4,
+        "itemsAttempted": 4,
+        "status": "read",
+        "executionVerified": false
+      },
+      {
+        "name": "_quartzDriverPonchoJobBones",
+        "elementType": "ActorAnimation.ActorAnimationQuartzDriverPonchoJobBone",
+        "length": 6,
+        "itemsRead": 6,
+        "itemsAttempted": 6,
+        "status": "read",
+        "executionVerified": false
+      }
+    ],
+    "unsupportedCaptureOnlyJobs": []
   }
 }

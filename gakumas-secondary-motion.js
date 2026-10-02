@@ -1,5 +1,8 @@
 export const QUARTZ_HAIR = 'ActorAnimationQuartzDriverHairBone';
 export const QUARTZ_SKIRT = 'ActorAnimationQuartzDriverSkirtBone';
+export const QUARTZ_ROTATION = 'ActorAnimationQuartzDriverRotationBone';
+export const QUARTZ_HUMANOID_ARM = 'ActorAnimationQuartzDriverHumanoidArmBone';
+export const QUARTZ_HUMANOID_HAND = 'ActorAnimationQuartzDriverHumanoidHandBone';
 export const QUARTZ_HUMANOID_UPLEG = 'ActorAnimationQuartzDriverHumanoidUpLegBone';
 export const APPLY_SPRING_ANGLE_LIMITS = true;
 export const APPLY_SKIRT_QUARTZ_LIMITS = false;
@@ -530,12 +533,42 @@ export function twistAngleDegrees(q, axis) {
 // quaternion avoids turning the hip's flexion/abduction into an unintended
 // helper-bone rotation.
 export function humanoidUpLegDriverQuaternion(relative, setting = {}) {
+    return humanoidQuartzDriverQuaternion(relative, setting);
+}
+
+// HumanoidArm, HumanoidHand, and HumanoidUpLeg all write one selected
+// humanoid muscle channel into a helper bone. The capture contains the
+// channel coefficient and the Stage has no native solver IO for these jobs,
+// so this is an explicit stage adaptation rather than a native-parity claim.
+export function humanoidQuartzDriverQuaternion(relative, setting = {}) {
     const axisIndex = Number.isInteger(setting?.sourceAxis)
         ? Math.max(0, Math.min(2, setting.sourceAxis))
         : 0;
     const axis = axisIndex === 1 ? [0, 1, 0] : axisIndex === 2 ? [0, 0, 1] : [1, 0, 0];
     const coefficient = Number.isFinite(Number(setting?.coefficient)) ? Number(setting.coefficient) : 0;
     return quatFromAxisAngle(axis, twistAngleDegrees(relative || [0, 0, 0, 1], axis) * coefficient);
+}
+
+// Rotation jobs expose the coefficient vector, limits, connection axis, and
+// rotation order in the capture. Keep those fields in degrees until the final
+// quaternion conversion so a unit mistake cannot silently scale the output.
+// The native job itself is not executed by the capture, therefore this helper
+// is deliberately labelled as a Stage adaptation in profile provenance.
+export function quartzRotationDriverQuaternion(relative, setting = {}) {
+    const source = quaternionToEulerDegreesXYZ(relative || [0, 0, 0, 1]);
+    const coefficient = Array.isArray(setting?.coefficient) ? setting.coefficient : [0, 0, 0];
+    const min = Array.isArray(setting?.limitMin) ? setting.limitMin : [-180, -180, -180];
+    const max = Array.isArray(setting?.limitMax) ? setting.limitMax : [180, 180, 180];
+    const scaled = source.map((value, index) => clampAxis(
+        value * (Number(coefficient[index]) || 0),
+        Number(min[index] ?? -180),
+        Number(max[index] ?? 180),
+    ));
+    const axis = Number.isInteger(setting?.connectionAxis) ? setting.connectionAxis : 0;
+    const mapped = connectionAxisPermute(scaled[0], scaled[1], scaled[2], axis);
+    return setting?.rotationOrder === 1
+        ? unityEulerDegreesToQuaternion(mapped)
+        : eulerDegreesToQuaternionXYZ(mapped);
 }
 
 export function femurAbductionDegrees(q, side) {
@@ -1207,8 +1240,16 @@ export function composeRestAndExtra(rest, extraEuler) {
 
 export function selectQuartzDrivers(table) {
     const useRecoveredAlgorithm = table?.physicsAlgorithm === RECOVERED_PHYSICS_ALGORITHM;
+    const supported = new Set([
+        QUARTZ_HAIR,
+        QUARTZ_SKIRT,
+        QUARTZ_ROTATION,
+        QUARTZ_HUMANOID_ARM,
+        QUARTZ_HUMANOID_HAND,
+        QUARTZ_HUMANOID_UPLEG,
+    ]);
     return (table?.drivers || []).filter(driver => driver?.enabled
-        && (driver.className === QUARTZ_HAIR || driver.className === QUARTZ_SKIRT || driver.className === QUARTZ_HUMANOID_UPLEG)
+        && supported.has(driver.className)
         && !(driver.className === QUARTZ_SKIRT && !useRecoveredAlgorithm && /Back/i.test(driver.bone || ''))
         && !(driver.className === QUARTZ_SKIRT && table?.disableSkirtMotion));
 }
@@ -2413,6 +2454,7 @@ export class SecondaryMotion {
             skirtQuartzDrivers: 0,
             skirtQuartzMaxAngle: 0,
             skirtQuartzLastBone: '',
+            quartzDriversApplied: 0,
             staticCollisionHits: 0,
             thighCollisionHits: 0,
             maxCollisionCorrection: 0,
@@ -2468,14 +2510,19 @@ export class SecondaryMotion {
                 this.missing.push(driver.bone);
                 continue;
             }
-            const humanoidUpLegReference = driver.className === QUARTZ_HUMANOID_UPLEG
+            const humanoidReference = [QUARTZ_HUMANOID_ARM, QUARTZ_HUMANOID_HAND, QUARTZ_HUMANOID_UPLEG].includes(driver.className)
                 ? (driver.setting?.referenceBone?.name || driver.bone?.replace(/_(?:Roll_)?H$/, ''))
                 : null;
+            const referenceName = driver.className === QUARTZ_ROTATION
+                ? driver.setting?.referenceBone?.name
+                : driver.className === QUARTZ_SKIRT
+                    ? driver.setting?.referenceBone?.name
+                    : humanoidReference;
             const sources = driver.className === QUARTZ_HAIR
                 ? [byName.get('Head'), byName.get('Neck')]
-                : [byName.get(humanoidUpLegReference || driver.setting?.referenceBone?.name)];
+                : [byName.get(referenceName)];
             if (sources.some(entry => !entry)) {
-                this.missing.push(`${driver.bone}←${driver.className === QUARTZ_HAIR ? 'Head/Neck' : humanoidUpLegReference || driver.setting?.referenceBone?.name}`);
+                this.missing.push(`${driver.bone}←${driver.className === QUARTZ_HAIR ? 'Head/Neck' : referenceName}`);
                 continue;
             }
             this.bindings.push({
@@ -3062,6 +3109,7 @@ export class SecondaryMotion {
         this.runtime.skirtQuartzDrivers = 0;
         this.runtime.skirtQuartzMaxAngle = 0;
         this.runtime.skirtQuartzLastBone = '';
+        this.runtime.quartzDriversApplied = 0;
         // Some GLB outfits keep the skirt root as a sibling of the humanoid
         // thigh instead of parenting it below UpLeg_H. Unity still carries
         // that duplicate root with the thigh before the panel Quartz driver
@@ -3109,6 +3157,25 @@ export class SecondaryMotion {
                 const relative = relativeQuaternion(restRotation, liveRotation);
                 binding.extra = humanoidUpLegDriverQuaternion(relative, driver.setting);
                 writeQuat(target.bone, composeRestAndQuat(target.quaternion.toArray(), binding.extra));
+                this.runtime.quartzDriversApplied += 1;
+                continue;
+            }
+            if (driver.className === QUARTZ_HUMANOID_ARM || driver.className === QUARTZ_HUMANOID_HAND) {
+                const restRotation = sources[0].quaternion.toArray();
+                const liveRotation = sources[0].bone.quaternion.toArray();
+                const relative = relativeQuaternion(restRotation, liveRotation);
+                binding.extra = humanoidQuartzDriverQuaternion(relative, driver.setting);
+                writeQuat(target.bone, composeRestAndQuat(target.quaternion.toArray(), binding.extra));
+                this.runtime.quartzDriversApplied += 1;
+                continue;
+            }
+            if (driver.className === QUARTZ_ROTATION) {
+                const restRotation = sources[0].quaternion.toArray();
+                const liveRotation = sources[0].bone.quaternion.toArray();
+                const relative = relativeQuaternion(restRotation, liveRotation);
+                binding.extra = quartzRotationDriverQuaternion(relative, driver.setting);
+                writeQuat(target.bone, composeRestAndQuat(target.quaternion.toArray(), binding.extra));
+                this.runtime.quartzDriversApplied += 1;
                 continue;
             }
             const side = driverSide(driver.bone);
@@ -3135,6 +3202,7 @@ export class SecondaryMotion {
                 binding.extra = recovered ? extra : smoothFollowExtra(binding.extra, extra, FOLLOW_SMOOTH);
             }
             writeQuat(target.bone, composeRestAndQuat(target.quaternion.toArray(), binding.extra));
+            this.runtime.quartzDriversApplied += 1;
             if (driver.className === QUARTZ_SKIRT && !/Jacket3_S$/.test(driver.bone || '')) {
                 const angle = quatAngleDegrees([0, 0, 0, 1], binding.extra);
                 this.runtime.skirtQuartzDrivers += 1;

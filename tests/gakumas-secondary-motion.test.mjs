@@ -6,12 +6,17 @@ import { fileURLToPath } from 'node:url';
 import { Bone } from '../vendor/three/build/three.module.js';
 import {
     SecondaryMotion,
+    QUARTZ_ROTATION,
+    QUARTZ_HUMANOID_ARM,
+    QUARTZ_HUMANOID_HAND,
     QUARTZ_HUMANOID_UPLEG,
     composeRestAndExtra,
     driverSide,
     eulerDegreesToQuaternionXYZ,
     hairDriverEuler,
     humanoidUpLegDriverQuaternion,
+    humanoidQuartzDriverQuaternion,
+    quartzRotationDriverQuaternion,
     integrateTail,
     masksOverlap,
     medianScale,
@@ -90,6 +95,7 @@ const ttmrTable = JSON.parse(readFileSync(resolve(dirname(fileURLToPath(import.m
 const klljTable = JSON.parse(readFileSync(resolve(dirname(fileURLToPath(import.meta.url)), '../secondary-motion-profiles/kllj-schl-0000.json'), 'utf8'));
 const amaoTable = JSON.parse(readFileSync(resolve(dirname(fileURLToPath(import.meta.url)), '../secondary-motion-profiles/amao-casl.json'), 'utf8'));
 const kcnaTable = JSON.parse(readFileSync(resolve(dirname(fileURLToPath(import.meta.url)), '../secondary-motion-profiles/kcna-casl.json'), 'utf8'));
+const ssmkTable = JSON.parse(readFileSync(resolve(dirname(fileURLToPath(import.meta.url)), '../secondary-motion-profiles/ssmk-schl-0000.json'), 'utf8'));
 
 test('HumanoidUpLeg Quartz drivers are selected and apply their signed GLB twist', () => {
     const source = eulerDegreesToQuaternionXYZ([15, 0, 0]);
@@ -110,16 +116,61 @@ test('HumanoidUpLeg Quartz drivers are selected and apply their signed GLB twist
     assert.equal(selected.length, 1);
 });
 
+test('captured Rotation, HumanoidArm, and HumanoidHand jobs are selected and keep degree coefficients', () => {
+    const rotation = quartzRotationDriverQuaternion(
+        eulerDegreesToQuaternionXYZ([0, 30, 0]),
+        { coefficient: [0, -0.4, 0], limitMin: [-180, -180, -180], limitMax: [180, 180, 180] },
+    );
+    const rotationEuler = quaternionToEulerDegreesXYZ(rotation);
+    assert.ok(Math.abs(rotationEuler[1] + 12) < 1e-6, `expected -12° rotation channel, got ${rotationEuler[1]}`);
+
+    const generic = humanoidQuartzDriverQuaternion(
+        eulerDegreesToQuaternionXYZ([20, 0, 0]),
+        { humanPartDof: 4, coefficient: -0.8 },
+    );
+    const genericEuler = quaternionToEulerDegreesXYZ(generic);
+    assert.ok(Math.abs(genericEuler[0] + 16) < 1e-6, `expected -16° arm channel, got ${genericEuler[0]}`);
+
+    const selected = selectQuartzDrivers({ drivers: [
+        { className: QUARTZ_ROTATION, enabled: true, bone: 'LeftForeArm_H' },
+        { className: QUARTZ_HUMANOID_ARM, enabled: true, bone: 'LeftArm_H' },
+        { className: QUARTZ_HUMANOID_HAND, enabled: true, bone: 'LeftHand_H' },
+    ] });
+    assert.deepEqual(selected.map(driver => driver.className), [QUARTZ_ROTATION, QUARTZ_HUMANOID_ARM, QUARTZ_HUMANOID_HAND]);
+});
+
+test('HumanoidArm binding writes a signed helper rotation from its source arm', () => {
+    const identity = [0, 0, 0, 1];
+    const arm = fakeBone('LeftArm', identity);
+    const helper = fakeBone('LeftArm_H', identity);
+    const motion = new SecondaryMotion({
+        drivers: [{
+            className: QUARTZ_HUMANOID_ARM,
+            enabled: true,
+            bone: 'LeftArm_H',
+            setting: { humanPartDof: 4, coefficient: -0.8 },
+        }],
+    });
+    motion.bind([
+        { bone: arm, quaternion: { toArray: () => [...identity] } },
+        { bone: helper, quaternion: { toArray: () => [...identity] } },
+    ]);
+    arm.quaternion.set(...eulerDegreesToQuaternionXYZ([20, 0, 0]));
+    motion.update();
+    const euler = quaternionToEulerDegreesXYZ(helper.quaternion.toArray());
+    assert.ok(Math.abs(euler[0] + 16) < 1e-5, `arm helper should receive the signed roll, got ${euler[0]}`);
+});
+
 test('ttmr profile carries the four captured HumanoidUpLeg driver jobs', () => {
     assert.equal(ttmrTable.nativeSkirtCarrier, 'thigh');
     const drivers = selectQuartzDrivers(ttmrTable).filter(driver => driver.className === QUARTZ_HUMANOID_UPLEG);
-    assert.deepEqual(drivers.map(driver => driver.bone), [
+    assert.deepEqual(drivers.map(driver => driver.bone).sort(), [
         'LeftUpLeg_H',
         'LeftUpLeg_Roll_H',
         'RightUpLeg_H',
         'RightUpLeg_Roll_H',
     ]);
-    assert.deepEqual(drivers.map(driver => [driver.setting.humanPartDof, driver.setting.coefficient]), [
+    assert.deepEqual(drivers.map(driver => [driver.setting.humanPartDof, Number(driver.setting.coefficient.toFixed(3))]).sort((a, b) => a[0] - b[0] || a[1] - b[1]), [
         [2, -1], [2, -0.6], [3, -1], [3, -0.6],
     ]);
 });
@@ -149,8 +200,8 @@ test('kllj school profile uses complete outfit native geometry without long foot
 
 test('amao casl profile uses captured jacket dynamics and child chain links', () => {
     assert.equal(amaoTable.adaptationScope.nativeDynamic, 'all');
-    assert.equal(amaoTable.nativeDynamicGeometryApplied, 170);
-    assert.equal(amaoTable.nativeCaptureCoverage.joinedDynamicRecords, 170);
+    assert.equal(amaoTable.nativeDynamicGeometryApplied, 172);
+    assert.equal(amaoTable.nativeCaptureCoverage.joinedDynamicRecords, 172);
     assert.equal(amaoTable.nativeChainGeometryApplied, 37);
     assert.equal(amaoTable.nativeCaptureCoverage.joinedChainRecords, 37);
     const jacketSprings = amaoTable.springs.filter(record => /Jacket/.test(record.bone));
@@ -168,6 +219,27 @@ test('kcna casl profile uses captured skirt dynamics, UpLeg drivers, and child c
     assert.equal(kcnaTable.drivers.filter(record => record.className === 'ActorAnimationQuartzDriverHumanoidUpLegBone').length, 4);
     assert.equal(kcnaTable.springs.filter(record => /Skirt/.test(record.bone) && Number.isInteger(record.nativeDynamicIndex)).length, 64);
     assert.equal(kcnaTable.nativeChainGeometry.records.filter(record => /Skirt/.test(record.sourceBone || '')).length, 56);
+});
+
+test('latest candidate profiles keep all three humanoid Quartz classes and native unit endpoints', () => {
+    for (const profileName of [
+        'hski', 'ttmr-casl', 'fktn-casl', 'atbm-schl-0000', 'amao-casl',
+        'kllj-schl-0000', 'kcna-casl', 'ssmk-schl-0000', 'shro-casl',
+        'jsna-schl-0000', 'hmsz-schl-0000', 'hume-schl-0000', 'hrnm-schl-0000',
+    ]) {
+        const profile = JSON.parse(readFileSync(resolve(
+            dirname(fileURLToPath(import.meta.url)), `../secondary-motion-profiles/${profileName}.json`,
+        ), 'utf8'));
+        for (const className of [QUARTZ_ROTATION, QUARTZ_HUMANOID_ARM, QUARTZ_HUMANOID_HAND]) {
+            assert.equal(profile.drivers.filter(driver => driver.className === className).length, 4, `${profileName} should keep four ${className} jobs`);
+        }
+        assert.equal(profile.quartzStageAdaptation.status, 'stage-adaptation-native-io-unverified');
+    }
+    for (const bone of ['LeftToeBase', 'RightToeBase']) {
+        const collider = ssmkTable.colliders.find(item => item.bone === bone);
+        assert.ok(collider?.nativeGeometry, `${bone} should use captured native geometry`);
+        assert.ok(Math.abs(collider.unityLength - 0.045) < 1e-5, `${bone} should stay a 4.5cm capsule`);
+    }
 });
 
 test('kllj front skirt 3 and 4 chain links use Unity child particles', () => {

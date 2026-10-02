@@ -1,5 +1,5 @@
 {
-  "version": 3,
+  "version": 2,
   "drivers": [
     {
       "className": "ActorAnimationQuartzDriverSkirtBone",
@@ -42,6 +42,37 @@
       "setting": {
         "humanPartDof": 2,
         "coefficient": -1.0
+      },
+      "part": "body"
+    },
+    {
+      "className": "ActorAnimationQuartzDriverRotationBone",
+      "bone": "LeftLeg_H",
+      "enabled": true,
+      "setting": {
+        "rotationOrder": 0,
+        "limitMin": [
+          -180.0,
+          -180.0,
+          -180.0
+        ],
+        "limitMax": [
+          180.0,
+          180.0,
+          180.0
+        ],
+        "coefficient": [
+          0.0,
+          0.0,
+          -0.5
+        ],
+        "connectionAxis": 0,
+        "decomposeType": 0,
+        "composeType": 3,
+        "referenceBone": {
+          "pathId": 8876734880885239638,
+          "name": "LeftLeg"
+        }
       },
       "part": "body"
     },
@@ -114,6 +145,36 @@
       "part": "body"
     },
     {
+      "className": "ActorAnimationQuartzDriverHumanoidHandBone",
+      "bone": "LeftForeArm_Roll_H",
+      "enabled": true,
+      "setting": {
+        "humanPartDof": 4,
+        "coefficient": 0.5
+      },
+      "part": "body"
+    },
+    {
+      "className": "ActorAnimationQuartzDriverHumanoidArmBone",
+      "bone": "RightArm_Roll_H",
+      "enabled": true,
+      "setting": {
+        "humanPartDof": 5,
+        "coefficient": -0.30000001192092896
+      },
+      "part": "body"
+    },
+    {
+      "className": "ActorAnimationQuartzDriverHumanoidArmBone",
+      "bone": "RightArm_H",
+      "enabled": true,
+      "setting": {
+        "humanPartDof": 5,
+        "coefficient": -0.800000011920929
+      },
+      "part": "body"
+    },
+    {
       "className": "ActorAnimationQuartzDriverSkirtBone",
       "bone": "LeftFrontSkirt_A",
       "enabled": true,
@@ -143,6 +204,37 @@
         "referenceBone": {
           "pathId": 5722176902939995990,
           "name": "LeftUpLeg"
+        }
+      },
+      "part": "body"
+    },
+    {
+      "className": "ActorAnimationQuartzDriverRotationBone",
+      "bone": "RightForeArm_H",
+      "enabled": true,
+      "setting": {
+        "rotationOrder": 1,
+        "limitMin": [
+          -180.0,
+          -180.0,
+          -180.0
+        ],
+        "limitMax": [
+          180.0,
+          180.0,
+          180.0
+        ],
+        "coefficient": [
+          0.0,
+          -0.4000000059604645,
+          0.0
+        ],
+        "connectionAxis": 0,
+        "decomposeType": 0,
+        "composeType": 3,
+        "referenceBone": {
+          "pathId": 8491891863673958230,
+          "name": "RightForeArm"
         }
       },
       "part": "body"
@@ -178,6 +270,26 @@
           "pathId": 5236258081626255190,
           "name": "RightUpLeg"
         }
+      },
+      "part": "body"
+    },
+    {
+      "className": "ActorAnimationQuartzDriverHumanoidArmBone",
+      "bone": "LeftArm_Roll_H",
+      "enabled": true,
+      "setting": {
+        "humanPartDof": 4,
+        "coefficient": -0.30000001192092896
+      },
+      "part": "body"
+    },
+    {
+      "className": "ActorAnimationQuartzDriverHumanoidArmBone",
+      "bone": "LeftArm_H",
+      "enabled": true,
+      "setting": {
+        "humanPartDof": 4,
+        "coefficient": -0.800000011920929
       },
       "part": "body"
     },
@@ -226,6 +338,57 @@
       "part": "body"
     },
     {
+      "className": "ActorAnimationQuartzDriverHumanoidHandBone",
+      "bone": "LeftHand_H",
+      "enabled": true,
+      "setting": {
+        "humanPartDof": 4,
+        "coefficient": 0.8999999761581421
+      },
+      "part": "body"
+    },
+    {
+      "className": "ActorAnimationQuartzDriverHumanoidHandBone",
+      "bone": "RightForeArm_Roll_H",
+      "enabled": true,
+      "setting": {
+        "humanPartDof": 5,
+        "coefficient": 0.5
+      },
+      "part": "body"
+    },
+    {
+      "className": "ActorAnimationQuartzDriverRotationBone",
+      "bone": "RightLeg_H",
+      "enabled": true,
+      "setting": {
+        "rotationOrder": 0,
+        "limitMin": [
+          -180.0,
+          -180.0,
+          -180.0
+        ],
+        "limitMax": [
+          180.0,
+          180.0,
+          180.0
+        ],
+        "coefficient": [
+          0.0,
+          0.0,
+          -0.5
+        ],
+        "connectionAxis": 0,
+        "decomposeType": 0,
+        "composeType": 3,
+        "referenceBone": {
+          "pathId": 6314052384538685270,
+          "name": "RightLeg"
+        }
+      },
+      "part": "body"
+    },
+    {
       "className": "ActorAnimationQuartzDriverHumanoidUpLegBone",
       "bone": "RightUpLeg_Roll_H",
       "enabled": true,
@@ -242,6 +405,16 @@
       "setting": {
         "humanPartDof": 3,
         "coefficient": -1.0
+      },
+      "part": "body"
+    },
+    {
+      "className": "ActorAnimationQuartzDriverHumanoidHandBone",
+      "bone": "RightHand_H",
+      "enabled": true,
+      "setting": {
+        "humanPartDof": 5,
+        "coefficient": 0.8999999761581421
       },
       "part": "body"
     },
@@ -309,6 +482,37 @@
         "referenceBone": {
           "pathId": 5236258081626255190,
           "name": "RightUpLeg"
+        }
+      },
+      "part": "body"
+    },
+    {
+      "className": "ActorAnimationQuartzDriverRotationBone",
+      "bone": "LeftForeArm_H",
+      "enabled": true,
+      "setting": {
+        "rotationOrder": 1,
+        "limitMin": [
+          -180.0,
+          -180.0,
+          -180.0
+        ],
+        "limitMax": [
+          180.0,
+          180.0,
+          180.0
+        ],
+        "coefficient": [
+          0.0,
+          -0.4000000059604645,
+          0.0
+        ],
+        "connectionAxis": 0,
+        "decomposeType": 0,
+        "composeType": 3,
+        "referenceBone": {
+          "pathId": -8955714803050614954,
+          "name": "LeftForeArm"
         }
       },
       "part": "body"
@@ -13914,451 +14118,582 @@
   ],
   "colliders": [
     {
-      "bone": "LeftForeArm",
-      "type": 2,
-      "collisionMask": 64,
-      "offsetA": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "offsetB": [
-        -2.643373,
-        0.0,
-        -0.0
-      ],
-      "radiusA": 0.030000001192092896,
-      "radiusB": 0.04000000283122063,
-      "seatDynamicCorrectionDisableCollisionMask": 0,
-      "space": "pmxLocal",
-      "kind": "capsule",
-      "unityOffsetA": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "unityOffsetB": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "unityLength": 0.21146982192993163,
-      "nativeGeometry": true,
-      "nativeIndex": 10,
-      "aimBone": "LeftArm"
-    },
-    {
-      "bone": "RightArm",
-      "type": 2,
-      "collisionMask": 64,
-      "offsetA": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "offsetB": [
-        1.211071,
-        0.0,
-        -0.0
-      ],
-      "radiusA": 0.030000001192092896,
-      "radiusB": 0.030000001192092896,
-      "seatDynamicCorrectionDisableCollisionMask": 0,
-      "space": "pmxLocal",
-      "kind": "capsule",
-      "unityOffsetA": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "unityOffsetB": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "unityLength": 0.09688565850257874,
-      "nativeGeometry": true,
-      "nativeIndex": 9,
-      "aimBone": "RightShoulder"
-    },
-    {
       "bone": "Hips",
       "type": 1,
       "collisionMask": 1,
-      "offsetA": [
-        -0.625,
-        -0.5,
-        -0.5
-      ],
-      "offsetB": [
-        0.625,
-        -0.5,
-        -0.5
-      ],
-      "radiusA": 0.055000003427267075,
-      "radiusB": 0.055000003427267075,
-      "seatDynamicCorrectionDisableCollisionMask": 0,
-      "space": "pmxLocal",
-      "kind": "capsule",
-      "unityOffsetA": [
-        0.05000000447034836,
+      "nativeIndex": 0,
+      "sourceOffsetA": [
+        0.0,
         -0.04000000283122063,
         -0.04000000283122063
       ],
-      "unityOffsetB": [
+      "sourceOffsetB": [
+        0.0,
+        0.010000000707805157,
+        0.0
+      ],
+      "offsetA": [
         -0.05000000447034836,
         -0.04000000283122063,
         -0.04000000283122063
       ],
-      "unityLength": 0.10000000894069672,
-      "nativeGeometry": true,
-      "nativeIndex": 0
-    },
-    {
-      "bone": "LeftArm",
-      "type": 2,
-      "collisionMask": 64,
-      "offsetA": [
-        0.0,
-        0.0,
-        0.0
-      ],
       "offsetB": [
-        -1.211072,
-        0.0,
-        -0.0
+        0.05000000447034836,
+        -0.04000000283122063,
+        -0.04000000283122063
       ],
-      "radiusA": 0.030000001192092896,
-      "radiusB": 0.030000001192092896,
-      "seatDynamicCorrectionDisableCollisionMask": 0,
-      "space": "pmxLocal",
-      "kind": "capsule",
-      "unityOffsetA": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "unityOffsetB": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "unityLength": 0.09688573479652404,
-      "nativeGeometry": true,
-      "nativeIndex": 8,
-      "aimBone": "LeftShoulder"
-    },
-    {
-      "bone": "Spine2",
-      "type": 1,
-      "collisionMask": 64,
-      "offsetA": [
-        0.5625,
-        0.0625,
-        -0.0
-      ],
-      "offsetB": [
-        -0.5625,
-        0.0625,
-        -0.0
-      ],
-      "radiusA": 0.08000000566244125,
-      "radiusB": 0.08000000566244125,
-      "seatDynamicCorrectionDisableCollisionMask": 0,
-      "space": "pmxLocal",
-      "kind": "capsule",
-      "unityOffsetA": [
-        -0.044999994337558746,
-        0.005000000353902578,
-        0.0
-      ],
-      "unityOffsetB": [
-        0.044999994337558746,
-        0.005000000353902578,
-        0.0
-      ],
-      "unityLength": 0.08999998867511749,
-      "nativeGeometry": true,
-      "nativeIndex": 4
-    },
-    {
-      "bone": "RightToeBase",
-      "type": 1,
-      "collisionMask": 256,
-      "offsetA": [
-        -0.40625,
-        -0.1875,
-        -0.1875
-      ],
-      "offsetB": [
-        0.15625,
-        -0.1875,
-        -0.1875
-      ],
-      "radiusA": 0.02500000037252903,
-      "radiusB": 0.02500000037252903,
-      "seatDynamicCorrectionDisableCollisionMask": 0,
-      "space": "pmxLocal",
-      "kind": "capsule",
-      "unityOffsetA": [
-        -0.015000000596046448,
-        0.015000000596046448,
-        0.0325000025331974
-      ],
-      "unityOffsetB": [
-        -0.015000000596046448,
-        0.015000000596046448,
-        -0.012500000186264515
-      ],
-      "unityLength": 0.04500000271946192,
-      "nativeGeometry": true,
-      "nativeIndex": 7
-    },
-    {
-      "bone": "RightForeArm",
-      "type": 2,
-      "collisionMask": 64,
-      "offsetA": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "offsetB": [
-        2.643372,
-        0.0,
-        -0.0
-      ],
-      "radiusA": 0.030000001192092896,
-      "radiusB": 0.04000000283122063,
-      "seatDynamicCorrectionDisableCollisionMask": 0,
-      "space": "pmxLocal",
-      "kind": "capsule",
-      "unityOffsetA": [
-        0.0,
-        0.0,
-        -0.005000000353902578
-      ],
-      "unityOffsetB": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "unityLength": 0.211469783782959,
-      "nativeGeometry": true,
-      "nativeIndex": 11,
-      "aimBone": "RightArm"
-    },
-    {
-      "bone": "RightLeg",
-      "type": 2,
-      "collisionMask": 1,
-      "offsetA": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "offsetB": [
-        0.0,
-        4.608088,
-        0.061167
-      ],
-      "radiusA": 0.06800000369548798,
+      "radiusA": 0.055000003427267075,
       "radiusB": 0.055000003427267075,
+      "kind": "capsule",
       "seatDynamicCorrectionDisableCollisionMask": 0,
       "space": "pmxLocal",
-      "kind": "capsule",
       "unityOffsetA": [
-        0.0,
-        0.06000000238418579,
-        0.0
+        -0.05000000447034836,
+        -0.04000000283122063,
+        -0.04000000283122063
       ],
       "unityOffsetB": [
-        0.0,
-        0.0,
-        0.0
+        0.05000000447034836,
+        -0.04000000283122063,
+        -0.04000000283122063
       ],
-      "unityLength": 0.3686795170491064,
-      "nativeGeometry": true,
-      "nativeIndex": 3,
-      "nativePair": [
-        0.0,
-        0.06000000238418579
-      ],
-      "nativeScale": 1,
-      "aimBone": "RightUpLeg"
+      "unityLength": 0.10000000894069672,
+      "nativeGeometry": true
     },
     {
       "bone": "Spine1",
       "type": 1,
       "collisionMask": 64,
-      "offsetA": [
+      "nativeIndex": 1,
+      "sourceOffsetA": [
         0.0,
-        0.93125,
-        0.125
+        0.0,
+        0.010000000707805157
+      ],
+      "sourceOffsetB": [
+        1.0,
+        0.0010000000474974513,
+        0.0
+      ],
+      "offsetA": [
+        -0.0,
+        0.07450000196695328,
+        0.010000000707805157
       ],
       "offsetB": [
-        0.0,
-        -0.93125,
-        0.125
+        -0.0,
+        -0.07450000196695328,
+        0.010000000707805157
       ],
       "radiusA": 0.07500000298023224,
       "radiusB": 0.08000000566244125,
+      "kind": "capsule",
       "seatDynamicCorrectionDisableCollisionMask": 0,
       "space": "pmxLocal",
-      "kind": "capsule",
       "unityOffsetA": [
-        0.0,
+        -0.0,
         0.07450000196695328,
         0.010000000707805157
       ],
       "unityOffsetB": [
-        0.0,
+        -0.0,
         -0.07450000196695328,
         0.010000000707805157
       ],
       "unityLength": 0.14900000393390656,
-      "nativeGeometry": true,
-      "nativeIndex": 1
+      "nativeGeometry": true
     },
     {
       "bone": "LeftLeg",
       "type": 2,
       "collisionMask": 1,
-      "offsetA": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "offsetB": [
-        0.0,
-        4.608099,
-        0.061167
-      ],
-      "radiusA": 0.06800000369548798,
-      "radiusB": 0.055000003427267075,
-      "seatDynamicCorrectionDisableCollisionMask": 0,
-      "space": "pmxLocal",
-      "kind": "capsule",
-      "unityOffsetA": [
+      "nativeIndex": 2,
+      "sourceOffsetA": [
         0.0,
         0.06000000238418579,
         0.0
       ],
-      "unityOffsetB": [
+      "sourceOffsetB": [
         0.0,
         0.0,
         0.0
       ],
-      "unityLength": 0.36868043264413886,
+      "offsetA": [
+        -0.0,
+        0.06000000238418579,
+        0.0
+      ],
+      "offsetB": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "radiusA": 0.06800000369548798,
+      "radiusB": 0.055000003427267075,
+      "kind": "capsule",
+      "seatDynamicCorrectionDisableCollisionMask": 0,
+      "aimBone": "LeftUpLeg",
+      "space": "pmxLocal",
+      "unityOffsetA": [
+        -0.0,
+        0.06000000238418579,
+        0.0
+      ],
+      "unityOffsetB": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "unityLength": 0.06000000238418579,
       "nativeGeometry": true,
-      "nativeIndex": 2,
       "nativePair": [
         0.0,
         0.06000000238418579
       ],
-      "nativeScale": 1,
-      "aimBone": "LeftUpLeg"
+      "nativeScale": 1
     },
     {
-      "bone": "LeftToeBase",
-      "type": 1,
-      "collisionMask": 256,
+      "bone": "RightLeg",
+      "type": 2,
+      "collisionMask": 1,
+      "nativeIndex": 3,
+      "sourceOffsetA": [
+        0.0,
+        0.06000000238418579,
+        0.0
+      ],
+      "sourceOffsetB": [
+        0.0,
+        0.0,
+        0.0
+      ],
       "offsetA": [
-        -0.15625,
-        -0.1875,
-        -0.1875
+        -0.0,
+        0.06000000238418579,
+        0.0
       ],
       "offsetB": [
-        0.40625,
-        -0.1875,
-        -0.1875
+        -0.0,
+        0.0,
+        0.0
       ],
-      "radiusA": 0.02500000037252903,
-      "radiusB": 0.02500000037252903,
-      "seatDynamicCorrectionDisableCollisionMask": 0,
-      "space": "pmxLocal",
+      "radiusA": 0.06800000369548798,
+      "radiusB": 0.055000003427267075,
       "kind": "capsule",
+      "seatDynamicCorrectionDisableCollisionMask": 0,
+      "aimBone": "RightUpLeg",
+      "space": "pmxLocal",
       "unityOffsetA": [
-        0.015000000596046448,
-        -0.015000000596046448,
-        0.012500000186264515
+        -0.0,
+        0.06000000238418579,
+        0.0
       ],
       "unityOffsetB": [
-        0.015000000596046448,
-        -0.015000000596046448,
-        -0.0325000025331974
+        -0.0,
+        0.0,
+        0.0
       ],
-      "unityLength": 0.04500000271946192,
+      "unityLength": 0.06000000238418579,
       "nativeGeometry": true,
-      "nativeIndex": 6
+      "nativePair": [
+        0.0,
+        0.06000000238418579
+      ],
+      "nativeScale": 1
+    },
+    {
+      "bone": "Spine2",
+      "type": 1,
+      "collisionMask": 64,
+      "nativeIndex": 4,
+      "sourceOffsetA": [
+        0.0,
+        0.005000000353902578,
+        0.0
+      ],
+      "sourceOffsetB": [
+        0.0,
+        0.25,
+        0.0
+      ],
+      "offsetA": [
+        0.044999994337558746,
+        0.005000000353902578,
+        0.0
+      ],
+      "offsetB": [
+        -0.044999994337558746,
+        0.005000000353902578,
+        0.0
+      ],
+      "radiusA": 0.08000000566244125,
+      "radiusB": 0.08000000566244125,
+      "kind": "capsule",
+      "seatDynamicCorrectionDisableCollisionMask": 0,
+      "space": "pmxLocal",
+      "unityOffsetA": [
+        0.044999994337558746,
+        0.005000000353902578,
+        0.0
+      ],
+      "unityOffsetB": [
+        -0.044999994337558746,
+        0.005000000353902578,
+        0.0
+      ],
+      "unityLength": 0.08999998867511749,
+      "nativeGeometry": true
     },
     {
       "bone": "Neck",
       "type": 1,
       "collisionMask": 72,
-      "offsetA": [
+      "nativeIndex": 5,
+      "sourceOffsetA": [
         0.0,
-        0.74375,
-        0.125
+        0.020000001415610313,
+        0.010000000707805157
+      ],
+      "sourceOffsetB": [
+        1.0,
+        0.0010000000474974513,
+        0.0
+      ],
+      "offsetA": [
+        -0.0,
+        0.05950000137090683,
+        0.010000000707805157
       ],
       "offsetB": [
-        0.0,
-        -0.24375,
-        0.125
+        -0.0,
+        -0.019500000402331352,
+        0.010000000707805157
       ],
       "radiusA": 0.04000000283122063,
       "radiusB": 0.04000000283122063,
+      "kind": "capsule",
       "seatDynamicCorrectionDisableCollisionMask": 0,
       "space": "pmxLocal",
-      "kind": "capsule",
       "unityOffsetA": [
-        0.0,
+        -0.0,
         0.05950000137090683,
         0.010000000707805157
       ],
       "unityOffsetB": [
-        0.0,
+        -0.0,
         -0.019500000402331352,
         0.010000000707805157
       ],
       "unityLength": 0.07900000177323818,
-      "nativeGeometry": true,
-      "nativeIndex": 5
+      "nativeGeometry": true
+    },
+    {
+      "bone": "LeftToeBase",
+      "type": 1,
+      "collisionMask": 256,
+      "nativeIndex": 6,
+      "sourceOffsetA": [
+        0.015000000596046448,
+        -0.015000000596046448,
+        -0.010000000707805157
+      ],
+      "sourceOffsetB": [
+        2.0,
+        0.005000000353902578,
+        0.0
+      ],
+      "offsetA": [
+        -0.015000000596046448,
+        -0.015000000596046448,
+        0.012500000186264515
+      ],
+      "offsetB": [
+        -0.015000000596046448,
+        -0.015000000596046448,
+        -0.0325000025331974
+      ],
+      "radiusA": 0.02500000037252903,
+      "radiusB": 0.02500000037252903,
+      "kind": "capsule",
+      "seatDynamicCorrectionDisableCollisionMask": 0,
+      "space": "pmxLocal",
+      "unityOffsetA": [
+        -0.015000000596046448,
+        -0.015000000596046448,
+        0.012500000186264515
+      ],
+      "unityOffsetB": [
+        -0.015000000596046448,
+        -0.015000000596046448,
+        -0.0325000025331974
+      ],
+      "unityLength": 0.04500000271946192,
+      "nativeGeometry": true
+    },
+    {
+      "bone": "RightToeBase",
+      "type": 1,
+      "collisionMask": 256,
+      "nativeIndex": 7,
+      "sourceOffsetA": [
+        -0.015000000596046448,
+        0.015000000596046448,
+        0.010000000707805157
+      ],
+      "sourceOffsetB": [
+        2.0,
+        0.005000000353902578,
+        0.0
+      ],
+      "offsetA": [
+        0.015000000596046448,
+        0.015000000596046448,
+        0.0325000025331974
+      ],
+      "offsetB": [
+        0.015000000596046448,
+        0.015000000596046448,
+        -0.012500000186264515
+      ],
+      "radiusA": 0.02500000037252903,
+      "radiusB": 0.02500000037252903,
+      "kind": "capsule",
+      "seatDynamicCorrectionDisableCollisionMask": 0,
+      "space": "pmxLocal",
+      "unityOffsetA": [
+        0.015000000596046448,
+        0.015000000596046448,
+        0.0325000025331974
+      ],
+      "unityOffsetB": [
+        0.015000000596046448,
+        0.015000000596046448,
+        -0.012500000186264515
+      ],
+      "unityLength": 0.04500000271946192,
+      "nativeGeometry": true
+    },
+    {
+      "bone": "LeftArm",
+      "type": 2,
+      "collisionMask": 64,
+      "nativeIndex": 8,
+      "sourceOffsetA": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "sourceOffsetB": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "offsetA": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "offsetB": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "radiusA": 0.030000001192092896,
+      "radiusB": 0.030000001192092896,
+      "kind": "capsule",
+      "seatDynamicCorrectionDisableCollisionMask": 0,
+      "aimBone": "LeftShoulder",
+      "space": "pmxLocal",
+      "unityOffsetA": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "unityOffsetB": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "unityLength": 0.0,
+      "nativeGeometry": true
+    },
+    {
+      "bone": "RightArm",
+      "type": 2,
+      "collisionMask": 64,
+      "nativeIndex": 9,
+      "sourceOffsetA": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "sourceOffsetB": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "offsetA": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "offsetB": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "radiusA": 0.030000001192092896,
+      "radiusB": 0.030000001192092896,
+      "kind": "capsule",
+      "seatDynamicCorrectionDisableCollisionMask": 0,
+      "aimBone": "RightShoulder",
+      "space": "pmxLocal",
+      "unityOffsetA": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "unityOffsetB": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "unityLength": 0.0,
+      "nativeGeometry": true
+    },
+    {
+      "bone": "LeftForeArm",
+      "type": 2,
+      "collisionMask": 64,
+      "nativeIndex": 10,
+      "sourceOffsetA": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "sourceOffsetB": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "offsetA": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "offsetB": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "radiusA": 0.030000001192092896,
+      "radiusB": 0.04000000283122063,
+      "kind": "capsule",
+      "seatDynamicCorrectionDisableCollisionMask": 0,
+      "aimBone": "LeftArm",
+      "space": "pmxLocal",
+      "unityOffsetA": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "unityOffsetB": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "unityLength": 0.0,
+      "nativeGeometry": true
+    },
+    {
+      "bone": "RightForeArm",
+      "type": 2,
+      "collisionMask": 64,
+      "nativeIndex": 11,
+      "sourceOffsetA": [
+        0.0,
+        0.0,
+        -0.005000000353902578
+      ],
+      "sourceOffsetB": [
+        0.0,
+        0.0010000000474974513,
+        0.0
+      ],
+      "offsetA": [
+        -0.0,
+        0.0,
+        -0.005000000353902578
+      ],
+      "offsetB": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "radiusA": 0.030000001192092896,
+      "radiusB": 0.04000000283122063,
+      "kind": "capsule",
+      "seatDynamicCorrectionDisableCollisionMask": 0,
+      "aimBone": "RightArm",
+      "space": "pmxLocal",
+      "unityOffsetA": [
+        -0.0,
+        0.0,
+        -0.005000000353902578
+      ],
+      "unityOffsetB": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "unityLength": 0.005000000353902578,
+      "nativeGeometry": true
     },
     {
       "bone": "Head_Face",
-      "restBone": "Head",
-      "carrierBone": "mdl_chr_kllj-base-0000_face(Clone)",
       "type": 1,
       "collisionMask": 65336,
-      "offsetA": [
+      "nativeIndex": 12,
+      "sourceOffsetA": [
         0.0,
-        1.25,
-        0.25
+        0.06000000238418579,
+        0.020000001415610313
+      ],
+      "sourceOffsetB": [
+        1.0,
+        0.08000000566244125,
+        0.0
+      ],
+      "offsetA": [
+        -0.0,
+        0.10000000894069672,
+        0.020000001415610313
       ],
       "offsetB": [
-        0.0,
-        0.25,
-        0.25
+        -0.0,
+        0.019999999552965164,
+        0.020000001415610313
       ],
       "radiusA": 0.08000000566244125,
       "radiusB": 0.0650000050663948,
-      "seatDynamicCorrectionDisableCollisionMask": 0,
-      "space": "pmxLocal",
       "kind": "capsule",
+      "seatDynamicCorrectionDisableCollisionMask": 0,
+      "stageOnly": true,
+      "restBone": "Head",
+      "carrierBone": "Head_Face",
+      "space": "pmxLocal",
       "unityOffsetA": [
-        0.0,
+        -0.0,
         0.10000000894069672,
         0.020000001415610313
       ],
       "unityOffsetB": [
-        0.0,
+        -0.0,
         0.019999999552965164,
         0.020000001415610313
       ],
       "unityLength": 0.08000000938773155,
-      "nativeGeometry": true,
-      "nativeIndex": 12
+      "nativeGeometry": true
     }
   ],
   "chains": [
@@ -14436,13 +14771,17 @@
   "counts": {
     "ActorAnimationQuartzDriverSkirtBone": 8,
     "ActorAnimationQuartzDriverHumanoidUpLegBone": 4,
+    "ActorAnimationQuartzDriverRotationBone": 4,
+    "ActorAnimationQuartzDriverHumanoidHandBone": 4,
+    "ActorAnimationQuartzDriverHumanoidArmBone": 4,
     "ActorSwingDynamicBone": 132,
-    "ActorSwingStaticBone": 13,
+    "ActorSwingStaticBone": 12,
     "ActorSwingChain": 1
   },
   "scope": "QuartzDriver follow plus ActorSwing springs, captured dynamic/static colliders, and inferred skirt/jacket rings. Collider offsets are baked from Unity rest into PMX/THREE local space when rest+skeleton are supplied. Dynamic collider masks/radii come from the captured NativeList when supplied; game assemblies are not executed.",
   "nativeDynamicGeometryApplied": 132,
   "nativeChainGeometry": {
+    "source": "repo/tmp-secondary-motion-candidates\\latest-20261002\\native\\kllj-schl-0000\\kllj-native-chain-geometry.json",
     "schemaVersion": 2,
     "records": [
       {
@@ -14457,7 +14796,7 @@
         "collisionMask": 1,
         "radiusA": 0.02500000409781933,
         "radiusB": 0.02500000409781933,
-        "fastHitRadius": 0.0785384252667427,
+        "fastHitRadius": 0.07854491472244263,
         "sourceBone": "LeftBackSkirt2_S",
         "targetBone": "LeftBackSideSkirt2_S",
         "particleBinding": "child"
@@ -14474,7 +14813,7 @@
         "collisionMask": 1,
         "radiusA": 0.02499999664723873,
         "radiusB": 0.02499999664723873,
-        "fastHitRadius": 0.08053791522979736,
+        "fastHitRadius": 0.08055298030376434,
         "sourceBone": "LeftBackSideSkirt2_S",
         "targetBone": "LeftFrontSideSkirt2_S",
         "particleBinding": "child"
@@ -14491,7 +14830,7 @@
         "collisionMask": 1,
         "radiusA": 0.02500000037252903,
         "radiusB": 0.02500000037252903,
-        "fastHitRadius": 0.08774123340845108,
+        "fastHitRadius": 0.0877150222659111,
         "sourceBone": "LeftFrontSideSkirt2_S",
         "targetBone": "LeftFrontSkirt2_S",
         "particleBinding": "child"
@@ -14508,7 +14847,7 @@
         "collisionMask": 1,
         "radiusA": 0.02500000037252903,
         "radiusB": 0.02500000037252903,
-        "fastHitRadius": 0.10607221722602844,
+        "fastHitRadius": 0.1060314029455185,
         "sourceBone": "LeftFrontSkirt2_S",
         "targetBone": "RightFrontSkirt2_S",
         "particleBinding": "child"
@@ -14525,7 +14864,7 @@
         "collisionMask": 1,
         "radiusA": 0.025000005960464478,
         "radiusB": 0.025000005960464478,
-        "fastHitRadius": 0.08763349056243896,
+        "fastHitRadius": 0.08765589445829391,
         "sourceBone": "RightFrontSkirt2_S",
         "targetBone": "RightFrontSideSkirt2_S",
         "particleBinding": "child"
@@ -14542,7 +14881,7 @@
         "collisionMask": 1,
         "radiusA": 0.02500000409781933,
         "radiusB": 0.02500000409781933,
-        "fastHitRadius": 0.0782504603266716,
+        "fastHitRadius": 0.07833162695169449,
         "sourceBone": "RightFrontSideSkirt2_S",
         "targetBone": "RightBackSideSkirt2_S",
         "particleBinding": "child"
@@ -14559,7 +14898,7 @@
         "collisionMask": 1,
         "radiusA": 0.025000005960464478,
         "radiusB": 0.025000005960464478,
-        "fastHitRadius": 0.07858006656169891,
+        "fastHitRadius": 0.07857158780097961,
         "sourceBone": "RightBackSideSkirt2_S",
         "targetBone": "RightBackSkirt2_S",
         "particleBinding": "child"
@@ -14576,7 +14915,7 @@
         "collisionMask": 1,
         "radiusA": 0.02500000409781933,
         "radiusB": 0.02500000409781933,
-        "fastHitRadius": 0.09630576521158218,
+        "fastHitRadius": 0.09641538560390472,
         "sourceBone": "RightBackSkirt2_S",
         "targetBone": "LeftBackSkirt2_S",
         "particleBinding": "child"
@@ -14593,7 +14932,7 @@
         "collisionMask": 1,
         "radiusA": 0.030000004917383194,
         "radiusB": 0.030000004917383194,
-        "fastHitRadius": 0.09205588698387146,
+        "fastHitRadius": 0.09208352863788605,
         "sourceBone": "LeftBackSkirt3_S",
         "targetBone": "LeftBackSideSkirt3_S",
         "particleBinding": "child"
@@ -14610,7 +14949,7 @@
         "collisionMask": 1,
         "radiusA": 0.029999999329447746,
         "radiusB": 0.029999999329447746,
-        "fastHitRadius": 0.10032307356595993,
+        "fastHitRadius": 0.10029974579811096,
         "sourceBone": "LeftBackSideSkirt3_S",
         "targetBone": "LeftFrontSideSkirt3_S",
         "particleBinding": "child"
@@ -14627,7 +14966,7 @@
         "collisionMask": 1,
         "radiusA": 0.030000001192092896,
         "radiusB": 0.030000001192092896,
-        "fastHitRadius": 0.1056208685040474,
+        "fastHitRadius": 0.1055336743593216,
         "sourceBone": "LeftFrontSideSkirt3_S",
         "targetBone": "LeftFrontSkirt3_S",
         "particleBinding": "child"
@@ -14644,7 +14983,7 @@
         "collisionMask": 1,
         "radiusA": 0.030000004917383194,
         "radiusB": 0.030000004917383194,
-        "fastHitRadius": 0.11401217430830002,
+        "fastHitRadius": 0.11395327746868134,
         "sourceBone": "LeftFrontSkirt3_S",
         "targetBone": "RightFrontSkirt3_S",
         "particleBinding": "child"
@@ -14661,7 +15000,7 @@
         "collisionMask": 1,
         "radiusA": 0.03000001609325409,
         "radiusB": 0.03000001609325409,
-        "fastHitRadius": 0.10531088709831238,
+        "fastHitRadius": 0.10539181530475616,
         "sourceBone": "RightFrontSkirt3_S",
         "targetBone": "RightFrontSideSkirt3_S",
         "particleBinding": "child"
@@ -14678,7 +15017,7 @@
         "collisionMask": 1,
         "radiusA": 0.030000004917383194,
         "radiusB": 0.030000004917383194,
-        "fastHitRadius": 0.10032711178064346,
+        "fastHitRadius": 0.100592240691185,
         "sourceBone": "RightFrontSideSkirt3_S",
         "targetBone": "RightBackSideSkirt3_S",
         "particleBinding": "child"
@@ -14695,7 +15034,7 @@
         "collisionMask": 1,
         "radiusA": 0.030000001192092896,
         "radiusB": 0.030000001192092896,
-        "fastHitRadius": 0.09217574447393417,
+        "fastHitRadius": 0.09217382222414017,
         "sourceBone": "RightBackSideSkirt3_S",
         "targetBone": "RightBackSkirt3_S",
         "particleBinding": "child"
@@ -14712,7 +15051,7 @@
         "collisionMask": 1,
         "radiusA": 0.030000004917383194,
         "radiusB": 0.030000004917383194,
-        "fastHitRadius": 0.11703214794397354,
+        "fastHitRadius": 0.11716397106647491,
         "sourceBone": "RightBackSkirt3_S",
         "targetBone": "LeftBackSkirt3_S",
         "particleBinding": "child"
@@ -14729,7 +15068,7 @@
         "collisionMask": 1,
         "radiusA": 0.040000006556510925,
         "radiusB": 0.040000006556510925,
-        "fastHitRadius": 0.11616145074367523,
+        "fastHitRadius": 0.11623522639274597,
         "sourceBone": "LeftBackSkirt4_S_End",
         "targetBone": "LeftBackSideSkirt4_S_End",
         "particleBinding": "child"
@@ -14746,7 +15085,7 @@
         "collisionMask": 1,
         "radiusA": 0.03999999910593033,
         "radiusB": 0.03999999910593033,
-        "fastHitRadius": 0.12863793969154358,
+        "fastHitRadius": 0.12864701449871063,
         "sourceBone": "LeftBackSideSkirt4_S_End",
         "targetBone": "LeftFrontSideSkirt4_S_End",
         "particleBinding": "child"
@@ -14763,7 +15102,7 @@
         "collisionMask": 1,
         "radiusA": 0.04000000283122063,
         "radiusB": 0.04000000283122063,
-        "fastHitRadius": 0.13203412294387817,
+        "fastHitRadius": 0.13198107481002808,
         "sourceBone": "LeftFrontSideSkirt4_S_End",
         "targetBone": "LeftFrontSkirt4_S_End",
         "particleBinding": "child"
@@ -14780,7 +15119,7 @@
         "collisionMask": 1,
         "radiusA": 0.040000006556510925,
         "radiusB": 0.040000006556510925,
-        "fastHitRadius": 0.12816813588142395,
+        "fastHitRadius": 0.128118634223938,
         "sourceBone": "LeftFrontSkirt4_S_End",
         "targetBone": "RightFrontSkirt4_S_End",
         "particleBinding": "child"
@@ -14797,7 +15136,7 @@
         "collisionMask": 1,
         "radiusA": 0.04000002145767212,
         "radiusB": 0.04000002145767212,
-        "fastHitRadius": 0.13189134001731873,
+        "fastHitRadius": 0.13194933533668518,
         "sourceBone": "RightFrontSkirt4_S_End",
         "targetBone": "RightFrontSideSkirt4_S_End",
         "particleBinding": "child"
@@ -14814,7 +15153,7 @@
         "collisionMask": 1,
         "radiusA": 0.040000006556510925,
         "radiusB": 0.040000006556510925,
-        "fastHitRadius": 0.12902598083019257,
+        "fastHitRadius": 0.12933135032653809,
         "sourceBone": "RightFrontSideSkirt4_S_End",
         "targetBone": "RightBackSideSkirt4_S_End",
         "particleBinding": "child"
@@ -14831,7 +15170,7 @@
         "collisionMask": 1,
         "radiusA": 0.04000000283122063,
         "radiusB": 0.04000000283122063,
-        "fastHitRadius": 0.11642837524414062,
+        "fastHitRadius": 0.1164543405175209,
         "sourceBone": "RightBackSideSkirt4_S_End",
         "targetBone": "RightBackSkirt4_S_End",
         "particleBinding": "child"
@@ -14848,30 +15187,49 @@
         "collisionMask": 1,
         "radiusA": 0.040000006556510925,
         "radiusB": 0.040000006556510925,
-        "fastHitRadius": 0.14541499316692352,
+        "fastHitRadius": 0.14556998014450073,
         "sourceBone": "RightBackSkirt4_S_End",
         "targetBone": "LeftBackSkirt4_S_End",
         "particleBinding": "child"
       }
-    ]
+    ],
+    "status": "captured-indexes-with-named-child-bindings"
   },
-  "nativeChainGeometryApplied": 24,
   "profileId": "kllj-schl-0000",
   "physicsAlgorithm": "gakumas-runtime-recovered-v1",
-  "source": {
-    "capture": "G:\\gkmas\\gakumas\\gakumas-local\\physics-diagnostics\\capture-2026-10-1-18-36-7-47052-17464546",
-    "report": "tools\\gakumas-vmd-prototype\\variant-candidates\\authored\\kllj-schl-0000-swing-params.json",
-    "nativeDynamic": "tools\\gakumas-vmd-prototype\\variant-candidates\\native\\kllj-schl-0000-v25\\kllj-native-dynamic-geometry.json",
-    "nativeStatic": "tools\\gakumas-vmd-prototype\\variant-candidates\\native\\kllj-schl-0000-v25\\kllj-native-static-geometry.json",
-    "nativeChain": "tools\\gakumas-vmd-prototype\\variant-candidates\\native\\kllj-schl-0000-v25\\kllj-native-chain-geometry.json",
-    "rest": "tools\\gakumas-vmd-prototype\\variant-candidates\\rests\\kllj-schl-0000.json",
-    "pmx": "tools\\gakumas-vmd-prototype\\variant-candidates\\skeletons\\kllj-schl-0000.json"
-  },
-  "nativeDynamicGeometrySource": "tools\\gakumas-vmd-prototype\\variant-candidates\\native\\kllj-schl-0000-v25\\kllj-native-dynamic-geometry.json",
-  "nativeStaticGeometrySource": "tools\\gakumas-vmd-prototype\\variant-candidates\\native\\kllj-schl-0000-v25\\kllj-native-static-geometry.json",
-  "nativeStaticGeometryApplied": 13,
   "useModelingRestPose": true,
   "adaptationStatus": "provisional-native-dynamic-static-plus-native-chain",
+  "adaptationScope": {
+    "nativeDynamic": "all",
+    "nativeStatic": "captured-runtime-all",
+    "nativeChain": "captured-runtime-named-child",
+    "clothing": "variant-authored"
+  },
+  "source": {
+    "body": "capture://body",
+    "hair": "capture://hair",
+    "capture": "gakumas-local/physics-diagnostics\\capture-2026-10-2-14-4-19-7660-87569265\\idol-parameters.json",
+    "report": "repo/tools\\gakumas-vmd-prototype\\variant-candidates\\authored\\kllj-schl-0000-swing-params.json",
+    "nativeDynamic": "repo/tmp-secondary-motion-candidates\\latest-20261002\\native\\kllj-schl-0000\\kllj-native-dynamic-geometry.json",
+    "nativeStatic": "repo/tmp-secondary-motion-candidates\\latest-20261002\\native\\kllj-schl-0000\\kllj-native-static-geometry.json",
+    "nativeChain": "repo/tmp-secondary-motion-candidates\\latest-20261002\\native\\kllj-schl-0000\\kllj-native-chain-geometry.json",
+    "rest": "repo/tools\\gakumas-vmd-prototype\\variant-candidates\\rests\\kllj-schl-0000.json",
+    "pmx": "repo/tools\\gakumas-vmd-prototype\\variant-candidates\\skeletons\\kllj-schl-0000.json",
+    "glb": "capture://kllj-schl-0000.glb",
+    "captureStatus": "main_callback_snapshot_not_solver_io"
+  },
+  "nativeDynamicGeometrySource": "repo/tmp-secondary-motion-candidates\\latest-20261002\\native\\kllj-schl-0000\\kllj-native-dynamic-geometry.json",
+  "nativeStaticGeometrySource": "repo/tmp-secondary-motion-candidates\\latest-20261002\\native\\kllj-schl-0000\\kllj-native-static-geometry.json",
+  "nativeStaticGeometryApplied": 13,
+  "nativeChainGeometryApplied": 24,
+  "nativeReferenceLimits": false,
+  "nativeReferenceLimitCoverage": {
+    "enabled": false,
+    "space": null,
+    "configuredRecords": 0,
+    "referenceBones": [],
+    "unresolvedReferenceBones": []
+  },
   "nativeCaptureCoverage": {
     "capturedDynamicRecords": 132,
     "joinedDynamicRecords": 132,
@@ -14888,6 +15246,135 @@
   },
   "skirtCollidesWithThigh": true,
   "nativeSkirtThighCollisionRadiusScale": 1.15,
+  "quartzStageAdaptation": {
+    "status": "stage-adaptation-native-io-unverified",
+    "formulaSource": "serialized Quartz settings; capture job IO was not executed",
+    "supportedClasses": [
+      "ActorAnimationQuartzDriverHumanoidArmBone",
+      "ActorAnimationQuartzDriverHumanoidHandBone",
+      "ActorAnimationQuartzDriverHumanoidUpLegBone",
+      "ActorAnimationQuartzDriverRotationBone",
+      "ActorAnimationQuartzDriverSkirtBone"
+    ],
+    "driverCounts": {
+      "ActorAnimationQuartzDriverSkirtBone": 8,
+      "ActorAnimationQuartzDriverHumanoidUpLegBone": 4,
+      "ActorAnimationQuartzDriverRotationBone": 4,
+      "ActorAnimationQuartzDriverHumanoidHandBone": 4,
+      "ActorAnimationQuartzDriverHumanoidArmBone": 4
+    },
+    "captureJobs": [
+      {
+        "name": "_constraintTransformJobBones",
+        "elementType": "ActorAnimation.ActorAnimationConstraintTransformJobBone",
+        "length": 8,
+        "itemsRead": 8,
+        "itemsAttempted": 8,
+        "status": "read",
+        "executionVerified": false
+      },
+      {
+        "name": "_quartzDriverRotationJobBones",
+        "elementType": "ActorAnimation.ActorAnimationQuartzDriverRotationJobBone",
+        "length": 16,
+        "itemsRead": 16,
+        "itemsAttempted": 16,
+        "status": "read",
+        "executionVerified": false
+      },
+      {
+        "name": "_quartzDriverFrillJobBones",
+        "elementType": "ActorAnimation.ActorAnimationQuartzDriverFrillJobBone",
+        "length": 4,
+        "itemsRead": 4,
+        "itemsAttempted": 4,
+        "status": "read",
+        "executionVerified": false
+      },
+      {
+        "name": "_quartzDriverSkirtJobBones",
+        "elementType": "ActorAnimation.ActorAnimationQuartzDriverSkirtJobBone",
+        "length": 12,
+        "itemsRead": 12,
+        "itemsAttempted": 12,
+        "status": "read",
+        "executionVerified": false
+      },
+      {
+        "name": "_quartzDriverHairJobBones",
+        "elementType": "ActorAnimation.ActorAnimationQuartzDriverHairJobBone",
+        "length": 10,
+        "itemsRead": 10,
+        "itemsAttempted": 10,
+        "status": "read",
+        "executionVerified": false
+      },
+      {
+        "name": "_quartzDriverHumanoidHandJobBones",
+        "elementType": "ActorAnimation.ActorAnimationQuartzDriverHumanoidHandJobBone",
+        "length": 4,
+        "itemsRead": 4,
+        "itemsAttempted": 4,
+        "status": "read",
+        "executionVerified": false
+      },
+      {
+        "name": "_quartzDriverHumanoidSleeveJobBones",
+        "elementType": "ActorAnimation.ActorAnimationQuartzDriverHumanoidSleeveJobBone",
+        "length": 8,
+        "itemsRead": 8,
+        "itemsAttempted": 8,
+        "status": "read",
+        "executionVerified": false
+      },
+      {
+        "name": "_quartzDriverHumanoidUpLegJobBones",
+        "elementType": "ActorAnimation.ActorAnimationQuartzDriverHumanoidUpLegJobBone",
+        "length": 4,
+        "itemsRead": 4,
+        "itemsAttempted": 4,
+        "status": "read",
+        "executionVerified": false
+      },
+      {
+        "name": "_quartzDriverHumanoidArmJobBones",
+        "elementType": "ActorAnimation.ActorAnimationQuartzDriverHumanoidArmJobBone",
+        "length": 4,
+        "itemsRead": 4,
+        "itemsAttempted": 4,
+        "status": "read",
+        "executionVerified": false
+      },
+      {
+        "name": "_quartzDriverWaistJobBones",
+        "elementType": "ActorAnimation.ActorAnimationQuartzDriverWaistJobBone",
+        "length": 2,
+        "itemsRead": 2,
+        "itemsAttempted": 2,
+        "status": "read",
+        "executionVerified": false
+      },
+      {
+        "name": "_quartzDriverFurisodeJobBones",
+        "elementType": "ActorAnimation.ActorAnimationQuartzDriverFurisodeJobBone",
+        "length": 4,
+        "itemsRead": 4,
+        "itemsAttempted": 4,
+        "status": "read",
+        "executionVerified": false
+      },
+      {
+        "name": "_quartzDriverPonchoJobBones",
+        "elementType": "ActorAnimation.ActorAnimationQuartzDriverPonchoJobBone",
+        "length": 6,
+        "itemsRead": 6,
+        "itemsAttempted": 6,
+        "status": "read",
+        "executionVerified": false
+      }
+    ],
+    "unsupportedCaptureOnlyJobs": []
+  },
   "skirtStaticParticleRadius": "tail-particle",
   "skirtStaticParticleRadiusScale": 0.4,
   "skirtStaticParticleRadiusScaleByParticle": {

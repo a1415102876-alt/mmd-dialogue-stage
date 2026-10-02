@@ -3,31 +3,184 @@
   "drivers": [
     {
       "className": "ActorAnimationQuartzDriverHumanoidUpLegBone",
-      "bone": "LeftUpLeg_H",
+      "bone": "LeftUpLeg_Roll_H",
       "enabled": true,
       "setting": {
         "humanPartDof": 2,
-        "dof": 2,
-        "coefficient": -1.0,
-        "sourceAxis": 0,
-        "referenceBone": {
-          "name": "LeftUpLeg"
-        }
+        "coefficient": -0.6000000238418579
+      },
+      "part": "body"
+    },
+    {
+      "className": "ActorAnimationQuartzDriverHumanoidArmBone",
+      "bone": "LeftArm_H",
+      "enabled": true,
+      "setting": {
+        "humanPartDof": 4,
+        "coefficient": -0.800000011920929
+      },
+      "part": "body"
+    },
+    {
+      "className": "ActorAnimationQuartzDriverHumanoidArmBone",
+      "bone": "RightArm_Roll_H",
+      "enabled": true,
+      "setting": {
+        "humanPartDof": 5,
+        "coefficient": -0.30000001192092896
       },
       "part": "body"
     },
     {
       "className": "ActorAnimationQuartzDriverHumanoidUpLegBone",
-      "bone": "LeftUpLeg_Roll_H",
+      "bone": "LeftUpLeg_H",
       "enabled": true,
       "setting": {
         "humanPartDof": 2,
-        "dof": 2,
-        "coefficient": -0.6,
-        "sourceAxis": 0,
+        "coefficient": -1.0
+      },
+      "part": "body"
+    },
+    {
+      "className": "ActorAnimationQuartzDriverRotationBone",
+      "bone": "LeftForeArm_H",
+      "enabled": true,
+      "setting": {
+        "rotationOrder": 1,
+        "limitMin": [
+          -180.0,
+          -180.0,
+          -180.0
+        ],
+        "limitMax": [
+          180.0,
+          180.0,
+          180.0
+        ],
+        "coefficient": [
+          0.0,
+          -0.4000000059604645,
+          0.0
+        ],
+        "connectionAxis": 0,
+        "decomposeType": 0,
+        "composeType": 3,
         "referenceBone": {
-          "name": "LeftUpLeg"
+          "pathId": 883617398343042801,
+          "name": "LeftForeArm"
         }
+      },
+      "part": "body"
+    },
+    {
+      "className": "ActorAnimationQuartzDriverHumanoidHandBone",
+      "bone": "LeftForeArm_Roll_H",
+      "enabled": true,
+      "setting": {
+        "humanPartDof": 4,
+        "coefficient": 0.5
+      },
+      "part": "body"
+    },
+    {
+      "className": "ActorAnimationQuartzDriverRotationBone",
+      "bone": "RightLeg_H",
+      "enabled": true,
+      "setting": {
+        "rotationOrder": 0,
+        "limitMin": [
+          -180.0,
+          -180.0,
+          -180.0
+        ],
+        "limitMax": [
+          180.0,
+          180.0,
+          180.0
+        ],
+        "coefficient": [
+          0.0,
+          0.0,
+          -0.5
+        ],
+        "connectionAxis": 0,
+        "decomposeType": 0,
+        "composeType": 3,
+        "referenceBone": {
+          "pathId": -3750399240702359823,
+          "name": "RightLeg"
+        }
+      },
+      "part": "body"
+    },
+    {
+      "className": "ActorAnimationQuartzDriverHumanoidArmBone",
+      "bone": "LeftArm_Roll_H",
+      "enabled": true,
+      "setting": {
+        "humanPartDof": 4,
+        "coefficient": -0.30000001192092896
+      },
+      "part": "body"
+    },
+    {
+      "className": "ActorAnimationQuartzDriverRotationBone",
+      "bone": "LeftLeg_H",
+      "enabled": true,
+      "setting": {
+        "rotationOrder": 0,
+        "limitMin": [
+          -180.0,
+          -180.0,
+          -180.0
+        ],
+        "limitMax": [
+          180.0,
+          180.0,
+          180.0
+        ],
+        "coefficient": [
+          0.0,
+          0.0,
+          -0.5
+        ],
+        "connectionAxis": 0,
+        "decomposeType": 0,
+        "composeType": 3,
+        "referenceBone": {
+          "pathId": -2847070241201223951,
+          "name": "LeftLeg"
+        }
+      },
+      "part": "body"
+    },
+    {
+      "className": "ActorAnimationQuartzDriverHumanoidHandBone",
+      "bone": "LeftHand_H",
+      "enabled": true,
+      "setting": {
+        "humanPartDof": 4,
+        "coefficient": 0.8999999761581421
+      },
+      "part": "body"
+    },
+    {
+      "className": "ActorAnimationQuartzDriverHumanoidArmBone",
+      "bone": "RightArm_H",
+      "enabled": true,
+      "setting": {
+        "humanPartDof": 5,
+        "coefficient": -0.800000011920929
+      },
+      "part": "body"
+    },
+    {
+      "className": "ActorAnimationQuartzDriverHumanoidHandBone",
+      "bone": "RightForeArm_Roll_H",
+      "enabled": true,
+      "setting": {
+        "humanPartDof": 5,
+        "coefficient": 0.5
       },
       "part": "body"
     },
@@ -37,11 +190,47 @@
       "enabled": true,
       "setting": {
         "humanPartDof": 3,
-        "dof": 2,
-        "coefficient": -1.0,
-        "sourceAxis": 0,
+        "coefficient": -1.0
+      },
+      "part": "body"
+    },
+    {
+      "className": "ActorAnimationQuartzDriverHumanoidHandBone",
+      "bone": "RightHand_H",
+      "enabled": true,
+      "setting": {
+        "humanPartDof": 5,
+        "coefficient": 0.8999999761581421
+      },
+      "part": "body"
+    },
+    {
+      "className": "ActorAnimationQuartzDriverRotationBone",
+      "bone": "RightForeArm_H",
+      "enabled": true,
+      "setting": {
+        "rotationOrder": 1,
+        "limitMin": [
+          -180.0,
+          -180.0,
+          -180.0
+        ],
+        "limitMax": [
+          180.0,
+          180.0,
+          180.0
+        ],
+        "coefficient": [
+          0.0,
+          -0.4000000059604645,
+          0.0
+        ],
+        "connectionAxis": 0,
+        "decomposeType": 0,
+        "composeType": 3,
         "referenceBone": {
-          "name": "RightUpLeg"
+          "pathId": -1534167042618325263,
+          "name": "RightForeArm"
         }
       },
       "part": "body"
@@ -52,12 +241,7 @@
       "enabled": true,
       "setting": {
         "humanPartDof": 3,
-        "dof": 2,
-        "coefficient": -0.6,
-        "sourceAxis": 0,
-        "referenceBone": {
-          "name": "RightUpLeg"
-        }
+        "coefficient": -0.6000000238418579
       },
       "part": "body"
     },
@@ -23678,6 +23862,10 @@
   ],
   "nativeDynamicCollision": true,
   "counts": {
+    "ActorAnimationQuartzDriverHumanoidUpLegBone": 4,
+    "ActorAnimationQuartzDriverHumanoidArmBone": 4,
+    "ActorAnimationQuartzDriverRotationBone": 4,
+    "ActorAnimationQuartzDriverHumanoidHandBone": 4,
     "ActorAnimationQuartzDriverHairBone": 10,
     "ActorSwingDynamicBone": 211,
     "ActorSwingStaticBone": 22,
@@ -23686,7 +23874,7 @@
   "scope": "QuartzDriver follow plus ActorSwing springs, captured dynamic/static colliders, and inferred skirt/jacket rings. Collider offsets are baked from Unity rest into PMX/THREE local space when rest+skeleton are supplied. Dynamic collider masks/radii come from the captured NativeList when supplied; game assemblies are not executed.",
   "nativeDynamicGeometryApplied": 208,
   "nativeChainGeometry": {
-    "source": "tools\\gakumas-vmd-prototype\\variant-candidates\\native\\ttmr-casl\\ttmr-native-chain-geometry.json",
+    "source": "repo/tmp-secondary-motion-candidates\\latest-20261002\\native\\ttmr-casl\\ttmr-native-chain-geometry.json",
     "schemaVersion": 2,
     "records": [
       {
@@ -23701,7 +23889,7 @@
         "collisionMask": 1,
         "radiusA": 0.005000000819563866,
         "radiusB": 0.005000000819563866,
-        "fastHitRadius": 0.05049063265323639,
+        "fastHitRadius": 0.05053522810339928,
         "sourceBone": "LeftBackSkirt2_S",
         "targetBone": "LeftBackSideSkirt2_S",
         "particleBinding": "child"
@@ -23718,7 +23906,7 @@
         "collisionMask": 1,
         "radiusA": 0.005000000819563866,
         "radiusB": 0.005000000819563866,
-        "fastHitRadius": 0.068357914686203,
+        "fastHitRadius": 0.0683799460530281,
         "sourceBone": "LeftBackSideSkirt2_S",
         "targetBone": "LeftFrontSideSkirt2_S",
         "particleBinding": "child"
@@ -23735,7 +23923,7 @@
         "collisionMask": 1,
         "radiusA": 0.004999999888241291,
         "radiusB": 0.004999999888241291,
-        "fastHitRadius": 0.04668986424803734,
+        "fastHitRadius": 0.04658127948641777,
         "sourceBone": "LeftFrontSideSkirt2_S",
         "targetBone": "LeftFrontSkirt2_S",
         "particleBinding": "child"
@@ -23752,7 +23940,7 @@
         "collisionMask": 1,
         "radiusA": 0.004999999888241291,
         "radiusB": 0.004999999888241291,
-        "fastHitRadius": 0.056067172437906265,
+        "fastHitRadius": 0.056137565523386,
         "sourceBone": "LeftFrontSkirt2_S",
         "targetBone": "LeftFrontInSkirt2_S",
         "particleBinding": "child"
@@ -23769,7 +23957,7 @@
         "collisionMask": 1,
         "radiusA": 0.005000000353902578,
         "radiusB": 0.005000000353902578,
-        "fastHitRadius": 0.06415284425020218,
+        "fastHitRadius": 0.06418033689260483,
         "sourceBone": "LeftFrontInSkirt2_S",
         "targetBone": "LeftBackInSkirt2_S",
         "particleBinding": "child"
@@ -23786,7 +23974,7 @@
         "collisionMask": 64,
         "radiusA": 0.02499999850988388,
         "radiusB": 0.02499999850988388,
-        "fastHitRadius": 0.06737169623374939,
+        "fastHitRadius": 0.06790974736213684,
         "sourceBone": "LeftFrontJacket2_S",
         "targetBone": "LeftFrontSideJacket2_S",
         "particleBinding": "child"
@@ -23803,7 +23991,7 @@
         "collisionMask": 64,
         "radiusA": 0.02500000037252903,
         "radiusB": 0.02500000037252903,
-        "fastHitRadius": 0.08209160715341568,
+        "fastHitRadius": 0.08185424655675888,
         "sourceBone": "LeftFrontSideJacket2_S",
         "targetBone": "LeftBackSideJacket2_S",
         "particleBinding": "child"
@@ -23820,7 +24008,7 @@
         "collisionMask": 64,
         "radiusA": 0.02500000037252903,
         "radiusB": 0.02500000037252903,
-        "fastHitRadius": 0.07815662771463394,
+        "fastHitRadius": 0.07815783470869064,
         "sourceBone": "LeftBackSideJacket2_S",
         "targetBone": "LeftBackJacket2_S",
         "particleBinding": "child"
@@ -23837,7 +24025,7 @@
         "collisionMask": 64,
         "radiusA": 0.025000005960464478,
         "radiusB": 0.025000005960464478,
-        "fastHitRadius": 0.08426100760698318,
+        "fastHitRadius": 0.08426300436258316,
         "sourceBone": "LeftBackJacket2_S",
         "targetBone": "RightBackJacket2_S",
         "particleBinding": "child"
@@ -23854,7 +24042,7 @@
         "collisionMask": 64,
         "radiusA": 0.025000005960464478,
         "radiusB": 0.025000005960464478,
-        "fastHitRadius": 0.07693345844745636,
+        "fastHitRadius": 0.07691045850515366,
         "sourceBone": "RightBackJacket2_S",
         "targetBone": "RightBackSideJacket2_S",
         "particleBinding": "child"
@@ -23871,7 +24059,7 @@
         "collisionMask": 64,
         "radiusA": 0.02500000409781933,
         "radiusB": 0.02500000409781933,
-        "fastHitRadius": 0.07998031377792358,
+        "fastHitRadius": 0.08004622161388397,
         "sourceBone": "RightBackSideJacket2_S",
         "targetBone": "RightFrontSideJacket2_S",
         "particleBinding": "child"
@@ -23888,7 +24076,7 @@
         "collisionMask": 64,
         "radiusA": 0.02500000037252903,
         "radiusB": 0.02500000037252903,
-        "fastHitRadius": 0.06751730293035507,
+        "fastHitRadius": 0.06683257222175598,
         "sourceBone": "RightFrontSideJacket2_S",
         "targetBone": "RightFrontJacket2_S",
         "particleBinding": "child"
@@ -23905,7 +24093,7 @@
         "collisionMask": 1,
         "radiusA": 0.005000000819563866,
         "radiusB": 0.005000000819563866,
-        "fastHitRadius": 0.05055568367242813,
+        "fastHitRadius": 0.05048380792140961,
         "sourceBone": "RightBackSkirt2_S",
         "targetBone": "RightBackSideSkirt2_S",
         "particleBinding": "child"
@@ -23922,7 +24110,7 @@
         "collisionMask": 1,
         "radiusA": 0.005000000819563866,
         "radiusB": 0.005000000819563866,
-        "fastHitRadius": 0.06835004687309265,
+        "fastHitRadius": 0.06835147738456726,
         "sourceBone": "RightBackSideSkirt2_S",
         "targetBone": "RightFrontSideSkirt2_S",
         "particleBinding": "child"
@@ -23939,7 +24127,7 @@
         "collisionMask": 1,
         "radiusA": 0.004999999888241291,
         "radiusB": 0.004999999888241291,
-        "fastHitRadius": 0.04747358337044716,
+        "fastHitRadius": 0.04750417545437813,
         "sourceBone": "RightFrontSideSkirt2_S",
         "targetBone": "RightFrontSkirt2_S",
         "particleBinding": "child"
@@ -23956,7 +24144,7 @@
         "collisionMask": 1,
         "radiusA": 0.005000000353902578,
         "radiusB": 0.005000000353902578,
-        "fastHitRadius": 0.055560655891895294,
+        "fastHitRadius": 0.05554021894931793,
         "sourceBone": "RightFrontSkirt2_S",
         "targetBone": "RightFrontInSkirt2_S",
         "particleBinding": "child"
@@ -23973,7 +24161,7 @@
         "collisionMask": 1,
         "radiusA": 0.005000000353902578,
         "radiusB": 0.005000000353902578,
-        "fastHitRadius": 0.06407967209815979,
+        "fastHitRadius": 0.06407762318849564,
         "sourceBone": "RightFrontInSkirt2_S",
         "targetBone": "RightBackInSkirt2_S",
         "particleBinding": "child"
@@ -23990,7 +24178,7 @@
         "collisionMask": 1,
         "radiusA": 0.005000000819563866,
         "radiusB": 0.005000000819563866,
-        "fastHitRadius": 0.054688382893800735,
+        "fastHitRadius": 0.05424158275127411,
         "sourceBone": "RightBackSkirt3_S_End",
         "targetBone": "RightBackSideSkirt3_S_End",
         "particleBinding": "child"
@@ -24007,7 +24195,7 @@
         "collisionMask": 1,
         "radiusA": 0.005000000819563866,
         "radiusB": 0.005000000819563866,
-        "fastHitRadius": 0.07389744371175766,
+        "fastHitRadius": 0.0744154155254364,
         "sourceBone": "RightBackSideSkirt3_S_End",
         "targetBone": "RightFrontSideSkirt3_S_End",
         "particleBinding": "child"
@@ -24024,7 +24212,7 @@
         "collisionMask": 1,
         "radiusA": 0.004999999888241291,
         "radiusB": 0.004999999888241291,
-        "fastHitRadius": 0.04891234636306763,
+        "fastHitRadius": 0.04878847301006317,
         "sourceBone": "RightFrontSideSkirt3_S_End",
         "targetBone": "RightFrontSkirt3_S_End",
         "particleBinding": "child"
@@ -24041,7 +24229,7 @@
         "collisionMask": 1,
         "radiusA": 0.005000000353902578,
         "radiusB": 0.005000000353902578,
-        "fastHitRadius": 0.052209947258234024,
+        "fastHitRadius": 0.052091021090745926,
         "sourceBone": "RightFrontSkirt3_S_End",
         "targetBone": "RightFrontInSkirt3_S_End",
         "particleBinding": "child"
@@ -24058,7 +24246,7 @@
         "collisionMask": 1,
         "radiusA": 0.005000000353902578,
         "radiusB": 0.005000000353902578,
-        "fastHitRadius": 0.06408384442329407,
+        "fastHitRadius": 0.06406700611114502,
         "sourceBone": "RightFrontInSkirt3_S_End",
         "targetBone": "RightBackInSkirt3_S_End",
         "particleBinding": "child"
@@ -24075,7 +24263,7 @@
         "collisionMask": 64,
         "radiusA": 0.02499999850988388,
         "radiusB": 0.02499999850988388,
-        "fastHitRadius": 0.07496355473995209,
+        "fastHitRadius": 0.07640193402767181,
         "sourceBone": "LeftFrontJacket3_S",
         "targetBone": "LeftFrontSideJacket3_S",
         "particleBinding": "child"
@@ -24092,7 +24280,7 @@
         "collisionMask": 64,
         "radiusA": 0.02500000037252903,
         "radiusB": 0.02500000037252903,
-        "fastHitRadius": 0.08724919706583023,
+        "fastHitRadius": 0.08744842559099197,
         "sourceBone": "LeftFrontSideJacket3_S",
         "targetBone": "LeftBackSideJacket3_S",
         "particleBinding": "child"
@@ -24109,7 +24297,7 @@
         "collisionMask": 64,
         "radiusA": 0.02500000037252903,
         "radiusB": 0.02500000037252903,
-        "fastHitRadius": 0.0873570367693901,
+        "fastHitRadius": 0.08700614422559738,
         "sourceBone": "LeftBackSideJacket3_S",
         "targetBone": "LeftBackJacket3_S",
         "particleBinding": "child"
@@ -24126,7 +24314,7 @@
         "collisionMask": 64,
         "radiusA": 0.025000005960464478,
         "radiusB": 0.025000005960464478,
-        "fastHitRadius": 0.08426234871149063,
+        "fastHitRadius": 0.08426739275455475,
         "sourceBone": "LeftBackJacket3_S",
         "targetBone": "RightBackJacket3_S",
         "particleBinding": "child"
@@ -24143,7 +24331,7 @@
         "collisionMask": 64,
         "radiusA": 0.025000005960464478,
         "radiusB": 0.025000005960464478,
-        "fastHitRadius": 0.085642009973526,
+        "fastHitRadius": 0.08544868975877762,
         "sourceBone": "RightBackJacket3_S",
         "targetBone": "RightBackSideJacket3_S",
         "particleBinding": "child"
@@ -24160,7 +24348,7 @@
         "collisionMask": 64,
         "radiusA": 0.02500000409781933,
         "radiusB": 0.02500000409781933,
-        "fastHitRadius": 0.0854988694190979,
+        "fastHitRadius": 0.08592501282691956,
         "sourceBone": "RightBackSideJacket3_S",
         "targetBone": "RightFrontSideJacket3_S",
         "particleBinding": "child"
@@ -24177,7 +24365,7 @@
         "collisionMask": 64,
         "radiusA": 0.02500000037252903,
         "radiusB": 0.02500000037252903,
-        "fastHitRadius": 0.07582449167966843,
+        "fastHitRadius": 0.07428891211748123,
         "sourceBone": "RightFrontSideJacket3_S",
         "targetBone": "RightFrontJacket3_S",
         "particleBinding": "child"
@@ -24194,7 +24382,7 @@
         "collisionMask": 1,
         "radiusA": 0.005000000819563866,
         "radiusB": 0.005000000819563866,
-        "fastHitRadius": 0.05449582636356354,
+        "fastHitRadius": 0.054837848991155624,
         "sourceBone": "LeftBackSkirt3_S_End",
         "targetBone": "LeftBackSideSkirt3_S_End",
         "particleBinding": "child"
@@ -24211,7 +24399,7 @@
         "collisionMask": 1,
         "radiusA": 0.005000000819563866,
         "radiusB": 0.005000000819563866,
-        "fastHitRadius": 0.07209906727075577,
+        "fastHitRadius": 0.07151176780462265,
         "sourceBone": "LeftBackSideSkirt3_S_End",
         "targetBone": "LeftFrontSideSkirt3_S_End",
         "particleBinding": "child"
@@ -24228,7 +24416,7 @@
         "collisionMask": 1,
         "radiusA": 0.004999999888241291,
         "radiusB": 0.004999999888241291,
-        "fastHitRadius": 0.04896361380815506,
+        "fastHitRadius": 0.04903244599699974,
         "sourceBone": "LeftFrontSideSkirt3_S_End",
         "targetBone": "LeftFrontSkirt3_S_End",
         "particleBinding": "child"
@@ -24245,7 +24433,7 @@
         "collisionMask": 1,
         "radiusA": 0.004999999888241291,
         "radiusB": 0.004999999888241291,
-        "fastHitRadius": 0.05386996269226074,
+        "fastHitRadius": 0.05420435965061188,
         "sourceBone": "LeftFrontSkirt3_S_End",
         "targetBone": "LeftFrontInSkirt3_S_End",
         "particleBinding": "child"
@@ -24262,7 +24450,7 @@
         "collisionMask": 1,
         "radiusA": 0.005000000819563866,
         "radiusB": 0.005000000819563866,
-        "fastHitRadius": 0.06441259384155273,
+        "fastHitRadius": 0.06453806906938553,
         "sourceBone": "LeftFrontInSkirt3_S_End",
         "targetBone": "LeftBackInSkirt3_S_End",
         "particleBinding": "child"
@@ -24279,7 +24467,7 @@
         "collisionMask": 64,
         "radiusA": 0.019999999552965164,
         "radiusB": 0.019999999552965164,
-        "fastHitRadius": 0.07686460018157959,
+        "fastHitRadius": 0.07868525385856628,
         "sourceBone": "LeftFrontJacket4_S",
         "targetBone": "LeftFrontSideJacket4_S",
         "particleBinding": "child"
@@ -24296,7 +24484,7 @@
         "collisionMask": 64,
         "radiusA": 0.020000001415610313,
         "radiusB": 0.020000001415610313,
-        "fastHitRadius": 0.08575516194105148,
+        "fastHitRadius": 0.08642315864562988,
         "sourceBone": "LeftFrontSideJacket4_S",
         "targetBone": "LeftBackSideJacket4_S",
         "particleBinding": "child"
@@ -24313,7 +24501,7 @@
         "collisionMask": 64,
         "radiusA": 0.020000001415610313,
         "radiusB": 0.020000001415610313,
-        "fastHitRadius": 0.09048423916101456,
+        "fastHitRadius": 0.08960776776075363,
         "sourceBone": "LeftBackSideJacket4_S",
         "targetBone": "LeftBackJacket4_S",
         "particleBinding": "child"
@@ -24330,7 +24518,7 @@
         "collisionMask": 64,
         "radiusA": 0.02000000700354576,
         "radiusB": 0.02000000700354576,
-        "fastHitRadius": 0.07976822555065155,
+        "fastHitRadius": 0.07975943386554718,
         "sourceBone": "LeftBackJacket4_S",
         "targetBone": "RightBackJacket4_S",
         "particleBinding": "child"
@@ -24347,7 +24535,7 @@
         "collisionMask": 64,
         "radiusA": 0.02000000700354576,
         "radiusB": 0.02000000700354576,
-        "fastHitRadius": 0.08628449589014053,
+        "fastHitRadius": 0.0859590694308281,
         "sourceBone": "RightBackJacket4_S",
         "targetBone": "RightBackSideJacket4_S",
         "particleBinding": "child"
@@ -24364,7 +24552,7 @@
         "collisionMask": 64,
         "radiusA": 0.020000003278255463,
         "radiusB": 0.020000003278255463,
-        "fastHitRadius": 0.08355163782835007,
+        "fastHitRadius": 0.08405844122171402,
         "sourceBone": "RightBackSideJacket4_S",
         "targetBone": "RightFrontSideJacket4_S",
         "particleBinding": "child"
@@ -24381,7 +24569,7 @@
         "collisionMask": 64,
         "radiusA": 0.020000001415610313,
         "radiusB": 0.020000001415610313,
-        "fastHitRadius": 0.07618268579244614,
+        "fastHitRadius": 0.07389742881059647,
         "sourceBone": "RightFrontSideJacket4_S",
         "targetBone": "RightFrontJacket4_S",
         "particleBinding": "child"
@@ -24398,7 +24586,7 @@
         "collisionMask": 64,
         "radiusA": 0.019999999552965164,
         "radiusB": 0.019999999552965164,
-        "fastHitRadius": 0.08247128129005432,
+        "fastHitRadius": 0.08469602465629578,
         "sourceBone": "LeftFrontJacket5_S",
         "targetBone": "LeftFrontSideJacket5_S",
         "particleBinding": "child"
@@ -24415,7 +24603,7 @@
         "collisionMask": 64,
         "radiusA": 0.020000001415610313,
         "radiusB": 0.020000001415610313,
-        "fastHitRadius": 0.0907619521021843,
+        "fastHitRadius": 0.09191791713237762,
         "sourceBone": "LeftFrontSideJacket5_S",
         "targetBone": "LeftBackSideJacket5_S",
         "particleBinding": "child"
@@ -24432,7 +24620,7 @@
         "collisionMask": 64,
         "radiusA": 0.020000001415610313,
         "radiusB": 0.020000001415610313,
-        "fastHitRadius": 0.09581060707569122,
+        "fastHitRadius": 0.0945550799369812,
         "sourceBone": "LeftBackSideJacket5_S",
         "targetBone": "LeftBackJacket5_S",
         "particleBinding": "child"
@@ -24449,7 +24637,7 @@
         "collisionMask": 64,
         "radiusA": 0.02000000700354576,
         "radiusB": 0.02000000700354576,
-        "fastHitRadius": 0.08313150703907013,
+        "fastHitRadius": 0.08324497193098068,
         "sourceBone": "LeftBackJacket5_S",
         "targetBone": "RightBackJacket5_S",
         "particleBinding": "child"
@@ -24466,7 +24654,7 @@
         "collisionMask": 64,
         "radiusA": 0.02000000700354576,
         "radiusB": 0.02000000700354576,
-        "fastHitRadius": 0.09143424779176712,
+        "fastHitRadius": 0.09088214486837387,
         "sourceBone": "RightBackJacket5_S",
         "targetBone": "RightBackSideJacket5_S",
         "particleBinding": "child"
@@ -24483,7 +24671,7 @@
         "collisionMask": 64,
         "radiusA": 0.020000003278255463,
         "radiusB": 0.020000003278255463,
-        "fastHitRadius": 0.08866115659475327,
+        "fastHitRadius": 0.08884813636541367,
         "sourceBone": "RightBackSideJacket5_S",
         "targetBone": "RightFrontSideJacket5_S",
         "particleBinding": "child"
@@ -24500,7 +24688,7 @@
         "collisionMask": 64,
         "radiusA": 0.020000001415610313,
         "radiusB": 0.020000001415610313,
-        "fastHitRadius": 0.08330734074115753,
+        "fastHitRadius": 0.07999620586633682,
         "sourceBone": "RightFrontSideJacket5_S",
         "targetBone": "RightFrontJacket5_S",
         "particleBinding": "child"
@@ -24517,7 +24705,7 @@
         "collisionMask": 64,
         "radiusA": 0.009999999776482582,
         "radiusB": 0.009999999776482582,
-        "fastHitRadius": 0.07613561302423477,
+        "fastHitRadius": 0.07904592901468277,
         "sourceBone": "LeftFrontJacket6_S_End",
         "targetBone": "LeftFrontSideJacket6_S_End",
         "particleBinding": "child"
@@ -24534,7 +24722,7 @@
         "collisionMask": 64,
         "radiusA": 0.010000000707805157,
         "radiusB": 0.010000000707805157,
-        "fastHitRadius": 0.08654717355966568,
+        "fastHitRadius": 0.08823145180940628,
         "sourceBone": "LeftFrontSideJacket6_S_End",
         "targetBone": "LeftBackSideJacket6_S_End",
         "particleBinding": "child"
@@ -24551,7 +24739,7 @@
         "collisionMask": 64,
         "radiusA": 0.010000000707805157,
         "radiusB": 0.010000000707805157,
-        "fastHitRadius": 0.0896163359284401,
+        "fastHitRadius": 0.08784219622612,
         "sourceBone": "LeftBackSideJacket6_S_End",
         "targetBone": "LeftBackJacket6_S_End",
         "particleBinding": "child"
@@ -24568,7 +24756,7 @@
         "collisionMask": 64,
         "radiusA": 0.01000000350177288,
         "radiusB": 0.01000000350177288,
-        "fastHitRadius": 0.07534749060869217,
+        "fastHitRadius": 0.0757259950041771,
         "sourceBone": "LeftBackJacket6_S_End",
         "targetBone": "RightBackJacket6_S_End",
         "particleBinding": "child"
@@ -24585,7 +24773,7 @@
         "collisionMask": 64,
         "radiusA": 0.01000000350177288,
         "radiusB": 0.01000000350177288,
-        "fastHitRadius": 0.08713865280151367,
+        "fastHitRadius": 0.08585059642791748,
         "sourceBone": "RightBackJacket6_S_End",
         "targetBone": "RightBackSideJacket6_S_End",
         "particleBinding": "child"
@@ -24602,7 +24790,7 @@
         "collisionMask": 64,
         "radiusA": 0.010000001639127731,
         "radiusB": 0.010000001639127731,
-        "fastHitRadius": 0.08117222785949707,
+        "fastHitRadius": 0.08117730915546417,
         "sourceBone": "RightBackSideJacket6_S_End",
         "targetBone": "RightFrontSideJacket6_S_End",
         "particleBinding": "child"
@@ -24619,7 +24807,7 @@
         "collisionMask": 64,
         "radiusA": 0.010000000707805157,
         "radiusB": 0.010000000707805157,
-        "fastHitRadius": 0.07899241894483566,
+        "fastHitRadius": 0.07469213753938675,
         "sourceBone": "RightFrontSideJacket6_S_End",
         "targetBone": "RightFrontJacket6_S_End",
         "particleBinding": "child"
@@ -24636,7 +24824,7 @@
         "collisionMask": 8,
         "radiusA": 0.019999999552965164,
         "radiusB": 0.019999999552965164,
-        "fastHitRadius": 0.055911969393491745,
+        "fastHitRadius": 0.0559646412730217,
         "sourceBone": "RightBackSideHair2_S",
         "targetBone": "RightBackHair2_S",
         "particleBinding": "child"
@@ -24653,7 +24841,7 @@
         "collisionMask": 8,
         "radiusA": 0.020000003278255463,
         "radiusB": 0.020000003278255463,
-        "fastHitRadius": 0.05559592694044113,
+        "fastHitRadius": 0.05545857548713684,
         "sourceBone": "RightBackHair2_S",
         "targetBone": "CenterBackHair2_S",
         "particleBinding": "child"
@@ -24670,7 +24858,7 @@
         "collisionMask": 8,
         "radiusA": 0.020000003278255463,
         "radiusB": 0.020000003278255463,
-        "fastHitRadius": 0.055403854697942734,
+        "fastHitRadius": 0.055383700877428055,
         "sourceBone": "CenterBackHair2_S",
         "targetBone": "LeftBackHair2_S",
         "particleBinding": "child"
@@ -24687,7 +24875,7 @@
         "collisionMask": 8,
         "radiusA": 0.020000003278255463,
         "radiusB": 0.020000003278255463,
-        "fastHitRadius": 0.05560503154993057,
+        "fastHitRadius": 0.05558653548359871,
         "sourceBone": "LeftBackHair2_S",
         "targetBone": "LeftBackSideHair2_S",
         "particleBinding": "child"
@@ -24704,7 +24892,7 @@
         "collisionMask": 8,
         "radiusA": 0.010000000707805157,
         "radiusB": 0.010000000707805157,
-        "fastHitRadius": 0.05175330117344856,
+        "fastHitRadius": 0.05189555138349533,
         "sourceBone": "RightBackSideHair3_S",
         "targetBone": "RightBackHair3_S",
         "particleBinding": "child"
@@ -24721,7 +24909,7 @@
         "collisionMask": 8,
         "radiusA": 0.010000000707805157,
         "radiusB": 0.010000000707805157,
-        "fastHitRadius": 0.05106619745492935,
+        "fastHitRadius": 0.05065798759460449,
         "sourceBone": "RightBackHair3_S",
         "targetBone": "CenterBackHair3_S",
         "particleBinding": "child"
@@ -24738,7 +24926,7 @@
         "collisionMask": 8,
         "radiusA": 0.010000000707805157,
         "radiusB": 0.010000000707805157,
-        "fastHitRadius": 0.050869859755039215,
+        "fastHitRadius": 0.050822481513023376,
         "sourceBone": "CenterBackHair3_S",
         "targetBone": "LeftBackHair3_S",
         "particleBinding": "child"
@@ -24755,7 +24943,7 @@
         "collisionMask": 8,
         "radiusA": 0.010000001639127731,
         "radiusB": 0.010000001639127731,
-        "fastHitRadius": 0.052142538130283356,
+        "fastHitRadius": 0.05202371999621391,
         "sourceBone": "LeftBackHair3_S",
         "targetBone": "LeftBackSideHair3_S",
         "particleBinding": "child"
@@ -24772,7 +24960,7 @@
         "collisionMask": 8,
         "radiusA": 0.010000000707805157,
         "radiusB": 0.010000000707805157,
-        "fastHitRadius": 0.06070972606539726,
+        "fastHitRadius": 0.06056206300854683,
         "sourceBone": "RightBackSideHair4_S",
         "targetBone": "RightBackHair4_S",
         "particleBinding": "child"
@@ -24789,7 +24977,7 @@
         "collisionMask": 8,
         "radiusA": 0.010000004433095455,
         "radiusB": 0.010000004433095455,
-        "fastHitRadius": 0.05869605764746666,
+        "fastHitRadius": 0.05823890119791031,
         "sourceBone": "RightBackHair4_S",
         "targetBone": "CenterBackHair4_S",
         "particleBinding": "child"
@@ -24806,7 +24994,7 @@
         "collisionMask": 8,
         "radiusA": 0.010000001639127731,
         "radiusB": 0.010000001639127731,
-        "fastHitRadius": 0.05907725170254707,
+        "fastHitRadius": 0.05910024046897888,
         "sourceBone": "CenterBackHair4_S",
         "targetBone": "LeftBackHair4_S",
         "particleBinding": "child"
@@ -24823,7 +25011,7 @@
         "collisionMask": 8,
         "radiusA": 0.010000001639127731,
         "radiusB": 0.010000001639127731,
-        "fastHitRadius": 0.06325821578502655,
+        "fastHitRadius": 0.06292590498924255,
         "sourceBone": "LeftBackHair4_S",
         "targetBone": "LeftBackSideHair4_S",
         "particleBinding": "child"
@@ -24840,7 +25028,7 @@
         "collisionMask": 8,
         "radiusA": 0.015000002458691597,
         "radiusB": 0.015000002458691597,
-        "fastHitRadius": 0.06826344132423401,
+        "fastHitRadius": 0.06751491129398346,
         "sourceBone": "RightBackSideHair5_S",
         "targetBone": "RightBackHair5_S",
         "particleBinding": "child"
@@ -24857,7 +25045,7 @@
         "collisionMask": 8,
         "radiusA": 0.015000002458691597,
         "radiusB": 0.015000002458691597,
-        "fastHitRadius": 0.06850719451904297,
+        "fastHitRadius": 0.06801599264144897,
         "sourceBone": "RightBackHair5_S",
         "targetBone": "CenterBackHair5_S",
         "particleBinding": "child"
@@ -24874,7 +25062,7 @@
         "collisionMask": 8,
         "radiusA": 0.015000004321336746,
         "radiusB": 0.015000004321336746,
-        "fastHitRadius": 0.06995035707950592,
+        "fastHitRadius": 0.07039570063352585,
         "sourceBone": "CenterBackHair5_S",
         "targetBone": "LeftBackHair5_S",
         "particleBinding": "child"
@@ -24891,7 +25079,7 @@
         "collisionMask": 8,
         "radiusA": 0.015000002458691597,
         "radiusB": 0.015000002458691597,
-        "fastHitRadius": 0.0693901851773262,
+        "fastHitRadius": 0.0688975527882576,
         "sourceBone": "LeftBackHair5_S",
         "targetBone": "LeftBackSideHair5_S",
         "particleBinding": "child"
@@ -24908,7 +25096,7 @@
         "collisionMask": 8,
         "radiusA": 0.020000003278255463,
         "radiusB": 0.020000003278255463,
-        "fastHitRadius": 0.06714538484811783,
+        "fastHitRadius": 0.06597094237804413,
         "sourceBone": "RightBackSideHair6_S_End",
         "targetBone": "RightBackHair6_S_End",
         "particleBinding": "child"
@@ -24925,7 +25113,7 @@
         "collisionMask": 8,
         "radiusA": 0.020000003278255463,
         "radiusB": 0.020000003278255463,
-        "fastHitRadius": 0.06927420943975449,
+        "fastHitRadius": 0.06850595772266388,
         "sourceBone": "RightBackHair6_S_End",
         "targetBone": "CenterBackHair6_S_End",
         "particleBinding": "child"
@@ -24942,7 +25130,7 @@
         "collisionMask": 8,
         "radiusA": 0.02000000700354576,
         "radiusB": 0.02000000700354576,
-        "fastHitRadius": 0.07104597985744476,
+        "fastHitRadius": 0.073137067258358,
         "sourceBone": "CenterBackHair6_S_End",
         "targetBone": "LeftBackHair6_S_End",
         "particleBinding": "child"
@@ -24959,7 +25147,7 @@
         "collisionMask": 8,
         "radiusA": 0.020000003278255463,
         "radiusB": 0.020000003278255463,
-        "fastHitRadius": 0.06108761578798294,
+        "fastHitRadius": 0.06124791130423546,
         "sourceBone": "LeftBackHair6_S_End",
         "targetBone": "LeftBackSideHair6_S_End",
         "particleBinding": "child"
@@ -24978,19 +25166,20 @@
     "clothing": "variant-authored"
   },
   "source": {
-    "body": "mdl_chr_ttmr-casl-0000_body",
-    "hair": "mdl_chr_ttmr-base-0000_hair",
-    "capture": "capture-2026-9-30-20-3-29-42548-178504109",
-    "report": "tools\\gakumas-vmd-prototype\\variant-candidates\\authored\\ttmr-casl-swing-params.json",
-    "nativeDynamic": "tools\\gakumas-vmd-prototype\\variant-candidates\\native\\ttmr-casl\\ttmr-native-dynamic-geometry.json",
-    "nativeStatic": "tools\\gakumas-vmd-prototype\\variant-candidates\\native\\ttmr-casl\\ttmr-native-static-geometry.json",
-    "nativeChain": "tools\\gakumas-vmd-prototype\\variant-candidates\\native\\ttmr-casl\\ttmr-native-chain-geometry.json",
-    "rest": "tools\\gakumas-vmd-prototype\\variant-candidates\\rests\\ttmr-casl.json",
-    "pmx": "tools\\gakumas-vmd-prototype\\variant-candidates\\skeletons\\ttmr-casl.json",
-    "glb": "E:\\gakumas-pmx-workflow\\output\\ttmr-casl\\ttmr-casl.glb"
+    "body": "capture://body",
+    "hair": "capture://hair",
+    "capture": "gakumas-local/physics-diagnostics\\capture-2026-10-2-14-2-31-7660-87461359\\idol-parameters.json",
+    "report": "repo/tools\\gakumas-vmd-prototype\\variant-candidates\\authored\\ttmr-casl-swing-params.json",
+    "nativeDynamic": "repo/tmp-secondary-motion-candidates\\latest-20261002\\native\\ttmr-casl\\ttmr-native-dynamic-geometry.json",
+    "nativeStatic": "repo/tmp-secondary-motion-candidates\\latest-20261002\\native\\ttmr-casl\\ttmr-native-static-geometry.json",
+    "nativeChain": "repo/tmp-secondary-motion-candidates\\latest-20261002\\native\\ttmr-casl\\ttmr-native-chain-geometry.json",
+    "rest": "repo/tools\\gakumas-vmd-prototype\\variant-candidates\\rests\\ttmr-casl.json",
+    "pmx": "repo/tools\\gakumas-vmd-prototype\\variant-candidates\\skeletons\\ttmr-casl.json",
+    "glb": "capture://ttmr-casl.glb",
+    "captureStatus": "main_callback_snapshot_not_solver_io"
   },
-  "nativeDynamicGeometrySource": "tools\\gakumas-vmd-prototype\\variant-candidates\\native\\ttmr-casl\\ttmr-native-dynamic-geometry.json",
-  "nativeStaticGeometrySource": "tools\\gakumas-vmd-prototype\\variant-candidates\\native\\ttmr-casl\\ttmr-native-static-geometry.json",
+  "nativeDynamicGeometrySource": "repo/tmp-secondary-motion-candidates\\latest-20261002\\native\\ttmr-casl\\ttmr-native-dynamic-geometry.json",
+  "nativeStaticGeometrySource": "repo/tmp-secondary-motion-candidates\\latest-20261002\\native\\ttmr-casl\\ttmr-native-static-geometry.json",
   "nativeStaticGeometryApplied": 23,
   "nativeChainGeometryApplied": 75,
   "nativeReferenceLimits": false,
@@ -25019,17 +25208,146 @@
     "unknownSwingClasses": [],
     "unresolvedBones": []
   },
+  "gravityScaleByBoneGroup": {
+    "skirt": 0
+  },
+  "stableHairContacts": true,
+  "nativeSkirtThighCollisionRadiusScale": 1.25,
+  "nativeSkirtCarrier": "thigh",
+  "quartzStageAdaptation": {
+    "status": "stage-adaptation-native-io-unverified",
+    "formulaSource": "serialized Quartz settings; capture job IO was not executed",
+    "supportedClasses": [
+      "ActorAnimationQuartzDriverHairBone",
+      "ActorAnimationQuartzDriverHumanoidArmBone",
+      "ActorAnimationQuartzDriverHumanoidHandBone",
+      "ActorAnimationQuartzDriverHumanoidUpLegBone",
+      "ActorAnimationQuartzDriverRotationBone"
+    ],
+    "driverCounts": {
+      "ActorAnimationQuartzDriverHumanoidUpLegBone": 4,
+      "ActorAnimationQuartzDriverHumanoidArmBone": 4,
+      "ActorAnimationQuartzDriverRotationBone": 4,
+      "ActorAnimationQuartzDriverHumanoidHandBone": 4,
+      "ActorAnimationQuartzDriverHairBone": 10
+    },
+    "captureJobs": [
+      {
+        "name": "_constraintTransformJobBones",
+        "elementType": "ActorAnimation.ActorAnimationConstraintTransformJobBone",
+        "length": 8,
+        "itemsRead": 8,
+        "itemsAttempted": 8,
+        "status": "read",
+        "executionVerified": false
+      },
+      {
+        "name": "_quartzDriverRotationJobBones",
+        "elementType": "ActorAnimation.ActorAnimationQuartzDriverRotationJobBone",
+        "length": 16,
+        "itemsRead": 16,
+        "itemsAttempted": 16,
+        "status": "read",
+        "executionVerified": false
+      },
+      {
+        "name": "_quartzDriverFrillJobBones",
+        "elementType": "ActorAnimation.ActorAnimationQuartzDriverFrillJobBone",
+        "length": 4,
+        "itemsRead": 4,
+        "itemsAttempted": 4,
+        "status": "read",
+        "executionVerified": false
+      },
+      {
+        "name": "_quartzDriverSkirtJobBones",
+        "elementType": "ActorAnimation.ActorAnimationQuartzDriverSkirtJobBone",
+        "length": 12,
+        "itemsRead": 12,
+        "itemsAttempted": 12,
+        "status": "read",
+        "executionVerified": false
+      },
+      {
+        "name": "_quartzDriverHairJobBones",
+        "elementType": "ActorAnimation.ActorAnimationQuartzDriverHairJobBone",
+        "length": 10,
+        "itemsRead": 10,
+        "itemsAttempted": 10,
+        "status": "read",
+        "executionVerified": false
+      },
+      {
+        "name": "_quartzDriverHumanoidHandJobBones",
+        "elementType": "ActorAnimation.ActorAnimationQuartzDriverHumanoidHandJobBone",
+        "length": 4,
+        "itemsRead": 4,
+        "itemsAttempted": 4,
+        "status": "read",
+        "executionVerified": false
+      },
+      {
+        "name": "_quartzDriverHumanoidSleeveJobBones",
+        "elementType": "ActorAnimation.ActorAnimationQuartzDriverHumanoidSleeveJobBone",
+        "length": 8,
+        "itemsRead": 8,
+        "itemsAttempted": 8,
+        "status": "read",
+        "executionVerified": false
+      },
+      {
+        "name": "_quartzDriverHumanoidUpLegJobBones",
+        "elementType": "ActorAnimation.ActorAnimationQuartzDriverHumanoidUpLegJobBone",
+        "length": 4,
+        "itemsRead": 4,
+        "itemsAttempted": 4,
+        "status": "read",
+        "executionVerified": false
+      },
+      {
+        "name": "_quartzDriverHumanoidArmJobBones",
+        "elementType": "ActorAnimation.ActorAnimationQuartzDriverHumanoidArmJobBone",
+        "length": 4,
+        "itemsRead": 4,
+        "itemsAttempted": 4,
+        "status": "read",
+        "executionVerified": false
+      },
+      {
+        "name": "_quartzDriverWaistJobBones",
+        "elementType": "ActorAnimation.ActorAnimationQuartzDriverWaistJobBone",
+        "length": 2,
+        "itemsRead": 2,
+        "itemsAttempted": 2,
+        "status": "read",
+        "executionVerified": false
+      },
+      {
+        "name": "_quartzDriverFurisodeJobBones",
+        "elementType": "ActorAnimation.ActorAnimationQuartzDriverFurisodeJobBone",
+        "length": 4,
+        "itemsRead": 4,
+        "itemsAttempted": 4,
+        "status": "read",
+        "executionVerified": false
+      },
+      {
+        "name": "_quartzDriverPonchoJobBones",
+        "elementType": "ActorAnimation.ActorAnimationQuartzDriverPonchoJobBone",
+        "length": 6,
+        "itemsRead": 6,
+        "itemsAttempted": 6,
+        "status": "read",
+        "executionVerified": false
+      }
+    ],
+    "unsupportedCaptureOnlyJobs": []
+  },
   "nativeParticleHairLimits": true,
   "nativeParticleHairLimitExcludeBones": [
     "LeftFrontTopSideHair2_S",
     "RightFrontTopSideHair2_S",
     "LeftFrontTopSideHair3_S_End",
     "RightFrontTopSideHair3_S_End"
-  ],
-  "stableHairContacts": true,
-  "nativeSkirtThighCollisionRadiusScale": 1.25,
-  "gravityScaleByBoneGroup": {
-    "skirt": 0
-  },
-  "nativeSkirtCarrier": "thigh"
+  ]
 }
