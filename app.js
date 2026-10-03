@@ -8,9 +8,9 @@ import { OutlineEffect } from 'three/addons/effects/OutlineEffect.js?v=20260909-
 import { EXPRESSION_PRESETS, MOTION_BUCKETS, MOTION_FADE, buildPlaylist, classifyClipTracks, findPresetMorph, indexMotionFiles, normalizeActionId, parsePerformanceCommand, playlistClipIds, sortPlaylistByCatalog, canKeepBodyForFace, fadeDurationForClip, fadeDurationForTransition, findIdlePlaylistIndex, findFacePlaylistIndex, findGesturePlaylistIndex, shouldLoopMotion } from './core.js?v=20260929-glb-direct-track-classifier-v2';
 import { LIBRARY_R2_KEY, LIBRARY_SOURCE_KEY, idolAssetUrls, libraryFileUrl, motionAssetUrls, motionAvailability, resolveLibrarySource, selectIdolModel, sourceLabel } from './library-client.js?v=20261002-idol-glb';
 import { GAKUMAS_TEXTURE_KINDS, GAKUMAS_ACTIVE_TEXTURE_KINDS, selectMaterialTextures, textureDescriptor, textureUsesColorSpace, setTextureColorSpace } from './gakumas-materials.js?v=20260929-glb-highlight-semantic-v2';
-import { injectActorShader } from './gakumas-shader.js?v=20261003-hair-cover-fix-v15';
-import { actorStencilState, classifyActorPass, placeCharacterShadowLight, shouldCastCharacterShadow, shouldReceiveCharacterShadow } from './gakumas-passes.js?v=20261003-hair-cover-fix-v15';
-import { HairCoverStage } from './gakumas-hair-cover.js?v=20261003-hair-cover-fix-v15';
+import { injectActorShader } from './gakumas-shader.js?v=20261003-hair-cover-fix-v16';
+import { actorStencilState, classifyActorPass, placeCharacterShadowLight, shouldCastCharacterShadow, shouldReceiveCharacterShadow } from './gakumas-passes.js?v=20261003-hair-cover-fix-v16';
+import { HairCoverStage } from './gakumas-hair-cover.js?v=20261003-hair-cover-fix-v16';
 import { GakumasSceneStage } from './gakumas-scene.js?v=20261002-scene-lit-v7';
 import { GakumasPostPass } from './gakumas-post.js?v=20261002-scene-lit-v9';
 import { GAKUMAS_LOOK, GakumasLookPass, applyGakumasLookUniforms, createGakumasLookUniformValues } from './gakumas-look.js?v=20261002-rim-v1';
@@ -1129,10 +1129,10 @@ function applyMaterialStyle() {
                 if (actorPass === 'hairHighlight') {
                     // UnityGLTF imports the GLB sphere layer as a
                     // MeshStandardMaterial. Its hir_sph map already contains
-                    // the exported layer color and alpha. Draw a standard-lit
-                    // clone after the scene so the layer bypasses the eye
-                    // stencil without losing the face depth test. The hhl map
-                    // is still used by the regular m_hir shader path.
+                    // the exported layer color and alpha. Draw a clone with
+                    // the same actor shader as PMX m_hir after the scene so
+                    // the layer bypasses the eye stencil without losing the
+                    // face depth test. The hhl map remains on regular m_hir.
                     const highlightSource = state.modelFormat === 'glb'
                         ? createGlbHairHighlightOverlay(material)
                         : material;
@@ -1150,16 +1150,15 @@ function applyMaterialStyle() {
 }
 
 function createGlbHairHighlightOverlay(source) {
-    // The sph layer is an authored color/highlight layer. Keep it out of the
-    // scene light and shadow path so directional shadows cannot turn its
-    // pixels black. The original material remains a hidden source; this
-    // normal-blended clone is the only post-scene draw.
-    const overlay = new THREE.MeshBasicMaterial({
-        name: `${source.name || 'm_hir+'}:GLBOverlay`,
-        map: source.map || null,
-        color: source.color?.clone?.() || new THREE.Color(0xffffff),
-        toneMapped: true,
-    });
+    // Use the same actor shader as PMX m_hir so the sph layer follows the
+    // authored ramp, shadow floor and directional light. The original source
+    // remains hidden; this clone is the only post-scene draw.
+    const overlay = source.clone();
+    overlay.name = `${source.name || 'm_hir+'}:GLBOverlay`;
+    overlay.onBeforeCompile = source.onBeforeCompile;
+    overlay.customProgramCacheKey = () => 'gakumas-glb-hair-highlight-actor-v1';
+    overlay.defines = { ...(source.defines || {}) };
+    overlay.toneMapped = true;
     overlay.transparent = true;
     overlay.blending = THREE.NormalBlending;
     // HairCover clears the stencil test for this post-only pass, while the

@@ -1,6 +1,6 @@
 import * as THREE from './vendor/three/build/three.module.js';
-import { isHairCoverSourceMaterial } from './gakumas-passes.js?v=20261003-hair-cover-fix-v15';
-import { injectActorShader } from './gakumas-shader.js?v=20261003-hair-cover-fix-v15';
+import { isHairCoverSourceMaterial } from './gakumas-passes.js?v=20261003-hair-cover-fix-v16';
+import { injectActorShader } from './gakumas-shader.js?v=20261003-hair-cover-fix-v16';
 
 export const HAIR_FADE_PARAMETERS = Object.freeze([0.75, 2, 0.4, 4]);
 
