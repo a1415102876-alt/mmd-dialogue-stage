@@ -8,9 +8,9 @@ import { OutlineEffect } from 'three/addons/effects/OutlineEffect.js?v=20260909-
 import { EXPRESSION_PRESETS, MOTION_BUCKETS, MOTION_FADE, buildPlaylist, classifyClipTracks, findPresetMorph, indexMotionFiles, normalizeActionId, parsePerformanceCommand, playlistClipIds, sortPlaylistByCatalog, canKeepBodyForFace, fadeDurationForClip, fadeDurationForTransition, findIdlePlaylistIndex, findFacePlaylistIndex, findGesturePlaylistIndex, shouldLoopMotion } from './core.js?v=20260929-glb-direct-track-classifier-v2';
 import { LIBRARY_R2_KEY, LIBRARY_SOURCE_KEY, idolAssetUrls, libraryFileUrl, motionAssetUrls, motionAvailability, resolveLibrarySource, selectIdolModel, sourceLabel } from './library-client.js?v=20261002-idol-glb';
 import { GAKUMAS_TEXTURE_KINDS, GAKUMAS_ACTIVE_TEXTURE_KINDS, selectMaterialTextures, textureDescriptor, textureUsesColorSpace, setTextureColorSpace } from './gakumas-materials.js?v=20260929-glb-highlight-semantic-v2';
-import { injectActorShader } from './gakumas-shader.js?v=20261003-hair-cover-fix-v12';
-import { actorStencilState, classifyActorPass, placeCharacterShadowLight, shouldCastCharacterShadow, shouldReceiveCharacterShadow } from './gakumas-passes.js?v=20261003-hair-cover-fix-v12';
-import { HairCoverStage } from './gakumas-hair-cover.js?v=20261003-hair-cover-fix-v12';
+import { injectActorShader } from './gakumas-shader.js?v=20261003-hair-cover-fix-v14';
+import { actorStencilState, classifyActorPass, placeCharacterShadowLight, shouldCastCharacterShadow, shouldReceiveCharacterShadow } from './gakumas-passes.js?v=20261003-hair-cover-fix-v14';
+import { HairCoverStage } from './gakumas-hair-cover.js?v=20261003-hair-cover-fix-v14';
 import { GakumasSceneStage } from './gakumas-scene.js?v=20261002-scene-lit-v7';
 import { GakumasPostPass } from './gakumas-post.js?v=20261002-scene-lit-v9';
 import { GAKUMAS_LOOK, GakumasLookPass, applyGakumasLookUniforms, createGakumasLookUniformValues } from './gakumas-look.js?v=20261002-rim-v1';
@@ -1081,10 +1081,10 @@ function applyMaterialStyle() {
                 material.renderOrder = 30;
             }
             // PMX m_hir+ is a duplicated overlay used for the sphere/highlight
-            // layer. The GLB carries the same geometry and hir_sph map, but
-            // MeshStandardMaterial defaults to an opaque base-color pass,
-            // which hides the regular m_hir layer. Recreate the PMX overlay
-            // semantics here.
+            // layer. The GLB carries that layer as separate geometry using its
+            // hir_sph alpha-shaped map, but MeshStandardMaterial defaults to
+            // an opaque base-color pass, which hides the regular m_hir layer.
+            // Recreate the PMX overlay semantics here.
             if (state.modelFormat === 'glb' && actorPass === 'hairHighlight') {
                 material.transparent = true;
                 material.blending = THREE.AdditiveBlending;
@@ -1128,12 +1128,11 @@ function applyMaterialStyle() {
                 hairCoverStage.add(child, material, materialIndex, uniforms, hairTextureName);
                 if (actorPass === 'hairHighlight') {
                     // UnityGLTF imports the GLB sphere layer as a
-                    // MeshStandardMaterial. Its map is an authored alpha
-                    // overlay, so running it through the actor light/shadow
-                    // shader makes the layer vanish at the same view angles
-                    // as HairCover. Draw a small unlit clone after the scene;
-                    // it keeps the GLB alpha and blend semantics while
-                    // remaining independent of eye depth and camera light.
+                    // MeshStandardMaterial. Its hir_sph map already contains
+                    // the exported layer color and alpha. Draw a standard-lit
+                    // clone after the scene so the layer bypasses the eye
+                    // stencil without losing the face depth test. The hhl map
+                    // is still used by the regular m_hir shader path.
                     const highlightSource = state.modelFormat === 'glb'
                         ? createGlbHairHighlightOverlay(material)
                         : material;
@@ -1151,19 +1150,24 @@ function applyMaterialStyle() {
 }
 
 function createGlbHairHighlightOverlay(source) {
-    const overlay = new THREE.MeshBasicMaterial({
-        name: `${source.name || 'm_hir+'}:GLBOverlay`,
-        map: source.map || null,
-        color: source.color?.clone?.() || new THREE.Color(0xffffff),
-        transparent: true,
-        opacity: source.opacity ?? 0.55,
-        blending: THREE.AdditiveBlending,
-        depthTest: false,
-        depthWrite: false,
-        alphaTest: 0.01,
-        side: THREE.FrontSide,
-        toneMapped: false,
-    });
+    // Keep the GLB's MeshStandardMaterial so its hir_sph map is shaded with
+    // the same color response as the model. The original material remains a
+    // hidden source; this clone is the only post-scene draw.
+    const overlay = source.clone();
+    overlay.name = `${source.name || 'm_hir+'}:GLBOverlay`;
+    overlay.onBeforeCompile = () => {};
+    overlay.customProgramCacheKey = () => 'gakumas-glb-hair-highlight-standard-v1';
+    overlay.defines = {};
+    overlay.transparent = true;
+    overlay.blending = THREE.NormalBlending;
+    // HairCover clears the stencil test for this post-only pass, while the
+    // depth test still lets the face occlude highlights that are behind it.
+    overlay.depthTest = true;
+    overlay.depthWrite = false;
+    overlay.opacity = 1;
+    overlay.alphaTest = 0.01;
+    overlay.side = THREE.FrontSide;
+    overlay.needsUpdate = true;
     overlay.userData = {
         ...source.userData,
         gakumasPostHighlightOnly: true,

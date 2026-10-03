@@ -1,6 +1,6 @@
 import * as THREE from './vendor/three/build/three.module.js';
-import { isHairCoverSourceMaterial } from './gakumas-passes.js?v=20261003-hair-cover-fix-v12';
-import { injectActorShader } from './gakumas-shader.js?v=20261003-hair-cover-fix-v12';
+import { isHairCoverSourceMaterial } from './gakumas-passes.js?v=20261003-hair-cover-fix-v14';
+import { injectActorShader } from './gakumas-shader.js?v=20261003-hair-cover-fix-v14';
 
 export const HAIR_FADE_PARAMETERS = Object.freeze([0.75, 2, 0.4, 4]);
 
@@ -85,7 +85,7 @@ export class HairCoverStage {
             mesh,
             source,
             groups,
-            // GLB m_hir+ is an additive overlay. Its source material is kept
+            // GLB m_hir+ is a color overlay. Its source material is kept
             // out of the ordinary render list and is drawn exactly once in
             // this post pass, otherwise the 0.55 layer is accumulated twice.
             postOnly: source.userData?.gakumasPostHighlightOnly === true,
@@ -120,10 +120,10 @@ export class HairCoverStage {
             if ((!source.visible && !postOnly) || !isVisible(mesh, camera)) continue;
             mesh.modelViewMatrix.multiplyMatrices(camera.matrixWorldInverse, mesh.matrixWorld);
             mesh.normalMatrix.getNormalMatrix(mesh.modelViewMatrix);
-            // This callback runs after the regular render list, so the
-            // m_hir+ overlay is at the same depth as the already drawn hair.
-            // Redraw it as a true overlay: depth and stencil must not reject
-            // it when the eye card has already written its higher layer.
+            // This callback runs after the regular render list. Post-only GLB
+            // highlights bypass the eye stencil, but keep depth testing so a
+            // face drawn in front still occludes them. The historical PMX
+            // redraw remains an unconditional overlay.
             const state = {
                 depthTest: source.depthTest,
                 depthWrite: source.depthWrite,
@@ -136,7 +136,7 @@ export class HairCoverStage {
                 stencilZFail: source.stencilZFail,
                 stencilZPass: source.stencilZPass,
             };
-            source.depthTest = false;
+            source.depthTest = postOnly ? state.depthTest : false;
             source.depthWrite = false;
             source.stencilWrite = false;
             source.stencilFunc = THREE.AlwaysStencilFunc;

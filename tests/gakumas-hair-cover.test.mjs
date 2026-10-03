@@ -147,7 +147,9 @@ test('GLB post-only m_hir+ stays visible when HairCover is disabled without a du
         },
         renderBufferDirect: (_camera, _scene, _geometry, material) => {
             assert.equal(material, materials[2]);
-            assert.equal(material.depthTest, false);
+            // GLB m_hir+ is drawn after HairCover with stencil disabled, but
+            // its depth test stays enabled so the face can occlude it.
+            assert.equal(material.depthTest, true);
             assert.equal(material.depthWrite, false);
             events.push('highlight');
         },
